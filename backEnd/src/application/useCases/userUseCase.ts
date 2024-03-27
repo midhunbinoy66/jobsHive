@@ -67,4 +67,53 @@ export class UserUseCase{
             throw Error('Error while sending timeout otp')
         }
     }
+
+    async verifyLogin(email:string,password:string):Promise<IApiUserAuthRes>{
+        const userData = await this._userRespository.findByEmail(email);
+        if(userData !== null){
+            if(userData.isBlocked){
+                return {
+                    status:STATUS_CODES.FORBIDDEN,
+                    message:'You are blocked by admin',
+                    data:null,
+                    accessToken:'',
+                    refreshToken:''
+                }
+            }else{
+                const passwordMatch = await this._encryptor.comparePassword(password,userData.password as string);
+                if(passwordMatch){
+                    const accessToken = this._tokenGenerator.generateAccessToken(userData._id);
+                    const refreshToken = this._tokenGenerator.generateRefreshToken(userData._id);
+                        return {
+                            status:STATUS_CODES.OK,
+                            message:'Success',
+                            data:userData,
+                            accessToken:accessToken,
+                            refreshToken:refreshToken
+                        }
+                    
+                }else{
+                    return {
+                        status:STATUS_CODES.UNAUTHORIZED,
+                        message:'Incorrect credentials',
+                        data:null,
+                        accessToken:'',
+                        refreshToken:''
+                    }
+                }
+            }
+        }else{
+            return {
+                status:STATUS_CODES.UNAUTHORIZED,
+                message:'Invalid email or password',
+                data:null,
+                accessToken:'',
+                refreshToken:''
+            }
+        }
+
+    }
+
+
+    
 }

@@ -13,4 +13,8 @@ export class UserRespository implements IuserRepo {
         async  findByEmail(email: string): Promise<IUser | null> {
                 return await userModel.findOne({ email })
         }
+
+        async findById(id: string): Promise<IUser | null> {
+              return await userModel.findById({_id:id});  
+        }
 }

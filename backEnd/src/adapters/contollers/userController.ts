@@ -6,6 +6,7 @@ import { IUserAuth } from "../../application/interfaces/types/user";
 import { ITempUsrReq } from "../../application/interfaces/types/tempUser";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import jwt, { JwtPayload } from 'jsonwebtoken'
+import { IUser } from "../../entities/user";
 
 export class UserController{
     constructor(
@@ -34,7 +35,7 @@ export class UserController{
         
         } catch (error) {
             console.log(error);
-        }
+        }        
     }
 
 
@@ -104,6 +105,20 @@ export class UserController{
             console.log(error);
             res.status(500).json({message: err.message})
         }
+    }
+
+
+    async userLogin(req:Request,res:Response){
+        try {
+            const {email,password} = req.body as IUser;
+            const authData = await this._userUseCAse.verifyLogin(email,password as string);
+            res.status(authData.status).json(authData);
+    
+        } catch (error) {
+            console.log(error);
+        }
+
+        
     }
 
 

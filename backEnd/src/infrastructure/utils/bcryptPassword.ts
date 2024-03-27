@@ -9,4 +9,8 @@ export class Encryptor implements IEncryptor{
                 const hashedPassword  = await bcrypt.hash(password,salt);
                 return hashedPassword; 
         }
+
+        async comparePassword(pass: string, hashedPassword: string): Promise<boolean> {
+                return await bcrypt.compare(pass,hashedPassword);  
+        }
 }

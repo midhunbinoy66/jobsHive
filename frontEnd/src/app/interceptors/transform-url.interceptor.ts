@@ -13,6 +13,13 @@ export class TransformUrlInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+    
+    const  baseUrl  = 'http://localhost:3000/'
+    const newReq = request.clone(
+      { url: baseUrl + request.url }
+    )
+    console.log(newReq.url, 'new url from interceptor')
+    
+    return next.handle(newReq);
   }
 }
