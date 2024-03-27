@@ -1,22 +1,22 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
-import { AbstractControl, Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { validateByTrimming } from '../../../helpers/validations';
-import { emailValidators, nameValidators, passwordValidators } from '../../../shared/validators';
-import { MAX_OTP_LIMIT, OTP_RESEND_MAX_TIME, OTP_TIMER } from '../../../shared/constants';
-import { formatTime } from '../../../helpers/timer';
-import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
-import { saveUserOnStore } from '../../../states/user/user.action';
-import { IUserRes } from '../../../models/users';
+import { formatTime } from 'src/app/helpers/timer';
+import { passwordMatchValidator, validateByTrimming } from 'src/app/helpers/validations';
+import { IUserRes } from 'src/app/models/users';
+import { MAX_OTP_LIMIT, OTP_RESEND_MAX_TIME, OTP_TIMER } from 'src/app/shared/constants';
+import { emailValidators, nameValidators, otpValidators, passwordValidators } from 'src/app/shared/validators';
+import { saveUserOnStore } from 'src/app/states/user/user.action';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
-  styleUrl: './user-register.component.css'
+  styleUrls: ['./user-register.component.css']
 })
-export class UserRegisterComponent implements OnInit{
+export class UserRegisterComponent {
   form!:FormGroup ;
   isSubmitted=false;
   showOtpField = false;
@@ -37,8 +37,10 @@ export class UserRegisterComponent implements OnInit{
         name:['',[validateByTrimming(nameValidators)]],
         email:['',[validateByTrimming(emailValidators)]],
         password:['',[validateByTrimming(passwordValidators)]],
-        confirmPassword:['',[validateByTrimming(passwordValidators)]],
-        mobile:['',Validators.required]
+        repeatPassword:[''],
+        otp: [{ value: '', disabled: true }, [validateByTrimming(otpValidators)]]
+      }, {
+        validators: passwordMatchValidator
       })
     }
 
@@ -76,9 +78,10 @@ get f():Record<string,AbstractControl>{
 
     onSubmit():void{
         this.isSubmitted = true;  
-        console.log(this.form.getRawValue())
+        console.log(this.form.invalid, this.form.get('repeatPassword'),this.form.get('password'), this.form.get('name'),this.form.get('email'))
         if(!this.showOtpField && !this.form.invalid){
           const user = this.form.getRawValue();
+          console.log(user);
           this.http.post('user/register',user).subscribe({
             next:(res:any)=>{
               localStorage.setItem('userAuthToken', res.token)
@@ -86,7 +89,7 @@ get f():Record<string,AbstractControl>{
               this.form.get('name')?.disable();
               this.form.get('email')?.disable();
               this.form.get('password')?.disable();
-              this.form.get('confirmPassword')?.disable();
+              this.form.get('repeatPassword')?.disable();
               this.form.get('otp')?.enable();
               this.startTimer();
               setTimeout(() => {
@@ -112,5 +115,4 @@ get f():Record<string,AbstractControl>{
           console.log('error',this.form.errors);
         }
       }
-
 }

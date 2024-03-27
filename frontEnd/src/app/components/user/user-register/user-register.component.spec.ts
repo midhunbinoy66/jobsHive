@@ -6,12 +6,10 @@ describe('UserRegisterComponent', () => {
   let component: UserRegisterComponent;
   let fixture: ComponentFixture<UserRegisterComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [UserRegisterComponent]
-    })
-    .compileComponents();
-    
+    });
     fixture = TestBed.createComponent(UserRegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

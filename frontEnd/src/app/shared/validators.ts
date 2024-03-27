@@ -3,7 +3,7 @@ import { userNameMinLength,userNameMaxLength,nameRegex,emailRegex,OTPRegex,passw
 
 export const nameValidators =[
     Validators.required,
-    Validators.minLength(userNameMaxLength),
+    Validators.minLength(userNameMinLength),
     Validators.maxLength(userNameMaxLength),
     Validators.pattern(nameRegex)
 ]
@@ -18,3 +18,8 @@ export const passwordValidators = [
     Validators.minLength(passwordMinLength),
     Validators.pattern(passwordRegex)
 ]
+
+export const otpValidators = [
+    Validators.required,
+    Validators.pattern(OTPRegex)
+  ]
