@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 dotenv.config();
 import cors from 'cors'
 import userRouter from '../routes/userRoutes';
+import adminRouter from '../routes/adminRoutes';
 
 
 export const createServer =  ()=>{
@@ -17,7 +18,8 @@ export const createServer =  ()=>{
                 origin:process.env.CORS_URI
             }))
 
-            app.use('/user',userRouter)
+            app.use('/user',userRouter);
+            app.use('/admin',adminRouter);
 
             return app;
 

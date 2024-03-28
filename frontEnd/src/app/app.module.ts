@@ -9,10 +9,12 @@ import { reducer } from './states/app.state';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TransformUrlInterceptor } from './interceptors/transform-url.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { PageNotFoundComponent } from './components/common/page-not-found/page-not-found.component';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
 
   ],
   imports: [
