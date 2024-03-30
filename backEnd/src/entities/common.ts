@@ -5,3 +5,7 @@ export interface IUserAddress {
     city: string
     zip: number
 }
+
+export interface IEmployerAddress extends IUserAddress{
+    landmark?:string
+}

@@ -5,6 +5,7 @@ dotenv.config();
 import cors from 'cors'
 import userRouter from '../routes/userRoutes';
 import adminRouter from '../routes/adminRoutes';
+import employerRouter from '../routes/employerRoutes';
 
 
 export const createServer =  ()=>{
@@ -20,7 +21,7 @@ export const createServer =  ()=>{
 
             app.use('/user',userRouter);
             app.use('/admin',adminRouter);
-
+            app.use('/employer',employerRouter);
             return app;
 
     } catch (error) {

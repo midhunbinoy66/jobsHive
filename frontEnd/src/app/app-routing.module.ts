@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './components/common/page-not-found/page-n
 const routes: Routes = [
   {path:'user',loadChildren:()=> import('./components/user/user.module').then(m=>m.UserModule)},
   {path:'admin',loadChildren:()=>import('./components/admin/admin.module').then(m=>m.AdminModule)},
+  {path:'employer',loadChildren:()=>import('./components/employer/employer.module').then(m=>m.EmployerModule)},
   {path:'',redirectTo:'user',pathMatch:'full'},
   {
     path:'**',

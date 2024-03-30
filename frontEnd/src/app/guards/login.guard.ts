@@ -5,6 +5,7 @@ import {  inject } from '@angular/core';
 export const loginGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const role = route.parent?.routeConfig?.path;
+  console.log(role);
   const token = localStorage.getItem(`${role}RefreshToken`);
 
   if(token === null || isTokenExpired(token)){
