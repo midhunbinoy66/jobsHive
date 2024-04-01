@@ -9,3 +9,5 @@ export interface IUserAddress {
 export interface IEmployerAddress extends IUserAddress{
     landmark?:string
 }
+
+export interface IJobAddress extends IUserAddress{}

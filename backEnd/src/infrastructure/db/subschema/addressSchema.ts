@@ -29,3 +29,9 @@ export const employerAddressSchema: Schema = new Schema<IEmployerAddress & Docum
     ...userAddressSchema.obj,
     landmark: String,
 })
+
+export const jobAddressSchema: Schema = new Schema<IEmployerAddress & Document>({
+    ...userAddressSchema.obj,
+    landmark: String,
+})
+

@@ -14,3 +14,10 @@ export interface ISubscription{
     endDate:Date;
 }
 
+
+
+export interface IEmployerAddress extends IUserAddress{
+    landmark?:string
+}
+
+export interface IJobAddress extends IUserAddress{}
