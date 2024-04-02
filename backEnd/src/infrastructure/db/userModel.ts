@@ -22,6 +22,11 @@ export const userSchema  =  new Schema<IUser & Document>({
     },
     profilePic:String,
     address: userAddressSchema,
+    isGoogleAuth:{
+        type:Boolean,
+        default:false,
+        required:true
+    }
 
 })
 

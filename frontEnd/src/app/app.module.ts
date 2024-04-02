@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TransformUrlInterceptor } from './interceptors/transform-url.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { PageNotFoundComponent } from './components/common/page-not-found/page-not-found.component';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
   declarations: [
@@ -22,11 +23,12 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot(reducer, {metaReducers})
+    StoreModule.forRoot(reducer, {metaReducers}),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TransformUrlInterceptor, multi: true }
+ 
   ],
   bootstrap: [AppComponent]
 })

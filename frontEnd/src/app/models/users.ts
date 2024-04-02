@@ -36,3 +36,8 @@ export interface IApiTokenRes {
 
 
 
+export interface IUserSocialAuth {
+  name: string
+  email: string
+  profilePic?: string
+}

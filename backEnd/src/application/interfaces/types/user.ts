@@ -8,6 +8,13 @@ export interface IUserAuth {
     password: string
 }
 
+// for social auth credentials
+export interface IUserSocialAuth {
+    name: string
+    email: string
+    profilePic?: string
+}
+
 export interface IUserRes extends IUser{}
 
 

@@ -5,7 +5,7 @@ import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { ITempUserRepo } from "../interfaces/repos/tempUserRepo";
 import { IuserRepo } from "../interfaces/repos/userRepo";
 import { ITempUserRes, ITempUsrReq } from "../interfaces/types/tempUser";
-import { IApiUserAuthRes, IUserAuth } from "../interfaces/types/user";
+import { IApiUserAuthRes, IUserAuth, IUserSocialAuth } from "../interfaces/types/user";
 import { IEncryptor } from "../interfaces/utils/encryptor";
 import { ImailSender } from "../interfaces/utils/mailSender";
 import { ITokenGenerator } from "../interfaces/utils/tokenGenerator";
@@ -25,7 +25,7 @@ export class UserUseCase{
         return iUserExist;
     }
 
-    async saveUserDetails(userData:IUserAuth):Promise<IApiUserAuthRes>{
+    async saveUserDetails(userData:IUserAuth | IUserSocialAuth):Promise<IApiUserAuthRes>{
         const user = await this._userRespository.saveUser(userData);
         const accessToken = this._tokenGenerator.generateAccessToken(user._id);
         const refreshToken = this._tokenGenerator.generateRefreshToken(user._id);
@@ -36,6 +36,40 @@ export class UserUseCase{
             message:'success',
             accessToken,
             refreshToken
+        }
+    }
+
+    async handleSocialSignUp(name:string,email:string,profilePic:string | undefined):Promise<IApiUserAuthRes>{
+        const emailData = await this.isEmailExist(email);
+        if(emailData === null){
+            const userToSave = {name,email,profilePic,isGoogleAuth:true};
+            const savedData = await this.saveUserDetails(userToSave);
+            return savedData;
+        }else{
+            if(emailData.isBlocked){
+                return {
+                    status: STATUS_CODES.FORBIDDEN,
+                    message: 'You are blocked by admin',
+                    data: null,
+                    accessToken: '',
+                    refreshToken: ''
+                }
+            }else{
+                if(!emailData.isGoogleAuth){
+                    await this._userRespository.updateGoogleAuth(emailData._id,profilePic);
+                    
+                }
+
+                const accessToken = this._tokenGenerator.generateAccessToken(emailData._id);
+                const refreshToken = this._tokenGenerator.generateRefreshToken(emailData._id);
+                return{
+                    status:STATUS_CODES.OK,
+                    message:'Success',
+                    data:emailData,
+                    accessToken,
+                    refreshToken
+                }
+            }
         }
     }
 

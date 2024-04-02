@@ -10,5 +10,5 @@ userRouter.post('/validateOtp',(req,res)=>uController.validateUserOTP(req,res));
 userRouter.get('/resendOtp',(req,res)=>uController.resendOTP(req,res));
 userRouter.post('/login',(req,res)=>uController.userLogin(req,res));
 userRouter.get('/jobs',(req,res)=>jController.getJobs(req,res))
-
+userRouter.post('/auth/google',(req,res)=>uController.userSocialSignUp(req,res));
 export default userRouter

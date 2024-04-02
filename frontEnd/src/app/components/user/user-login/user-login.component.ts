@@ -7,15 +7,17 @@ import { validateByTrimming } from 'src/app/helpers/validations';
 import { IApiUserAuthRes } from 'src/app/models/users';
 import { emailValidators, passwordValidators } from 'src/app/shared/validators';
 import { saveUserOnStore } from 'src/app/states/user/user.action';
-
+import { environment } from 'src/environments/environment'
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
+
   isSubmitted = false;
   form!:FormGroup
+
   constructor(
     @Inject(Router) private readonly router:Router,
     @Inject(FormBuilder) private readonly formBuilder:FormBuilder,
@@ -24,10 +26,12 @@ export class UserLoginComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
+
     this.form = this.formBuilder.group({
       email:['',[validateByTrimming(emailValidators)]],
       password:['',[validateByTrimming(passwordValidators)]]
     })
+    
 
   }
 

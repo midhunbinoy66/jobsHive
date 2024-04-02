@@ -9,4 +9,5 @@ export interface IUser {
     isBlocked: boolean
     profilePic?: string
     address?: IUserAddress,
+    isGoogleAuth: boolean
 }

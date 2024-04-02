@@ -1,9 +1,10 @@
 import { IUser } from "../../../entities/user";
-import { IUserAuth } from "../types/user";
+import { IUserAuth, IUserSocialAuth } from "../types/user";
 
 
 export interface IuserRepo{
-    saveUser(user:IUserAuth):Promise<IUser>
+    saveUser(user:IUserAuth | IUserSocialAuth):Promise<IUser>
     findByEmail(email: string): Promise<IUser | null>
     findById(id:string):Promise<IUser|null>
+    updateGoogleAuth(id: string, profilePic: string | undefined): Promise<void>
 }

@@ -1,3 +1,4 @@
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
@@ -5,7 +6,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { formatTime } from 'src/app/helpers/timer';
 import { passwordMatchValidator, validateByTrimming } from 'src/app/helpers/validations';
-import { IUserRes } from 'src/app/models/users';
+import { IApiUserAuthRes, IUserRes, IUserSocialAuth } from 'src/app/models/users';
 import { MAX_OTP_LIMIT, OTP_RESEND_MAX_TIME, OTP_TIMER } from 'src/app/shared/constants';
 import { emailValidators, nameValidators, otpValidators, passwordValidators } from 'src/app/shared/validators';
 import { saveUserOnStore } from 'src/app/states/user/user.action';
@@ -24,11 +25,13 @@ export class UserRegisterComponent {
   formattedTime: string = '03:00'
   otpResendCount: number = 0
   showOTPResend: boolean = true
+  loggedIn!: boolean;
   constructor(
       @Inject(HttpClient) private readonly http:HttpClient,
       @Inject(Router) private readonly router:Router,
       @Inject(FormBuilder) private readonly formBuilder:FormBuilder,
-      @Inject(Store) private readonly store:Store
+      @Inject(Store) private readonly store:Store,
+      @Inject(Store) private readonly authService:SocialAuthService
   ){}
 
 
@@ -42,6 +45,25 @@ export class UserRegisterComponent {
       }, {
         validators: passwordMatchValidator
       })
+
+    //   this.authService.authState.subscribe((user)=>{
+    //   const userData:IUserSocialAuth ={
+    //     name:user.name,
+    //     email:user.email,
+    //     profilePic:user.photoUrl
+    //   }
+    //   console.log(user);
+    //   this.http.post<IApiUserAuthRes>('user/auth/google', userData).subscribe({
+    //     next: (res: IApiUserAuthRes) => {
+    //       localStorage.setItem('userAccessToken', res.accessToken)
+    //       localStorage.setItem('userRefreshToken', res.refreshToken)
+    //       this.store.dispatch(saveUserOnStore({ userDetails: res.data as IUserRes }))
+    //       void this.router.navigate(['/'])
+    //     }
+    //   })
+
+    // })    
+
     }
 
 get f():Record<string,AbstractControl>{

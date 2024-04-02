@@ -4,6 +4,8 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { loginGuard } from 'src/app/guards/login.guard';
+import { authGuard } from 'src/app/guards/auth.guard';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
 
@@ -22,6 +24,17 @@ const routes: Routes = [
     title:'Login | JobHive',
     component:UserLoginComponent,
     canActivate:[loginGuard]
+  },
+  {
+    path:'profile',
+    title:'JobHive | Profile',
+    // canActivate:[authGuard],
+    children:[
+      {
+        path:'',
+        component:UserProfileComponent
+      }
+    ]
   },
   {
     path: '',

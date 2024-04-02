@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UserUseCase } from "../../application/useCases/userUseCase";
 import { Encryptor } from "../../infrastructure/utils/bcryptPassword";
 import { OTPGenerator } from "../../infrastructure/utils/otpGenerator";
-import { IUserAuth } from "../../application/interfaces/types/user";
+import { IUserAuth, IUserSocialAuth } from "../../application/interfaces/types/user";
 import { ITempUsrReq } from "../../application/interfaces/types/tempUser";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import jwt, { JwtPayload } from 'jsonwebtoken'
@@ -119,6 +119,17 @@ export class UserController{
         }
 
         
+    }
+
+    async userSocialSignUp(req:Request,res:Response){
+        try {
+            const {name,email,profilePic} = req.body as IUserSocialAuth;
+            const authData = await this._userUseCAse.handleSocialSignUp(name,email,profilePic as string);
+            res.status(authData.status).json(authData);
+        } catch (error) {
+            const err = error as Error
+            res.status(500).json({message: err.message })
+        }
     }
 
 
