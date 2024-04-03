@@ -29,3 +29,5 @@ export interface IApiUserAuthRes extends IApiUserRes{
     accessToken:string
     refreshToken:string
 }
+
+export interface IUserUpdate extends Omit<IUserRes,'_id'|'password'|'email'|'isBlocked'>{}

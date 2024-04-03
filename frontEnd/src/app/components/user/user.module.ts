@@ -13,6 +13,11 @@ import { userReducer } from 'src/app/states/user/user.reducer';
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import {  GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
+import { PasswordValidationComponent } from '../common/validation/password-validation/password-validation.component';
+import { EmailValidationComponent } from '../common/validation/email-validation/email-validation.component';
+import { NameValidationComponent } from '../common/validation/name-validation/name-validation.component';
+import { OtpValidationComponent } from '../common/validation/otp-validation/otp-validation.component';
 
 
 @NgModule({
@@ -21,14 +26,19 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     UserLoginComponent,
     UserHomeComponent,
     UserNavComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    EditUserProfileComponent
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
     ReactiveFormsModule,
     StoreModule.forFeature('user',userReducer),
-    SocialLoginModule
+    SocialLoginModule,
+    PasswordValidationComponent,
+    EmailValidationComponent,
+    NameValidationComponent,
+    OtpValidationComponent
   ],
   providers: [
     {

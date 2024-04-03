@@ -23,3 +23,5 @@ export const otpValidators = [
     Validators.required,
     Validators.pattern(OTPRegex)
   ]
+
+  export const requiredValidator = [Validators.required]

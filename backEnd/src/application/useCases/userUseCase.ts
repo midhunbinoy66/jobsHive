@@ -5,7 +5,7 @@ import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { ITempUserRepo } from "../interfaces/repos/tempUserRepo";
 import { IuserRepo } from "../interfaces/repos/userRepo";
 import { ITempUserRes, ITempUsrReq } from "../interfaces/types/tempUser";
-import { IApiUserAuthRes, IUserAuth, IUserSocialAuth } from "../interfaces/types/user";
+import { IApiUserAuthRes, IApiUserRes, IUserAuth, IUserSocialAuth, IUserUpdate } from "../interfaces/types/user";
 import { IEncryptor } from "../interfaces/utils/encryptor";
 import { ImailSender } from "../interfaces/utils/mailSender";
 import { ITokenGenerator } from "../interfaces/utils/tokenGenerator";
@@ -148,6 +148,21 @@ export class UserUseCase{
 
     }
 
-
+    async updateUserData(userId:string,user:IUserUpdate):Promise<IApiUserRes>{
+        try {
+            const updatedUser = await this._userRespository.updateUser(userId,user)
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:updatedUser,
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
     
 }

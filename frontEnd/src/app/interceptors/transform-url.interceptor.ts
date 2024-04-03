@@ -7,6 +7,8 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import {environment} from 'src/environments/environment.development'
+
 @Injectable()
 export class TransformUrlInterceptor implements HttpInterceptor {
 
@@ -14,7 +16,8 @@ export class TransformUrlInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     
-    const  baseUrl  = 'http://localhost:3000/'
+    const  baseUrl  = environment.baseUrl
+    console.log(baseUrl);
     const newReq = request.clone(
       { url: baseUrl + request.url }
     )

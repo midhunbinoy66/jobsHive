@@ -1,4 +1,4 @@
-import { IUserAddress } from "./common"
+import { IApiRes, IUserAddress } from "./common"
 
 export interface IUserRes {
     _id: string
@@ -9,14 +9,15 @@ export interface IUserRes {
     isBlocked: boolean
     profilePic?: string
     wallet?: string
-    address?:string
+    address?:IUserAddress
   }
   
 
 
 export interface IUserAuth {
     name: string
-    email: string
+    email: string,
+    mobile?:number
     password: string
   }
 
@@ -41,3 +42,6 @@ export interface IUserSocialAuth {
   email: string
   profilePic?: string
 }
+
+export interface IUserUpdate extends Omit<IUserRes, '_id' | 'email' | 'password' | 'isBlocked' > { }
+export interface IApiUserRes extends IApiRes<IUserRes> {}

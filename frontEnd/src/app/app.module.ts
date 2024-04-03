@@ -11,11 +11,15 @@ import { TransformUrlInterceptor } from './interceptors/transform-url.intercepto
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { PageNotFoundComponent } from './components/common/page-not-found/page-not-found.component';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { ErrorHandlerInterceptor } from './interceptors/error-handler.interceptor';
+
+
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    
 
   ],
   imports: [
@@ -27,8 +31,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: TransformUrlInterceptor, multi: true }
- 
+    { provide: HTTP_INTERCEPTORS, useClass: TransformUrlInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })

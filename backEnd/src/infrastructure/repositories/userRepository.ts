@@ -1,5 +1,5 @@
 import { IuserRepo } from "../../application/interfaces/repos/userRepo";
-import { IUserAuth, IUserSocialAuth } from "../../application/interfaces/types/user";
+import { IUserAuth, IUserRes, IUserSocialAuth, IUserUpdate } from "../../application/interfaces/types/user";
 import { IUser } from "../../entities/user";
 import userModel from "../db/userModel";
 
@@ -31,4 +31,16 @@ export class UserRespository implements IuserRepo {
                     throw Error('Error while updating google auth')
                 }
             }
+
+        async updateUser(userId: string, user: IUserUpdate): Promise<IUserRes | null> {
+            return await userModel.findByIdAndUpdate(
+                {_id:userId},
+                {
+                    name:user.name,
+                    mobile:user.mobile,
+                    address:user.address
+                },
+                {new:true}
+            )
+        }
 }

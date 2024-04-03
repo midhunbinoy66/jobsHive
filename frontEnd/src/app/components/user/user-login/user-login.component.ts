@@ -40,7 +40,10 @@ export class UserLoginComponent implements OnInit {
   }
 
   onSubmit():void{
+    console.log('hi...')
     this.isSubmitted = true;
+    console.log(this.form.invalid);
+    console.log(this.form.getRawValue());
     if(!this.form.invalid){
       const user = this.form.getRawValue();
       console.log(user);

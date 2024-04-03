@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UserUseCase } from "../../application/useCases/userUseCase";
 import { Encryptor } from "../../infrastructure/utils/bcryptPassword";
 import { OTPGenerator } from "../../infrastructure/utils/otpGenerator";
-import { IUserAuth, IUserSocialAuth } from "../../application/interfaces/types/user";
+import { IUserAuth, IUserSocialAuth, IUserUpdate } from "../../application/interfaces/types/user";
 import { ITempUsrReq } from "../../application/interfaces/types/tempUser";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import jwt, { JwtPayload } from 'jsonwebtoken'
@@ -110,6 +110,7 @@ export class UserController{
 
     async userLogin(req:Request,res:Response){
         try {
+            console.log('user login hit')
             const {email,password} = req.body as IUser;
             const authData = await this._userUseCAse.verifyLogin(email,password as string);
             res.status(authData.status).json(authData);
@@ -132,5 +133,12 @@ export class UserController{
         }
     }
 
+
+    async updateProfile(req:Request,res:Response){
+        const userId = req.params.userId;
+        const user = req.body as IUserUpdate
+        const apiRes = await this._userUseCAse.updateUserData(userId,user);
+        return res.status(apiRes.status).json(apiRes);
+    }
 
 }

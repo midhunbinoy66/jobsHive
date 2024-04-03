@@ -7,17 +7,17 @@ import { EmployerHomeComponent } from './employer-home/employer-home.component';
 import { EmployerRegisterComponent } from './employer-register/employer-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     EmployerLoginComponent,
     EmployerHomeComponent,
-    EmployerRegisterComponent
+    EmployerRegisterComponent,
   ],
   imports: [
     CommonModule,
     EmployerRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ]
 })
 export class EmployerModule { }
