@@ -6,6 +6,7 @@ import cors from 'cors'
 import userRouter from '../routes/userRoutes';
 import adminRouter from '../routes/adminRoutes';
 import employerRouter from '../routes/employerRoutes';
+import tokenRouter from '../routes/tokenRoute';
 
 
 export const createServer =  ()=>{
@@ -22,6 +23,7 @@ export const createServer =  ()=>{
             app.use('/user',userRouter);
             app.use('/admin',adminRouter);
             app.use('/employer',employerRouter);
+            app.use('/token',tokenRouter);
             return app;
 
     } catch (error) {

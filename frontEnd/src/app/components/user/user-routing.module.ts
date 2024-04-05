@@ -7,6 +7,7 @@ import { loginGuard } from 'src/app/guards/login.guard';
 import { authGuard } from 'src/app/guards/auth.guard';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
+import { UserJobsComponent } from './user-jobs/user-jobs.component';
 
 const routes: Routes = [
 
@@ -40,6 +41,12 @@ const routes: Routes = [
         component:EditUserProfileComponent
       }
     ]
+  },
+  {
+    path:'jobs',
+    title:'JobHive| Jobs',
+    component:UserJobsComponent,
+    canActivate:[authGuard]
   },
   {
     path: '',

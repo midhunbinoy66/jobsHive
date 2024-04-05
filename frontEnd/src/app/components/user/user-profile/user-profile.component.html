@@ -1,15 +1,49 @@
 <app-user-nav></app-user-nav>
-<section>
-    <div class="container flex my-2">
-        <div class="flex space-y-3 flex-col  p-8 ring-2 ring-gray-400 m-2 rounded-lg shadow-xl ">                
-                    <a [routerLink]="'edit'" class=" text-gray-700 hover:text-emerald-900 font-bold">Edit profile</a>
-                    <a href="" class="text-gray-700 hover:text-emerald-900 font-bold">My Jobs</a>
-                    <a href="" class="text-gray-700 hover:text-emerald-900 font-bold">Subscriptions</a>
-                    <a href="" class="text-gray-700 hover:text-emerald-900 font-bold">Notifications</a>
+<div class="flex  flex-col lg:flex-row">
+    <app-user-sidebar></app-user-sidebar>
+    <section class="bg-gray-100 py-12 flex-1">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="px-4 py-5 sm:px-6">
+                    <h3 class="text-lg font-bold leading-6 text-gray-900">User Profile</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">View and edit your user information.</p>
+                </div>
+                <div class="border-t border-gray-200">
+                    <dl>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Name</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">{{user?.name}}</dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Email</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">{{user?.email}}</dd>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Mobile</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">{{user?.mobile}}</dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Address</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
+                                <ul>
+                                    <li>{{user?.address?.city}}</li>
+                                    <li>{{user?.address?.district}}</li>
+                                    <li>{{user?.address?.state}}</li>
+                                    <li>{{user?.address?.country}}</li>
+                                    <li>{{user?.address?.zip}}</li>
+                                </ul>
+                            </dd>
+                        </div>
+                        <!-- Add other fields similarly -->
+                    </dl>
+                </div>
+                <div class="px-4 py-4 bg-gray-50 text-right sm:px-6">
+                    <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="m-2">
-            <h1>Use details</h1>
-            
-        </div>
-    </div>
-</section>
+    </section>
+    
+</div>

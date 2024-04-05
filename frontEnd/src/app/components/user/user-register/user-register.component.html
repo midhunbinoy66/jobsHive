@@ -12,22 +12,22 @@
 
                 <div class="form-outline mb-3 ">
                   <input type="text"  formControlName="name" id="form3Example1cg" class="form-control form-control-lg" placeholder="Enter Name" />
-                  <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="false"></app-name-validation>
+                  <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-name-validation>
                 </div>
 
                 <div class="form-outline mb-3 ">
                   <input type="email"  formControlName="email" id="form3Example3cg" class="form-control form-control-lg" placeholder="Enter Email" />
-                  <app-email-validation [emailControl]="form.get('email')" [isSubmitted]="false"></app-email-validation>
+                  <app-email-validation [emailControl]="form.get('email')" [isSubmitted]="isSubmitted"></app-email-validation>
                 </div>
 
                 <div *ngIf="!showOtpField" class="form-outline mb-3 ">
                     <input type="password" formControlName="password" id="form3Example4cg" class="form-control form-control-lg" placeholder="Enter Password" />
-                    <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="false"></app-password-validation>
+                    <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="isSubmitted"></app-password-validation>
                 </div>
                   
                 <div *ngIf="!showOtpField" class="form-outline mb-3 ">
                     <input type="password" formControlName="repeatPassword" id="form3Example4cdg" class="form-control form-control-lg" placeholder="Repeat Password" />
-                    <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="false"></app-password-validation>
+                    <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="isSubmitted"></app-password-validation>
                   </div>
 
                 <div *ngIf="showOtpField">

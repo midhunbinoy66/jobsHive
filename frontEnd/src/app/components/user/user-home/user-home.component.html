@@ -1,20 +1,61 @@
 <app-user-nav></app-user-nav>
-    <div class="flex items-center justify-center h-screen">
-        <div class="bg-white p-8 rounded-lg shadow-lg">
+    <div class="flex items-center justify-center h-1/2  w-screen">
+        <div class="bg-white p-8 rounded-lg shadow-lg ">
           <h2 class="text-lg font-semibold mb-4">Search Jobs</h2>
-          <form class="flex flex-col sm:flex-row"(submit)="onSubmit()" [formGroup]="searchForm">
+          <form class="flex flex-col sm:flex-row space-x-2"(submit)="onSubmit()" [formGroup]="searchForm">
             <div class="flex-grow mb-4 sm:mr-2">
               <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-              <input type="text" id="title" name="title" placeholder="Enter job title" class="mt-1 p-2 border border-gray-300 rounded-md w-full" formControlName="title">
+              <input type="text" id="title" name="title" placeholder="Enter job title" class="mt-1 p-2 border border-gray-300 rounded-md w-full" formControlName="title" [required]="true">
+              <p *ngIf="searchForm.get('title')?.invalid && searchForm.get('title')?.touched " class="text-red-300">Title is requierd</p>
             </div>
             <div class="flex-grow mb-4 sm:ml-2">
               <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-              <input type="text" id="location" name="location" placeholder="Enter location" class="mt-1 p-2 border border-gray-300 rounded-md w-full" formControlName="location">
+              <input type="text" id="location" name="location" placeholder="Enter location" class="mt-1 p-2 border border-gray-300 rounded-md w-full" formControlName="location" [required]="true">
+              <p *ngIf="searchForm.get('location')?.invalid && searchForm.get('location')?.touched " class="text-red-300">Location  is requierd</p>
+
             </div>
-            <button  class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mt-4 sm:mt-0">Search</button>
+            <div>
+              <button  class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mt-4 sm:mt-0" [disabled]="searchForm.invalid">Search</button>
+            </div>
           </form>
         </div>
       </div>
 
-
-  
+      <section class="my-1">
+        <div class="container flex ring-2 shadow-lg bg-white p-1">
+          <div *ngIf="searchResults && searchResults.length > 0" class="flex-1 overflow-y-auto">
+            <div class="grid grid-cols-1  gap-4 p-4">
+              <div *ngFor="let job of searchResults" class="shadow-lg bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
+                (click)="onSelection(job._id)">
+                <h1 class="text-2xl font-bold mb-2">{{job.title}}</h1>
+                <p class="text-gray-500 mb-2 font-semibold">{{job.location}}</p>
+                <ul>
+                  <li *ngFor="let responsibility of job.responsibilities" class="text-gray-400">{{responsibility}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Selected job container -->
+          <div class="flex-1 bg-gray-100 p-4">
+            <div *ngIf="selectedJob" class="shadow-lg bg-white rounded-lg p-4">
+              <h1 class="text-2xl font-bold mb-2">{{selectedJob.title}}</h1>
+              <p class="text-gray-500 mb-2">{{selectedJob.location}}</p>
+              <p class="">{{selectedJob.description}}</p>
+              <div class="space-x-2">
+                <button  class="bg-blue-500 text-white  rounded-md hover:bg-blue-600 mt-4 sm:mt-0 px-3 py-2 " (click)="onApply(selectedJob._id)">Apply</button>
+                <button  class="bg-gray-500 text-white  rounded-md hover:bg-gray-900 mt-4 sm:mt-0 px-3 py-2" (click)="saveJob(selectedJob._id)">Save</button> 
+              </div>
+              <h2 class="text-lg font-bold mb-2">Responsibilities:</h2>
+              <ul>
+                <li *ngFor="let resp of selectedJob.responsibilities" class="text-gray-400">{{resp}}</li>
+              </ul>
+              <h2 class="text-lg font-bold my-2">Requirements:</h2>
+              <ul>
+                <li *ngFor="let req of selectedJob.requirements" class="text-gray-400">{{req}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      

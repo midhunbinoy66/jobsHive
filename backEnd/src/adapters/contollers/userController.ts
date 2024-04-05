@@ -141,4 +141,13 @@ export class UserController{
         return res.status(apiRes.status).json(apiRes);
     }
 
+    async updateUserSavedJobs(req:Request,res:Response){
+        const userId = req.params.userId;
+        const {jobId} = req.body;
+        console.log(req.body);
+        console.log(userId,jobId);
+        const apiRes = await this._userUseCAse.saveUserJob(userId,jobId);
+        return res.status(apiRes.status).json(apiRes);
+    }
+
 }

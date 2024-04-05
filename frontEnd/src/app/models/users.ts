@@ -9,7 +9,8 @@ export interface IUserRes {
     isBlocked: boolean
     profilePic?: string
     wallet?: string
-    address?:IUserAddress
+    address?:IUserAddress,
+    savedJobs?:string[]
   }
   
 

@@ -13,4 +13,9 @@ export class JobService {
   findJobs(criteria:any){
     return this.http.get<IApiJobsRes>('user/jobs',{params:criteria});
   }
+
+  findSavedJobs(jobIds:string[]){
+    const payload = { jobIds: jobIds };
+    return this.http.post<IApiJobsRes>('user/saved-jobs',payload)
+  }
 }

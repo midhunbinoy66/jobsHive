@@ -14,9 +14,9 @@ export interface IJobRes{
     description:string
     salary:number
     isActive:boolean
-    localtion:IJobAddress
+    location:string
     type:string
     tags:string[]
-    requierments:string[]
+    requirements:string[]
     responsibilities:string[]
 }

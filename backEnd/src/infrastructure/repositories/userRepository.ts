@@ -1,5 +1,6 @@
 import { IuserRepo } from "../../application/interfaces/repos/userRepo";
 import { IUserAuth, IUserRes, IUserSocialAuth, IUserUpdate } from "../../application/interfaces/types/user";
+import { IJob } from "../../entities/job";
 import { IUser } from "../../entities/user";
 import userModel from "../db/userModel";
 
@@ -43,4 +44,15 @@ export class UserRespository implements IuserRepo {
                 {new:true}
             )
         }
+
+        async updateUserSavedJobs(userId: string, job: IJob): Promise<IUserRes | null> {
+                return await userModel.findByIdAndUpdate(
+                    {_id:userId},
+                    {
+                        $push:{savedJobs:job._id}
+                    },
+                    {new:true}
+                )
+        }
+
 }

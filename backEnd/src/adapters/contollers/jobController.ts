@@ -30,7 +30,6 @@ export class JobController{
           ]
         };
 
-        console.log(query);
         const apiRes = await this._jobUseCase.findJobs(query);
         res.status(apiRes.status).json(apiRes);
     }
@@ -38,6 +37,12 @@ export class JobController{
     async addJob(req:Request,res:Response){
         const job = req.body.job;
         const apiRes = await this._jobUseCase.saveJob(job);
+        res.status(apiRes.status).json(apiRes);
+    }
+
+    async getUserSavedJobs(req:Request,res:Response){
+        const jobIds = req.body.jobIds;
+        const apiRes = await this._jobUseCase.findUserSavedJobs(jobIds);
         res.status(apiRes.status).json(apiRes);
     }
 }

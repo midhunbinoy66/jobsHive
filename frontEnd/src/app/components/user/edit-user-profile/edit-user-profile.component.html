@@ -1,5 +1,8 @@
 <app-user-nav></app-user-nav>
-<section>
+<!-- <app-user-nav></app-user-nav>
+
+<section class="flex">
+    <app-user-sidebar></app-user-sidebar>
     <form  [formGroup]="profileForm" (ngSubmit)="onsubmit()">
         <div class="container flex flex-col space-y-3 p-3 m-2 w-1/2 bg-gradient-to-tr from-slate-400 to-gray-900 shadow-xl ">
             <h1 class="text-2xl font-bold font-mono">Edit user form</h1>
@@ -40,4 +43,66 @@
     </form>
 
 </section>
+ -->
 
+ <section class="flex flex-col lg:flex-row">
+    <!-- Sidebar -->
+    <app-user-sidebar class="lg:w-1/4"></app-user-sidebar>
+
+    <!-- Form -->
+    <form [formGroup]="profileForm" (ngSubmit)="onsubmit()" class="lg:w-3/4 flex justify-center items-center p-4">
+        <div class="container max-w-lg bg-white rounded-lg shadow-md p-8">
+            <h1 class="text-3xl font-bold mb-8 text-center">Edit User Form</h1>
+
+            <!-- User Name -->
+            <div class="mb-6">
+                <label for="name" class="text-lg mb-2 block">User Name</label>
+                <input type="text" placeholder="User Name" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="name">
+                
+            </div>
+
+            <!-- Mobile -->
+            <div class="mb-6">
+                <label for="mobile" class="text-lg mb-2 block">Mobile</label>
+                <input type="number" placeholder="Mobile" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="mobile">
+            </div>
+
+            <!-- Address -->
+            <div class="mb-6">
+                <h1 class="text-lg font-semibold mb-2">Address</h1>
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <!-- City -->
+                    <div>
+                        <label for="city" class="text-lg mb-2 block">City</label>
+                        <input type="text" placeholder="City" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="city"  [(ngModel)]="city"> 
+                    </div>
+                    <!-- District -->
+                    <div>
+                        <label for="district" class="text-lg mb-2 block">District</label>
+                        <input type="text" placeholder="District" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="district"  [(ngModel)]="district">
+                    </div>
+                    <!-- State -->
+                    <div>
+                        <label for="state" class="text-lg mb-2 block">State</label>
+                        <input type="text" placeholder="State" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="state"  [(ngModel)]="state">
+                    </div>
+                    <!-- Country -->
+                    <div>
+                        <label for="country" class="text-lg mb-2 block">Country</label>
+                        <input type="text" placeholder="Country" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="country"  [(ngModel)]="country">
+                    </div>
+                    <!-- Zip Code -->
+                    <div>
+                        <label for="zipCode" class="text-lg mb-2 block">Zip Code</label>
+                        <input type="text" placeholder="Zip Code" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="zip"  [(ngModel)]="zip">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-center">
+                <button type="submit" class="bg-orange-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-orange-700 focus:outline-none focus:bg-orange-700">Submit</button>
+            </div>
+        </div>
+    </form>
+</section>

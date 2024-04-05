@@ -26,7 +26,11 @@ export const userSchema  =  new Schema<IUser & Document>({
         type:Boolean,
         default:false,
         required:true
-    }
+    },
+    savedJobs:[{
+        type:Schema.Types.ObjectId,
+        ref:'Jobs'
+    }]
 
 })
 

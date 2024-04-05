@@ -1,8 +1,8 @@
 <div class="flex flex-wrap w-screen">
     <section class="relative mx-auto">
       <!-- navbar -->
-      <nav class="flex justify-between bg-black text-amber-300 w-screen">
-        <div class="px-5 xl:px-12 py-6 flex w-full items-center">
+      <nav class="flex justify-between bg-gray-100 text-gray-900 w-screen">
+        <div class="px-5 xl:px-12 py-6 flex w-full items-start justify-start">
           <a class="" routerLink="/user/home">
             <img class="h-9" src="../../../../assets/logo.jpg" alt="jobHive Logo" />
             <!-- Logo Here. -->
@@ -10,13 +10,7 @@
           <!-- Nav Links -->
           <ul class="hidden sm:flex px-4 mx-auto font-heading space-x-12">
             <li>
-              <a class="hover:text-amber-500" routerLink="/user/home">Home</a>
-            </li>
-            <li>
-              <a class="hover:text-amber-500" routerLink="/user/movies">Movies</a>
-            </li>
-            <li>
-              <a class="hover:text-amber-500" routerLink="/user/theaters">Theaters</a>
+              <a class="hover:text-gray-500" routerLink="/user/home">Home</a>
             </li>
           </ul>
           <!-- Header Icons -->
@@ -80,7 +74,7 @@
   
     <!--dark mode - wide side navigation-->
     <div *ngIf="showSidebar"
-      class="w-60 py-4 px-2 text-amber-300 bg-black text-left capitalize font-medium shadow-lg sm:hidden fixed right-0">
+      class="w-60 py-4 px-2 text-black-300 bg-gray-300 text-left capitalize font-medium shadow-lg sm:hidden fixed right-0">
   
       <a routerLink="/user/home" (click)="toggleSideBar()">
         <span class="cursor-pointer px-2 py-1 hover:bg-gray-800 hover:text-amber-500 rounded block mb-5">
@@ -89,20 +83,12 @@
         </span>
       </a>
   
-      <a routerLink="/user/movies" (click)="toggleSideBar()">
+      <a routerLink="/user/jobs" (click)="toggleSideBar()">
         <span class="cursor-pointer px-2 py-1 hover:bg-gray-800 hover:text-amber-500 rounded block mb-5">
           <i class="w-8 fas fa-stream p-2 rounded-full"></i>
-          <span class="mx-2">Movies</span>
+          <span class="mx-2">Jobs</span>
         </span>
-      </a>
-  
-      <a routerLink="/user/theaters" (click)="toggleSideBar()">
-        <span class="cursor-pointer px-2 py-1 hover:bg-gray-800 hover:text-amber-500 rounded block mb-5">
-          <i class="w-8 fas fa-search p-2 bg-gray-800 rounded-full"></i>
-          <span class="mx-2">Theaters</span>
-        </span>
-      </a>
-  
+      </a>  
       <a routerLink="/user/messages" (click)="toggleSideBar()">
         <span class="cursor-pointer px-2 py-1 hover:bg-gray-800 hover:text-amber-500 rounded block mb-5">
           <i class="w-8 fas fa-th p-2 bg-gray-800 rounded-full"></i>

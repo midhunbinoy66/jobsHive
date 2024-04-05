@@ -1,5 +1,5 @@
 import express from 'express';
-import { jController, uController } from '../utils/controllers';
+import { appController, jController, uController } from '../utils/controllers';
 
 const userRouter = express.Router();
 
@@ -12,4 +12,7 @@ userRouter.post('/login',(req,res)=>uController.userLogin(req,res));
 userRouter.get('/jobs',(req,res)=>jController.getJobs(req,res))
 userRouter.post('/auth/google',(req,res)=>uController.userSocialSignUp(req,res));
 userRouter.put('/update/:userId',(req,res)=>uController.updateProfile(req,res));
+userRouter.put('/saveJob/:userId',(req,res)=>uController.updateUserSavedJobs(req,res));
+userRouter.post('/saved-jobs',(req,res)=>jController.getUserSavedJobs(req,res));
+userRouter.post('/job/apply',(req,res)=>appController.saveApplication(req,res));
 export default userRouter

@@ -2,6 +2,7 @@
 import { IUser } from "../../entities/user";
 import { OTP_TIMER } from "../../infrastructure/constants/constants";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
+import { IJobRepo } from "../interfaces/repos/jobRepo";
 import { ITempUserRepo } from "../interfaces/repos/tempUserRepo";
 import { IuserRepo } from "../interfaces/repos/userRepo";
 import { ITempUserRes, ITempUsrReq } from "../interfaces/types/tempUser";
@@ -16,7 +17,8 @@ export class UserUseCase{
         private readonly _tempUserRepository:ITempUserRepo,
         private readonly _encryptor:IEncryptor,
         private readonly _tokenGenerator:ITokenGenerator,
-        private readonly _mailer:ImailSender
+        private readonly _mailer:ImailSender,
+        private readonly _jobRepository:IJobRepo
     )
     {}
 
@@ -163,6 +165,34 @@ export class UserUseCase{
                 data:null
             }
         }
+    }
+
+    async saveUserJob(userId:string,jobId:string):Promise<IApiUserRes>{
+
+        try {
+            const job = await this._jobRepository.findJobById(jobId);
+            if(job !== null){
+                const updatedUser =await this._userRespository.updateUserSavedJobs(userId,job)
+                return {
+                    status:STATUS_CODES.OK,
+                    message:'Success',
+                    data:updatedUser,
+                }
+            }else{
+                return {
+                    status:STATUS_CODES.NOT_FOUND,
+                    message:'Error,Job not found',
+                    data:null,
+                }
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+
     }
     
 }

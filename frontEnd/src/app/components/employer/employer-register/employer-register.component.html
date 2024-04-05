@@ -1,5 +1,3 @@
-<p>employer-register works!</p>
-<p>user-register works!</p>
 <section class="vh-100 bg-image"
   style="background-image: url('https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg');">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -18,24 +16,22 @@
 
                 <div class="form-outline mb-3 ">
                   <input type="email"  formControlName="email" id="form3Example3cg" class="form-control form-control-lg" placeholder="Enter Email" />
-                 
+                 <app-email-validation [emailControl]="form.get('email')" [isSubmitted]="false"></app-email-validation>
                 </div>
-<!-- 
-                <div class="form-outline mb-3 ">
-                  <input type="text"  formControlName="mobile" id="form3Example10cg" class="form-control form-control-lg" placeholder="Enter mobile" />
-                 
-                </div> -->
 
                 <div *ngIf="!showOtpField" class="form-outline mb-3 ">
                     <input type="password" formControlName="password" id="form3Example4cg" class="form-control form-control-lg" placeholder="Enter Password" />
-                </div>
+                    <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="false"></app-password-validation>
+                  </div>
                   
                 <div *ngIf="!showOtpField" class="form-outline mb-3 ">
                     <input type="password" formControlName="repeatPassword" id="form3Example4cdg" class="form-control form-control-lg" placeholder="Repeat Password" />
+                    <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="false"></app-password-validation>
                 </div>
 
                 <div *ngIf="showOtpField">
                   <input type="text" formControlName="otp" id="otp" class="form-control form-control-lg" placeholder="Enter OTP" />
+                  <app-otp-validation [otpControl]="form.get('otp')" [showOTPResend]="showOTPResend" [timerStr]="formattedTime" (OTPResend)="resendOTP()" ></app-otp-validation>  
                 </div>
                   
 

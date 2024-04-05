@@ -1,0 +1,25 @@
+<app-user-nav></app-user-nav>
+<section>
+    <div class="container flex flex-col sm:flex-row space-x-2 mt-2">
+        <app-user-sidebar></app-user-sidebar>        
+        <div  class="ring-gray-600 ring-2 w-full p-4 rounded-lg">
+            <!-- Tabs to toggle between saved jobs and applied jobs -->
+            <div class="flex justify-start space-x-2"> 
+                <button (click)="showSavedJobs = true; showAppliedJobs = false;" class="">Saved Jobs</button>
+                <button (click)="showAppliedJobs = true; showSavedJobs = false;">Applied Jobs</button>
+              
+            </div>
+
+            <!-- Conditionally render saved jobs component -->
+            <div *ngIf="showSavedJobs">
+              <app-user-saved-jobs></app-user-saved-jobs>
+            </div>
+          
+            <!-- Conditionally render applied jobs component -->
+            <div *ngIf="showAppliedJobs">
+              <app-user-applied-jobs></app-user-applied-jobs>
+            </div>
+          </div>
+          
+    </div>
+</section>

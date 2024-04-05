@@ -6,6 +6,9 @@ import { EmployerLoginComponent } from './employer-login/employer-login.componen
 import { EmployerHomeComponent } from './employer-home/employer-home.component';
 import { EmployerRegisterComponent } from './employer-register/employer-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EmailValidationComponent } from '../common/validation/email-validation/email-validation.component';
+import { PasswordValidationComponent } from '../common/validation/password-validation/password-validation.component';
+import { OtpValidationComponent } from '../common/validation/otp-validation/otp-validation.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     EmployerRoutingModule,
     ReactiveFormsModule,
+    EmailValidationComponent,
+    PasswordValidationComponent,
+    OtpValidationComponent
     
   ]
 })

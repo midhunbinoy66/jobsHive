@@ -16,4 +16,10 @@ export class JobRepository implements IJobRepo{
    async findJobs(criteria: IApiCriteria): Promise<IJob[] | null> {
         return jobModel.find(criteria);
     }
+
+    async findSavedJobs(jobIds: string[]): Promise<IJob[] | null> {
+        return await jobModel.find({_id:{$in:jobIds}});
+    }
+
+    
 }
