@@ -7,4 +7,5 @@ export interface IJobRepo{
     findJobById(id:string):Promise<IJob | null>
     findJobs(criteria:IApiCriteria):Promise<IJob[]|null>
     findSavedJobs(jobIds:string[]):Promise<IJob[]|null>
+    findAppliedJobs(jobIds:string[]):Promise<IJob[]|null>
 }

@@ -31,4 +31,22 @@ export class ApplicationUseCase{
         }
      }
     }
+
+
+    async findUserApplications(userId:string){
+        try {
+            const applications =await  this._applicationRepo.findAllApplication(userId);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:applications
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
 }

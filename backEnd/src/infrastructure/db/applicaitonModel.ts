@@ -13,6 +13,12 @@ const applicationSchema :Schema = new Schema<IApplication & Document>({
         ref:'Jobs',
         required:true
     },
+    jobTitle:{
+        type:String
+    },
+    jobLocation:{
+        type:String
+    },
     appliedTime:{
         type:Date,
         default:Date.now()

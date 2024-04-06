@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IApiJobsRes } from '../models/jobs';
-import { IApiApplicationRes } from '../models/application';
+import { IApiApplicationRes, IApiApplicationsRes } from '../models/application';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,9 @@ export class JobService {
   applyForJob(jobData:any){
     console.log(jobData);
     return this.http.post<IApiApplicationRes>('user/job/apply',jobData);
+  }
+
+  findAppliedJobs(userId:string){
+    return this.http.get<IApiApplicationsRes>(`user/applied-jobs/${userId}`);
   }
 }

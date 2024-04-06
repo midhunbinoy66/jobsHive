@@ -1,1 +1,19 @@
-<p>user-applied-jobs works!</p>
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="border-t border-gray-200">
+        <!-- Saved jobs list goes here -->
+        <div class="px-4 py-4 sm:px-6 " *ngFor="let job of userApplication">
+          <!-- Sample saved job item -->
+          <div class="mb-4">
+            <h4 class="text-lg font-bold text-gray-900">{{job.jobTitle}}</h4>
+            <p class="text-sm text-gray-500">{{job.jobLocation}}</p>
+            <p class="text-sm text-gray-500">{{job.jobLocation}}</p>
+            <p class="text-sm text-gray-500">{{job.appliedTime | date }}</p>
+            <p class="text-sm text-gray-500">{{job.coverLetter }}</p>
+          </div>
+          <!-- Repeat this structure for each saved job item -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

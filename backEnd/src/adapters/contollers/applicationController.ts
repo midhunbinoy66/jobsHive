@@ -14,4 +14,11 @@ export class ApplicationController{
         const apiRes = await this.__applicationUseCase.saveApplication(jobData);
         res.status(apiRes.status).json(apiRes);
     }
+
+    async findUserApplications(req:Request,res:Response){
+        const userId = req.params.userId
+        const apiRes  = await this.__applicationUseCase.findUserApplications(userId);
+        res.status(apiRes.status).json(apiRes);
+
+    }
 }

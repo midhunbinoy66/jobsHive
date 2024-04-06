@@ -25,6 +25,7 @@ export class UserHomeComponent implements OnInit {
   userId='';
   user:IUserRes|null=null;
   userDetail$ = this.store.pipe(select(selectUserDetails));
+  isSearched=false;
   constructor(
     private jobService:JobService,
     private formBuilder:FormBuilder,
@@ -47,6 +48,7 @@ export class UserHomeComponent implements OnInit {
   }
 
   onSubmit(){
+    this.isSearched=true;
     let criteria = this.searchForm.getRawValue();
     this.jobService.findJobs(criteria).subscribe({
       next:(res:IApiJobsRes)=>{ 
@@ -86,13 +88,15 @@ export class UserHomeComponent implements OnInit {
 
   }
 
-  onApply(jobId:string){
+  onApply(jobId:string,jobTitle:string,jobLocation:string){
     const dialogRef = this.dialog.open(ApplyModalComponent);
     dialogRef.afterClosed().subscribe(result=>{
-      if(result){
+      if(result !== undefined){
         const jobData ={
           userId: this.user?._id,
           jobId:jobId,
+          jobTitle:jobTitle,
+          jobLocation:jobLocation,
           coverLetter:result
         }
         console.log(jobData);
@@ -102,6 +106,8 @@ export class UserHomeComponent implements OnInit {
             void Swal.fire('Success','You application has been sent','success');
           }
         })
+      }else {
+        console.log('Application canceled');
       }
     })
   }

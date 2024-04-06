@@ -21,5 +21,8 @@ export class JobRepository implements IJobRepo{
         return await jobModel.find({_id:{$in:jobIds}});
     }
 
-    
+    async findAppliedJobs(jobIds: string[]): Promise<IJob[] | null> {
+        return await jobModel.find({_id:{$in:jobIds}})
+    }
+
 }
