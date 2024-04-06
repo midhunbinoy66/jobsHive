@@ -16,6 +16,15 @@ export class TransformUrlInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     
+
+    if (request.headers.has('Bypass-Interceptor')) {
+      console.log('deleting bypass interceptor')
+      const bypassedRequest = request.clone({
+        headers: request.headers.delete('bypass-interceptor')
+      })
+      return next.handle(bypassedRequest)
+    }
+
     const  baseUrl  = environment.baseUrl
     console.log(baseUrl);
     const newReq = request.clone(

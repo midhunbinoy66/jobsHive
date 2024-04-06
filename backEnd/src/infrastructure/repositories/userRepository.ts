@@ -1,7 +1,10 @@
 import { IuserRepo } from "../../application/interfaces/repos/userRepo";
+import { IResumeReq } from "../../application/interfaces/types/resume";
 import { IUserAuth, IUserRes, IUserSocialAuth, IUserUpdate } from "../../application/interfaces/types/user";
 import { IJob } from "../../entities/job";
+import { IResume } from "../../entities/resume";
 import { IUser } from "../../entities/user";
+import resumeModel from "../db/resumeModel";
 import userModel from "../db/userModel";
 
 
@@ -53,6 +56,29 @@ export class UserRespository implements IuserRepo {
                     },
                     {new:true}
                 )
+        }
+
+        async saveUserResume(userId: string, resume: IResumeReq): Promise<IResume | null> {
+                    return await resumeModel.findOneAndUpdate(
+                        {userId:userId},
+                        {
+                            $set:{
+                                name:resume.name,
+                                email:resume.email,
+                                mobile:resume.mobile,
+                                languages:resume.languages,
+                                education:resume.education,
+                                workExperience:resume.workExperience,
+                                skills:resume.skills
+                            }
+                        },
+                        {upsert:true,new:true}
+                    )
+        }
+
+
+        async findResumeByUserId(userId: string): Promise<IResume | null> {
+            return await resumeModel.findOne({userId:userId})
         }
 
 }

@@ -5,6 +5,7 @@ import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { IJobRepo } from "../interfaces/repos/jobRepo";
 import { ITempUserRepo } from "../interfaces/repos/tempUserRepo";
 import { IuserRepo } from "../interfaces/repos/userRepo";
+import { IApiResumeRes, IResumeReq } from "../interfaces/types/resume";
 import { ITempUserRes, ITempUsrReq } from "../interfaces/types/tempUser";
 import { IApiUserAuthRes, IApiUserRes, IUserAuth, IUserSocialAuth, IUserUpdate } from "../interfaces/types/user";
 import { IEncryptor } from "../interfaces/utils/encryptor";
@@ -194,5 +195,50 @@ export class UserUseCase{
         }
 
     }
+
+
+    async getUserResume(userId:string):Promise<IApiResumeRes>{
+        try {
+            
+            const userResume = await this._userRespository.findResumeByUserId(userId);
+            if(userResume !== null){
+                return {
+                    status:STATUS_CODES.OK,
+                    message:'Success',
+                    data:userResume,
+                }
+            }else{
+                return {
+                    status:STATUS_CODES.NOT_FOUND,
+                    message:'No resume for this user',
+                    data:userResume,
+                }
+            }
+
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
     
+
+    async saveUserResume(userId:string,resumeData:IResumeReq):Promise<IApiResumeRes>{
+        try {
+            const userResume = await this._userRespository.saveUserResume(userId,resumeData);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:userResume,
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
 }

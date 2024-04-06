@@ -10,8 +10,8 @@ export class ApplicationController{
     ){}
 
     async saveApplication(req:Request,res:Response){
-        const applicationData = req.body.application
-        const apiRes = await this.__applicationUseCase.saveApplication(applicationData);
+        const jobData = req.body
+        const apiRes = await this.__applicationUseCase.saveApplication(jobData);
         res.status(apiRes.status).json(apiRes);
     }
 }

@@ -22,6 +22,9 @@ import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { UserJobsComponent } from './user-jobs/user-jobs.component';
 import { UserSavedJobsComponent } from './user-saved-jobs/user-saved-jobs.component';
 import { UserAppliedJobsComponent } from './user-applied-jobs/user-applied-jobs.component';
+import { UserResumeComponent } from './user-resume/user-resume.component';
+import { MobileValidationComponent } from '../common/validation/mobile-validation/mobile-validation.component';
+import { CommonValidationComponent } from '../common/validation/common-validation/common-validation.component';
 
 
 @NgModule({
@@ -35,7 +38,8 @@ import { UserAppliedJobsComponent } from './user-applied-jobs/user-applied-jobs.
     UserSidebarComponent,
     UserJobsComponent,
     UserSavedJobsComponent,
-    UserAppliedJobsComponent
+    UserAppliedJobsComponent,
+    UserResumeComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +50,9 @@ import { UserAppliedJobsComponent } from './user-applied-jobs/user-applied-jobs.
     PasswordValidationComponent,
     EmailValidationComponent,
     NameValidationComponent,
-    OtpValidationComponent
+    OtpValidationComponent,
+    MobileValidationComponent,
+    CommonValidationComponent
   ],
   providers: [
     {

@@ -20,6 +20,9 @@ const applicationSchema :Schema = new Schema<IApplication & Document>({
     status:{
         type:String,
         default:'processing'
+    },
+    coverLetter:{
+        type:String
     }
 })
 

@@ -15,4 +15,6 @@ userRouter.put('/update/:userId',(req,res)=>uController.updateProfile(req,res));
 userRouter.put('/saveJob/:userId',(req,res)=>uController.updateUserSavedJobs(req,res));
 userRouter.post('/saved-jobs',(req,res)=>jController.getUserSavedJobs(req,res));
 userRouter.post('/job/apply',(req,res)=>appController.saveApplication(req,res));
+userRouter.get('/resume/:userId',(req,res)=>uController.findUserResume(req,res));
+userRouter.post('/resume/:userId',(req,res)=>uController.saveUserResume(req,res));
 export default userRouter

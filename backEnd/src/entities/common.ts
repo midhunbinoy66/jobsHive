@@ -6,6 +6,22 @@ export interface IUserAddress {
     zip: number
 }
 
+export interface IUserEducation{
+    institution:string
+    degree:string
+    fieldOfStudy:string
+    eduStartDate:string
+    eduEndDate:string
+}
+
+export interface IUserWorkExp{
+    companyName:string
+    jobTitle:string
+    location:string
+    workStartDate:string
+    workEndDate:string
+}
+
 export interface IEmployerAddress extends IUserAddress{
     landmark?:string
 }

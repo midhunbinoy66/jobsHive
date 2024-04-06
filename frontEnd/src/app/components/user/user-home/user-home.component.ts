@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { IApiJobsRes, IJobRes } from 'src/app/models/jobs';
@@ -10,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 import { saveUserOnStore } from 'src/app/states/user/user.action';
 import { selectUserDetails } from 'src/app/states/user/user.selector';
 import Swal from 'sweetalert2';
+import { ApplyModalComponent } from '../../common/apply-modal/apply-modal.component';
 
 @Component({
   selector: 'app-user-home',
@@ -28,7 +30,8 @@ export class UserHomeComponent implements OnInit {
     private formBuilder:FormBuilder,
     private userService:UserService,
     private store:Store,
-    private router:Router
+    private router:Router,
+    private dialog:MatDialog
   ){}
 
   ngOnInit(): void {
@@ -84,7 +87,23 @@ export class UserHomeComponent implements OnInit {
   }
 
   onApply(jobId:string){
-    
+    const dialogRef = this.dialog.open(ApplyModalComponent);
+    dialogRef.afterClosed().subscribe(result=>{
+      if(result){
+        const jobData ={
+          userId: this.user?._id,
+          jobId:jobId,
+          coverLetter:result
+        }
+        console.log(jobData);
+        this.jobService.applyForJob(jobData).subscribe({
+          next:(res)=>{
+            console.log(res);
+            void Swal.fire('Success','You application has been sent','success');
+          }
+        })
+      }
+    })
   }
 
 }

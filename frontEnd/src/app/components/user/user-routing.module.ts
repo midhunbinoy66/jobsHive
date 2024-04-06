@@ -8,6 +8,7 @@ import { authGuard } from 'src/app/guards/auth.guard';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
 import { UserJobsComponent } from './user-jobs/user-jobs.component';
+import { UserResumeComponent } from './user-resume/user-resume.component';
 
 const routes: Routes = [
 
@@ -44,8 +45,14 @@ const routes: Routes = [
   },
   {
     path:'jobs',
-    title:'JobHive| Jobs',
+    title:'JobHive | Jobs',
     component:UserJobsComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'resume',
+    title:'JobHive | Resume',
+    component:UserResumeComponent,
     canActivate:[authGuard]
   },
   {
