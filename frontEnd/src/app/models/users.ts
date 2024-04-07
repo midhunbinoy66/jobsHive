@@ -1,4 +1,4 @@
-import { IApiRes, IUserAddress } from "./common"
+import { IApiRes, ISubscription, IUserAddress } from "./common"
 
 export interface IUserRes {
     _id: string
@@ -9,8 +9,9 @@ export interface IUserRes {
     isBlocked: boolean
     profilePic?: string
     wallet?: string
-    address?:IUserAddress,
+    address?:IUserAddress
     savedJobs?:string[]
+    subscription?:ISubscription
   }
   
 
@@ -42,6 +43,15 @@ export interface IUserSocialAuth {
   name: string
   email: string
   profilePic?: string
+}
+
+
+export interface IUserSubscriptionDisplay{
+  startDate:Date
+  endDate:Date
+  planName:string
+  features:string[]
+  description:string
 }
 
 export interface IUserUpdate extends Omit<IUserRes, '_id' | 'email' | 'password' | 'isBlocked' > { }

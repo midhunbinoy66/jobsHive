@@ -25,6 +25,7 @@ import { UserAppliedJobsComponent } from './user-applied-jobs/user-applied-jobs.
 import { UserResumeComponent } from './user-resume/user-resume.component';
 import { MobileValidationComponent } from '../common/validation/mobile-validation/mobile-validation.component';
 import { CommonValidationComponent } from '../common/validation/common-validation/common-validation.component';
+import { UserSubscriptionComponent } from './user-subscription/user-subscription.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CommonValidationComponent } from '../common/validation/common-validatio
     UserJobsComponent,
     UserSavedJobsComponent,
     UserAppliedJobsComponent,
-    UserResumeComponent
+    UserResumeComponent,
+    UserSubscriptionComponent
   ],
   imports: [
     CommonModule,

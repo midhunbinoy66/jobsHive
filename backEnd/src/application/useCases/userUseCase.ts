@@ -77,6 +77,15 @@ export class UserUseCase{
     }
 
 
+    async findUserDetails(userId:string):Promise<IApiUserRes>{
+        const user  = await this._userRespository.findById(userId);
+        return {
+            status: STATUS_CODES.OK,
+            data:user,
+            message:'success',
+        }
+    }
+
     async saveUserTemporarily(userData:ITempUsrReq):Promise<ITempUserRes & {userAuthToken:string}>{
         const user = await this._tempUserRepository.saveUser(userData);
         const userAuthToken = this._tokenGenerator.generateTempToken(user._id);
@@ -233,6 +242,24 @@ export class UserUseCase{
                 message:'Success',
                 data:userResume,
             }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
+    async removeUserSavedJob(userId:string,jobId:string){
+        try {
+            const user  = await this._userRespository.removeUserSavedJob(userId,jobId);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:user,
+            }
+            
         } catch (error) {
             return {
                 status:STATUS_CODES.INTERNAL_SERVER_ERROR,

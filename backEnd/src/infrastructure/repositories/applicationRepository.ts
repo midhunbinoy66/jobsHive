@@ -1,3 +1,4 @@
+
 import { IApplicantRepo } from "../../application/interfaces/repos/applicatnRepo";
 import { IApplicationReq } from "../../application/interfaces/types/application";
 import { IApplication } from "../../entities/application";
@@ -13,6 +14,20 @@ export class ApplicationRepository implements IApplicantRepo{
     }
 
     async saveApplication(applicationData:IApplicationReq): Promise<IApplication | null> {
-        return await new applicationModel(applicationData).save() 
+
+       
+        // return await new applicationModel(applicationData).save() 
+
+        return await applicationModel.findOneAndUpdate(
+            {userId:applicationData.userId,jobId:applicationData.jobId},
+            {
+                $set:{
+                    jobTitle:applicationData.jobTitle,
+                    jobLocation:applicationData.jobLocation,
+                    coverLetter:applicationData.coverLetter
+                }
+            },
+            {upsert:true,new:true}
+        )
     }
 }

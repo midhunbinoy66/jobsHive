@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IApiJobsRes } from '../models/jobs';
 import { IApiApplicationRes, IApiApplicationsRes } from '../models/application';
+import { IApiUserRes } from '../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,9 @@ export class JobService {
 
   findAppliedJobs(userId:string){
     return this.http.get<IApiApplicationsRes>(`user/applied-jobs/${userId}`);
+  }
+
+  removeSavedJob(userId:string,jobId:string){
+    return this.http.post<IApiUserRes>(`user/remove/saved-jobs/${userId}`,{jobId});
   }
 }

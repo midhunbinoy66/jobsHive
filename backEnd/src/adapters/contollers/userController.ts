@@ -164,4 +164,19 @@ export class UserController{
         const apiRes = await this._userUseCAse.saveUserResume(userId,resumeData);
         return res.status(apiRes.status).json(apiRes)
     }
+
+    async findUserDetails(req:Request,res:Response){
+        
+        const userId = req.params.userId;
+        const apiRes = await this._userUseCAse.findUserDetails(userId);
+        return res.status(apiRes.status).json(apiRes);
+        
+    }
+
+    async userRemoveSavedJob(req:Request,res:Response){
+        const jobId = req.body.jobId;
+        const userId = req.params.userId;
+        const apiRes = await this._userUseCAse.removeUserSavedJob(userId,jobId);
+        return res.status(apiRes.status).json(apiRes);
+    }
 }

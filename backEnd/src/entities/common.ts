@@ -1,3 +1,5 @@
+import { IPlan } from "./plan"
+
 export interface IUserAddress {
     country: string
     state: string
@@ -20,6 +22,12 @@ export interface IUserWorkExp{
     location:string
     workStartDate:string
     workEndDate:string
+}
+
+export interface IUserSubscription{
+    planId:IPlan
+    startDate:Date
+    endDate:Date
 }
 
 export interface IEmployerAddress extends IUserAddress{

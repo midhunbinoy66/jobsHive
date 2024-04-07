@@ -18,6 +18,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button'
 import {MatInputModule} from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './states/user/user.effects';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
@@ -40,7 +42,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     MatButtonModule,
     MatInputModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    EffectsModule.forRoot([UserEffects])
 
   ],
   providers: [

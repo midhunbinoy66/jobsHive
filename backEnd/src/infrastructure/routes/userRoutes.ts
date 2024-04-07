@@ -1,5 +1,5 @@
 import express from 'express';
-import { appController, jController, uController } from '../utils/controllers';
+import { appController, jController, pController, uController } from '../utils/controllers';
 
 const userRouter = express.Router();
 
@@ -18,4 +18,8 @@ userRouter.get('/applied-jobs/:userId',(req,res)=>appController.findUserApplicat
 userRouter.post('/job/apply',(req,res)=>appController.saveApplication(req,res));
 userRouter.get('/resume/:userId',(req,res)=>uController.findUserResume(req,res));
 userRouter.post('/resume/:userId',(req,res)=>uController.saveUserResume(req,res));
+userRouter.get('/plans',(req,res)=>pController.findAllPlans(req,res));
+userRouter.get('/plans/:planId',(req,res)=>pController.findPlan(req,res));
+userRouter.get('/get/:userId',(req,res)=>uController.findUserDetails(req,res));
+userRouter.post('/remove/saved-jobs/:userId',(req,res)=>uController.userRemoveSavedJob(req,res));
 export default userRouter

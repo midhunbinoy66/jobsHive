@@ -30,4 +30,8 @@ export class UserService {
 
     return this.http.post<IApiResumeRes>(`user/resume/${userId}`,resumeData);
   }
+
+  getUserDetails(userId:string):Observable<IApiUserRes>{
+    return this.http.get<IApiUserRes>(`user/get/${userId}`);
+  }
 }

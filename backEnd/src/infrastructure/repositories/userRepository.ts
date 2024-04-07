@@ -52,7 +52,7 @@ export class UserRespository implements IuserRepo {
                 return await userModel.findByIdAndUpdate(
                     {_id:userId},
                     {
-                        $push:{savedJobs:job._id}
+                        $addToSet:{savedJobs:job._id}
                     },
                     {new:true}
                 )
@@ -79,6 +79,17 @@ export class UserRespository implements IuserRepo {
 
         async findResumeByUserId(userId: string): Promise<IResume | null> {
             return await resumeModel.findOne({userId:userId})
+        }
+
+        async removeUserSavedJob(userId: string, jobId: string): Promise<IUserRes | null> {
+            return await userModel.findByIdAndUpdate(
+                {_id:userId},
+                {
+                    $pull:{savedJobs:jobId}
+                },
+                {new:true}
+            );
+              
         }
 
 }

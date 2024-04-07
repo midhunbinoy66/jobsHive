@@ -14,4 +14,5 @@ export interface IuserRepo{
     updateUserSavedJobs(userId:string,job:IJob):Promise<IUserRes|null>,
     findResumeByUserId(userId:string):Promise<IResume|null>,
     saveUserResume(userId:string,resume:IResumeReq):Promise<IResume|null>
+    removeUserSavedJob(userId:string,jobId:string):Promise<IUserRes| null>
 }

@@ -9,6 +9,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
 import { UserJobsComponent } from './user-jobs/user-jobs.component';
 import { UserResumeComponent } from './user-resume/user-resume.component';
+import { UserSubscriptionComponent } from './user-subscription/user-subscription.component';
 
 const routes: Routes = [
 
@@ -53,6 +54,12 @@ const routes: Routes = [
     path:'resume',
     title:'JobHive | Resume',
     component:UserResumeComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'subscription',
+    title:'JobHive | Subscription',
+    component:UserSubscriptionComponent,
     canActivate:[authGuard]
   },
   {

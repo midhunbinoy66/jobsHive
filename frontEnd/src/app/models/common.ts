@@ -17,6 +17,7 @@ export interface ISubscription{
 
 
 
+
 export interface IEmployerAddress extends IUserAddress{
     landmark?:string
 }

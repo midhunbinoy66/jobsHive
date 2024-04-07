@@ -9,7 +9,7 @@
             <p class="text-sm text-gray-500">{{job.location}}</p>
             <p class="text-sm text-gray-500">{{job.description}}</p>
           </div>
-          <!-- Repeat this structure for each saved job item -->
+            <button class="p-2 text-gray-800 ring-2 ring-gray-700 bg-white text-sm rounded-lg hover:bg-slate-900" (click)="onRemove(job._id)"> Remove </button>
         </div>
       </div>
     </div>
