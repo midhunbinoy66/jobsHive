@@ -43,6 +43,7 @@ export class UserUseCase{
     }
 
     async handleSocialSignUp(name:string,email:string,profilePic:string | undefined):Promise<IApiUserAuthRes>{
+        console.log('this is social login,,,')
         const emailData = await this.isEmailExist(email);
         if(emailData === null){
             const userToSave = {name,email,profilePic,isGoogleAuth:true};

@@ -59,6 +59,7 @@ export class UserRespository implements IuserRepo {
         }
 
         async saveUserResume(userId: string, resume: IResumeReq): Promise<IResume | null> {
+            console.log(resume);
                     return await resumeModel.findOneAndUpdate(
                         {userId:userId},
                         {

@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { loginGuard } from 'src/app/guards/login.guard';
+import { authGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   {
     path:'home',
     title:'JobHive | Dashboard',
-    component:AdminHomeComponent
+    component:AdminHomeComponent,
+    canActivate:[authGuard]
   },
   {
     path:'login',
@@ -18,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   }
 

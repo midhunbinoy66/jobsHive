@@ -29,7 +29,8 @@ export const otpValidators = [
 export const requiredValidator = [Validators.required]
 
 export const mobileValidators = [
-    Validators.pattern(mobileRegex)
+    Validators.pattern(mobileRegex),
+    Validators.required
   ]
 
 

@@ -4,12 +4,14 @@ import { EmployerHomeComponent } from './employer-home/employer-home.component';
 import { EmployerLoginComponent } from './employer-login/employer-login.component';
 import { loginGuard } from 'src/app/guards/login.guard';
 import { EmployerRegisterComponent } from './employer-register/employer-register.component';
+import { authGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   {
     path:'home',
     title:'JobHive | Employer',
-    component:EmployerHomeComponent
+    component:EmployerHomeComponent,
+    canActivate:[authGuard]
   },
   {
     path:'login',
@@ -25,14 +27,10 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
-  {
-    path: 'dashboard',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  }
+
 ];
 
 @NgModule({

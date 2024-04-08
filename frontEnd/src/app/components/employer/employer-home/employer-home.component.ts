@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employer-home',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class EmployerHomeComponent {
 
+    constructor(
+      private readonly router:Router
+    ){}
+
+  onLogout(){
+    localStorage.removeItem('employerAccessToken')
+    localStorage.removeItem('employerRefreshToken')
+    void this.router.navigate(['/employer/login'])
+  }
 }

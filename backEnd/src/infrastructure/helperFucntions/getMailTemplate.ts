@@ -20,7 +20,7 @@ export function getOTPTemplate (otp: number): string {
         <p>This OTP is valid for a single use and will expire after a short period of time.</p>
         <p>If you did not request this OTP, please ignore this email.</p>
         <p>Thank you,</p>
-        <p>CineSnap</p>
+        <p>JobHive</p>
     </body>
     </html>
     `

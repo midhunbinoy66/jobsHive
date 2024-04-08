@@ -11,5 +11,5 @@ export class PlanRepository implements IPlanRepo{
     findAllPlans(): Promise<IPlan[] | null> {
         return userPlanModel.find()
     }
-    
+
 }

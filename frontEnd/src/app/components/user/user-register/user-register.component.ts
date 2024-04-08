@@ -26,6 +26,7 @@ export class UserRegisterComponent {
   otpResendCount: number = 0
   showOTPResend: boolean = true
   loggedIn!: boolean;
+  user:any;
   constructor(
       @Inject(HttpClient) private readonly http:HttpClient,
       @Inject(Router) private readonly router:Router,
@@ -46,23 +47,24 @@ export class UserRegisterComponent {
         validators: passwordMatchValidator
       })
 
-    //   this.authService.authState.subscribe((user)=>{
-    //   const userData:IUserSocialAuth ={
-    //     name:user.name,
-    //     email:user.email,
-    //     profilePic:user.photoUrl
-    //   }
-    //   console.log(user);
-    //   this.http.post<IApiUserAuthRes>('user/auth/google', userData).subscribe({
-    //     next: (res: IApiUserAuthRes) => {
-    //       localStorage.setItem('userAccessToken', res.accessToken)
-    //       localStorage.setItem('userRefreshToken', res.refreshToken)
-    //       this.store.dispatch(saveUserOnStore({ userDetails: res.data as IUserRes }))
-    //       void this.router.navigate(['/'])
-    //     }
-    //   })
+    this.authService.authState.subscribe((user)=>{
+        this.user =user;
+      const userData:IUserSocialAuth ={
+        name:user.name,
+        email:user.email,
+        profilePic:user.photoUrl
+      }
+      console.log(user);
+      this.http.post<IApiUserAuthRes>('user/auth/google', userData).subscribe({
+        next: (res: IApiUserAuthRes) => {
+          localStorage.setItem('userAccessToken', res.accessToken)
+          localStorage.setItem('userRefreshToken', res.refreshToken)
+          this.store.dispatch(saveUserOnStore({ userDetails: res.data as IUserRes }))
+          void this.router.navigate(['/'])
+        }
+      })
 
-    // })    
+    })    
 
     }
 

@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import { filter } from 'rxjs';
 import { IJobRes } from 'src/app/models/jobs';
 import { IUserRes } from 'src/app/models/users';
 import { JobService } from 'src/app/services/job.service';
-import { fetchUserData } from 'src/app/states/user/user.action';
+import { fetchUserData, saveUserOnStore } from 'src/app/states/user/user.action';
 import { selectUserDetails } from 'src/app/states/user/user.selector';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-saved-jobs',
@@ -25,8 +27,8 @@ export class UserSavedJobsComponent implements OnInit{
 
     ngOnInit(): void {  
       this.userDetails$.subscribe((user)=>{
-        this.user = user;
         if (user) {
+          this.user = user;
           const savedJobsIds = user.savedJobs;
           if (savedJobsIds && savedJobsIds.length > 0) {
             this.jobService.findSavedJobs(savedJobsIds).subscribe({
@@ -51,8 +53,11 @@ export class UserSavedJobsComponent implements OnInit{
     onRemove(jobId:string){
       this.jobService.removeSavedJob(this.user!._id,jobId).subscribe({
         next:(res)=>{
+  
           this.store.dispatch(fetchUserData({ userId: this.user!._id }))
-          this.cdr.detectChanges(); // Manually trigger change detection
+          void Swal.fire('Success','Job has been removed','success')
+          this.router.navigate(['/user/jobs']);
+
         }
       })
     }

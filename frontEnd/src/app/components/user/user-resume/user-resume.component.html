@@ -81,10 +81,10 @@
                     class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2"
                     formControlName="companyLocation" required="true">
                     <app-common-validation [isSubmitted]="isSubmitted" [generalControl]="form.get('companyLocation')"></app-common-validation>
-                  <input type="text" name="startDate" placeholder="Start Date"
+                  <input type="date" name="startDate" placeholder="Start Date"
                     class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2"
                     formControlName="companyStartDate" required="true">
-                  <input type="text" name="endDate" placeholder="End Date"
+                  <input type="date" name="endDate" placeholder="End Date"
                     class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2"
                     formControlName="companyEndDate" required="true">
                 </div>
@@ -109,10 +109,10 @@
                     class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2"
                     formControlName="fieldOfStudy" required="true">
                     <app-common-validation [isSubmitted]="isSubmitted" [generalControl]="form.get('fieldOfStudy')"></app-common-validation>
-                  <input type="text" name="startDate[]" placeholder="Start Date"
+                  <input type="date" name="startDate[]" placeholder="Start Date"
                     class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2"
                     formControlName="startDate" required="true">
-                  <input type="text" name="endDate[]" placeholder="End Date"
+                  <input type="date" name="endDate[]" placeholder="End Date"
                     class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2"
                     formControlName="endDate" required="true">
                 </div>

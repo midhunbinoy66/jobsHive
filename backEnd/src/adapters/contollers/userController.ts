@@ -159,8 +159,6 @@ export class UserController{
     async saveUserResume(req:Request,res:Response){
         const userId = req.params.userId
         const resumeData = req.body
-        console.log(userId);
-        console.log(resumeData);
         const apiRes = await this._userUseCAse.saveUserResume(userId,resumeData);
         return res.status(apiRes.status).json(apiRes)
     }

@@ -38,14 +38,14 @@ export interface IUserEducation{
     institution:string
     degree:string
     fieldOfStudy:string
-    eduStartDate:string
-    eduEndDate:string
+    eduStartDate:Date
+    eduEndDate:Date
 }
 
 export interface IUserWorkExp{
     companyName:string
     jobTitle:string
     location:string
-    workStartDate:string
-    workEndDate:string
+    workStartDate:Date
+    workEndDate:Date
 }

@@ -15,10 +15,9 @@ export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): V
     const password = control.get('password')
     const repeatPassword = control.get('repeatPassword')
   
-    // console.log(repeatPassword, 'repeat password from password match validator')
   
     if ((password != null) && (repeatPassword != null)) {
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+
       if (repeatPassword.value === '') {
         repeatPassword.setErrors({ required: true })
         return { required: true }

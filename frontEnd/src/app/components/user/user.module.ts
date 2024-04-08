@@ -10,8 +10,7 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { UserNavComponent } from './user-nav/user-nav.component';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from 'src/app/states/user/user.reducer';
-import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-import {  GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { SocialLoginModule, GoogleLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
 import { PasswordValidationComponent } from '../common/validation/password-validation/password-validation.component';
@@ -26,7 +25,12 @@ import { UserResumeComponent } from './user-resume/user-resume.component';
 import { MobileValidationComponent } from '../common/validation/mobile-validation/mobile-validation.component';
 import { CommonValidationComponent } from '../common/validation/common-validation/common-validation.component';
 import { UserSubscriptionComponent } from './user-subscription/user-subscription.component';
-
+import { CityValidationComponent } from '../common/validation/city-validation/city-validation.component';
+import { CountryValidationComponent } from '../common/validation/country-validation/country-validation.component';
+import { DistrictValidationComponent } from '../common/validation/district-validation/district-validation.component';
+import { StateValidationComponent } from '../common/validation/state-validation/state-validation.component';
+import { ZipValidationComponent } from '../common/validation/zip-validation/zip-validation.component';
+import {  GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -49,12 +53,18 @@ import { UserSubscriptionComponent } from './user-subscription/user-subscription
     ReactiveFormsModule,
     StoreModule.forFeature('user',userReducer),
     SocialLoginModule,
+    GoogleSigninButtonModule,
     PasswordValidationComponent,
     EmailValidationComponent,
     NameValidationComponent,
     OtpValidationComponent,
     MobileValidationComponent,
-    CommonValidationComponent
+    CommonValidationComponent,
+    CityValidationComponent,
+    CountryValidationComponent,
+    DistrictValidationComponent,
+    StateValidationComponent,
+    ZipValidationComponent
   ],
   providers: [
     {
@@ -64,10 +74,15 @@ import { UserSubscriptionComponent } from './user-subscription/user-subscription
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(environment.google_client_id)
-          }
-        ]
-      } // as SocialAuthServiceConfig,
+            provider: new GoogleLoginProvider(
+              environment.google_client_id
+            )
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
     }
   ]
 })

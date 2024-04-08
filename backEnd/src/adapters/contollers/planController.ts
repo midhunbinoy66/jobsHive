@@ -17,4 +17,13 @@ export class PlanController {
         res.status(apiRes.status).json(apiRes);
 
     }
+
+    // async findPlanByName(req:Request,res:Response){
+    //     const searchKey = req.body.searchKey;
+    //     const apiRes = await this._planUseCases.searchPlan(searchKey);
+        
+    // }
+
+
+    
 }
