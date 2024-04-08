@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { validateByTrimming } from 'src/app/helpers/validations';
 import { emailValidators, passwordValidators } from 'src/app/shared/validators';
+import { saveEmployerOnStore } from 'src/app/states/employer/employer.action';
 
 @Component({
   selector: 'app-employer-login',
@@ -17,7 +19,8 @@ export class EmployerLoginComponent implements OnInit {
   constructor(
     @Inject(HttpClient) private readonly http:HttpClient,
     @Inject(Router) private readonly router:Router,
-    @Inject(FormBuilder) private readonly formBuilder:FormBuilder
+    @Inject(FormBuilder) private readonly formBuilder:FormBuilder,
+    private readonly store:Store
   ){}
 
     ngOnInit(): void {
@@ -39,6 +42,7 @@ export class EmployerLoginComponent implements OnInit {
           next:(res:any)=>{
             localStorage.setItem('employerAccessToken',res.accessToken);
             localStorage.setItem('employerRefreshToken',res.refreshToken);
+            this.store.dispatch(saveEmployerOnStore({employerDetails:res.data}));
             void this.router.navigate(['/employer/home']);
           }
         })
