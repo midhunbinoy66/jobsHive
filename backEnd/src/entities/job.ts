@@ -9,9 +9,8 @@ export interface IJob{
     description:string
     salary:number
     isActive:boolean
-    localtion:IJobAddress
+    location:IJobAddress
     type:string
-    tags:string[]
     requierments:string[]
     responsibilities:string[]
 }

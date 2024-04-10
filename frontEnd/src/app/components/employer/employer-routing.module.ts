@@ -5,6 +5,11 @@ import { EmployerLoginComponent } from './employer-login/employer-login.componen
 import { loginGuard } from 'src/app/guards/login.guard';
 import { EmployerRegisterComponent } from './employer-register/employer-register.component';
 import { authGuard } from 'src/app/guards/auth.guard';
+import { EmployerCreateJobComponent } from './employer-create-job/employer-create-job.component';
+import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
+import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
+import { EmployerJobApplicantsComponent } from './employer-job-applicants/employer-job-applicants.component';
+import { EmployerJobEditComponent } from './employer-job-edit/employer-job-edit.component';
 
 const routes: Routes = [
   {
@@ -24,6 +29,36 @@ const routes: Routes = [
     title:'JobHive | Employer Register',
     component:EmployerRegisterComponent,
     canActivate:[loginGuard]
+  },
+  {
+    path:'profile',
+    title:'JobHive | Employer Profile',
+    component:EmployerProfileComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'create-job',
+    title:'JobHive | Create Job',
+    component:EmployerCreateJobComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'jobs',
+    title:'JobHive | Jobs',
+    component:EmployerJobsComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'job/:jobId',
+    title:'JobHive | Job',
+    component:EmployerJobApplicantsComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'edit-job/:jobId',
+    title:'JObHive | Edit Job',
+    component:EmployerJobEditComponent,
+    canActivate:[authGuard]
   },
   {
     path: '',

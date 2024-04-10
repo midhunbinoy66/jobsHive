@@ -12,6 +12,7 @@ import { saveUserOnStore } from 'src/app/states/user/user.action';
 import { selectUserDetails } from 'src/app/states/user/user.selector';
 import Swal from 'sweetalert2';
 import { ApplyModalComponent } from '../../common/apply-modal/apply-modal.component';
+import { IJobAddress } from 'src/app/models/common';
 
 @Component({
   selector: 'app-user-home',
@@ -88,7 +89,7 @@ export class UserHomeComponent implements OnInit {
 
   }
 
-  onApply(jobId:string,jobTitle:string,jobLocation:string){
+  onApply(jobId:string,jobTitle:string,jobLocation:IJobAddress){
     const dialogRef = this.dialog.open(ApplyModalComponent);
     dialogRef.afterClosed().subscribe(result=>{
       if(result !== undefined){

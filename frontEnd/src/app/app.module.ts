@@ -20,6 +20,7 @@ import {MatInputModule} from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './states/user/user.effects';
+import { JobDeleteModalComponent } from './components/common/job-delete-modal/job-delete-modal.component';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
@@ -27,6 +28,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     AppComponent,
     PageNotFoundComponent,
     ApplyModalComponent,
+    JobDeleteModalComponent,
 
     
 

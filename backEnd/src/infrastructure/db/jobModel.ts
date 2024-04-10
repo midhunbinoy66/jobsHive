@@ -1,5 +1,6 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 import { IJob } from "../../entities/job";
+import { jobAddressSchema } from "./subschema/addressSchema";
 
 
 const jobSchema:Schema  = new Schema<IJob &Document>({
@@ -24,10 +25,6 @@ const jobSchema:Schema  = new Schema<IJob &Document>({
     type:{
         type:String,
     },
-    tags:{
-        type:[String],
-
-    },
     requierments:{
         type:[String],
 
@@ -40,10 +37,7 @@ const jobSchema:Schema  = new Schema<IJob &Document>({
         type:Schema.Types.ObjectId,
         ref:'Employers'
     },
-    localtion:{
-        type:String,
-    }
-    
+    location:jobAddressSchema
 })
 
 

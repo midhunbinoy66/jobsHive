@@ -45,7 +45,7 @@ const userUseCase = new UserUseCase(userRepository,tempUserRepository,encryptor,
 const adminUseCase = new AdminUseCase(encryptor,adminRepository,tokenGenerator);
 const employerUseCase = new EmployeruseCase(employerRepository,tempEmployerRepository,encryptor,tokenGenerator,mailSender,otpGenerator);
 const jobUseCase = new JobUseCase(jobRepository);
-const applicationUseCase = new ApplicationUseCase(applicationRepository)
+const applicationUseCase = new ApplicationUseCase(applicationRepository);
 const planUseCase = new PlanUseCase(planRepository);
 //UserControllers
 export const uController = new UserController(userUseCase,otpGenerator,encryptor);

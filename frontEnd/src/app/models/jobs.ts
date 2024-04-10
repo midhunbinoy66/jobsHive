@@ -7,6 +7,13 @@ export interface IApiJobsRes{
   }
 
 
+export interface IApiJobRes{
+    status:string
+    message:string
+    data:IJobRes|null
+  }
+
+
 export interface IJobRes{
     _id:string
     employer:string
@@ -14,9 +21,11 @@ export interface IJobRes{
     description:string
     salary:number
     isActive:boolean
-    location:string
+    location:IJobAddress
     type:string
-    tags:string[]
     requirements:string[]
     responsibilities:string[]
 }
+
+
+export interface IJobReq extends Omit<IJobRes ,'_id'|'isActive'|'tags'>{}

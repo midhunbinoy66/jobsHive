@@ -1,6 +1,6 @@
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { JobRepository } from "../../infrastructure/repositories/jobRepository";
-import { IApiCriteria, IApiJobRes, IApiJobsRes, IJobReq } from "../interfaces/types/job";
+import {  IApiJobRes, IApiJobsRes, IJobReq } from "../interfaces/types/job";
 
 
 
@@ -34,10 +34,10 @@ export class JobUseCase{
         }
     }
 
-    async findJobs(criteria:IApiCriteria):Promise<IApiJobsRes>{
+    async findJobs(title:string,location:string):Promise<IApiJobsRes>{
         try {
        
-            const jobs = await this._jobRepository.findJobs(criteria) 
+            const jobs = await this._jobRepository.findJobs(title,location) 
                 return{
                     status:STATUS_CODES.OK,
                     message:'Success',
@@ -91,6 +91,51 @@ export class JobUseCase{
             
         } catch (error) {
             return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
+    async deleteEmployerJob(jobId:string){
+        try {
+
+            const job = await this._jobRepository.deleteEmployerJob(jobId);
+            if(job !== null){
+                return {
+                    status:STATUS_CODES.OK,
+                    message:'Job deleted Succesfully',
+                    data:job
+                }
+            }else{
+                return {
+                    status:STATUS_CODES.NOT_FOUND,
+                    message:'Job with this id not found',
+                    data:null
+                }
+            }
+            
+        } catch (error) {
+            return{
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
+    async findEmployerJobs(employerId:string){
+        try {
+            const jobsData = await this._jobRepository.findEmployerJObs(employerId);
+                return {
+                    status:STATUS_CODES.OK,
+                    message:'Success',
+                    data:jobsData
+                }
+
+        } catch (error) {
+            return{
                 status:STATUS_CODES.INTERNAL_SERVER_ERROR,
                 message:'Internal server error',
                 data:null

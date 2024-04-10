@@ -1,9 +1,11 @@
+import { IJobAddress } from "./common"
+
 export interface IApplicationRes{
     _id:string
     userId:string
     jobId:string
     jobTitle:string
-    jobLocation:string
+    jobLocation:IJobAddress
     appliedTime:Date
     status:string
     coverLetter:string

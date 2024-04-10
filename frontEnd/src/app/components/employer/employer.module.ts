@@ -12,6 +12,13 @@ import { OtpValidationComponent } from '../common/validation/otp-validation/otp-
 import { EmployerNavComponent } from './employer-nav/employer-nav.component';
 import { StoreModule } from '@ngrx/store';
 import { employerReducer } from 'src/app/states/employer/employer.reducer';
+import { EmployerCreateJobComponent } from './employer-create-job/employer-create-job.component';
+import { SalaryValidationComponent } from '../common/validation/salary-validation/salary-validation.component';
+import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
+import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
+import { EmployerSidebarComponent } from './employer-sidebar/employer-sidebar.component';
+import { EmployerJobEditComponent } from './employer-job-edit/employer-job-edit.component';
+import { EmployerJobApplicantsComponent } from './employer-job-applicants/employer-job-applicants.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +26,12 @@ import { employerReducer } from 'src/app/states/employer/employer.reducer';
     EmployerHomeComponent,
     EmployerRegisterComponent,
     EmployerNavComponent,
+    EmployerCreateJobComponent,
+    EmployerJobsComponent,
+    EmployerProfileComponent,
+    EmployerSidebarComponent,
+    EmployerJobEditComponent,
+    EmployerJobApplicantsComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +40,7 @@ import { employerReducer } from 'src/app/states/employer/employer.reducer';
     EmailValidationComponent,
     PasswordValidationComponent,
     OtpValidationComponent,
+    SalaryValidationComponent,
     StoreModule.forFeature('employer',employerReducer)
     
   ]

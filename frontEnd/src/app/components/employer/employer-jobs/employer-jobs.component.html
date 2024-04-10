@@ -1,0 +1,12 @@
+<app-employer-nav></app-employer-nav>
+
+<app-employer-sidebar></app-employer-sidebar>
+
+<div class="flex flex-col space-y-2 w-full shadow-lg">
+    <div *ngFor="let job of employerJobs " class="w-1/2 shadow-lg p-4 cursor-pointer" (click)="viewJob(job._id)">
+        <h1>{{job.title}}</h1>
+        <p>{{job.description}}</p>
+        <p>{{job.isActive}}</p>
+        <button type="button" (click)="onEditJob(job._id)" class="bg-teal-600 text-white p-2 rounded-lg mx-1">Edit</button>
+        <button type="button" (click)="onDeleteJob(job._id)" class="bg-red-500 text-white p-2 rounded-lg">Delete</button>    </div>
+</div>

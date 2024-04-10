@@ -49,4 +49,22 @@ export class ApplicationUseCase{
             }
         }
     }
+
+    async findEmployerJobApplications(jobId:string){
+        try {
+            const applications = await this._applicationRepo.findApplicationByJobId(jobId);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:applications
+            }
+            
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal Server Error',
+                data:null
+            }
+        }
+    }
 }

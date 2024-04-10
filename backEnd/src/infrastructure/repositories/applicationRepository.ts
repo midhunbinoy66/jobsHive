@@ -30,4 +30,8 @@ export class ApplicationRepository implements IApplicantRepo{
             {upsert:true,new:true}
         )
     }
+
+   async findApplicationByJobId(jobId: string): Promise<IApplication[] | null> {
+            return await applicationModel.find({jobId:jobId})
+    }
 }

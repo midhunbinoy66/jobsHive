@@ -40,3 +40,8 @@ export const commonValidators =[
     Validators.minLength(commonMinLength),
     Validators.maxLength(commonMaxLength),
 ]
+
+export const salaryValidators =[
+    Validators.required,
+    Validators.min(10000),
+]

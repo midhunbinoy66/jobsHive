@@ -1,0 +1,85 @@
+<section >
+    <div class="p-5"> 
+        <form  [formGroup]="jobForm" (submit)="onSubmit()">
+            <div class="flex space-x-3 mb-2">
+                <label for="title">Job title</label>
+                <input type="text" name="title" placeholder="title" formControlName="title" class="ring-2 p-1 rounded-lg">
+            </div>
+            <div class="flex space-x-3 mb-2"> 
+                <label for="description">Job Description</label>
+                <input type="text" name="description" placeholder="description"  formControlName="description" class="ring-2 p-1 rounded-lg">
+            </div>
+            <div class="flex space-x-3 mb-2">
+                <label for="salary">Job Salary</label>
+                <input type="number" name="salary" placeholder="slary"  class="ring-2 p-1 rounded-lg" formControlName="salary">
+            </div>
+            <div>
+                <h3>Company Address</h3>
+            </div>
+            <div class="flex space-x-3 mb-2">
+
+                <label for="city">City</label>
+                <input type="text" name="city" placeholder="city" class="ring-2 p-1 rounded-lg" formControlName="city">
+            </div >
+            <div class="flex space-x-3 mb-2">
+                <label for="district">District</label>
+                <input type="text" name="district" placeholder="district" class="ring-2 p-1 rounded-lg" formControlName="district">
+            </div>
+
+            <div class="flex space-x-3 mb-2">
+                <label for="state">State</label>
+                <input type="text" name="state" placeholder="state" class="ring-2 p-1 rounded-lg" formControlName="state">
+            </div>
+            <div class="flex space-x-3 mb-2">
+                <label for="country">Country</label>
+                <input type="text" name="country" placeholder="country" class="ring-2 p-1 rounded-lg" formControlName="country">
+            </div>
+
+            <div class="flex space-x-3 mb-2">
+                <label for="landmark">Landmark</label>
+                <input type="text" name="landmark" placeholder="landmark" class="ring-2 p-1 rounded-lg" formControlName="landmark">
+            </div>
+
+            <div class="flex space-x-3 mb-2">
+                <label for="zip">Zip</label>
+                <input type="number" name="zip" placeholder="zip" class="ring-2 p-1 rounded-lg" formControlName="zip">
+            </div>
+
+            <div formArrayName="requierments">
+                <div *ngFor="let requierment of requiermentForms.controls; let i = index">
+                    <div>
+                        <input type="text" [formControlName]="i" placeholder="requierment" class="ring-2 p-1 rounded-lg">
+                        <button type="button"  (click)="removeRequierment(i)">Remove</button>
+                    </div>
+                        <button type="button" (click)="addRequierment()">Add requierment</button>
+                </div>
+            </div>
+
+            <div formArrayName="responsibilities">
+                <div *ngFor="let responsibility of responsibilitiesFrom.controls;let i = index">
+                    <div class="flex space-x-3 mb-2">
+                        <label for="responsibilities">Responsibility</label>
+                        <input type="text" placeholder="responsibilities" [formControlName]="i" class="ring-2 p-1 rounded-lg" >
+                        <button type="button" (click)="removeResponsibilities(i)">Remove Responsibility</button>
+                    </div>
+                </div>
+                <button type="button" (click)="addResponsiblilites()">Add Responsibility</button>
+            </div>
+
+            <div>
+                <label for="typeOfJob">Type of job</label>
+                <select name="typeOfJob" id="typeOfJob" formControlName="typeOfJob">
+                    <option value="fullTime">Full Time</option>
+                    <option value="partTime">Part Time</option>
+                </select>
+            </div>
+
+            <div>
+            <button type="submit"
+            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
+        </div>
+
+        </form>
+
+    </div>
+</section>

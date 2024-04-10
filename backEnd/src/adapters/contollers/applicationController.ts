@@ -21,4 +21,11 @@ export class ApplicationController{
         res.status(apiRes.status).json(apiRes);
 
     }
+
+    async findEmployerJobApplcations(req:Request,res:Response){
+        const jobId = req.params.jobId
+        console.log(jobId);
+        const apiRes = await this.__applicationUseCase.findEmployerJobApplications(jobId);
+        res.status(apiRes.status).json(apiRes);
+    }
 }

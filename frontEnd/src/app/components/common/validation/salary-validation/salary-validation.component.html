@@ -1,0 +1,4 @@
+<div *ngIf="salaryContorl && isSubmitted && salaryContorl.errors">
+    <div *ngIf="salaryContorl.errors['required']" class="text-red-600">Salary is requierd</div>
+    <div *ngIf="salaryContorl.errors['min']" class="text-red-600">Salary has to be minumum 10000</div>
+</div>

@@ -1,6 +1,5 @@
 import { Request,Response, } from "express";
 import { JobUseCase } from "../../application/useCases/jobUseCase";
-import { MongoDBQuery } from "../../application/interfaces/types/job";
 
 
 export class JobController{
@@ -9,33 +8,23 @@ export class JobController{
     ){}
 
     async getJobDetails(req:Request,res:Response){
-        const moviedId = req.params.jobId;
-        const apiRes = await this._jobUseCase.findJob(moviedId);
+        const jobId = req.params.jobId;
+        const apiRes = await this._jobUseCase.findJob(jobId);
         res.status(apiRes.status).json(apiRes);
     }
 
     async getJobs(req:Request,res:Response){
         const  title = req.query.title as string;
         const location = req.query.location as string;
-   
-        
-        // Construct criteria object with regex patterns
-        const titleRegex = new RegExp(title, 'i'); // 'i' flag for case-insensitive matching
-        const locationRegex = new RegExp(location, 'i');
-        
-        const query: MongoDBQuery = {
-          $or: [
-            { title: { $regex: titleRegex } },
-            { location: { $regex: locationRegex } }
-          ]
-        };
 
-        const apiRes = await this._jobUseCase.findJobs(query);
+
+        const apiRes = await this._jobUseCase.findJobs(title,location);
         res.status(apiRes.status).json(apiRes);
     }
 
     async addJob(req:Request,res:Response){
-        const job = req.body.job;
+        const job = req.body
+        console.log(job)
         const apiRes = await this._jobUseCase.saveJob(job);
         res.status(apiRes.status).json(apiRes);
     }
@@ -43,6 +32,18 @@ export class JobController{
     async getUserSavedJobs(req:Request,res:Response){
         const jobIds = req.body.jobIds;
         const apiRes = await this._jobUseCase.findUserSavedJobs(jobIds);
+        res.status(apiRes.status).json(apiRes);
+    }
+
+    async deleteEmployerJob(req:Request,res:Response){
+        const jobId = req.params.jobId
+        const apiRes = await this._jobUseCase.deleteEmployerJob(jobId);
+        res.status(apiRes.status).json(apiRes);
+    }
+
+    async getAllEmployerJob(req:Request,res:Response){
+        const employerId = req.params.employerId;
+        const apiRes = await this._jobUseCase.findEmployerJobs(employerId);
         res.status(apiRes.status).json(apiRes);
     }
 }
