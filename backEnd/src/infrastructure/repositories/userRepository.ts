@@ -93,4 +93,44 @@ export class UserRespository implements IuserRepo {
               
         }
 
+
+       async  findAllUsers(page: number, limit: number, searchQuery: string): Promise<IUserRes[] | null> {
+            const regex = new RegExp(searchQuery,'i');
+            return await userModel.find({
+                $or:[
+                    {name:{$regex:regex}},
+                    {emaol:{$regex:regex}},
+                    {mobile:{$regex:regex}}
+                ]
+            })
+            .skip((page-1)*limit)
+            .limit(limit)
+            .select('-password')
+            .exec()
+        }
+
+        async findUsersCount(searchQuery: string): Promise<number> {
+        const regex = new RegExp(searchQuery ,'i');
+        return await userModel.find({
+            $or: [
+                { name: { $regex: regex } },
+                { email: { $regex: regex } },
+                { mobile: { $regex: regex } }
+            ]
+        }).countDocuments() 
+      }  
+
+      async blockAndUblockUser(userId: string): Promise<void> {
+          try {
+                const user = await userModel.findById({_id:userId});
+                if(user !== null){
+                    user.isBlocked = !user.isBlocked;
+                    await user.save();
+                }else{
+                throw Error('Something went wrong, userId didt received')
+                }
+          } catch (error) {
+            throw Error('Error while blocking/unblocking user')
+          }
+      }
 }

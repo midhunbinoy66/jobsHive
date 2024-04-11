@@ -54,5 +54,11 @@ export interface IUserSubscriptionDisplay{
   description:string
 }
 
+export interface IUsersAndCount{
+  users:IUserRes[]
+  userCount:number
+}
+
 export interface IUserUpdate extends Omit<IUserRes, '_id' | 'email' | 'password' | 'isBlocked' > { }
 export interface IApiUserRes extends IApiRes<IUserRes> {}
+export interface IApiUsersRes extends IApiRes<IUserRes[]>{}

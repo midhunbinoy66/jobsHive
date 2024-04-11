@@ -15,4 +15,7 @@ export interface IuserRepo{
     findResumeByUserId(userId:string):Promise<IResume|null>,
     saveUserResume(userId:string,resume:IResumeReq):Promise<IResume|null>
     removeUserSavedJob(userId:string,jobId:string):Promise<IUserRes| null>
+    findAllUsers(page:number,limit:number,searchQuery:string):Promise<IUserRes[] | null>
+    findUsersCount(searchQuery:string):Promise<number>
+    blockAndUblockUser(userId:string):Promise<void>
 }

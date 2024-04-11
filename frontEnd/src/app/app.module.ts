@@ -22,6 +22,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './states/user/user.effects';
 import { JobDeleteModalComponent } from './components/common/job-delete-modal/job-delete-modal.component';
 
+
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     PageNotFoundComponent,
     ApplyModalComponent,
     JobDeleteModalComponent,
+
 
     
 

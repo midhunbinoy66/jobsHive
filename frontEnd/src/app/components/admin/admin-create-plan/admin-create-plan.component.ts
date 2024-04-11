@@ -1,0 +1,59 @@
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { validateByTrimming } from 'src/app/helpers/validations';
+import { PlanService } from 'src/app/services/plan.service';
+import { nameValidators } from 'src/app/shared/validators';
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-admin-create-plan',
+  templateUrl: './admin-create-plan.component.html',
+  styleUrls: ['./admin-create-plan.component.css']
+})
+export class AdminCreatePlanComponent implements OnInit {
+
+  form!:FormGroup;
+  isSubmittd=false;
+
+  constructor(
+    private readonly fb:FormBuilder,
+    private readonly planService:PlanService
+
+  ){}
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      name:['',[validateByTrimming(nameValidators)]],
+      description:['',[validateByTrimming(nameValidators)]],
+      price:['',Validators.required],
+      features:this.fb.array([this.fb.control('')]),
+      duration:['',Validators.required]
+    })
+  }
+
+  get featuresForm(){
+    return this.form.get('features') as FormArray
+  }
+
+  addFeature(){
+    this.featuresForm.push(this.fb.control(''))
+  }
+
+  removeFeature(index:number){
+    this.featuresForm.removeAt(index);
+  }
+
+  onSubmit(){
+    this.isSubmittd =true;
+    if(!this.form.invalid){
+      const planData = this.form.getRawValue();
+      this.planService.savePlan(planData).subscribe({
+        next:(res)=>{
+          void Swal.fire('Success','Plan Added Succesfully','success');
+        }
+      })
+
+    }
+
+  }
+}

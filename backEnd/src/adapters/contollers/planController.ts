@@ -13,17 +13,29 @@ export class PlanController {
 
     async findPlan(req:Request,res:Response){
         const planId = req.params.planId;
+        console.log(planId);
         const apiRes = await this._planUseCases.findPlan(planId);
         res.status(apiRes.status).json(apiRes);
 
     }
 
-    // async findPlanByName(req:Request,res:Response){
-    //     const searchKey = req.body.searchKey;
-    //     const apiRes = await this._planUseCases.searchPlan(searchKey);
-        
-    // }
+    async createPlan(req:Request,res:Response){
+        const planData = req.body;
+        const apiRes = await this._planUseCases.createNewPlan(planData);
+        res.status(apiRes.status).json(apiRes);
+    }
 
+    async deletePlan(req:Request,res:Response){
+        const planId = req.params.planId;
+        const apiRes = await this._planUseCases.deletePlan(planId);
+        res.status(apiRes.status).json(apiRes);
+    }
 
+    async updatPlan(req:Request,res:Response){
+        const planId  = req.params.planId;
+        const planData = req.body;
+        const apiRes = await this._planUseCases.updatePlan(planId,planData);
+        res.status(apiRes.status).json(apiRes);
+    }
     
 }

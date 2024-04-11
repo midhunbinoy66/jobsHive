@@ -1,0 +1,97 @@
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { validateByTrimming } from 'src/app/helpers/validations';
+import { IPlan } from 'src/app/models/plans';
+import { PlanService } from 'src/app/services/plan.service';
+import { commonValidators } from 'src/app/shared/validators';
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-admin-edit-plan',
+  templateUrl: './admin-edit-plan.component.html',
+  styleUrls: ['./admin-edit-plan.component.css']
+})
+export class AdminEditPlanComponent implements OnInit{
+
+  plan:IPlan | null = null;
+  form!:FormGroup;
+  isSubmittd=false;
+  PlanId:string ='';
+
+  constructor(
+    private readonly planService:PlanService,
+    private readonly route:ActivatedRoute,
+    private readonly fb:FormBuilder,
+    private readonly router:Router
+  ){}
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params=>{
+      this.PlanId = params['planId'];
+      this.planService.findUserPlan(this.PlanId).subscribe({
+        next:(res)=>{
+          this.plan = res.data
+          if(this.plan !== null){
+            this.initializeForm();
+          }
+        }
+      })
+    })
+
+  }
+
+  initializeForm(){
+    this.form = this.fb.group({
+      name:['',[validateByTrimming(commonValidators)]],
+      description:['',[validateByTrimming(commonValidators)]],
+      price:['',Validators.required],
+      duration:['',[validateByTrimming(commonValidators)]],
+      features:this.fb.array([this.fb.control('')])
+    })
+
+    if(this.plan){
+      this.form.patchValue(
+        {
+          name:this.plan.name || '',
+          description:this.plan.description || '',
+          price:this.plan.price || '',
+          duration:this.plan.duration || ''
+        }
+      )
+
+      if(this.plan.features && this.plan.features.length>0){
+          this.plan.features.forEach(feature=>{
+            this.featuresForm.push(this.fb.control(feature));
+          })
+      }
+    }
+    
+  }
+  
+  get featuresForm(){
+    return this.form.get('features') as FormArray
+  }
+ 
+
+  addFeature(){
+    this.featuresForm.push(this.fb.control(''));
+  }
+
+  removeFeature(index:number){
+    this.featuresForm.removeAt(index);
+  }
+
+  onSubmit(){
+    this.isSubmittd =true;
+    if(!this.form.invalid){
+      const planData = this.form.getRawValue();
+      this.planService.editPlan(this.PlanId,planData).subscribe({
+        next:(res)=>{
+          void Swal.fire('Success','Plan Updated Successfully','success');
+          this.router.navigate(['/admin/plans']);
+        }
+      })
+    }
+  }
+}

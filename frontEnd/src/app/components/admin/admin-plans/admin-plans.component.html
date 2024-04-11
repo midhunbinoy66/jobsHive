@@ -1,0 +1,10 @@
+<h1>All Plans</h1>
+
+<div *ngFor="let plan of plans" class="shadow-lg my-1 p-2 ">
+
+    <p>{{plan.name}}</p>
+    <p>{{plan.description}}</p>
+    <p>{{plan.price}}</p>
+    <button class="bg-teal-700 rounded-lg p-2 text-white font-bold" (click)="onEdit(plan._id)" >Edit</button>
+    <button  class="bg-red-700 rounded-lg p-2 text-white font-bold" (click)="onDelete(plan._id)">Delete</button>
+</div>

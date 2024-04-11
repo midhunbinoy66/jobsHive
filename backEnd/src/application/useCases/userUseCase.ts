@@ -5,9 +5,10 @@ import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { IJobRepo } from "../interfaces/repos/jobRepo";
 import { ITempUserRepo } from "../interfaces/repos/tempUserRepo";
 import { IuserRepo } from "../interfaces/repos/userRepo";
+import { IApiRes } from "../interfaces/types/commont";
 import { IApiResumeRes, IResumeReq } from "../interfaces/types/resume";
 import { ITempUserRes, ITempUsrReq } from "../interfaces/types/tempUser";
-import { IApiUserAuthRes, IApiUserRes, IUserAuth, IUserSocialAuth, IUserUpdate } from "../interfaces/types/user";
+import { IApiUserAuthRes, IApiUserRes, IUserAndCount, IUserAuth, IUserSocialAuth, IUserUpdate } from "../interfaces/types/user";
 import { IEncryptor } from "../interfaces/utils/encryptor";
 import { ImailSender } from "../interfaces/utils/mailSender";
 import { ITokenGenerator } from "../interfaces/utils/tokenGenerator";
@@ -261,6 +262,46 @@ export class UserUseCase{
                 data:user,
             }
             
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
+    async getAllUser(page:number,limit:number,searchQuery:string | undefined):Promise<IApiRes<IUserAndCount| null>>{
+        try {
+            
+            if( isNaN(page)) page =1
+            if(isNaN(limit)) limit =10;
+            if(!searchQuery) searchQuery ='';
+            const users = await this._userRespository.findAllUsers(page,limit,searchQuery);
+            const userCount = await this._userRespository.findUsersCount(searchQuery);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:{users:users,userCount}
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
+
+    async blockUser(userId:string):Promise<IApiRes<null>>{
+        try {
+            await this._userRespository.blockAndUblockUser(userId);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:null
+            }
         } catch (error) {
             return {
                 status:STATUS_CODES.INTERNAL_SERVER_ERROR,

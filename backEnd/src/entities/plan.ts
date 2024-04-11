@@ -7,4 +7,5 @@ export interface IPlan{
     name:string
     description:string
     features:string[]
+    isActive:boolean
 }

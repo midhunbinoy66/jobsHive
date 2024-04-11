@@ -13,3 +13,5 @@ export interface IApiPlansRes{
     data:IPlan[] | null
     
 }
+
+export interface IPlanReq extends Omit<IPlan ,'_id'|'isActive'>{}

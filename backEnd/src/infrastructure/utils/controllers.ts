@@ -49,7 +49,7 @@ const applicationUseCase = new ApplicationUseCase(applicationRepository);
 const planUseCase = new PlanUseCase(planRepository);
 //UserControllers
 export const uController = new UserController(userUseCase,otpGenerator,encryptor);
-export const aController = new AdminController(adminUseCase)
+export const aController = new AdminController(adminUseCase,userUseCase)
 export const eContorller = new Employercontoller(employerUseCase,otpGenerator,encryptor);
 export const jController = new JobController(jobUseCase);
 export const appController = new ApplicationController(applicationUseCase);

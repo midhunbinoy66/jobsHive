@@ -30,4 +30,9 @@ export interface IApiUserAuthRes extends IApiUserRes{
     refreshToken:string
 }
 
+export interface  IUserAndCount{
+    users:IUserRes[] | null,
+    userCount:number
+}
+
 export interface IUserUpdate extends Omit<IUserRes,'_id'|'password'|'email'|'isBlocked'>{}

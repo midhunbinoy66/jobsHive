@@ -19,6 +19,10 @@ const userPlanSchema  = new mongoose.Schema<IPlan & Document>({
     },
     duration:{
         type:String
+    },
+    isActive:{
+        type:Boolean,
+        default:true
     }
 })
 
