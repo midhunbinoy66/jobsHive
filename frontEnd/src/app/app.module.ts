@@ -21,7 +21,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './states/user/user.effects';
 import { JobDeleteModalComponent } from './components/common/job-delete-modal/job-delete-modal.component';
-
+import { UpdateJobStatusModalComponent } from './components/common/update-job-status-modal/update-job-status-modal.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
@@ -30,6 +33,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     PageNotFoundComponent,
     ApplyModalComponent,
     JobDeleteModalComponent,
+    UpdateJobStatusModalComponent,
 
 
     
@@ -45,9 +49,12 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
+    MatOptionModule,
     BrowserAnimationsModule,
+    MatSelectModule,
     FormsModule,
-    EffectsModule.forRoot([UserEffects])
+    EffectsModule.forRoot([UserEffects]),
+    MatIconModule
 
   ],
   providers: [

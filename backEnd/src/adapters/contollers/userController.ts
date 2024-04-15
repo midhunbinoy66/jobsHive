@@ -177,4 +177,19 @@ export class UserController{
         const apiRes = await this._userUseCAse.removeUserSavedJob(userId,jobId);
         return res.status(apiRes.status).json(apiRes);
     }
+
+    async followEmployer(req:Request,res:Response){
+        const userId = req.params.userId;
+        const {employerId} = req.body;
+        const apiRes = await this._userUseCAse.followEmployer(userId,employerId)
+        return res.status(apiRes.status).json(apiRes);
+    }
+
+    async unfollowEmployer(req:Request,res:Response){
+        const userId = req.params.userId;
+        const {employerId} = req.body;
+        const apiRes = await this._userUseCAse.unfollowEmployer(userId,employerId)
+        return res.status(apiRes.status).json(apiRes);
+    }
+
 }

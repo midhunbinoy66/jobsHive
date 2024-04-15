@@ -41,7 +41,7 @@ const applicationRepository = new ApplicationRepository();
 const planRepository  = new PlanRepository();
 
 //UseCases
-const userUseCase = new UserUseCase(userRepository,tempUserRepository,encryptor,tokenGenerator,mailSender,jobRepository);
+const userUseCase = new UserUseCase(userRepository,tempUserRepository,encryptor,tokenGenerator,mailSender,jobRepository,employerRepository);
 const adminUseCase = new AdminUseCase(encryptor,adminRepository,tokenGenerator);
 const employerUseCase = new EmployeruseCase(employerRepository,tempEmployerRepository,encryptor,tokenGenerator,mailSender,otpGenerator);
 const jobUseCase = new JobUseCase(jobRepository);
@@ -49,7 +49,7 @@ const applicationUseCase = new ApplicationUseCase(applicationRepository);
 const planUseCase = new PlanUseCase(planRepository);
 //UserControllers
 export const uController = new UserController(userUseCase,otpGenerator,encryptor);
-export const aController = new AdminController(adminUseCase,userUseCase)
+export const aController = new AdminController(adminUseCase,userUseCase,employerUseCase)
 export const eContorller = new Employercontoller(employerUseCase,otpGenerator,encryptor);
 export const jController = new JobController(jobUseCase);
 export const appController = new ApplicationController(applicationUseCase);

@@ -22,3 +22,10 @@ export interface IApiEmployerRes{
     message:string
     data:IEmployerRes|null
 }
+
+export interface  IEmployerAndCount{
+    users:IEmployerRes[] | null,
+    userCount:number
+}
+
+export interface IEmployerUpdate extends Omit<IEmployerRes,'_id'|'password'|'email'|'isBlocked'>{}

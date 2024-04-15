@@ -31,6 +31,10 @@ export const userSchema  =  new Schema<IUser & Document>({
     savedJobs:[{
         type:Schema.Types.ObjectId,
         ref:'Jobs'
+    }],
+    following:[{
+        type:Schema.Types.ObjectId,
+        ref:'Employer'
     }]
 
 })

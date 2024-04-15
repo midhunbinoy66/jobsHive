@@ -46,7 +46,7 @@ export class AdminEditPlanComponent implements OnInit{
       name:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
       price:['',Validators.required],
-      duration:['',[validateByTrimming(commonValidators)]],
+      duration:['',Validators.required],
       features:this.fb.array([this.fb.control('')])
     })
 
@@ -84,7 +84,9 @@ export class AdminEditPlanComponent implements OnInit{
 
   onSubmit(){
     this.isSubmittd =true;
+    console.log(this.form.controls);
     if(!this.form.invalid){
+      console.log('planedit...')
       const planData = this.form.getRawValue();
       this.planService.editPlan(this.PlanId,planData).subscribe({
         next:(res)=>{

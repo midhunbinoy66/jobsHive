@@ -2,7 +2,7 @@ import { Request,Response } from "express";
 import { EmployeruseCase } from "../../application/useCases/employerUseCase";
 import { Encryptor } from "../../infrastructure/utils/bcryptPassword";
 import { OTPGenerator } from "../../infrastructure/utils/otpGenerator";
-import { IEmployerAuth } from "../../application/interfaces/types/employer";
+import { IEmployerAuth, IEmployerUpdate } from "../../application/interfaces/types/employer";
 import { ITempEmployerReq } from "../../application/interfaces/types/tempEmployer";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import jwt, { JwtPayload } from 'jsonwebtoken'
@@ -108,5 +108,12 @@ export class Employercontoller{
             console.log(error);
             // next(error)
         }
+    }
+
+    async updateProfile(req:Request,res:Response){
+        const userId = req.params.userId;
+        const user = req.body as IEmployerUpdate
+        const apiRes = await this._employerUseCase.updateUserData(userId,user);
+        return res.status(apiRes.status).json(apiRes);
     }
 }

@@ -10,6 +10,8 @@ import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
 import { EmployerJobApplicantsComponent } from './employer-job-applicants/employer-job-applicants.component';
 import { EmployerJobEditComponent } from './employer-job-edit/employer-job-edit.component';
+import { EmployerApplicanResumeComponent } from './employer-applican-resume/employer-applican-resume.component';
+import { EmployerProfileEditComponent } from './employer-profile-edit/employer-profile-edit.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,13 @@ const routes: Routes = [
     canActivate:[authGuard]
   },
   {
+    path:'profile/edit',
+    title:'JobHive | Profile Edit',
+    component:EmployerProfileEditComponent,
+    canActivate:[authGuard]
+  },
+
+  {
     path:'create-job',
     title:'JobHive | Create Job',
     component:EmployerCreateJobComponent,
@@ -52,6 +61,12 @@ const routes: Routes = [
     path:'job/:jobId',
     title:'JobHive | Job',
     component:EmployerJobApplicantsComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'job/resume/:userId',
+    title:'JobHive | Resume',
+    component:EmployerApplicanResumeComponent,
     canActivate:[authGuard]
   },
   {

@@ -98,6 +98,23 @@ export class JobUseCase{
         }
     }
 
+    async updateEmployerJob(jobId:string,jobData:IJobReq){
+        try {
+            const job = await this._jobRepository.updateJob(jobId,jobData);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:job
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
     async deleteEmployerJob(jobId:string){
         try {
 

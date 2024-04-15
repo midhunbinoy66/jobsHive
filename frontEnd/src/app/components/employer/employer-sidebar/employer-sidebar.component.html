@@ -1,23 +1,21 @@
 <div>
-    <aside [ngClass]="{'hidden': !showSidebar, 'md:block': showSidebar}" class="bg-white-900 text-black-100 w-64 flex-none border border-black rounded-lg shadow-2xl ">
+    <aside [ngClass]="{'hidden': !showSidebar, 'md:block': showSidebar}" class="text-white w-full md:w-64 flex-none border border-black rounded-r-lg shadow-2xl min-h-screen  bg-gray-700">
         <div class="p-4">
             <h1 class="text-xl font-bold mb-4 text-center">Menu</h1>
             <nav>
                 <ul>
                     <li>
-                        <a  [routerLink]="'/employer/profile/edit'" class="block py-2 px-4 hover:bg-white-700 ">Edit Profile</a>
+                        <a [routerLink]="'/employer/profile/edit'" class="block py-2 px-4 hover:bg-gray-600">Edit Profile</a>
                     </li>
                     <li>
-                        <a   [routerLink]="'/employer/create-job'" class="block py-2 px-4 hover:bg-gray-700">Create Job</a>
+                        <a [routerLink]="'/employer/create-job'" class="block py-2 px-4 hover:bg-gray-600">Create Job</a>
                     </li>
                     <li>
-                        <a   [routerLink]="'/employer/jobs'" class="block py-2 px-4 hover:bg-gray-700">Job Listing</a>
+                        <a [routerLink]="'/employer/jobs'" class="block py-2 px-4 hover:bg-gray-600">Job Listing</a>
                     </li>
+      
                     <li>
-                        <a  [routerLink]="'/employer/subscription'" class="block py-2 px-4 hover:bg-gray-700">Subscription</a>
-                    </li>
-                    <li>
-                        <a  (click)="logout()" class="block py-2 px-4 hover:bg-gray-700 cursor-pointer">Logout</a>
+                        <a (click)="logout()" class="block py-2 px-4 hover:bg-gray-600 cursor-pointer">Logout</a>
                     </li>
                 </ul>
             </nav>
@@ -25,7 +23,7 @@
     </aside>
     
     <!-- Toggle button for small screens -->
-    <button (click)="toggleSidebar()" class="block md:hidden  top-18 left-0 p-4 bg-gray-900 text-white rounded-full m-1">
+    <button (click)="toggleSidebar()" class="block md:hidden fixed top-4 left-4 p-4 bg-gray-900 text-white rounded-full">
         <svg class="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path *ngIf="!showSidebar" fill-rule="evenodd" clip-rule="evenodd" d="M4 5h16a1 1 0 0 0 0-2H4a1 1 0 0 0 0 2zm0 7h16a1 1 0 0 0 0-2H4a1 1 0 0 0 0 2zm0 6h16a1 1 0 0 0 0-2H4a1 1 0 0 0 0 2z"/>
             <path *ngIf="showSidebar" fill-rule="evenodd" clip-rule="evenodd" d="M20 5a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1zm-6 7a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zm-6-7a1 1 0 1 1 2 0v12a1 1 0 1 1-2 0V5z"/>

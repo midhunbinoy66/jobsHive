@@ -2,6 +2,7 @@
 import { IUser } from "../../entities/user";
 import { OTP_TIMER } from "../../infrastructure/constants/constants";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
+import { IEmployerRepo } from "../interfaces/repos/employerRepo";
 import { IJobRepo } from "../interfaces/repos/jobRepo";
 import { ITempUserRepo } from "../interfaces/repos/tempUserRepo";
 import { IuserRepo } from "../interfaces/repos/userRepo";
@@ -20,7 +21,8 @@ export class UserUseCase{
         private readonly _encryptor:IEncryptor,
         private readonly _tokenGenerator:ITokenGenerator,
         private readonly _mailer:ImailSender,
-        private readonly _jobRepository:IJobRepo
+        private readonly _jobRepository:IJobRepo,
+        private readonly _employerRespository:IEmployerRepo
     )
     {}
 
@@ -309,5 +311,42 @@ export class UserUseCase{
                 data:null
             }
         }
+    }
+
+    async followEmployer(userId:string,employerId:string){
+        try {
+
+            const user = await this._userRespository.followEmployer(userId,employerId);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:user
+            }
+            
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
+                data:null
+            }
+        }
+    }
+
+    async unfollowEmployer(userId:string,employerId:string){
+        try {
+            const user = await this._userRespository.unFollowEmplopyer(userId,employerId);
+            return{
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:user
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
+                data:null
+            }
+        }
+
     }
 }

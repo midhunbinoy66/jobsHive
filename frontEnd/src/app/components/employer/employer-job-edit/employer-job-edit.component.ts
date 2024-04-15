@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { validateByTrimming } from 'src/app/helpers/validations';
 import { IApiJobRes, IApiJobsRes, IJobRes } from 'src/app/models/jobs';
 import { JobService } from 'src/app/services/job.service';
 import { commonValidators, salaryValidators } from 'src/app/shared/validators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employer-job-edit',
@@ -15,11 +16,13 @@ export class EmployerJobEditComponent implements OnInit{
 
   jobForm!:FormGroup
   jobData:IJobRes | null = null;
+  isSubmitted = false;
 
   constructor(
     private readonly formBuilder:FormBuilder,
     private readonly jobService:JobService,
-    private readonly route:ActivatedRoute
+    private readonly route:ActivatedRoute,
+    private readonly router:Router
   ){}
 
   ngOnInit(): void {
@@ -29,29 +32,37 @@ export class EmployerJobEditComponent implements OnInit{
           next:(res)=>{
             this.jobData = res.data
             if(this.jobData){
+             this.intializeForm();
+            }
+          }
+        })
+      })
+
+  }
 
 
+  intializeForm(){
     this.jobForm = this.formBuilder.group({
       title:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
-      salary:['',[validateByTrimming(salaryValidators)]],
+      salary:['',Validators.required],
       city:['',[validateByTrimming(commonValidators)]],
       district:['',[validateByTrimming(commonValidators)]],
       state:['',[validateByTrimming(commonValidators)]],
       country:['',[validateByTrimming(commonValidators)]],
-      landmark:['',[validateByTrimming(commonValidators)]],
-      zip:['',[validateByTrimming(commonValidators)]],
+      // landmark:['',[validateByTrimming(commonValidators)]],
+      zip:['',Validators.required],
       requierments:this.formBuilder.array([this.formBuilder.control('')]),
       responsibilities:this.formBuilder.array([this.formBuilder.control('')]),
-      typeOfJob:['',[validateByTrimming(commonValidators)]]
+      typeOfJob:['',Validators.required]
     })
 
     console.log(this.jobData);
     this.jobForm.patchValue({
-      title:this.jobData.title ||'',
-      description:this.jobData.description ||'',
-      salary:this.jobData.salary || '',
-      typeOfJob:this.jobData.type || ''
+      title:this.jobData!.title ||'',
+      description:this.jobData!.description ||'',
+      salary:this.jobData!.salary || '',
+      typeOfJob:this.jobData!.type || ''
     })
 
     if(this.jobData?.location){
@@ -64,24 +75,17 @@ export class EmployerJobEditComponent implements OnInit{
       })
     }
 
-    if(this.jobData?.requirements && this.jobData.requirements.length>0){
-      this.jobData.requirements.forEach((requirement)=>{
+    if(this.jobData?.requierments && this.jobData.requierments.length>0){
+      this.jobData.requierments.forEach((requirement)=>{
         this.requiermentForms.push(this.formBuilder.control(requirement));
       })
     }
 
     if(this.jobData?.responsibilities && this.jobData.responsibilities.length>0){
       this.jobData.responsibilities.forEach((responsibility)=>{
-        this.requiermentForms.push(this.formBuilder.control(responsibility));
+        this.responsibilitiesFrom.push(this.formBuilder.control(responsibility));
       })
     }
-
-  
-            }
-          }
-        })
-      })
-
   }
 
 
@@ -113,6 +117,12 @@ export class EmployerJobEditComponent implements OnInit{
   }
 
   onSubmit(){
-    console.log(this.jobForm.getRawValue())
+    const formData = this.jobForm.getRawValue();
+    this.jobService.updateJob(this.jobData!._id,formData).subscribe({
+      next:(res)=>{
+        void Swal.fire('Success','Job Edited Successfully','success');
+        this.router.navigate(['/employer/jobs'])
+      }
+    })
   }
 }

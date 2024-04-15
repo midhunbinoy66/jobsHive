@@ -46,4 +46,13 @@ export class JobController{
         const apiRes = await this._jobUseCase.findEmployerJobs(employerId);
         res.status(apiRes.status).json(apiRes);
     }
+
+
+    async updateEmployerJob(req:Request,res:Response){
+        const jobId = req.params.jobId;
+        const jobData = req.body;
+        console.log(jobData,jobId)
+        const apiRes = await this._jobUseCase.updateEmployerJob(jobId,jobData);
+        res.status(apiRes.status).json(apiRes);
+    }
 }

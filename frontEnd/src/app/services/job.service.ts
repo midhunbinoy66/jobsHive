@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IApiJobRes, IApiJobsRes, IJobReq, IJobRes } from '../models/jobs';
 import { IApiApplicationRes, IApiApplicationsRes } from '../models/application';
-import { IApiUserRes } from '../models/users';
+import { IApiUserRes, IUserUpdate } from '../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +49,9 @@ export class JobService {
 
   deleteEmployerJob(jobId:string){
     return this.http.get<IApiJobsRes>(`employer/delete-job/${jobId}`);
+  }
+
+  updateJob(jobId:string,jobData:IJobReq){
+    return this.http.post<IApiJobRes>(`employer/update-job/${jobId}`,jobData);
   }
 }

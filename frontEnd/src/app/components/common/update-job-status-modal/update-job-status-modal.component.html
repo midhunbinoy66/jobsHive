@@ -1,0 +1,21 @@
+<mat-dialog-content>
+    <div>
+      <p>{{data.name}}</p>
+      <p>{{data.email}}</p>
+      <p>{{data.jobId}}</p>
+    </div>
+  
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="selectedStatus" name="status" required="true" #inputField="ngModel">
+        <mat-option value="approved">Approved</mat-option>
+        <mat-option value="rejected">Rejected</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions>
+    <button mat-button (click)="dialogRef.close()">Cancel</button>
+    <button mat-button color="primary" (click)="updateStatus()" [disabled]="inputField.invalid">Update</button>
+  </mat-dialog-actions>
+  

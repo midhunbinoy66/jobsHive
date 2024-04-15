@@ -26,4 +26,7 @@ userRouter.get('/plans',(req,res)=>pController.findAllPlans(req,res));
 userRouter.get('/plans/:planId',(req,res)=>pController.findPlan(req,res));
 userRouter.get('/get/:userId',(req,res)=>uController.findUserDetails(req,res));
 userRouter.post('/remove/saved-jobs/:userId',(req,res)=>uController.userRemoveSavedJob(req,res));
+userRouter.patch('/follow/:userId',(req,res)=>uController.followEmployer(req,res));
+userRouter.patch('/unfollow/:userId',(req,res)=>uController.unfollowEmployer(req,res));
+
 export default userRouter

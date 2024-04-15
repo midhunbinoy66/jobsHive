@@ -12,6 +12,8 @@ import { AdminPlansComponent } from './admin-plans/admin-plans.component';
 import { AdminCreatePlanComponent } from './admin-create-plan/admin-create-plan.component';
 import { AdminEditPlanComponent } from './admin-edit-plan/admin-edit-plan.component';
 import { CommonValidationComponent } from '../common/validation/common-validation/common-validation.component';
+import { AdminNavComponent } from './admin-nav/admin-nav.component';
+import { AdminEmployerMangementComponent } from './admin-employer-mangement/admin-employer-mangement.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { CommonValidationComponent } from '../common/validation/common-validatio
     AdminUserManagementComponent,
     AdminPlansComponent,
     AdminCreatePlanComponent,
-    AdminEditPlanComponent
+    AdminEditPlanComponent,
+    AdminNavComponent,
+    AdminEmployerMangementComponent
   ],
   imports: [
     CommonModule,

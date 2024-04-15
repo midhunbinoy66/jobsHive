@@ -1,3 +1,4 @@
+
 import { IJobRepo } from "../../application/interfaces/repos/jobRepo";
 import {  IJobReq } from "../../application/interfaces/types/job";
 import { IJob } from "../../entities/job";
@@ -48,6 +49,24 @@ export class JobRepository implements IJobRepo{
     async findEmployerJObs(employerId: string): Promise<IJob[] | null> {
         return await jobModel.find(
             {isActive:true,employer:employerId}
+        )
+    }
+
+    async updateJob(jobId: string, jobData: IJobReq): Promise<IJob | null> {
+        return await jobModel.findByIdAndUpdate(
+            {_id:jobId},
+            {
+                $set:{
+                    title:jobData.title,
+                    description:jobData.description,
+                    salary:jobData.salary,
+                    type:jobData.type,
+                    requierments:jobData.requierments,
+                    responsibilities:jobData.responsibilities,
+                    location:jobData.location
+                }
+            },
+            {new:true}
         )
     }
 

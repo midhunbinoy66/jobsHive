@@ -1,10 +1,30 @@
-<h1>All Plans</h1>
+<app-admin-nav></app-admin-nav>
+<div class="container p-1">
+    <div class="p-1 shadow-lg my-2">
+        <div class="flex justify-between">
+            <h1 class="text-2xl font-bold mb-4">All Plans</h1>
+            <div>
+                <a [routerLink]="'/admin/create-plan'" class="ring-2 bg-blue-900 text-white font-bold rounded-lg text-center p-3">Create New Plan</a>
+            </div>
+        </div>
 
-<div *ngFor="let plan of plans" class="shadow-lg my-1 p-2 ">
-
-    <p>{{plan.name}}</p>
-    <p>{{plan.description}}</p>
-    <p>{{plan.price}}</p>
-    <button class="bg-teal-700 rounded-lg p-2 text-white font-bold" (click)="onEdit(plan._id)" >Edit</button>
-    <button  class="bg-red-700 rounded-lg p-2 text-white font-bold" (click)="onDelete(plan._id)">Delete</button>
+        <div *ngFor="let plan of plans" class="shadow-lg my-1 p-4 bg-white rounded-lg md:flex md:items-center md:justify-between md:p-6">
+        
+            <div class="md:w-1/2">
+                <p class="text-lg font-semibold">{{ plan.name }}</p>
+                <p class="text-gray-600 mt-2">{{ plan.description }}</p>
+            </div>
+        
+            <div class="md:w-1/4 mt-4 md:mt-0">
+                <p class="text-lg font-semibold">${{ plan.price }}</p>
+            </div>
+        
+            <div class="md:w-1/4 flex justify-end mt-4 md:mt-0">
+                <button class="bg-teal-700 rounded-lg px-4 py-2 text-white font-bold mr-2" (click)="onEdit(plan._id)">Edit</button>
+                <button class="bg-red-700 rounded-lg px-4 py-2 text-white font-bold" (click)="onDelete(plan._id)">Delete</button>
+            </div>
+        </div>
+    </div>
+ 
+    
 </div>

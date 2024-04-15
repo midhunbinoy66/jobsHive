@@ -19,6 +19,15 @@ import { EmployerProfileComponent } from './employer-profile/employer-profile.co
 import { EmployerSidebarComponent } from './employer-sidebar/employer-sidebar.component';
 import { EmployerJobEditComponent } from './employer-job-edit/employer-job-edit.component';
 import { EmployerJobApplicantsComponent } from './employer-job-applicants/employer-job-applicants.component';
+import { EmployerApplicanResumeComponent } from './employer-applican-resume/employer-applican-resume.component';
+import { EmployerProfileEditComponent } from './employer-profile-edit/employer-profile-edit.component';
+import { NameValidationComponent } from '../common/validation/name-validation/name-validation.component';
+import { CityValidationComponent } from '../common/validation/city-validation/city-validation.component';
+import { StateValidationComponent } from '../common/validation/state-validation/state-validation.component';
+import { MobileValidationComponent } from '../common/validation/mobile-validation/mobile-validation.component';
+import { DistrictValidationComponent } from '../common/validation/district-validation/district-validation.component';
+import { CountryValidationComponent } from '../common/validation/country-validation/country-validation.component';
+import { ZipValidationComponent } from '../common/validation/zip-validation/zip-validation.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +41,8 @@ import { EmployerJobApplicantsComponent } from './employer-job-applicants/employ
     EmployerSidebarComponent,
     EmployerJobEditComponent,
     EmployerJobApplicantsComponent,
+    EmployerApplicanResumeComponent,
+    EmployerProfileEditComponent,
   ],
   imports: [
     CommonModule,
@@ -41,7 +52,15 @@ import { EmployerJobApplicantsComponent } from './employer-job-applicants/employ
     PasswordValidationComponent,
     OtpValidationComponent,
     SalaryValidationComponent,
-    StoreModule.forFeature('employer',employerReducer)
+    StoreModule.forFeature('employer',employerReducer),
+    NameValidationComponent,
+    CityValidationComponent,
+    StateValidationComponent,
+    MobileValidationComponent,
+    DistrictValidationComponent,
+    CountryValidationComponent,
+    ZipValidationComponent,
+    
     
   ]
 })

@@ -18,4 +18,6 @@ export interface IuserRepo{
     findAllUsers(page:number,limit:number,searchQuery:string):Promise<IUserRes[] | null>
     findUsersCount(searchQuery:string):Promise<number>
     blockAndUblockUser(userId:string):Promise<void>
+    followEmployer(userId:string,employerId:string):Promise<IUserRes | null>
+    unFollowEmplopyer(userId:string,employerId:string):Promise<IUserRes | null>
 }

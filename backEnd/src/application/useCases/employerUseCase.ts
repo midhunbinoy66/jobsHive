@@ -3,7 +3,8 @@ import { OTP_TIMER } from "../../infrastructure/constants/constants";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { IEmployerRepo } from "../interfaces/repos/employerRepo";
 import { ITempEmployerRepo } from "../interfaces/repos/tempEmployerRepo";
-import { IApiEmployerAuthRes, IEmployerAuth} from "../interfaces/types/employer";
+import { IApiRes } from "../interfaces/types/commont";
+import { IApiEmployerAuthRes, IApiEmployerRes, IEmployerAndCount, IEmployerAuth, IEmployerUpdate} from "../interfaces/types/employer";
 import { ITempEmployerReq, ITempEmployerRes } from "../interfaces/types/tempEmployer";
 import { IEncryptor } from "../interfaces/utils/encryptor";
 import { ImailSender } from "../interfaces/utils/mailSender";
@@ -115,4 +116,63 @@ export class EmployeruseCase{
             refreshToken: ''
         };
     }
+
+
+    async getAllUser(page:number,limit:number,searchQuery:string | undefined):Promise<IApiRes< IEmployerAndCount | null>>{
+        try {
+            
+            if( isNaN(page)) page =1
+            if(isNaN(limit)) limit =10;
+            if(!searchQuery) searchQuery ='';
+            const users = await this._employerRepository.findAllUsers(page,limit,searchQuery);
+            const userCount = await this._employerRepository.findUsersCount(searchQuery);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:{users:users,userCount}
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
+    async blockUser(userId:string):Promise<IApiRes<null>>{
+        try {
+            await this._employerRepository.blockAndUblockUser(userId);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:null
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
+
+    async updateUserData(userId:string,user:IEmployerUpdate):Promise<IApiEmployerRes>{
+        try {
+            const updatedUser = await this._employerRepository.updateUser(userId,user)
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:updatedUser,
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
 }

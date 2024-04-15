@@ -8,6 +8,7 @@ import { AdminUserManagementComponent } from './admin-user-management/admin-user
 import { AdminCreatePlanComponent } from './admin-create-plan/admin-create-plan.component';
 import { AdminPlansComponent } from './admin-plans/admin-plans.component';
 import { AdminEditPlanComponent } from './admin-edit-plan/admin-edit-plan.component';
+import { AdminEmployerMangementComponent } from './admin-employer-mangement/admin-employer-mangement.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,12 @@ const routes: Routes = [
     path:'users',
     title:'JobHive | Users',
     component:AdminUserManagementComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'employers',
+    title:'JobHive | Employers',
+    component:AdminEmployerMangementComponent,
     canActivate:[authGuard]
   },
   {

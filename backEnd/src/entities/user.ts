@@ -10,5 +10,6 @@ export interface IUser {
     profilePic?: string
     address?: IUserAddress,
     isGoogleAuth: boolean,
-    savedJobs?:string[]
+    savedJobs?:string[],
+    following?:string[]
 }

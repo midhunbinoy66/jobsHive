@@ -113,4 +113,33 @@ export class UserHomeComponent implements OnInit {
     })
   }
 
+
+  onFollow(employerId:string){
+    this.userService.followEmployer(this.user!._id,employerId).subscribe({
+      next:(res)=>{
+        // this.user?.following?.push(employerId);
+        this.store.dispatch(saveUserOnStore({userDetails:res.data}))
+        void Swal.fire('Success','Followed','success');
+      }
+    })
+  }
+
+
+  onUnFollow(employerId:string){
+    this.userService.unfollowEmployer(this.user!._id,employerId).subscribe({
+      next:(res)=>{
+        // if(this.user?.following)
+        // this.user!.following = this.user!.following.filter(id => id !== employerId);
+        this.store.dispatch(saveUserOnStore({userDetails:res.data}))
+        void Swal.fire('Success','UnFollowed','success');
+      }
+    })
+  }
+
+  isFollowing(employerId: string): boolean {
+    if(this.user?.following !==undefined){
+      return this.user!.following.includes(employerId);
+    }else return false
+
+  }
 }

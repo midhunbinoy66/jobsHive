@@ -9,4 +9,6 @@ adminRouter.patch( '/users/block/:userId',(req,res)=>aController.blockUser(req,r
 adminRouter.post('/create-plan',(req,res)=>pController.createPlan(req,res));
 adminRouter.patch('/delete-plan/:planId',(req,res)=>pController.deletePlan(req,res));
 adminRouter.put('/update-plan/:planId',(req,res)=>pController.updatPlan(req,res));
+adminRouter.get('/employers',(req,res)=>aController.getAllEmployers(req,res));
+adminRouter.patch( '/employers/block/:userId',(req,res)=>aController.blockEmployers(req,res))
 export default adminRouter

@@ -23,7 +23,7 @@ export interface IJobRes{
     isActive:boolean
     location:IJobAddress
     type:string
-    requirements:string[]
+    requierments:string[]
     responsibilities:string[]
 }
 

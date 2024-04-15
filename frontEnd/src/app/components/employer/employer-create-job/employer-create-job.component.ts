@@ -93,7 +93,7 @@ export class EmployerCreateJobComponent implements OnInit {
       title:formData.title,
       description:formData.description,
       location:jobAddress,
-      requirements:formData.requierments,
+      requierments:formData.requierments,
       responsibilities:formData.responsibilities,
       salary:formData.salary,
       type:formData.typeOfJob,

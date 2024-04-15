@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { validateByTrimming } from 'src/app/helpers/validations';
 import { PlanService } from 'src/app/services/plan.service';
 import { nameValidators } from 'src/app/shared/validators';
@@ -17,7 +18,8 @@ export class AdminCreatePlanComponent implements OnInit {
 
   constructor(
     private readonly fb:FormBuilder,
-    private readonly planService:PlanService
+    private readonly planService:PlanService,
+    private readonly router:Router
 
   ){}
 
@@ -50,6 +52,7 @@ export class AdminCreatePlanComponent implements OnInit {
       this.planService.savePlan(planData).subscribe({
         next:(res)=>{
           void Swal.fire('Success','Plan Added Succesfully','success');
+          this.router.navigate(['/admin/plans'])
         }
       })
 

@@ -1,0 +1,45 @@
+<app-employer-nav></app-employer-nav>
+<div class="flex flex-wrap">
+  <app-employer-sidebar></app-employer-sidebar>
+  <div class="bg-white shadow-md rounded-lg px-8 py-6 flex-1">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Resume Details</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Personal Information</h3>
+        <div class="mb-4">
+          <p><span class="font-semibold">Name:</span> {{ userResume?.name }}</p>
+          <p><span class="font-semibold">Email:</span> {{ userResume?.email }}</p>
+          <p><span class="font-semibold">Mobile:</span> {{ userResume?.mobile }}</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Languages & Skills</h3>
+        <div class="mb-4">
+          <p><span class="font-semibold">Languages:</span> {{ userResume!.languages.join(', ') }}</p>
+          <p><span class="font-semibold">Skills:</span> {{ userResume!.skills.join(', ') }}</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Work Experience</h3>
+        <ul class="list-disc pl-5 mb-4">
+          <li><span class="font-semibold">Company Name:</span> {{ userResume?.workExperience?.companyName }}</li>
+          <li><span class="font-semibold">Job Title:</span> {{ userResume?.workExperience?.jobTitle }}</li>
+          <li><span class="font-semibold">Start Date:</span> {{ userResume?.workExperience?.workStartDate }}</li>
+          <li><span class="font-semibold">End Date:</span> {{ userResume?.workExperience?.workEndDate }}</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Education</h3>
+        <ul class="list-disc pl-5 mb-4">
+          <li><span class="font-semibold">Institution:</span> {{ userResume?.education?.institution }}</li>
+          <li><span class="font-semibold">Degree:</span> {{ userResume?.education?.degree }}</li>
+          <li><span class="font-semibold">Field of Study:</span> {{ userResume?.education?.fieldOfStudy }}</li>
+          <li><span class="font-semibold">Start Date:</span> {{ userResume?.education?.eduStartDate }}</li>
+          <li><span class="font-semibold">End Date:</span> {{ userResume?.education?.eduEndDate }}</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</div>

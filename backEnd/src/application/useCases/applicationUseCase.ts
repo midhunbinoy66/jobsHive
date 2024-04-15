@@ -67,4 +67,21 @@ export class ApplicationUseCase{
             }
         }
     }
+
+    async updateApplicationStatus(applicationId:string,status:string){
+        try {
+            const application = await this._applicationRepo.updateApplicationStatus(applicationId,status);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:application
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal Server Error',
+                data:null
+            }
+        }
+    }
 }

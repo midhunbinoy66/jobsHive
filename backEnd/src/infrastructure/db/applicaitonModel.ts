@@ -25,7 +25,8 @@ const applicationSchema :Schema = new Schema<IApplication & Document>({
     },
     status:{
         type:String,
-        default:'processing'
+        default:'processing',
+        enum:['processing','rejected','approved']
     },
     coverLetter:{
         type:String

@@ -36,6 +36,7 @@ export class EmployerJobsComponent implements OnInit{
       this.jobService.findEmployerJobs(this.employer._id).subscribe({
         next:(res)=>{
           this.employerJobs = res.data
+          console.log(this.employerJobs);
         }
       })
     }

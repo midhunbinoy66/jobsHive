@@ -31,6 +31,7 @@ import { DistrictValidationComponent } from '../common/validation/district-valid
 import { StateValidationComponent } from '../common/validation/state-validation/state-validation.component';
 import { ZipValidationComponent } from '../common/validation/zip-validation/zip-validation.component';
 import {  GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { UserFollowingComponent } from './user-following/user-following.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {  GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
     UserSavedJobsComponent,
     UserAppliedJobsComponent,
     UserResumeComponent,
-    UserSubscriptionComponent
+    UserSubscriptionComponent,
+    UserFollowingComponent
   ],
   imports: [
     CommonModule,

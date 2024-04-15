@@ -2,12 +2,11 @@ import { IApiRes, IEmployerAddress, ISubscription } from "./common"
 
 export interface IEmployerRes{
     _id:string
+    name:string
     email:string
-    companyName:string
     password:string
-    profilePic?:string
-    numberOfEmployees?:number
     isBlocked:boolean
+    profilePic?:string
     mobile?:number
     address?:IEmployerAddress
     subscription?:ISubscription
@@ -36,3 +35,9 @@ export interface IEmployerAuthRes{
     refreshToken:string
 }
 
+export interface IEmployersAndCount{
+    users:IEmployerRes[]
+    userCount:number
+  }
+
+export interface IEmployerUpdate extends Omit<IEmployerRes, '_id' | 'email' | 'password' | 'isBlocked' > { }

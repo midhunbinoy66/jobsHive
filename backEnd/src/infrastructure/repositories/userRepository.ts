@@ -133,4 +133,25 @@ export class UserRespository implements IuserRepo {
             throw Error('Error while blocking/unblocking user')
           }
       }
+
+      async followEmployer(userId: string, employerId: string): Promise<IUserRes | null> {
+        return await userModel.findByIdAndUpdate(
+            {_id:userId},
+            {
+                $addToSet:{following:employerId}
+            },
+            {new:true}
+        )
+      }
+
+      async unFollowEmplopyer(userId: string, employerId: string): Promise<IUserRes | null> {
+            console.log(userId,employerId);
+          return await userModel.findByIdAndUpdate(
+            {_id:userId},
+            {
+              $pull:{following:employerId}   
+            },
+            {new:true}
+          )
+      }
 }

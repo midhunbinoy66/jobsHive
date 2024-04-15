@@ -8,6 +8,7 @@ export interface IJobRepo{
     findJobs(title:string,location:string):Promise<IJob[]|null>
     findSavedJobs(jobIds:string[]):Promise<IJob[]|null>
     findAppliedJobs(jobIds:string[]):Promise<IJob[]|null>
+    updateJob(jobId:string,jobData:IJobReq):Promise<IJob | null>
     deleteEmployerJob(jobId:string):Promise<IJob| null>
     findEmployerJObs(employerId:string):Promise<IJob[]|null>
 }

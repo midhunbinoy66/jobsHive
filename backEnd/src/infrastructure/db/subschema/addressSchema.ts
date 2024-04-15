@@ -26,8 +26,7 @@ export  const userAddressSchema:Schema  =new Schema<IUserAddress & Document>({
 })
 
 export const employerAddressSchema: Schema = new Schema<IEmployerAddress & Document>({
-    ...userAddressSchema.obj,
-    landmark: String,
+    ...userAddressSchema.obj
 })
 
 export const jobAddressSchema: Schema = new Schema<IEmployerAddress & Document>({

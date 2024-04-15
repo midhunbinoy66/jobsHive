@@ -1,85 +1,81 @@
-<section >
-    <div class="p-5"> 
-        <form  [formGroup]="jobForm" (submit)="onSubmit()">
-            <div class="flex space-x-3 mb-2">
-                <label for="title">Job title</label>
-                <input type="text" name="title" placeholder="title" formControlName="title" class="ring-2 p-1 rounded-lg">
-            </div>
-            <div class="flex space-x-3 mb-2"> 
-                <label for="description">Job Description</label>
-                <input type="text" name="description" placeholder="description"  formControlName="description" class="ring-2 p-1 rounded-lg">
-            </div>
-            <div class="flex space-x-3 mb-2">
-                <label for="salary">Job Salary</label>
-                <input type="number" name="salary" placeholder="slary"  class="ring-2 p-1 rounded-lg" formControlName="salary">
-            </div>
-            <div>
-                <h3>Company Address</h3>
-            </div>
-            <div class="flex space-x-3 mb-2">
-
-                <label for="city">City</label>
-                <input type="text" name="city" placeholder="city" class="ring-2 p-1 rounded-lg" formControlName="city">
-            </div >
-            <div class="flex space-x-3 mb-2">
-                <label for="district">District</label>
-                <input type="text" name="district" placeholder="district" class="ring-2 p-1 rounded-lg" formControlName="district">
-            </div>
-
-            <div class="flex space-x-3 mb-2">
-                <label for="state">State</label>
-                <input type="text" name="state" placeholder="state" class="ring-2 p-1 rounded-lg" formControlName="state">
-            </div>
-            <div class="flex space-x-3 mb-2">
-                <label for="country">Country</label>
-                <input type="text" name="country" placeholder="country" class="ring-2 p-1 rounded-lg" formControlName="country">
-            </div>
-
-            <div class="flex space-x-3 mb-2">
-                <label for="landmark">Landmark</label>
-                <input type="text" name="landmark" placeholder="landmark" class="ring-2 p-1 rounded-lg" formControlName="landmark">
-            </div>
-
-            <div class="flex space-x-3 mb-2">
-                <label for="zip">Zip</label>
-                <input type="number" name="zip" placeholder="zip" class="ring-2 p-1 rounded-lg" formControlName="zip">
-            </div>
-
-            <div formArrayName="requierments">
-                <div *ngFor="let requierment of requiermentForms.controls; let i = index">
-                    <div>
-                        <input type="text" [formControlName]="i" placeholder="requierment" class="ring-2 p-1 rounded-lg">
-                        <button type="button"  (click)="removeRequierment(i)">Remove</button>
+<app-employer-nav></app-employer-nav>
+<div class="flex flex-wrap">
+    <app-employer-sidebar class="w-full md:w-64 "></app-employer-sidebar>
+    <section class="flex-1">
+        <div class="container mx-auto px-4 py-8" *ngIf="jobForm">
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h1 class="text-2xl font-bold mb-6 text-center">Edit Job</h1>
+                <form [formGroup]="jobForm" (submit)="onSubmit()">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Job Title</label>
+                        <input type="text" name="title" placeholder="Title" formControlName="title" class="form-control">
                     </div>
-                        <button type="button" (click)="addRequierment()">Add requierment</button>
-                </div>
-            </div>
-
-            <div formArrayName="responsibilities">
-                <div *ngFor="let responsibility of responsibilitiesFrom.controls;let i = index">
-                    <div class="flex space-x-3 mb-2">
-                        <label for="responsibilities">Responsibility</label>
-                        <input type="text" placeholder="responsibilities" [formControlName]="i" class="ring-2 p-1 rounded-lg" >
-                        <button type="button" (click)="removeResponsibilities(i)">Remove Responsibility</button>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Job Description</label>
+                        <textarea name="description" rows="4" placeholder="Description" formControlName="description" class="form-control"></textarea>
                     </div>
-                </div>
-                <button type="button" (click)="addResponsiblilites()">Add Responsibility</button>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">Job Salary</label>
+                        <input type="number" name="salary" placeholder="Salary" class="form-control" formControlName="salary">
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Company Address</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6 mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" name="city" placeholder="City" class="form-control" formControlName="city">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="district" class="form-label">District</label>
+                            <input type="text" name="district" placeholder="District" class="form-control" formControlName="district">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="state" class="form-label">State</label>
+                            <input type="text" name="state" placeholder="State" class="form-control" formControlName="state">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" name="country" placeholder="Country" class="form-control" formControlName="country">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="zip" class="form-label">Zip</label>
+                            <input type="number" name="zip" placeholder="Zip" class="form-control" formControlName="zip">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Requirements</label>
+                        <div formArrayName="requierments">
+                            <div *ngFor="let requirement of requiermentForms.controls; let i = index" class="d-flex align-items-center mb-2">
+                                <input type="text" [formControlName]="i" placeholder="Requirement" class="form-control me-2">
+                                <button type="button" (click)="removeRequierment(i)" class="btn ">Remove</button>
+                            </div>
+                            <button type="button" (click)="addRequierment()" class="btn  bg-blue rounded-lg">Add Requirement</button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Responsibilities</label>
+                        <div formArrayName="responsibilities">
+                            <div *ngFor="let responsibility of responsibilitiesFrom.controls; let i = index" class="d-flex align-items-center mb-2">
+                                <input type="text" placeholder="Responsibility" [formControlName]="i" class="form-control me-2">
+                                <button type="button" (click)="removeResponsibilities(i)" class="btn btn-danger">Remove</button>
+                            </div>
+                            <button type="button" (click)="addResponsiblilites()" class="btn btn-primary">Add Responsibility</button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="typeOfJob" class="form-label">Type of Job</label>
+                        <select name="typeOfJob" id="typeOfJob" formControlName="typeOfJob" class="form-select">
+                            <option value="fullTime">Full Time</option>
+                            <option value="partTime">Part Time</option>
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
             </div>
-
-            <div>
-                <label for="typeOfJob">Type of job</label>
-                <select name="typeOfJob" id="typeOfJob" formControlName="typeOfJob">
-                    <option value="fullTime">Full Time</option>
-                    <option value="partTime">Part Time</option>
-                </select>
-            </div>
-
-            <div>
-            <button type="submit"
-            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
         </div>
-
-        </form>
-
-    </div>
-</section>
+    </section>
+    
+    
+    
+</div>

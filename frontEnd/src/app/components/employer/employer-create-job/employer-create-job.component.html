@@ -1,85 +1,86 @@
-<section >
-    <div class="p-5"> 
-        <form  [formGroup]="jobForm" (submit)="onSubmit()">
-            <div class="flex space-x-3 mb-2">
-                <label for="title">Job title</label>
-                <input type="text" name="title" placeholder="title" formControlName="title" class="ring-2 p-1 rounded-lg">
-            </div>
-            <div class="flex space-x-3 mb-2"> 
-                <label for="description">Job Description</label>
-                <input type="text" name="description" placeholder="description"  formControlName="description" class="ring-2 p-1 rounded-lg">
-            </div>
-            <div class="flex space-x-3 mb-2">
-                <label for="salary">Job Salary</label>
-                <input type="number" name="salary" placeholder="slary"  class="ring-2 p-1 rounded-lg" formControlName="salary">
-            </div>
-            <div>
-                <h3>Company Address</h3>
-            </div>
-            <div class="flex space-x-3 mb-2">
+<app-employer-nav></app-employer-nav>
 
-                <label for="city">City</label>
-                <input type="text" name="city" placeholder="city" class="ring-2 p-1 rounded-lg" formControlName="city">
-            </div >
-            <div class="flex space-x-3 mb-2">
-                <label for="district">District</label>
-                <input type="text" name="district" placeholder="district" class="ring-2 p-1 rounded-lg" formControlName="district">
-            </div>
-
-            <div class="flex space-x-3 mb-2">
-                <label for="state">State</label>
-                <input type="text" name="state" placeholder="state" class="ring-2 p-1 rounded-lg" formControlName="state">
-            </div>
-            <div class="flex space-x-3 mb-2">
-                <label for="country">Country</label>
-                <input type="text" name="country" placeholder="country" class="ring-2 p-1 rounded-lg" formControlName="country">
-            </div>
-
-            <div class="flex space-x-3 mb-2">
-                <label for="landmark">Landmark</label>
-                <input type="text" name="landmark" placeholder="landmark" class="ring-2 p-1 rounded-lg" formControlName="landmark">
-            </div>
-
-            <div class="flex space-x-3 mb-2">
-                <label for="zip">Zip</label>
-                <input type="number" name="zip" placeholder="zip" class="ring-2 p-1 rounded-lg" formControlName="zip">
-            </div>
-
-            <div formArrayName="requierments">
-                <div *ngFor="let requierment of requiermentForms.controls; let i = index">
-                    <div>
-                        <input type="text" [formControlName]="i" placeholder="requierment" class="ring-2 p-1 rounded-lg">
-                        <button type="button"  (click)="removeRequierment(i)">Remove</button>
-                    </div>
-                        <button type="button" (click)="addRequierment()">Add requierment</button>
+<div class="flex flex-wrap">
+    <app-employer-sidebar  class=" min-h-screen w-full md:w-64 "> </app-employer-sidebar>
+    <section class="bg-gray-100 py-10 flex-1" >
+        <div class="container mx-auto px-4">
+            <form [formGroup]="jobForm" (submit)="onSubmit()" class="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <div class="mb-4">
+                    <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Job title</label>
+                    <input type="text" name="title" placeholder="Title" formControlName="title" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
-            </div>
-
-            <div formArrayName="responsibilities">
-                <div *ngFor="let responsibility of responsibilitiesFrom.controls;let i = index">
-                    <div class="flex space-x-3 mb-2">
-                        <label for="responsibilities">Responsibility</label>
-                        <input type="text" placeholder="responsibilities" [formControlName]="i" class="ring-2 p-1 rounded-lg" >
-                        <button type="button" (click)="removeResponsibilities(i)">Remove Responsibility</button>
+                <div class="mb-4">
+                    <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Job Description</label>
+                    <input type="text" name="description" placeholder="Description" formControlName="description" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="salary" class="block text-gray-700 text-sm font-bold mb-2">Job Salary</label>
+                    <input type="number" name="salary" placeholder="Salary" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="salary">
+                </div>
+                <!-- Company Address -->
+                <div class="mb-6">
+                    <h3 class="text-gray-700 text-lg font-bold mb-2">Company Address</h3>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label for="city" class="block text-gray-700 text-sm font-bold mb-2">City</label>
+                            <input type="text" name="city" placeholder="City" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="city">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                            <label for="district" class="block text-gray-700 text-sm font-bold mb-2">District</label>
+                            <input type="text" name="district" placeholder="District" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="district">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/3 px-3">
+                            <label for="state" class="block text-gray-700 text-sm font-bold mb-2">State</label>
+                            <input type="text" name="state" placeholder="State" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="state">
+                        </div>
+                        <div class="w-full md:w-1/3 px-3">
+                            <label for="country" class="block text-gray-700 text-sm font-bold mb-2">Country</label>
+                            <input type="text" name="country" placeholder="Country" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="country">
+                        </div>
+                        <div class="w-full md:w-1/3 px-3">
+                            <label for="landmark" class="block text-gray-700 text-sm font-bold mb-2">Landmark</label>
+                            <input type="text" name="landmark" placeholder="Landmark" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="landmark">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="zip" class="block text-gray-700 text-sm font-bold mb-2">Zip</label>
+                        <input type="number" name="zip" placeholder="Zip" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="zip">
                     </div>
                 </div>
-                <button type="button" (click)="addResponsiblilites()">Add Responsibility</button>
-            </div>
-
-            <div>
-                <label for="typeOfJob">Type of job</label>
-                <select name="typeOfJob" id="typeOfJob" formControlName="typeOfJob">
-                    <option value="fullTime">Full Time</option>
-                    <option value="partTime">Part Time</option>
-                </select>
-            </div>
-
-            <div>
-            <button type="submit"
-            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
+                <!-- Requirements -->
+                <div class="mb-6">
+                    <div formArrayName="requirements">
+                        <div *ngFor="let requirement of requiermentForms.controls; let i = index" class="flex items-center">
+                            <input type="text" [formControlName]="i" placeholder="Requirement" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2">
+                            <button type="button" (click)="removeRequierment(i)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Remove</button>
+                        </div>
+                        <button type="button" (click)="addRequierment()" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Requirement</button>
+                    </div>
+                </div>
+                <!-- Responsibilities -->
+                <div class="mb-6">
+                    <div formArrayName="responsibilities">
+                        <div *ngFor="let responsibility of responsibilitiesFrom.controls; let i = index" class="flex items-center mb-4">
+                            <input type="text" placeholder="Responsibility" [formControlName]="i" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2">
+                            <button type="button" (click)="removeResponsibilities(i)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Remove</button>
+                        </div>
+                        <button type="button" (click)="addResponsiblilites()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Responsibility</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="typeOfJob" class="block text-gray-700 text-sm font-bold mb-2">Type of job</label>
+                    <select name="typeOfJob" id="typeOfJob" formControlName="typeOfJob" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="fullTime">Full Time</option>
+                        <option value="partTime">Part Time</option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+                </div>
+            </form>
         </div>
-
-        </form>
-
-    </div>
-</section>
+    </section>
+    
+</div>

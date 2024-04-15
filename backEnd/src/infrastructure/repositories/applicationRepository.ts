@@ -34,4 +34,13 @@ export class ApplicationRepository implements IApplicantRepo{
    async findApplicationByJobId(jobId: string): Promise<IApplication[] | null> {
             return await applicationModel.find({jobId:jobId})
     }
+
+    async updateApplicationStatus(applicationId: string, status: string): Promise<IApplication | null> {
+            return await applicationModel.findByIdAndUpdate(
+                {_id:applicationId},
+                {$set:
+                    {status:status}
+                }
+            )
+    }
 }

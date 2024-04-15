@@ -1,12 +1,63 @@
 <app-employer-nav></app-employer-nav>
-
-<app-employer-sidebar></app-employer-sidebar>
-
-<div class="flex flex-col space-y-2 w-full shadow-lg">
-    <div *ngFor="let job of employerJobs " class="w-1/2 shadow-lg p-4 cursor-pointer" (click)="viewJob(job._id)">
-        <h1>{{job.title}}</h1>
-        <p>{{job.description}}</p>
-        <p>{{job.isActive}}</p>
-        <button type="button" (click)="onEditJob(job._id)" class="bg-teal-600 text-white p-2 rounded-lg mx-1">Edit</button>
-        <button type="button" (click)="onDeleteJob(job._id)" class="bg-red-500 text-white p-2 rounded-lg">Delete</button>    </div>
+<div class="flex  flex-wrap  space-x-3">
+    <app-employer-sidebar class=" w-full md:w-64"></app-employer-sidebar>
+    <div *ngIf="employerJobs && employerJobs!.length>0" class="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div *ngFor="let job of employerJobs" class=" p-4 " (click)="viewJob(job._id)">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Job Title -->
+                <div class="bg-teal-600 text-white px-4 py-2">
+                    <h1 class="text-xl font-semibold">{{ job.title }}</h1>
+                </div>
+        
+                <!-- Job Details -->
+                <div class="p-4">
+                    <p class="text-gray-700 text-sm mb-4">{{ job.description }}</p>
+                    
+                    <!-- Job Location -->
+                    <div class="flex items-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M10 0a7.53 7.53 0 00-7.5 7.5c0 5.55 7.5 12.5 7.5 12.5s7.5-6.95 7.5-12.5A7.53 7.53 0 0010 0zM2 7.5A6.47 6.47 0 017.5 2a6.47 6.47 0 015 2.5A6.47 6.47 0 0112.5 10c0 1.65-.625 3.15-1.646 4.284l-.028.026c-.036.035-.072.07-.108.106L10 17.5l-.718-.684c-.036-.036-.072-.071-.108-.106l-.028-.026C3.125 13.15 2.5 11.65 2.5 10c0-1.65.625-3.15 1.646-4.284l.028-.026c.036-.036.072-.07.108-.106L5 2.5 2 5.5v2zm5.5 7c.265 0 .52-.106.707-.293l4-4a1 1 0 10-1.414-1.414L7.5 12.086V7a1 1 0 10-2 0v5.086L3.207 9.793a1 1 0 10-1.414 1.414l4 4c.187.187.442.293.707.293z" clip-rule="evenodd" />
+                        </svg>
+                        <p class="text-gray-600">{{ job.location.city }}, {{ job.location.state }}</p>
+                    </div>
+        
+                    <!-- Job Salary and Type -->
+                    <div class="flex items-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M10 0a7.53 7.53 0 00-7.5 7.5c0 5.55 7.5 12.5 7.5 12.5s7.5-6.95 7.5-12.5A7.53 7.53 0 0010 0zM2 7.5A6.47 6.47 0 017.5 2a6.47 6.47 0 015 2.5A6.47 6.47 0 0112.5 10c0 1.65-.625 3.15-1.646 4.284l-.028.026c-.036.035-.072.07-.108.106L10 17.5l-.718-.684c-.036-.036-.072-.071-.108-.106l-.028-.026C3.125 13.15 2.5 11.65 2.5 10c0-1.65.625-3.15 1.646-4.284l.028-.026c.036-.036.072-.07.108-.106L5 2.5 2 5.5v2zm5.5 7c.265 0 .52-.106.707-.293l4-4a1 1 0 10-1.414-1.414L7.5 12.086V7a1 1 0 10-2 0v5.086L3.207 9.793a1 1 0 10-1.414 1.414l4 4c.187.187.442.293.707.293z" clip-rule="evenodd" />
+                        </svg>
+                        <p class="text-gray-600">{{ job.salary | currency }} - {{ job.type }}</p>
+                    </div>
+        
+                    <!-- Job Requirements -->
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">Requirements</h2>
+                        <ul class="list-disc list-inside text-gray-700">
+                            <li *ngFor="let requirement of job.requierments">{{ requirement }}</li>
+                        </ul>
+                    </div>
+        
+                    <!-- Job Responsibilities -->
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">Responsibilities</h2>
+                        <ul class="list-disc list-inside text-gray-700">
+                            <li *ngFor="let responsibility of job.responsibilities">{{ responsibility }}</li>
+                        </ul>
+                    </div>
+        
+                    <!-- Job Actions -->
+                    <div class="flex justify-end">
+                        <button type="button" (click)="onEditJob(job._id)" class="bg-teal-600 text-white px-4 py-2 rounded-lg mr-2 hover:bg-teal-700">Edit</button>
+                        <button type="button" (click)="onDeleteJob(job._id)" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    
 </div>
+
+

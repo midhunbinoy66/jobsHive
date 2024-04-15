@@ -12,6 +12,7 @@ export interface IUserRes {
     address?:IUserAddress
     savedJobs?:string[]
     subscription?:ISubscription
+    following?:string[]
   }
   
 

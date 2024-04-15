@@ -43,4 +43,15 @@ export class UserService {
   getUserDetails(userId:string):Observable<IApiUserRes>{
     return this.http.get<IApiUserRes>(`user/get/${userId}`);
   }
+
+  followEmployer(userId:string,employerId:string):Observable<IApiUserRes>{
+    console.log(userId,'userId');
+    console.log(employerId,'employerId');
+
+    return this.http.patch<IApiUserRes>(`user/follow/${userId}`,{employerId});
+  }
+
+  unfollowEmployer(userId: string, employerId: string): Observable<IApiUserRes> {
+    return this.http.patch<IApiUserRes>(`user/unfollow/${userId}`, { employerId });
+  }
 }
