@@ -11,4 +11,7 @@ export interface IJobRepo{
     updateJob(jobId:string,jobData:IJobReq):Promise<IJob | null>
     deleteEmployerJob(jobId:string):Promise<IJob| null>
     findEmployerJObs(employerId:string):Promise<IJob[]|null>
+    findJobsForVerification(page:number,limit:number):Promise<IJob[] | null>
+    verifyJob(jobId:string):Promise<IJob | null>
+    findJobscount():Promise<number>
 }

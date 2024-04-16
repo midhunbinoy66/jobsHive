@@ -13,4 +13,5 @@ export interface IJob{
     type:string
     requierments:string[]
     responsibilities:string[]
+    verification:string
 }

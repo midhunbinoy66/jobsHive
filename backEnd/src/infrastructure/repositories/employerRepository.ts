@@ -70,5 +70,11 @@ export class EmployerRepository implements IEmployerRepo{
         )
       }
 
+      async findFollowingEmployers(employerIds: string[]): Promise<IEmployer[] | null> {
+          return await employerModel.find({
+            _id: { $in: employerIds }
+        }).exec();
+      }
+
 
 }

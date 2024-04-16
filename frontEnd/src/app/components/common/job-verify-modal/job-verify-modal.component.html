@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Confirm Verification</h1>
+<div mat-dialog-content>
+  Are you sure you want to verify this job {{ data.jobId }}?
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+</div>

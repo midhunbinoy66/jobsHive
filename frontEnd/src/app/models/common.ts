@@ -1,4 +1,5 @@
 import { IEmployerRes } from "./employer";
+import { IJobssAndCount } from "./jobs";
 import { IUserRes, IUsersAndCount } from "./users";
 
 
@@ -25,7 +26,7 @@ export interface IEmployerAddress extends IUserAddress{
 
 export interface IJobAddress extends IUserAddress{}
 
-export type AllResTypes = IUserRes | IEmployerRes | IEmployerRes[]|IUserRes[] | IUsersAndCount | null
+export type AllResTypes = IUserRes | IEmployerRes | IEmployerRes[]|IUserRes[] | IUsersAndCount | null | IJobssAndCount
 
 export interface IApiRes<T extends AllResTypes> {
     status: number

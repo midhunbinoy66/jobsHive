@@ -1,21 +1,24 @@
 <div>
-    <aside [ngClass]="{'hidden': !showSidebar, 'md:block': showSidebar}" class="text-white w-full md:w-64 flex-none border border-black rounded-r-lg shadow-2xl min-h-screen  bg-gray-700">
+    <aside [ngClass]="{'hidden': !showSidebar, 'md:block': showSidebar}" class="text-black w-full md:w-64 flex-none border border-black rounded-r-lg shadow-2xl min-h-screen  bg-transparent ">
         <div class="p-4">
             <h1 class="text-xl font-bold mb-4 text-center">Menu</h1>
             <nav>
                 <ul>
                     <li>
-                        <a [routerLink]="'/employer/profile/edit'" class="block py-2 px-4 hover:bg-gray-600">Edit Profile</a>
+                        <a [routerLink]="'/employer/profile'" class="block py-2 px-4 hover:bg-gray-600 hover:text-white">Profile</a>
                     </li>
                     <li>
-                        <a [routerLink]="'/employer/create-job'" class="block py-2 px-4 hover:bg-gray-600">Create Job</a>
+                        <a [routerLink]="'/employer/profile/edit'" class="block py-2 px-4 hover:bg-gray-600  hover:text-white">Edit Profile</a>
                     </li>
                     <li>
-                        <a [routerLink]="'/employer/jobs'" class="block py-2 px-4 hover:bg-gray-600">Job Listing</a>
+                        <a [routerLink]="'/employer/create-job'" class="block py-2 px-4 hover:bg-gray-600  hover:text-white">Create Job</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="'/employer/jobs'" class="block py-2 px-4 hover:bg-gray-600  hover:text-white">Job Listing</a>
                     </li>
       
                     <li>
-                        <a (click)="logout()" class="block py-2 px-4 hover:bg-gray-600 cursor-pointer">Logout</a>
+                        <a (click)="logout()" class="block py-2 px-4 hover:bg-gray-600 cursor-pointer  hover:text-white">Logout</a>
                     </li>
                 </ul>
             </nav>

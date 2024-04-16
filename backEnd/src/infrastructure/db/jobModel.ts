@@ -37,7 +37,11 @@ const jobSchema:Schema  = new Schema<IJob &Document>({
         type:Schema.Types.ObjectId,
         ref:'Employers'
     },
-    location:jobAddressSchema
+    location:jobAddressSchema,
+    verification:{
+        type:String,
+        default:'pending'
+    }
 })
 
 

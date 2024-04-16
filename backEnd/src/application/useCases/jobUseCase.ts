@@ -161,4 +161,43 @@ export class JobUseCase{
     }
 
     
+    async findJobforVerfication(page:number,limit:number){
+        try {
+            
+            if( isNaN(page)) page =1
+            if(isNaN(limit)) limit =10;
+            const jobs = await this._jobRepository.findJobsForVerification(page,limit);
+            const jobCount = await this._jobRepository.findJobscount();
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:{jobs:jobs,jobCount}
+            }
+
+        } catch (error) {
+            return{
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
+    async verifyJob(jobId:string){
+        try {
+            
+            const job = await this._jobRepository.verifyJob(jobId);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:job
+            }
+        } catch (error) {
+            return{
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
 }

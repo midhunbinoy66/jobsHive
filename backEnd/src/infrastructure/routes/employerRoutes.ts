@@ -16,4 +16,5 @@ employerRouter.get('/jobs/:employerId',(req,res)=>jController.getAllEmployerJob(
 employerRouter.get('/delete-job/:jobId',(req,res)=>jController.deleteEmployerJob(req,res));
 employerRouter.get('/applications/:jobId',(req,res)=>appController.findEmployerJobApplcations(req,res));
 employerRouter.patch('/application/:applicationId',(req,res)=>appController.updateEmployerJobApplication(req,res));
+employerRouter.post('/following',(req,res)=>eContorller.getFollowingEmployers(req,res));
 export default employerRouter;

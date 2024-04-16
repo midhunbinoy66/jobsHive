@@ -17,6 +17,7 @@ export class JobRepository implements IJobRepo{
    async findJobs(title:string,location:string): Promise<IJob[] | null> {
     const query = {
         title: new RegExp(title, 'i'), // 'i' flag for case-insensitive matching
+        isActive:true,
         $or: [
             { 'location.country': new RegExp(location, 'i') },
             { 'location.state': new RegExp(location, 'i') },
@@ -70,4 +71,32 @@ export class JobRepository implements IJobRepo{
         )
     }
 
+    async findJobsForVerification(page:number,limit:number): Promise<IJob[] | null> {
+        const skip = (page - 1) * limit; // Number of items to skip
+
+        return await jobModel.find(
+            {verification:'pending',isActive:true}
+        )  
+        .skip(skip)
+        .limit(limit)
+        .exec();
+    }
+
+    async verifyJob(jobId: string): Promise<IJob | null> {
+        return await jobModel.findByIdAndUpdate(
+            {_id:jobId},
+            {
+                $set:{
+                    verification:'verified'
+                }
+            },
+            {new:true}
+        )
+    }
+
+   async findJobscount(): Promise<number> {
+        return await jobModel.find(
+            {verification:'pending'}
+        ).countDocuments();
+    }
 }

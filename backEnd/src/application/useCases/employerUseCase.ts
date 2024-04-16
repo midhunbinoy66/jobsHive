@@ -175,4 +175,22 @@ export class EmployeruseCase{
         }
     }
 
+    async getFollowingEmployers(employerIds:string[]){
+        try {
+            const employers = await this._employerRepository.findFollowingEmployers(employerIds);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:employers,
+            }
+            
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
 }

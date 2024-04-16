@@ -20,11 +20,11 @@ const employerSchema:Schema = new Schema<IEmployer & Document>({
         type:Boolean,
         default:false
     },
+    address:employerAddressSchema
 
 })
 
 employerSchema.add(emailSchema);
-employerSchema.add(employerAddressSchema);
 employerSchema.add(mobileSchema);
 
 export const employerModel:Model<IEmployer & Document> = mongoose.model<IEmployer & Document>('Employers',employerSchema)

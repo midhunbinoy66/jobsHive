@@ -55,4 +55,18 @@ export class JobController{
         const apiRes = await this._jobUseCase.updateEmployerJob(jobId,jobData);
         res.status(apiRes.status).json(apiRes);
     }
+
+    async getJobsforVerification(req:Request,res:Response){
+        const page = parseInt(req.query.page as string);
+        const limit = parseInt(req.query.limit as string);
+        const apiRes  = await this._jobUseCase.findJobforVerfication(page,limit);
+        res.status(apiRes.status).json(apiRes);
+    }
+
+    async verifyJob(req:Request,res:Response){
+        const jobId = req.params.jobId;
+        const apiRes = await this._jobUseCase.verifyJob(jobId);
+        res.status(apiRes.status).json(apiRes);
+        
+    }
 }

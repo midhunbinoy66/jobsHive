@@ -64,12 +64,14 @@
             <input type="text" name="duration" id="duration" formControlName="duration"
                    placeholder="Duration of the plan"
                    class="p-2 ring-2 focus:ring-2 focus:ring-gray-500 focus:outline-none focus:border-transparent w-full">
+            <app-common-validation [generalControl]="form.get('duration')" [isSubmitted]="isSubmittd"></app-common-validation>
         </div>
 
         <div class="mb-4">
             <label for="price" class="block mb-1">Price</label>
             <input type="number" name="price" id="price" formControlName="price" placeholder="Price of the plan"
                    class="p-2 ring-2 focus:ring-2 focus:ring-gray-500 focus:outline-none focus:border-transparent w-full">
+            <div *ngIf="form.get('price')?.invalid" style="color: red;">Field is required</div>
         </div>
 
         <div formArrayName="features">

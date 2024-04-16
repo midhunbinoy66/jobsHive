@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { IApiRes } from '../models/common';
 import { Observable } from 'rxjs';
 import { IUsersAndCount } from '../models/users';
-import { IAPiEmployerRes, IEmployerUpdate, IEmployersAndCount } from '../models/employer';
+import { IAPiEmployerRes, IApiEmployersRes, IEmployerUpdate, IEmployersAndCount } from '../models/employer';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,10 @@ export class EmployerService {
 
   updateUserDetails(userId:string,userData:IEmployerUpdate):Observable<IAPiEmployerRes>{
     return this.http.put<IAPiEmployerRes>(`employer/update/${userId}`,userData);
+  }
+
+  getFollowingEmployers(employerIds:string[]):Observable<IApiEmployersRes>{
+    return this.http.post<IApiEmployersRes>(`employer/following`,employerIds);
   }
 
 }

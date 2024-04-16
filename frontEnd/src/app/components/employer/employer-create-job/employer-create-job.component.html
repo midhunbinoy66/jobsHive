@@ -1,21 +1,24 @@
 <app-employer-nav></app-employer-nav>
 
-<div class="flex flex-wrap">
+<div class="flex flex-wrap bg-cover bg-center"  style="background-image: url('../../../../assets/cool-background.png')">
     <app-employer-sidebar  class=" min-h-screen w-full md:w-64 "> </app-employer-sidebar>
-    <section class="bg-gray-100 py-10 flex-1" >
+    <section class="bg-transparent py-10 flex-1" >
         <div class="container mx-auto px-4">
-            <form [formGroup]="jobForm" (submit)="onSubmit()" class="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form [formGroup]="jobForm" (submit)="onSubmit()" class="max-w-lg mx-auto bg-transparent shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class="mb-4">
                     <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Job title</label>
                     <input type="text" name="title" placeholder="Title" formControlName="title" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <app-common-validation [generalControl]="jobForm.get('title')" [isSubmitted]="isSubmitted"></app-common-validation>         
                 </div>
                 <div class="mb-4">
                     <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Job Description</label>
                     <input type="text" name="description" placeholder="Description" formControlName="description" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <app-common-validation [generalControl]="jobForm.get('description')" [isSubmitted]="isSubmitted"></app-common-validation>         
                 </div>
                 <div class="mb-4">
                     <label for="salary" class="block text-gray-700 text-sm font-bold mb-2">Job Salary</label>
                     <input type="number" name="salary" placeholder="Salary" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="salary">
+                    <app-salary-validation [isSubmitted]="isSubmitted" [salaryContorl]="jobForm.get('salary')"></app-salary-validation>
                 </div>
                 <!-- Company Address -->
                 <div class="mb-6">
@@ -24,20 +27,28 @@
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label for="city" class="block text-gray-700 text-sm font-bold mb-2">City</label>
                             <input type="text" name="city" placeholder="City" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="city">
+                            <app-city-validation [cityControl]="jobForm.get('city')"
+                            [isSubmitted]="isSubmitted"></app-city-validation>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
                             <label for="district" class="block text-gray-700 text-sm font-bold mb-2">District</label>
                             <input type="text" name="district" placeholder="District" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="district">
+                            <app-district-validation [districtControl]="jobForm.get('district')"
+                            [isSubmitted]="isSubmitted"></app-district-validation>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full md:w-1/3 px-3">
                             <label for="state" class="block text-gray-700 text-sm font-bold mb-2">State</label>
                             <input type="text" name="state" placeholder="State" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="state">
+                            <app-state-validation [stateControl]="jobForm.get('state')"
+                            [isSubmitted]="isSubmitted"></app-state-validation>
                         </div>
                         <div class="w-full md:w-1/3 px-3">
                             <label for="country" class="block text-gray-700 text-sm font-bold mb-2">Country</label>
                             <input type="text" name="country" placeholder="Country" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="country">
+                            <app-country-validation [countryControl]="jobForm.get('country')"
+                            [isSubmitted]="isSubmitted"></app-country-validation>
                         </div>
                         <div class="w-full md:w-1/3 px-3">
                             <label for="landmark" class="block text-gray-700 text-sm font-bold mb-2">Landmark</label>
@@ -47,11 +58,13 @@
                     <div class="mb-4">
                         <label for="zip" class="block text-gray-700 text-sm font-bold mb-2">Zip</label>
                         <input type="number" name="zip" placeholder="Zip" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="zip">
+                        <app-zip-validation [zipControl]="jobForm.get('zip')"
+                        [isSubmitted]="isSubmitted"></app-zip-validation>
                     </div>
                 </div>
                 <!-- Requirements -->
                 <div class="mb-6">
-                    <div formArrayName="requirements">
+                    <div formArrayName="requierments">
                         <div *ngFor="let requirement of requiermentForms.controls; let i = index" class="flex items-center">
                             <input type="text" [formControlName]="i" placeholder="Requirement" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2">
                             <button type="button" (click)="removeRequierment(i)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Remove</button>
@@ -71,7 +84,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="typeOfJob" class="block text-gray-700 text-sm font-bold mb-2">Type of job</label>
-                    <select name="typeOfJob" id="typeOfJob" formControlName="typeOfJob" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <select name="typeOfJob" id="typeOfJob" formControlName="typeOfJob" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required="true">
                         <option value="fullTime">Full Time</option>
                         <option value="partTime">Part Time</option>
                     </select>

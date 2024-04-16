@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { validateByTrimming } from 'src/app/helpers/validations';
 import { IJobAddress } from 'src/app/models/common';
@@ -24,7 +25,8 @@ export class EmployerCreateJobComponent implements OnInit {
   constructor(
     private readonly formBuilder:FormBuilder,
     private readonly store:Store,
-    private readonly jobService:JobService
+    private readonly jobService:JobService,
+    private readonly router:Router
   ){}
 
 
@@ -78,35 +80,38 @@ export class EmployerCreateJobComponent implements OnInit {
 
   onSubmit(){
     this.isSubmitted =true;
-    console.log('submitted');
-    const formData= this.jobForm.getRawValue();
-    
-    const jobAddress:IJobAddress  = {
-      city:formData.city,
-      district:formData.district,
-      state:formData.state,
-      country:formData.country,
-      zip:formData.zip
-    }
-
-    const jobData:IJobReq ={
-      title:formData.title,
-      description:formData.description,
-      location:jobAddress,
-      requierments:formData.requierments,
-      responsibilities:formData.responsibilities,
-      salary:formData.salary,
-      type:formData.typeOfJob,
-      employer:this.employer!._id
-    }
- 
-    console.log(jobData)
-
-    this.jobService.createJob(jobData).subscribe({
-      next:(res)=>{
-        void Swal.fire('Success','Job Has been created','success');
-
+    if(!this.jobForm.invalid){
+      console.log('submitted');
+      const formData= this.jobForm.getRawValue();
+      
+      const jobAddress:IJobAddress  = {
+        city:formData.city,
+        district:formData.district,
+        state:formData.state,
+        country:formData.country,
+        zip:formData.zip
       }
-    })
+  
+      const jobData:IJobReq ={
+        title:formData.title,
+        description:formData.description,
+        location:jobAddress,
+        requierments:formData.requierments,
+        responsibilities:formData.responsibilities,
+        salary:formData.salary,
+        type:formData.typeOfJob,
+        employer:this.employer!._id
+      }
+   
+      console.log(jobData)
+  
+      this.jobService.createJob(jobData).subscribe({
+        next:(res)=>{
+          void Swal.fire('Success','Job Has been created','success');
+          this.router.navigate(['/employer/jobs'])
+        }
+      })
+    }
+
   }
 }

@@ -10,4 +10,5 @@ export interface IEmployerRepo{
     findAllUsers(page:number,limit:number,searchQuery:string):Promise<IEmployerRes[] | null>
     findUsersCount(searchQuery:string):Promise<number>
     blockAndUblockUser(userId:string):Promise<void>
+    findFollowingEmployers(employerIds:string[]):Promise<IEmployer[]|null>
 }

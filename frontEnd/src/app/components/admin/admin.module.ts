@@ -14,6 +14,9 @@ import { AdminEditPlanComponent } from './admin-edit-plan/admin-edit-plan.compon
 import { CommonValidationComponent } from '../common/validation/common-validation/common-validation.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { AdminEmployerMangementComponent } from './admin-employer-mangement/admin-employer-mangement.component';
+import { AdminJobManagementComponent } from './admin-job-management/admin-job-management.component';
+import { EmailValidationComponent } from '../common/validation/email-validation/email-validation.component';
+import { PasswordValidationComponent } from '../common/validation/password-validation/password-validation.component';
 
 
 @NgModule({
@@ -26,7 +29,8 @@ import { AdminEmployerMangementComponent } from './admin-employer-mangement/admi
     AdminCreatePlanComponent,
     AdminEditPlanComponent,
     AdminNavComponent,
-    AdminEmployerMangementComponent
+    AdminEmployerMangementComponent,
+    AdminJobManagementComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +38,9 @@ import { AdminEmployerMangementComponent } from './admin-employer-mangement/admi
     ReactiveFormsModule,
     TableFilterComponent,
     FormsModule,
-    CommonValidationComponent
+    CommonValidationComponent,
+    EmailValidationComponent,
+    PasswordValidationComponent
   ]
 })
 export class AdminModule { }

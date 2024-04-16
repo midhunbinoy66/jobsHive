@@ -1,44 +1,57 @@
 <app-employer-nav></app-employer-nav>
-<div class="flex flex-wrap">
+<div class="flex flex-wrap bg-cover bg-center" style="background-image: url('../../../../assets/cool-background.png')">
     <app-employer-sidebar class="w-full md:w-64 "></app-employer-sidebar>
     <section class="flex-1">
         <div class="container mx-auto px-4 py-8" *ngIf="jobForm">
-            <div class="bg-white shadow-md rounded-lg p-6">
+            <div class="bg-transparent shadow-md rounded-lg p-6">
                 <h1 class="text-2xl font-bold mb-6 text-center">Edit Job</h1>
                 <form [formGroup]="jobForm" (submit)="onSubmit()">
                     <div class="mb-3">
                         <label for="title" class="form-label">Job Title</label>
                         <input type="text" name="title" placeholder="Title" formControlName="title" class="form-control">
+                        <app-common-validation [generalControl]="jobForm.get('title')" [isSubmitted]="isSubmitted"></app-common-validation>         
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Job Description</label>
                         <textarea name="description" rows="4" placeholder="Description" formControlName="description" class="form-control"></textarea>
+                        <app-common-validation [generalControl]="jobForm.get('description')" [isSubmitted]="isSubmitted"></app-common-validation>         
                     </div>
                     <div class="mb-3">
                         <label for="salary" class="form-label">Job Salary</label>
                         <input type="number" name="salary" placeholder="Salary" class="form-control" formControlName="salary">
+                        
                     </div>
                     <h3 class="text-lg font-semibold mb-3">Company Address</h3>
                     <div class="row g-3">
                         <div class="col-md-6 mb-3">
                             <label for="city" class="form-label">City</label>
                             <input type="text" name="city" placeholder="City" class="form-control" formControlName="city">
+                            <app-city-validation [cityControl]="jobForm.get('city')"
+                            [isSubmitted]="isSubmitted"></app-city-validation>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="district" class="form-label">District</label>
                             <input type="text" name="district" placeholder="District" class="form-control" formControlName="district">
+                            <app-district-validation [districtControl]="jobForm.get('district')"
+                                [isSubmitted]="isSubmitted"></app-district-validation>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="state" class="form-label">State</label>
                             <input type="text" name="state" placeholder="State" class="form-control" formControlName="state">
+                            <app-state-validation [stateControl]="jobForm.get('state')"
+                            [isSubmitted]="isSubmitted"></app-state-validation>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="country" class="form-label">Country</label>
                             <input type="text" name="country" placeholder="Country" class="form-control" formControlName="country">
+                            <app-country-validation [countryControl]="jobForm.get('country')"
+                            [isSubmitted]="isSubmitted"></app-country-validation>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="zip" class="form-label">Zip</label>
                             <input type="number" name="zip" placeholder="Zip" class="form-control" formControlName="zip">
+                            <app-zip-validation [zipControl]="jobForm.get('zip')"
+                            [isSubmitted]="isSubmitted"></app-zip-validation>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -63,7 +76,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="typeOfJob" class="form-label">Type of Job</label>
-                        <select name="typeOfJob" id="typeOfJob" formControlName="typeOfJob" class="form-select">
+                        <select name="typeOfJob" id="typeOfJob" formControlName="typeOfJob" class="form-select" required="true">
                             <option value="fullTime">Full Time</option>
                             <option value="partTime">Part Time</option>
                         </select>

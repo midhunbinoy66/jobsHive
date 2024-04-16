@@ -5,9 +5,9 @@
         <div>
             <h1 class="text-xl font-bold mb-4">Job Applications</h1>
             <div *ngFor="let application of applications" class="shadow-lg bg-gray-200 flex flex-col space-y-4 m-2 w-full md:w-1/2 p-4 rounded-lg">
-                <h2 class="text-lg font-semibold">{{ application._id }}</h2>
-                <p class="text-sm text-gray-600">{{ application.appliedTime | date }}</p>
-                <p class="text-base">{{ application.status }}</p>
+                <h2 class="text-lg font-semibold">ApplicationId: {{ application._id | slice:0:6 }}</h2>
+                <p class="text-sm text-gray-600">Date: {{ application.appliedTime | date }}</p>
+                <p class="text-sm text-gray-600">Application Status: {{ application.status }}</p>
                 <div class="flex space-x-4 mt-4">
                     <button type="button" class="p-2 bg-teal-500 rounded-lg text-white font-semibold hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50" (click)="viewResume(application.userId)">View Resume</button>
                     <button type="button" class="p-2 bg-red-500 rounded-lg text-white font-semibold hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50" (click)="updateJobStatus(application.userId, application._id)">Update Status</button>

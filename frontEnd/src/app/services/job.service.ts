@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiJobRes, IApiJobsRes, IJobReq, IJobRes } from '../models/jobs';
+import { IApiJobRes, IApiJobsRes, IJobReq, IJobRes, IJobssAndCount } from '../models/jobs';
 import { IApiApplicationRes, IApiApplicationsRes } from '../models/application';
 import { IApiUserRes, IUserUpdate } from '../models/users';
+import { Observable } from 'rxjs';
+import { IApiRes } from '../models/common';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +55,13 @@ export class JobService {
 
   updateJob(jobId:string,jobData:IJobReq){
     return this.http.post<IApiJobRes>(`employer/update-job/${jobId}`,jobData);
+  }
+
+  findJobsForVerification(page: number = 1, limit: number = 10):Observable<IApiRes<IJobssAndCount |null >>{
+    return this.http.get<IApiRes<IJobssAndCount |null >>(`admin/jobs?page=${page}&limit=${limit}`);
+  }
+
+  verifyJob(jobId:string):Observable<IApiJobRes>{
+    return this.http.patch<IApiJobRes>(`admin/job-verify/${jobId}`,{});
   }
 }

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { validateByTrimming } from 'src/app/helpers/validations';
 import { PlanService } from 'src/app/services/plan.service';
-import { nameValidators } from 'src/app/shared/validators';
+import { commonValidators, nameValidators } from 'src/app/shared/validators';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,8 +25,8 @@ export class AdminCreatePlanComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      name:['',[validateByTrimming(nameValidators)]],
-      description:['',[validateByTrimming(nameValidators)]],
+      name:['',[validateByTrimming(commonValidators)]],
+      description:['',[validateByTrimming(commonValidators)]],
       price:['',Validators.required],
       features:this.fb.array([this.fb.control('')]),
       duration:['',Validators.required]

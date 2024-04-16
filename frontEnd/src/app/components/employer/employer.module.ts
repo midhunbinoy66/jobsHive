@@ -28,6 +28,7 @@ import { MobileValidationComponent } from '../common/validation/mobile-validatio
 import { DistrictValidationComponent } from '../common/validation/district-validation/district-validation.component';
 import { CountryValidationComponent } from '../common/validation/country-validation/country-validation.component';
 import { ZipValidationComponent } from '../common/validation/zip-validation/zip-validation.component';
+import { CommonValidationComponent } from '../common/validation/common-validation/common-validation.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ZipValidationComponent } from '../common/validation/zip-validation/zip-
     DistrictValidationComponent,
     CountryValidationComponent,
     ZipValidationComponent,
-    
+    CommonValidationComponent,
+    SalaryValidationComponent
     
   ]
 })

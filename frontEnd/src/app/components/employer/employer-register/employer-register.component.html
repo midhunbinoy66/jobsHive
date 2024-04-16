@@ -12,6 +12,7 @@
 
                 <div class="form-outline mb-3 ">
                   <input type="text"  formControlName="name" id="form3Example1cg" class="form-control form-control-lg" placeholder="Enter Name" />
+                  <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="false"></app-name-validation> 
                 </div>
 
                 <div class="form-outline mb-3 ">

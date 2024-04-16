@@ -139,4 +139,8 @@ get f():Record<string,AbstractControl>{
           console.log('error',this.form.errors);
         }
       }
+
+      resetValidation(){
+        this.isSubmitted=false
+      }
 }

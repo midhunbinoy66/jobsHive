@@ -25,6 +25,8 @@ import { UpdateJobStatusModalComponent } from './components/common/update-job-st
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { JobVerifyModalComponent } from './components/common/job-verify-modal/job-verify-modal.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
@@ -34,6 +36,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     ApplyModalComponent,
     JobDeleteModalComponent,
     UpdateJobStatusModalComponent,
+    JobVerifyModalComponent,
 
 
     
@@ -54,7 +57,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     MatSelectModule,
     FormsModule,
     EffectsModule.forRoot([UserEffects]),
-    MatIconModule
+    MatIconModule,
+    NgxPaginationModule
 
   ],
   providers: [

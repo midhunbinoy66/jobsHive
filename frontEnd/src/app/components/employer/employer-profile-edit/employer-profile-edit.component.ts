@@ -84,7 +84,7 @@ export class EmployerProfileEditComponent implements OnInit {
       const user: IEmployerUpdate={
         name:userData.name,
         mobile:userData.mobile,
-        address
+        address:address
       }
 
       this.employerService.updateUserDetails(this.employerId,user).subscribe({

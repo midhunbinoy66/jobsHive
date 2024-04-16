@@ -30,12 +30,16 @@ export class EmployerJobApplicantsComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.subscribe(params=>{
       this.jobId = params['jobId'];
-      this.applicationService.findApplicationByJobId(this.jobId).subscribe({
-        next:(res)=>{
-          this.applications = res.data
-          console.log(this.applications);
-        }
-      })
+      this.initialize();
+    })
+  }
+
+  initialize(){
+    this.applicationService.findApplicationByJobId(this.jobId).subscribe({
+      next:(res)=>{
+        this.applications = res.data
+        console.log(this.applications);
+      }
     })
   }
 
@@ -65,6 +69,7 @@ export class EmployerJobApplicantsComponent implements OnInit{
           const status  ={status:result};
           this.applicationService.updateApplication(applicationId,status).subscribe({
             next:(res)=>{
+              this.initialize();
               void Swal.fire('Success','Job Status updated','success');
             }
           })

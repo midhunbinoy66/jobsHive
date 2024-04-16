@@ -1,5 +1,5 @@
 <app-employer-nav></app-employer-nav>
-<div class="flex flex-wrap">
+<div class="flex flex-wrap bg-cover bg-center" style="background-image: url('../../../../assets/cool-background.png')">
 
     <app-employer-sidebar></app-employer-sidebar>
     <div class="flex-1 " *ngIf="profileForm">
@@ -7,7 +7,7 @@
         <section class="flex flex-col lg:flex-row">
             <!-- Form -->
             <form [formGroup]="profileForm" (ngSubmit)="onsubmit()" class="lg:w-3/4 flex justify-center items-center p-4">
-                <div class="container max-w-lg bg-white rounded-lg shadow-md p-8">
+                <div class="container max-w-lg bg-transparent rounded-lg shadow-md p-8">
                     <h1 class="text-3xl font-bold mb-8 text-center">Edit Employer Form</h1>
                     
                     <!-- User Name -->

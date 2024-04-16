@@ -33,13 +33,23 @@ export class EmployerJobsComponent implements OnInit{
       this.employer = res;
     })
     if(this.employer){
-      this.jobService.findEmployerJobs(this.employer._id).subscribe({
-        next:(res)=>{
-          this.employerJobs = res.data
-          console.log(this.employerJobs);
-        }
-      })
+      // this.jobService.findEmployerJobs(this.employer._id).subscribe({
+      //   next:(res)=>{
+      //     this.employerJobs = res.data
+      //     console.log(this.employerJobs);
+      //   }
+      // })
+      this.initialize();
     }
+  }
+
+  initialize(){
+    this.jobService.findEmployerJobs(this.employer!._id).subscribe({
+      next:(res)=>{
+        this.employerJobs = res.data
+        console.log(this.employerJobs);
+      }
+    })
   }
 
   onDeleteJob(jobId:string){
@@ -55,6 +65,7 @@ export class EmployerJobsComponent implements OnInit{
           next:(res)=>{
             void Swal.fire('Success','Job Deleted Successfully','success');
             this.isDeleted = true;
+            this.initialize();
           }
         })
       }

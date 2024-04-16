@@ -1,5 +1,5 @@
 import express from 'express';
-import { aController, pController } from '../utils/controllers';
+import { aController, jController, pController } from '../utils/controllers';
 
 const adminRouter = express.Router();
 
@@ -11,4 +11,6 @@ adminRouter.patch('/delete-plan/:planId',(req,res)=>pController.deletePlan(req,r
 adminRouter.put('/update-plan/:planId',(req,res)=>pController.updatPlan(req,res));
 adminRouter.get('/employers',(req,res)=>aController.getAllEmployers(req,res));
 adminRouter.patch( '/employers/block/:userId',(req,res)=>aController.blockEmployers(req,res))
+adminRouter.get('/jobs',(req,res)=>jController.getJobsforVerification(req,res));
+adminRouter.patch('/job-verify/:jobId',(req,res)=>jController.verifyJob(req,res));
 export default adminRouter

@@ -117,12 +117,15 @@ export class EmployerJobEditComponent implements OnInit{
   }
 
   onSubmit(){
-    const formData = this.jobForm.getRawValue();
-    this.jobService.updateJob(this.jobData!._id,formData).subscribe({
-      next:(res)=>{
-        void Swal.fire('Success','Job Edited Successfully','success');
-        this.router.navigate(['/employer/jobs'])
-      }
-    })
+    this.isSubmitted = true;
+    if(!this.jobForm.invalid){
+      const formData = this.jobForm.getRawValue();
+      this.jobService.updateJob(this.jobData!._id,formData).subscribe({
+        next:(res)=>{
+          void Swal.fire('Success','Job Edited Successfully','success');
+          this.router.navigate(['/employer/jobs'])
+        }
+      })
+    }
   }
 }

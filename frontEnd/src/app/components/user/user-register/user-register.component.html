@@ -11,17 +11,18 @@
               <form [formGroup]="form" (submit)="onSubmit()">
 
                 <div class="form-outline mb-3 ">
-                  <input type="text"  formControlName="name" id="form3Example1cg" class="form-control form-control-lg" placeholder="Enter Name" />
+                  <input type="text"  formControlName="name" id="form3Example1cg" class="form-control form-control-lg" placeholder="Enter Name"   (input)="resetValidation()" 
+                  (keyup)="resetValidation()"/>
                   <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-name-validation>
                 </div>
 
                 <div class="form-outline mb-3 ">
-                  <input type="email"  formControlName="email" id="form3Example3cg" class="form-control form-control-lg" placeholder="Enter Email" />
+                  <input type="email"  formControlName="email" id="form3Example3cg" class="form-control form-control-lg" placeholder="Enter Email" (input)="resetValidation()"   (keyup)="resetValidation()"   />
                   <app-email-validation [emailControl]="form.get('email')" [isSubmitted]="isSubmitted"></app-email-validation>
                 </div>
 
                 <div *ngIf="!showOtpField" class="form-outline mb-3 ">
-                    <input type="password" formControlName="password" id="form3Example4cg" class="form-control form-control-lg" placeholder="Enter Password" />
+                    <input type="password" formControlName="password" id="form3Example4cg" class="form-control form-control-lg" placeholder="Enter Password" (input)="resetValidation()"   (keyup)="resetValidation()"  />
                     <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="isSubmitted"></app-password-validation>
                 </div>
                   

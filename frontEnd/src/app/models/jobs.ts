@@ -25,7 +25,13 @@ export interface IJobRes{
     type:string
     requierments:string[]
     responsibilities:string[]
+    verification:string
 }
 
 
-export interface IJobReq extends Omit<IJobRes ,'_id'|'isActive'|'tags'>{}
+
+export interface IJobssAndCount{
+  jobs:IJobRes[]
+  jobsCount:number
+}
+export interface IJobReq extends Omit<IJobRes ,'_id'|'isActive'|'tags'|'verification'>{}
