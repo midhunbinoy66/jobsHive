@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { IUserRes } from 'src/app/models/users';
+import { RazorpayService } from 'src/app/services/razorpay.service';
 import { selectUserState } from 'src/app/states/user/user.selector';
 
 @Component({
@@ -12,7 +13,8 @@ export class UserProfileComponent implements OnInit{
   user:IUserRes|null = null;
   userDetails$ = this.store.pipe(select(selectUserState));
   constructor(
-    private readonly store:Store
+    private readonly store:Store,
+    private readonly razorpayService:RazorpayService
   ){}
 
   ngOnInit(): void {

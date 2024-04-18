@@ -1,4 +1,4 @@
-import { IUserAddress } from "./common"
+import { IUserAddress, IUserSubscription, IWalletHistory } from "./common"
 
 export interface IUser {
     _id: string
@@ -11,5 +11,8 @@ export interface IUser {
     address?: IUserAddress,
     isGoogleAuth: boolean,
     savedJobs?:string[],
-    following?:string[]
+    following?:string[],
+    wallet:number
+    walletHistory:IWalletHistory[]
+    subscription?:IUserSubscription
 }

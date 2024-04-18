@@ -1,6 +1,7 @@
 import { IJob } from "../../../entities/job";
 import { IResume } from "../../../entities/resume";
 import { IUser } from "../../../entities/user";
+import { IWalletHistoryAndCount } from "../types/commont";
 import { IResumeReq } from "../types/resume";
 import { IUserAuth, IUserRes, IUserSocialAuth, IUserUpdate } from "../types/user";
 
@@ -20,4 +21,7 @@ export interface IuserRepo{
     blockAndUblockUser(userId:string):Promise<void>
     followEmployer(userId:string,employerId:string):Promise<IUserRes | null>
     unFollowEmplopyer(userId:string,employerId:string):Promise<IUserRes | null>
+    updateWallet(userId:string,amount:number,message:string):Promise<IUserRes | null>
+    getWalletHistory(userId:string,page:number,limit:number):Promise<IWalletHistoryAndCount | null>
+
 }

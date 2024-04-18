@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { IApiUserRes, IApiUsersRes, IUserRes, IUserUpdate, IUsersAndCount } from '../models/users';
 import { Observable } from 'rxjs';
 import { IApiResumeRes, IResumeUpdate } from '../models/resume';
-import { IApiRes } from '../models/common';
+import { IApiRes, IWalletHistoryAndCount } from '../models/common';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +53,9 @@ export class UserService {
 
   unfollowEmployer(userId: string, employerId: string): Observable<IApiUserRes> {
     return this.http.patch<IApiUserRes>(`user/unfollow/${userId}`, { employerId });
+  }
+
+  getWalletHistory(userId:string,page:number,limit:number):Observable<IApiRes<IWalletHistoryAndCount | null>>{
+    return this.http.get<IApiRes<IWalletHistoryAndCount|null>>(`user/wallet-history/${userId}?page=${page}&limt=${limit}`)
   }
 }

@@ -4,6 +4,7 @@ import { userAddressSchema } from "./subschema/addressSchema";
 import { emailSchema } from "./base/emailSchema";
 import { mobileSchema } from "./base/mobileSchema";
 import { userSubscriptionSchema } from "./subschema/subscriptionSchema";
+import { walletSchema } from "./base/walletSchema";
 
 export const userSchema  =  new Schema<IUser & Document>({
     name:{
@@ -41,7 +42,8 @@ export const userSchema  =  new Schema<IUser & Document>({
 
 userSchema.add(emailSchema);
 userSchema.add(mobileSchema);
-userSchema.add(userSubscriptionSchema)
+userSchema.add(userSubscriptionSchema);
+userSchema.add(walletSchema);
 
 
 const userModel:Model<IUser & Document>  = mongoose.model<IUser & Document>('Users',userSchema);

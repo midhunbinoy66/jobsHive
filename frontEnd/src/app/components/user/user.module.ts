@@ -32,6 +32,9 @@ import { StateValidationComponent } from '../common/validation/state-validation/
 import { ZipValidationComponent } from '../common/validation/zip-validation/zip-validation.component';
 import {  GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { UserFollowingComponent } from './user-following/user-following.component';
+import { UserPaymentComponent } from './user-payment/user-payment.component';
+import { UserWalletComponent } from './user-wallet/user-wallet.component';
+import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,9 @@ import { UserFollowingComponent } from './user-following/user-following.componen
     UserAppliedJobsComponent,
     UserResumeComponent,
     UserSubscriptionComponent,
-    UserFollowingComponent
+    UserFollowingComponent,
+    UserPaymentComponent,
+    UserWalletComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +71,8 @@ import { UserFollowingComponent } from './user-following/user-following.componen
     CountryValidationComponent,
     DistrictValidationComponent,
     StateValidationComponent,
-    ZipValidationComponent
+    ZipValidationComponent,
+    WalletHistoryComponent
   ],
   providers: [
     {

@@ -1,4 +1,4 @@
-import { IApiRes, ISubscription, IUserAddress } from "./common"
+import { IApiRes, ISubscription, IUserAddress, IWalletHistory } from "./common"
 
 export interface IUserRes {
     _id: string
@@ -8,11 +8,12 @@ export interface IUserRes {
     mobile?: number
     isBlocked: boolean
     profilePic?: string
-    wallet?: string
+    wallet?: number
     address?:IUserAddress
     savedJobs?:string[]
     subscription?:ISubscription
     following?:string[]
+    walletHistory?:IWalletHistory[]| []
   }
   
 

@@ -7,27 +7,34 @@
 
                 <div class="flex flex-wrap justify-center">
                     <div *ngFor="let plan of allPlans" class="max-w-md w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mx-4 mb-8">
-                      <div class="bg-gradient-to-br from-blue-600 to-purple-700 shadow-lg rounded-lg overflow-hidden h-full transform transition-transform duration-300 hover:scale-105">
+                      <div class="bg-gradient-to-br from-blue-300 to-blue-400 shadow-lg rounded-lg overflow-hidden h-full transform transition-transform duration-300 hover:scale-105">
                         <div class="px-6 py-4 h-full">
                           <div class="font-bold text-xl mb-2">{{ plan.name }}</div>
-                          <p class="text-gray-100 text-base">{{ plan.description }}</p>
-                          <p class="text-gray-100 text-base mt-2">Duration: {{ plan.duration }}</p>
-                          <p class="text-gray-100 text-base">Price: ${{ plan.price }}</p>
+                          <p class="text-black text-base">{{ plan.description }}</p>
+                          <p class="text-black text-base mt-2">Duration: {{ plan.duration }}</p>
+                          <p class="text-black text-base">Price: ${{ plan.price }}</p>
                           <ul class="mt-4">
                             <li class="flex items-center" *ngFor="let feature of plan.features">
-                              <span class="text-gray-400">{{ feature }}</span>
+                              <span class="text-black">{{ feature }}</span>
                             </li>
                           </ul>
+                          <div class="my-1 flex justify-end">
+                            <button class="p-1 bg-slate-500 ring-2 rounded-lg" (click)="goToDetails(plan._id)" >Add subscription</button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                   
-
-    
-
+                  <div *ngIf="user?.subscription !== undefined" else #noPlan>
+                      <h1>This is user subscription</h1>
+                  </div>
+                  <div>
+                    <ng-template #noPlan>
+                      <h1>No plan for this user</h1>
+                    </ng-template>
+                  </div>
              </div>
         </div>
     </section>
-
 </div>

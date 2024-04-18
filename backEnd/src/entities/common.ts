@@ -35,3 +35,9 @@ export interface IEmployerAddress extends IUserAddress{
 }
 
 export interface IJobAddress extends IUserAddress{}
+
+export interface IWalletHistory {
+    amount:number
+    message:string
+    date:Date
+}

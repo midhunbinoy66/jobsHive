@@ -18,6 +18,17 @@ export interface ISubscription{
 }
 
 
+export interface IWalletHistory{
+    amount:number,
+    message:string
+    date:Date
+}
+
+export interface IWalletHistoryAndCount{
+    walletHistory:IWalletHistory[]
+    count:number
+}
+
 
 
 export interface IEmployerAddress extends IUserAddress{
@@ -26,7 +37,7 @@ export interface IEmployerAddress extends IUserAddress{
 
 export interface IJobAddress extends IUserAddress{}
 
-export type AllResTypes = IUserRes | IEmployerRes | IEmployerRes[]|IUserRes[] | IUsersAndCount | null | IJobssAndCount
+export type AllResTypes = IUserRes | IEmployerRes | IEmployerRes[]|IUserRes[] | IUsersAndCount | null | IJobssAndCount | IWalletHistoryAndCount
 
 export interface IApiRes<T extends AllResTypes> {
     status: number
@@ -51,3 +62,8 @@ export interface IUserWorkExp{
     workStartDate:Date
     workEndDate:Date
 }
+
+export interface IRazorpayRes {
+    razorpay_payment_id: string
+  }
+  

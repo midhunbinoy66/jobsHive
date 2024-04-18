@@ -6,7 +6,7 @@ import { IEmployerRepo } from "../interfaces/repos/employerRepo";
 import { IJobRepo } from "../interfaces/repos/jobRepo";
 import { ITempUserRepo } from "../interfaces/repos/tempUserRepo";
 import { IuserRepo } from "../interfaces/repos/userRepo";
-import { IApiRes } from "../interfaces/types/commont";
+import { IApiRes, IWalletHistoryAndCount } from "../interfaces/types/commont";
 import { IApiResumeRes, IResumeReq } from "../interfaces/types/resume";
 import { ITempUserRes, ITempUsrReq } from "../interfaces/types/tempUser";
 import { IApiUserAuthRes, IApiUserRes, IUserAndCount, IUserAuth, IUserSocialAuth, IUserUpdate } from "../interfaces/types/user";
@@ -348,5 +348,68 @@ export class UserUseCase{
             }
         }
 
+    }
+
+
+    async addToWallet(userId:string,amount:number):Promise<IApiUserRes>{
+        try {
+            if(typeof amount !== 'number'){
+                return {
+                    status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                    message:"Internal Sever Error",
+                    data:null
+                }
+            }else{
+                const user = await this._userRespository.updateWallet(userId,amount,'Add to Wallet');
+                if (user !== null){
+                    return{
+                        status:STATUS_CODES.OK,
+                        message:'Success',
+                        data:user
+                    }
+                }else{
+                    return{
+                        status:STATUS_CODES.BAD_REQUEST,
+                        message:'Bad Request',
+                        data:null
+                    }
+                } 
+
+            }
+            
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
+                data:null
+            }
+        }
+    }
+
+
+    async getWalletHistory(userId:string,page:number,limit:number):Promise<IApiRes<IWalletHistoryAndCount| null>>{
+        try {
+                const userWallet = await this._userRespository.getWalletHistory(userId,page,limit)
+                if(userWallet){
+                    return {
+                        status:STATUS_CODES.OK,
+                        message:'Success',
+                        data:userWallet
+                    }
+                }
+                else{
+                    return {
+                        status:STATUS_CODES.BAD_REQUEST,
+                        message:'Error',
+                        data:null
+                    }
+                }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
+                data:null
+            }
+        }
     }
 }

@@ -11,6 +11,9 @@ import { UserJobsComponent } from './user-jobs/user-jobs.component';
 import { UserResumeComponent } from './user-resume/user-resume.component';
 import { UserSubscriptionComponent } from './user-subscription/user-subscription.component';
 import { UserFollowingComponent } from './user-following/user-following.component';
+import { UserPaymentComponent } from './user-payment/user-payment.component';
+import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.component';
+import { UserWalletComponent } from './user-wallet/user-wallet.component';
 
 const routes: Routes = [
 
@@ -67,6 +70,18 @@ const routes: Routes = [
     path:'subscription',
     title:'JobHive | Subscription',
     component:UserSubscriptionComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'subscription/:planId',
+    title:'JobHive | Payment',
+    component:UserPaymentComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'wallet',
+    title:'JobHive | Wallet',
+    component:UserWalletComponent,
     canActivate:[authGuard]
   },
   {
