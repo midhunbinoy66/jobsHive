@@ -2,10 +2,11 @@
 
 export interface IPlan{
     _id:string
-    duration:string
+    duration:number
     price:number
     name:string
     description:string
     features:string[]
     isActive:boolean
+    type:string
 }

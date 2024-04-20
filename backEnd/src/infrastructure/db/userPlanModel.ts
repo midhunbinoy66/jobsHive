@@ -17,12 +17,15 @@ const userPlanSchema  = new mongoose.Schema<IPlan & Document>({
     features:{
         type:[String]
     },
-    duration:{
-        type:String
-    },
     isActive:{
         type:Boolean,
         default:true
+    },
+    type:{
+        type:String
+    },
+    duration:{
+        type:Number
     }
 })
 

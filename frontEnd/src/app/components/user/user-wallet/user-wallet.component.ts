@@ -36,6 +36,7 @@ export class UserWalletComponent  implements OnInit{
   getWalletHistory():void{
     this.userService.getWalletHistory(this.userId,this.page,this.itemsPerPage).subscribe({
       next:(res)=>{
+        console.log(res);
         if(res.data === null) return 
         this.walletHistory = res.data.walletHistory
         this.count  = res.data.count

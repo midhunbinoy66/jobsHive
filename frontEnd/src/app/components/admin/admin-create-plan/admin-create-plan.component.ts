@@ -29,7 +29,8 @@ export class AdminCreatePlanComponent implements OnInit {
       description:['',[validateByTrimming(commonValidators)]],
       price:['',Validators.required],
       features:this.fb.array([this.fb.control('')]),
-      duration:['',Validators.required]
+      duration:['',Validators.required],
+      type:['',Validators.required]
     })
   }
 

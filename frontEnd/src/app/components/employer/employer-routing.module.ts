@@ -12,6 +12,8 @@ import { EmployerJobApplicantsComponent } from './employer-job-applicants/employ
 import { EmployerJobEditComponent } from './employer-job-edit/employer-job-edit.component';
 import { EmployerApplicanResumeComponent } from './employer-applican-resume/employer-applican-resume.component';
 import { EmployerProfileEditComponent } from './employer-profile-edit/employer-profile-edit.component';
+import { EmployerSubscriptionComponent } from './employer-subscription/employer-subscription.component';
+import { EmployerPaymentComponent } from './employer-payment/employer-payment.component';
 
 const routes: Routes = [
   {
@@ -73,6 +75,18 @@ const routes: Routes = [
     path:'edit-job/:jobId',
     title:'JObHive | Edit Job',
     component:EmployerJobEditComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'subscription',
+    title:'JobHive | Subscription',
+    component:EmployerSubscriptionComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'subscription/:planId',
+    title:'JobHive | Payment',
+    component:EmployerPaymentComponent,
     canActivate:[authGuard]
   },
   {

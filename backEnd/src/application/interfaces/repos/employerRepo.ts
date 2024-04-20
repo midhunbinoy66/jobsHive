@@ -1,3 +1,4 @@
+import { IUserSubscription } from "../../../entities/common";
 import { IEmployer } from "../../../entities/employer";
 import { IEmployerAuth, IEmployerRes, IEmployerUpdate} from "../types/employer";
 
@@ -11,4 +12,6 @@ export interface IEmployerRepo{
     findUsersCount(searchQuery:string):Promise<number>
     blockAndUblockUser(userId:string):Promise<void>
     findFollowingEmployers(employerIds:string[]):Promise<IEmployer[]|null>
+    updateUserSubscription(userId:string,planData:IUserSubscription):Promise<IEmployerRes | null>
+
 }

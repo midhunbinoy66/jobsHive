@@ -3,6 +3,7 @@ import { emailSchema } from "./base/emailSchema";
 import { employerAddressSchema } from "./subschema/addressSchema";
 import { mobileSchema } from "./base/mobileSchema";
 import { IEmployer } from "../../entities/employer";
+import { userSubscriptionSchema } from "./subschema/subscriptionSchema";
 
 
 const employerSchema:Schema = new Schema<IEmployer & Document>({
@@ -20,7 +21,8 @@ const employerSchema:Schema = new Schema<IEmployer & Document>({
         type:Boolean,
         default:false
     },
-    address:employerAddressSchema
+    address:employerAddressSchema,
+    subscription:userSubscriptionSchema
 
 })
 

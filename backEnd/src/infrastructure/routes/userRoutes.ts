@@ -29,6 +29,6 @@ userRouter.post('/remove/saved-jobs/:userId',(req,res)=>uController.userRemoveSa
 userRouter.patch('/follow/:userId',(req,res)=>uController.followEmployer(req,res));
 userRouter.patch('/unfollow/:userId',(req,res)=>uController.unfollowEmployer(req,res));
 userRouter.get('/wallet-history/:userId',(req,res)=>uController.getWalletHistory(req,res));
-userRouter.get('/wallet/add/:userId',(req,res)=>uController.addToWallet(req,res));
-
+userRouter.patch('/wallet/add/:userId',(req,res)=>uController.addToWallet(req,res));
+userRouter.patch('/subscription/:userId',(req,res)=>uController.userPlanSubscribe(req,res))
 export default userRouter

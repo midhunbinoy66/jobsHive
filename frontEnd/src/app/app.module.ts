@@ -27,6 +27,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { JobVerifyModalComponent } from './components/common/job-verify-modal/job-verify-modal.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddToWalletComponent } from './components/common/add-to-wallet/add-to-wallet.component';
+import { WalletAmountValidationComponent } from './components/common/validation/wallet-amount-validation/wallet-amount-validation.component';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
@@ -37,6 +40,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     JobDeleteModalComponent,
     UpdateJobStatusModalComponent,
     JobVerifyModalComponent,
+    AddToWalletComponent,
 
 
     
@@ -58,7 +62,9 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     FormsModule,
     EffectsModule.forRoot([UserEffects]),
     MatIconModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule,
+    WalletAmountValidationComponent
 
   ],
   providers: [

@@ -1,5 +1,6 @@
 import { IEmployerRepo } from "../../application/interfaces/repos/employerRepo";
 import { IEmployerAuth, IEmployerRes, IEmployerUpdate } from "../../application/interfaces/types/employer";
+import { IUserSubscription } from "../../entities/common";
 import { IEmployer } from "../../entities/employer";
 import { employerModel } from "../db/employerModel";
 
@@ -76,5 +77,14 @@ export class EmployerRepository implements IEmployerRepo{
         }).exec();
       }
 
-
+      async updateUserSubscription(userId: string, planData: IUserSubscription): Promise<IEmployerRes | null> {
+        console.log(planData);    
+        return await employerModel.findByIdAndUpdate(
+                {_id:userId},
+                {
+                    subscription:planData
+                },
+                {new:true}
+            )
+      } 
 }

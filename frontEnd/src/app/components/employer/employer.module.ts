@@ -29,6 +29,8 @@ import { DistrictValidationComponent } from '../common/validation/district-valid
 import { CountryValidationComponent } from '../common/validation/country-validation/country-validation.component';
 import { ZipValidationComponent } from '../common/validation/zip-validation/zip-validation.component';
 import { CommonValidationComponent } from '../common/validation/common-validation/common-validation.component';
+import { EmployerSubscriptionComponent } from './employer-subscription/employer-subscription.component';
+import { EmployerPaymentComponent } from './employer-payment/employer-payment.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { CommonValidationComponent } from '../common/validation/common-validatio
     EmployerJobApplicantsComponent,
     EmployerApplicanResumeComponent,
     EmployerProfileEditComponent,
+    EmployerSubscriptionComponent,
+    EmployerPaymentComponent,
   ],
   imports: [
     CommonModule,

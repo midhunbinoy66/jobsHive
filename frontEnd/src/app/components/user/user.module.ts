@@ -57,6 +57,7 @@ import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.
   imports: [
     CommonModule,
     UserRoutingModule,
+    
     ReactiveFormsModule,
     StoreModule.forFeature('user',userReducer),
     SocialLoginModule,
@@ -72,7 +73,7 @@ import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.
     DistrictValidationComponent,
     StateValidationComponent,
     ZipValidationComponent,
-    WalletHistoryComponent
+    WalletHistoryComponent,
   ],
   providers: [
     {

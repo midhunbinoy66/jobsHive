@@ -61,7 +61,7 @@
 
         <div class="mb-4">
             <label for="duration" class="block mb-1">Duration</label>
-            <input type="text" name="duration" id="duration" formControlName="duration"
+            <input type="number" name="duration" id="duration" formControlName="duration"
                    placeholder="Duration of the plan"
                    class="p-2 ring-2 focus:ring-2 focus:ring-gray-500 focus:outline-none focus:border-transparent w-full">
             <app-common-validation [generalControl]="form.get('duration')" [isSubmitted]="isSubmittd"></app-common-validation>

@@ -122,4 +122,11 @@ export class Employercontoller{
         const apiRes  = await this._employerUseCase.getFollowingEmployers(employerIds);
         res.status(apiRes.status).json(apiRes);
     }
+
+    async userPlanSubscribe(req:Request,res:Response){
+        const {employerId} = req.params
+        const {planData}  =req.body
+        const apiRes = await this._employerUseCase.updateUserSubscription(employerId,planData);
+        return res.status(apiRes.status).json(apiRes);
+    }
 }

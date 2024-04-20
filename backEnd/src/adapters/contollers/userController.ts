@@ -207,4 +207,12 @@ export class UserController{
         return res.status(apiRes.status).json(apiRes);
     }
 
+
+    async userPlanSubscribe(req:Request,res:Response){
+        const {userId} = req.params
+        const {planData}  =req.body
+        const apiRes = await this._userUseCAse.updateUserSubscription(userId,planData);
+        return res.status(apiRes.status).json(apiRes);
+    }
+
 }

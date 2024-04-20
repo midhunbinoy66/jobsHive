@@ -1,36 +1,37 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { IRazorpayRes, ISubscription } from 'src/app/models/common';
-import { IApiPlanRes, IPlan } from 'src/app/models/plans';
-import { IUserRes } from 'src/app/models/users';
+import { IEmployerRes } from 'src/app/models/employer';
+import { IPlan } from 'src/app/models/plans';
+import { EmployerService } from 'src/app/services/employer.service';
 import { PlanService } from 'src/app/services/plan.service';
 import { RazorpayService } from 'src/app/services/razorpay.service';
-import { UserService } from 'src/app/services/user.service';
-import { saveUserOnStore } from 'src/app/states/user/user.action';
-import { selectUserDetails } from 'src/app/states/user/user.selector';
+import { saveEmployerOnStore } from 'src/app/states/employer/employer.action';
+import { selectEmployerDetails } from 'src/app/states/employer/employrer.selector';
 
 @Component({
-  selector: 'app-user-payment',
-  templateUrl: './user-payment.component.html',
-  styleUrls: ['./user-payment.component.css']
+  selector: 'app-employer-payment',
+  templateUrl: './employer-payment.component.html',
+  styleUrls: ['./employer-payment.component.css']
 })
-export class UserPaymentComponent implements OnInit ,OnDestroy{
-  userDetails$ = this.store.pipe(select(selectUserDetails));
-  planId:string='';
-  plan:IPlan | null =null;
-  user:IUserRes | null = null;
-  userId:string =''
-  private readonly paymentResultSubscription: Subscription;
+export class EmployerPaymentComponent implements OnInit {
+  employerDetails$ = this.store.pipe(select(selectEmployerDetails));
+  planId = ''
+  plan!:IPlan
+  employer:IEmployerRes | null = null;
+  employerId =''
 
+
+  private readonly paymentResultSubscription: Subscription;
   constructor(
+    private readonly store:Store,
     private readonly router:Router,
     private readonly route:ActivatedRoute,
-    private readonly store:Store,
     private readonly planService:PlanService,
     private readonly razorpayService:RazorpayService,
-    private readonly userService:UserService
+    private readonly employerService:EmployerService
   ){
     this.paymentResultSubscription = this.razorpayService.getPaymentResutlObservable()
     .subscribe((response:IRazorpayRes | null)=>{
@@ -56,38 +57,40 @@ export class UserPaymentComponent implements OnInit ,OnDestroy{
         endDate:endDate
     }
     console.log(planData);
-    this.userService.usrePlanSubscription(this.userId,planData).subscribe({
+    this.employerService.employerPlanSubscription(this.employerId,planData).subscribe({
       next:(res)=>{
           console.log(res.data);
-          this.store.dispatch(saveUserOnStore({userDetails:res.data}));
+          this.store.dispatch(saveEmployerOnStore({employerDetails:res.data}));
+          this.router.navigate(['/employer/subscription'])
       }
     })
   }
 
   ngOnInit(): void {
 
-    this.userDetails$.subscribe((res)=>{
-      this.user =res;
-      this.userId =res!._id
-    })
-
-    this.route.params.subscribe(params=>{
-      this.planId = params['planId'];
-      this.planService.findUserPlan(this.planId).subscribe({
-        next:(res)=>{
-          this.plan = res.data
-          
-        }
+      this.employerDetails$.subscribe(res=>{
+        this.employer = res
+        this.employerId = res!._id
       })
-    })  
+
+      this.route.params.subscribe(params=>{
+        this.planId = params['planId'];
+        this.planService.findUserPlan(this.planId).subscribe({
+          next:(res)=>{
+            if(res.data !== null){
+              this.plan = res.data
+            }
+          }
+        })
+      })
   }
 
 
   payforSusbcription(amount:number):void{
     this.razorpayService.initiateRazorpayPayment(amount,{
-      name:this.user!.name,
-      email:this.user!.email,
-      mobile:(this.user!.mobile !== undefined) ? `${this.user!.mobile}` : ''
+      name:this.employer!.name,
+      email:this.employer!.email,
+      mobile:(this.employer!.mobile !== undefined) ? `${this.employer!.mobile}` : ''
     })
   }
   
@@ -104,3 +107,4 @@ export class UserPaymentComponent implements OnInit ,OnDestroy{
     this.paymentResultSubscription.unsubscribe();
   }
 }
+

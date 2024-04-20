@@ -1,4 +1,5 @@
 
+import { IUserSubscription } from "../../entities/common";
 import { IUser } from "../../entities/user";
 import { OTP_TIMER } from "../../infrastructure/constants/constants";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
@@ -404,6 +405,25 @@ export class UserUseCase{
                         data:null
                     }
                 }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
+                data:null
+            }
+        }
+    }
+
+
+    async updateUserSubscription(userId:string,planData:IUserSubscription):Promise<IApiUserRes>{
+        try {
+            const userData = await this._userRespository.updateUserSubscription(userId,planData)
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:userData
+            }
+
         } catch (error) {
             return {
                 status:STATUS_CODES.INTERNAL_SERVER_ERROR,

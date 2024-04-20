@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiRes } from '../models/common';
+import { IApiRes, ISubscription } from '../models/common';
 import { Observable } from 'rxjs';
 import { IUsersAndCount } from '../models/users';
 import { IAPiEmployerRes, IApiEmployersRes, IEmployerUpdate, IEmployersAndCount } from '../models/employer';
@@ -31,4 +31,8 @@ export class EmployerService {
     return this.http.post<IApiEmployersRes>(`employer/following`,employerIds);
   }
 
+
+  employerPlanSubscription(employerId:string,planData:ISubscription):Observable<IAPiEmployerRes>{
+    return this.http.patch<IAPiEmployerRes>(`employer/subscription/${employerId}`,{planData})
+  }
 }

@@ -1,4 +1,4 @@
-import { IEmployerAddress } from "./common"
+import { IEmployerAddress, IUserSubscription } from "./common"
 
 
 export interface IEmployer{
@@ -10,4 +10,5 @@ export interface IEmployer{
     profilePic?:string
     mobile?: number
     isBlocked: boolean
+    subscription:IUserSubscription
 } 

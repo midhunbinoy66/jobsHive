@@ -2,6 +2,7 @@ import { IuserRepo } from "../../application/interfaces/repos/userRepo";
 import { IWalletHistoryAndCount } from "../../application/interfaces/types/commont";
 import { IResumeReq } from "../../application/interfaces/types/resume";
 import { IUserAuth, IUserRes, IUserSocialAuth, IUserUpdate } from "../../application/interfaces/types/user";
+import { IUserSubscription } from "../../entities/common";
 import { IJob } from "../../entities/job";
 import { IResume } from "../../entities/resume";
 import { IUser } from "../../entities/user";
@@ -177,4 +178,15 @@ export class UserRespository implements IuserRepo {
             }
           )
       }
+
+      async updateUserSubscription(userId: string, planData: IUserSubscription): Promise<IUserRes | null> {
+        console.log(planData);    
+        return await userModel.findByIdAndUpdate(
+                {_id:userId},
+                {
+                    subscription:planData
+                },
+                {new:true}
+            )
+      } 
 }

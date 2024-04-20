@@ -1,3 +1,4 @@
+import { IUserSubscription } from "../../entities/common";
 import { IEmployer } from "../../entities/employer";
 import { OTP_TIMER } from "../../infrastructure/constants/constants";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
@@ -188,6 +189,24 @@ export class EmployeruseCase{
             return {
                 status:STATUS_CODES.INTERNAL_SERVER_ERROR,
                 message:'Internal server error',
+                data:null
+            }
+        }
+    }
+
+    async updateUserSubscription(userId:string,planData:IUserSubscription):Promise<IApiEmployerRes>{
+        try {
+            const userData = await this._employerRepository.updateUserSubscription(userId,planData)
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:userData
+            }
+
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
                 data:null
             }
         }

@@ -36,18 +36,15 @@ export class UserSubscriptionComponent implements OnInit {
       this.userPlanId = res?.subscription?.planId;
     })
 
-    console.log(this.user);
-
     this.planService.findAllPlans().subscribe({
       next:(res)=>{
-        this.allPlans = res.data;
-        console.log(this.allPlans);
+        if(res.data)
+        this.allPlans = res.data.filter(plan=>plan.type ==='user');
+        if(this.allPlans && this.userPlanId  ){
+          this.userPlan = this.allPlans?.find(plan => plan._id == this.userPlanId);
+        }
       }
     })
-
-    if(this.userPlanId ! == undefined){
-      this.userPlan = this.allPlans?.find(plan => plan._id === this.userPlanId);
-    }
 
 }
 

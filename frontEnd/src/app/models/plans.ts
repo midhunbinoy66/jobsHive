@@ -22,8 +22,9 @@ export interface  IPlan{
     description:string
     price:number
     features:string[]
-    duration:string
+    duration:number
     isActive:boolean
+    type:string 
 }
 
 export interface IPlanReq extends Omit<IPlan,'_id'|'isActive'>{}

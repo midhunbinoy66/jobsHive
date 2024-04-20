@@ -1,12 +1,12 @@
-<app-user-nav></app-user-nav>
+<app-employer-nav></app-employer-nav>
 <div class="bg-cover bg-center " style="background-image: url('../../../../assets/cool-background.png')">
     <section >
         <div class="container flex flex-col sm:flex-row space-x-2 ">
-            <app-user-sidebar class="my-1"></app-user-sidebar>        
+            <app-employer-sidebar class="my-1"></app-employer-sidebar>        
             <div  class="ring-gray-200 ring-2 w-full p-4 rounded-lg my-1">
 
                 <div class="flex flex-wrap justify-center">
-                    <div *ngFor="let plan of allPlans" class="max-w-md w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mx-4 mb-8">
+                    <div *ngFor="let plan of plans" class="max-w-md w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mx-4 mb-8">
                       <div class="bg-gradient-to-br from-blue-300 to-blue-400 shadow-lg rounded-lg overflow-hidden h-full transform transition-transform duration-300 hover:scale-105">
                         <div class="px-6 py-4 h-full">
                           <div class="font-bold text-xl mb-2">{{ plan.name }}</div>
@@ -25,12 +25,12 @@
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div *ngIf="employerPlan !== undefined">
                     <h1>current Subscription</h1>
-                    <p>{{userPlan?.name}}</p>
-                    <p>{{userPlan?.features}}</p>
-                    <p>start Date : {{user?.subscription?.startDate | date}}</p>
-                    <p>End Date : {{user?.subscription?.endDate | date}}</p>
+                    <p>{{employerPlan.name}}</p>
+                    <p>{{employerPlan.features}}</p>
+                    <p>start Date : {{emploeyr?.subscription?.startDate | date}}</p>
+                    <p>End Date : {{emploeyr?.subscription?.endDate | date}}</p>
                   </div>
              </div>
         </div>

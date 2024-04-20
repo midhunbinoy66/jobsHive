@@ -1,5 +1,5 @@
 import { Validators } from "@angular/forms";
-import { userNameMinLength,userNameMaxLength,nameRegex,emailRegex,OTPRegex,passwordMinLength,passwordRegex ,mobileRegex, commonMaxLength, commonMinLength} from "./constants";
+import { userNameMinLength,userNameMaxLength,nameRegex,emailRegex,OTPRegex,passwordMinLength,passwordRegex ,mobileRegex, commonMaxLength, commonMinLength, numRegex, MIN_WALLET_ADD, MAX_WALLET_ADD} from "./constants";
 
 export const nameValidators =[
     Validators.required,
@@ -44,4 +44,11 @@ export const commonValidators =[
 export const salaryValidators =[
     Validators.required,
     Validators.min(10000),
+]
+
+export const walletAmountValidators =[
+    Validators.required,
+    Validators.pattern(numRegex),
+    Validators.min(MIN_WALLET_ADD),
+    Validators.max(MAX_WALLET_ADD)
 ]

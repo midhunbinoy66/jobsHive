@@ -1,3 +1,4 @@
+import { IUserSubscription } from "../../../entities/common";
 import { IJob } from "../../../entities/job";
 import { IResume } from "../../../entities/resume";
 import { IUser } from "../../../entities/user";
@@ -23,5 +24,6 @@ export interface IuserRepo{
     unFollowEmplopyer(userId:string,employerId:string):Promise<IUserRes | null>
     updateWallet(userId:string,amount:number,message:string):Promise<IUserRes | null>
     getWalletHistory(userId:string,page:number,limit:number):Promise<IWalletHistoryAndCount | null>
+    updateUserSubscription(userId:string,planData:IUserSubscription):Promise<IUserRes | null>
 
 }

@@ -36,13 +36,13 @@ export const userSchema  =  new Schema<IUser & Document>({
     following:[{
         type:Schema.Types.ObjectId,
         ref:'Employer'
-    }]
+    }],
+    subscription:userSubscriptionSchema
 
 })
 
 userSchema.add(emailSchema);
 userSchema.add(mobileSchema);
-userSchema.add(userSubscriptionSchema);
 userSchema.add(walletSchema);
 
 
