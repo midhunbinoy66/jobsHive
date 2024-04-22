@@ -1,0 +1,21 @@
+<app-employer-nav></app-employer-nav>
+
+
+
+<div class="bg-cover bg-center " style="background-image: url('../../../../assets/cool-background.png')">
+    <section >
+        <div class="flex flex-col sm:flex-row space-x-2 ">
+            <app-employer-sidebar class="my-1"></app-employer-sidebar>        
+            <div  class="ring-gray-200 ring-2 w-full p-4 rounded-lg my-1">
+                <app-wallet-history
+                [walletHistory]="walletHistory"
+                [transCount]="count"
+                (pageChange)="onPageChange($event)"
+                (itemsPerPageChange)="onItemsPerPageChange($event)"
+            ></app-wallet-history>
+             </div>
+        </div>
+    </section>
+</div>
+
+<app-employer-footer></app-employer-footer>

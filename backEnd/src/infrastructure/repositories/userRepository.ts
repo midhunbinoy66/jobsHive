@@ -189,4 +189,29 @@ export class UserRespository implements IuserRepo {
                 {new:true}
             )
       } 
+
+
+     async updateUserProfilePic(userId: string, fileName: string): Promise<IUserRes | null> {
+          return await userModel.findByIdAndUpdate(
+            {_id:userId},
+            {
+                $set:{
+                    profilePic:fileName
+                }
+            },
+            {new:true}
+          )
+      }
+
+      async removeUserProfileDp(userId: string): Promise<IUserRes | null> {
+          return await userModel.findByIdAndUpdate(
+            {_id:userId},
+            {
+                $unset:{
+                    profilePic:''
+                }
+            },
+            {new:true}
+          )
+      }
 }

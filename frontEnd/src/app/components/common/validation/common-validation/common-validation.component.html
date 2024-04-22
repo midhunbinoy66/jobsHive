@@ -3,5 +3,5 @@
     <div *ngIf="generalControl.errors['required']" style="color: red;">Field is required</div>
     <div *ngIf="generalControl.errors['minlength']" style="color: red;">Field must contain {{ generalControl.errors['minlength'].requiredLength }} characters</div>
     <div *ngIf="generalControl.errors['maxlength']" style="color: red;">Field max contain {{ generalControl.errors['maxlength'].requiredLength }} characters</div>
-    <div *ngIf="generalControl.errors['pattern'] && !generalControl.errors['minlength'] && !generalControl.errors['maxlength']" style="color: red;">Field only contains alphabets</div>
+    <div *ngIf="generalControl.errors['pattern'] " style="color: red;">Field only contains alphabets</div>
 </div>

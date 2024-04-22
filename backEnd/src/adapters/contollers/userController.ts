@@ -215,4 +215,17 @@ export class UserController{
         return res.status(apiRes.status).json(apiRes);
     }
 
+    async updateUserProfilePhoto(req:Request,res:Response){
+        const userId = req.params.userId;
+        const fileName = req.file?.filename
+        const apiRes  = await this._userUseCAse.updateUserProfilePic(userId,fileName);
+        res.status(apiRes.status).json(apiRes)
+    }
+
+    async removeUserProfileDp (req: Request, res: Response) { 
+        const userId = req.params.userId
+        const apiRes = await this._userUseCAse.removeUserProfileDp(userId)
+        res.status(apiRes.status).json(apiRes)
+    }
+
 }

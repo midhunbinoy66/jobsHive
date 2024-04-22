@@ -1,5 +1,6 @@
 import { IUserSubscription } from "../../../entities/common";
 import { IEmployer } from "../../../entities/employer";
+import { IWalletHistoryAndCount } from "../types/commont";
 import { IEmployerAuth, IEmployerRes, IEmployerUpdate} from "../types/employer";
 
 
@@ -13,5 +14,7 @@ export interface IEmployerRepo{
     blockAndUblockUser(userId:string):Promise<void>
     findFollowingEmployers(employerIds:string[]):Promise<IEmployer[]|null>
     updateUserSubscription(userId:string,planData:IUserSubscription):Promise<IEmployerRes | null>
+    updateWallet(userId:string,amount:number,message:string):Promise<IEmployerRes | null>
+    getWalletHistory(userId:string,page:number,limit:number):Promise<IWalletHistoryAndCount | null>
 
 }

@@ -1,7 +1,7 @@
 <app-user-nav></app-user-nav>
 <div  class="bg-cover bg-center " style="background-image: url('../../../../assets/cool-background.png')">
   <section>
-    <div class="container flex flex-col sm:flex-row space-x-2 ">
+    <div class="flex flex-col sm:flex-row space-x-2 ">
       <app-user-sidebar class="my-1"></app-user-sidebar>
       <div class="ring-gray-200 ring-2 w-full p-4 rounded-lg my-1 bg-gray-400" *ngIf="!isResume" >
         <div class="max-w-md mx-5 ">
@@ -128,7 +128,7 @@
   
       </div>
 <div *ngIf="isResume" class="container mx-auto py-1">
-  <div class="bg-white shadow-md rounded-lg px-8 py-6">
+  <div class="bg-transparent shadow-lg rounded-lg px-8 py-6">
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Resume Details</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
@@ -172,8 +172,7 @@
   </div>
 </div>
 
-      
-  
     </div>
   </section>
 </div>
+<app-user-footer></app-user-footer>

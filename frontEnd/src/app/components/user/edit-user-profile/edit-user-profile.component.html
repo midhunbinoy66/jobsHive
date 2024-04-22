@@ -4,68 +4,13 @@
 <app-user-nav></app-user-nav>
 <div class="bg-cover bg-center " style="background-image: url('../../../../assets/cool-background.png')">
     <section>
-        <div class="container flex flex-col sm:flex-row space-x-2 ">
+        <div class=" flex flex-col sm:flex-row space-x-2 ">
             <app-user-sidebar class="my-1"></app-user-sidebar>        
             <div  class="ring-gray-400 ring-2 w-full p-4 rounded-lg my-1">
-                <!-- <section class="flex flex-col lg:flex-row">
-
-                    <form [formGroup]="profileForm" (ngSubmit)="onsubmit()" class="lg:w-3/4 flex justify-center items-center p-4">
-                        <div class="container max-w-lg bg-white rounded-lg shadow-md p-8">
-                            <h1 class="text-3xl font-bold mb-8 text-center">Edit User Form</h1>
-                
-
-                            <div class="mb-6">
-                                <label for="name" class="text-lg mb-2 block">User Name</label>
-                                <input type="text" placeholder="User Name" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="name">
-                                
-                            </div>
-                
-
-                            <div class="mb-6">
-                                <label for="mobile" class="text-lg mb-2 block">Mobile</label>
-                                <input type="number" placeholder="Mobile" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="mobile">
-                            </div>
-                
-
-                            <div class="mb-6">
-                                <h1 class="text-lg font-semibold mb-2">Address</h1>
-                                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-                                    <div>
-                                        <label for="city" class="text-lg mb-2 block">City</label>
-                                        <input type="text" placeholder="City" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="city"  [(ngModel)]="city"> 
-                                    </div>
-
-                                    <div>
-                                        <label for="district" class="text-lg mb-2 block">District</label>
-                                        <input type="text" placeholder="District" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="district"  [(ngModel)]="district">
-                                    </div>
-
-                                    <div>
-                                        <label for="state" class="text-lg mb-2 block">State</label>
-                                        <input type="text" placeholder="State" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="state"  [(ngModel)]="state">
-                                    </div>
-
-                                    <div>
-                                        <label for="country" class="text-lg mb-2 block">Country</label>
-                                        <input type="text" placeholder="Country" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="country"  [(ngModel)]="country">
-                                    </div>
-
-                                    <div>
-                                        <label for="zipCode" class="text-lg mb-2 block">Zip Code</label>
-                                        <input type="text" placeholder="Zip Code" class="w-full p-3 rounded-md border-gray-300 focus:outline-none focus:border-orange-500" formControlName="zip"  [(ngModel)]="zip">
-                                    </div>
-                                </div>
-                            </div>
-                
-
-                            <div class="flex justify-center">
-                                <button type="submit" class="bg-orange-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-orange-700 focus:outline-none focus:bg-orange-700">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </section> -->
-
+                <div class="relative">
+                    <!-- <app-profile-dp [hieght]="155" [width]="155" [currDp]="dpUrl" (deleteDp)="deleteProfilePic()" (imageReady)="imageReady($event)"></app-profile-dp> -->
+                    <app-profile-dp [height]="155" [width]="155" [currDp]="dpurl" (deleteDp)="deleteProfilePic()" (imageReady)="imageReady($event)"></app-profile-dp>
+                </div>
                 <section class="flex flex-col lg:flex-row">
                     <!-- Form -->
                     <form [formGroup]="profileForm" (ngSubmit)="onsubmit()" class="lg:w-3/4 flex justify-center items-center p-4">
@@ -143,3 +88,5 @@
         </div>
     </section>
 </div>
+
+<app-user-footer></app-user-footer>

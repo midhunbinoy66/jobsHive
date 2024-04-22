@@ -1,4 +1,5 @@
 import { IEmployerRepo } from "../../application/interfaces/repos/employerRepo";
+import { IWalletHistoryAndCount } from "../../application/interfaces/types/commont";
 import { IEmployerAuth, IEmployerRes, IEmployerUpdate } from "../../application/interfaces/types/employer";
 import { IUserSubscription } from "../../entities/common";
 import { IEmployer } from "../../entities/employer";
@@ -87,4 +88,28 @@ export class EmployerRepository implements IEmployerRepo{
                 {new:true}
             )
       } 
+
+
+
+      async getWalletHistory(userId: string, page: number, limit: number): Promise<IWalletHistoryAndCount | null> {
+        const userData = await employerModel.findById({_id:userId});
+        return userData !== null ?{
+          walletHistory:userData.walletHistory.slice((page-1)*limit,page * limit),
+          count:userData.walletHistory.length
+        }
+        : null
+    }
+
+    async updateWallet(userId: string, amount: number, message: string): Promise<IEmployerRes | null> {
+        return await employerModel.findByIdAndUpdate(
+          {_id:userId},
+          {
+              $inc:{wallet:amount},
+              $push:{walletHistory:{amount,message}}
+          },
+          {
+              new:true
+          }
+        )
+    }
 }

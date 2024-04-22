@@ -30,6 +30,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddToWalletComponent } from './components/common/add-to-wallet/add-to-wallet.component';
 import { WalletAmountValidationComponent } from './components/common/validation/wallet-amount-validation/wallet-amount-validation.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 @NgModule({
@@ -41,6 +43,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     UpdateJobStatusModalComponent,
     JobVerifyModalComponent,
     AddToWalletComponent,
+
 
 
     
@@ -64,7 +67,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     MatIconModule,
     NgxPaginationModule,
     NgbModule,
-    WalletAmountValidationComponent
+    WalletAmountValidationComponent,
+    ImageCropperModule
 
   ],
   providers: [

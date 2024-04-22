@@ -35,6 +35,8 @@ import { UserFollowingComponent } from './user-following/user-following.componen
 import { UserPaymentComponent } from './user-payment/user-payment.component';
 import { UserWalletComponent } from './user-wallet/user-wallet.component';
 import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.component';
+import { UserFooterComponent } from './user-footer/user-footer.component';
+import { ProfileDpComponent } from '../common/profile-dp/profile-dp.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.
     UserSubscriptionComponent,
     UserFollowingComponent,
     UserPaymentComponent,
-    UserWalletComponent
+    UserWalletComponent,
+    UserFooterComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +77,7 @@ import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.
     StateValidationComponent,
     ZipValidationComponent,
     WalletHistoryComponent,
+    ProfileDpComponent
   ],
   providers: [
     {

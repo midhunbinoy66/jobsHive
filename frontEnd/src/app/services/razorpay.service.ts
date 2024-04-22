@@ -26,8 +26,8 @@ export class RazorpayService {
       "key": environment.razorpayPublicKey,
       "amount": 1000000000, // amount in paise (Rupees x 100)
       "currency": 'INR',
-      "name": 'CineSnap',
-      "description": 'Payment for Booking Movie',
+      "name": 'JobHive',
+      "description": 'Payment for JobHive Subscription',
       "image": '../../../assets/logo-1x1.png',
       "order_id": '', // Replace with your order ID
       "handler": (response: IRazorpayRes) => { this.paymentResultSubject.next(response); },
@@ -40,7 +40,7 @@ export class RazorpayService {
         "address": 'JobHive Private Limited'
       },
       "theme": {
-        "color": '#f2bd00'
+        "color": '#223BC9'
       }
     }
   }

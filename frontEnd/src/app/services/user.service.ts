@@ -67,4 +67,14 @@ export class UserService {
   usrePlanSubscription(userId:string,planData:ISubscription):Observable<IApiUserRes>{
     return this.http.patch<IApiUserRes>(`user/subscription/${userId}`,{planData})
   }
+
+  updateUserProfilePhoto (userId: string, formData: FormData): Observable<IApiUserRes> {
+    console.log('hii....')
+    return this.http.patch<IApiUserRes>(`user/update/profileimage/${userId}`, formData)
+  }
+
+  deleteUserProfile (userId: string): Observable<IApiUserRes> {
+    return this.http.patch<IApiUserRes>(`user/remove/profileimage/${userId}`, {})
+  }
+
 }

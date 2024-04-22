@@ -129,4 +129,20 @@ export class Employercontoller{
         const apiRes = await this._employerUseCase.updateUserSubscription(employerId,planData);
         return res.status(apiRes.status).json(apiRes);
     }
+
+    async addToWallet(req:Request,res:Response){
+        const {employerId} = req.params
+        const amount :number = parseInt(req.body.amount);
+        const apiRes = await this._employerUseCase.addToWallet(employerId,amount);
+        res.status(apiRes.status).json(apiRes);
+    }
+
+    async getWalletHistory(req:Request,res:Response){
+        const {employerId } = req.params;
+        const page = req.query.page as unknown as number
+        const limit = req.query.limit as unknown as number
+        const apiRes = await this._employerUseCase.getWalletHistory(employerId,page,limit);
+        return res.status(apiRes.status).json(apiRes);
+    }
+
 }

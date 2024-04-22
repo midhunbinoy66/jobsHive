@@ -31,6 +31,9 @@ import { ZipValidationComponent } from '../common/validation/zip-validation/zip-
 import { CommonValidationComponent } from '../common/validation/common-validation/common-validation.component';
 import { EmployerSubscriptionComponent } from './employer-subscription/employer-subscription.component';
 import { EmployerPaymentComponent } from './employer-payment/employer-payment.component';
+import { EmployerWalletComponent } from './employer-wallet/employer-wallet.component';
+import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.component';
+import { EmployerFooterComponent } from './employer-footer/employer-footer.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,8 @@ import { EmployerPaymentComponent } from './employer-payment/employer-payment.co
     EmployerProfileEditComponent,
     EmployerSubscriptionComponent,
     EmployerPaymentComponent,
+    EmployerWalletComponent,
+    EmployerFooterComponent,
   ],
   imports: [
     CommonModule,
@@ -66,7 +71,8 @@ import { EmployerPaymentComponent } from './employer-payment/employer-payment.co
     CountryValidationComponent,
     ZipValidationComponent,
     CommonValidationComponent,
-    SalaryValidationComponent
+    SalaryValidationComponent,
+    WalletHistoryComponent
     
   ]
 })

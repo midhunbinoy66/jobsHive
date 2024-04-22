@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiRes, ISubscription } from '../models/common';
+import { IApiRes, ISubscription, IWalletHistoryAndCount } from '../models/common';
 import { Observable } from 'rxjs';
 import { IUsersAndCount } from '../models/users';
 import { IAPiEmployerRes, IApiEmployersRes, IEmployerUpdate, IEmployersAndCount } from '../models/employer';
@@ -34,5 +34,14 @@ export class EmployerService {
 
   employerPlanSubscription(employerId:string,planData:ISubscription):Observable<IAPiEmployerRes>{
     return this.http.patch<IAPiEmployerRes>(`employer/subscription/${employerId}`,{planData})
+  }
+
+  updateEmployerWallet(employerId:string,amount:number):Observable<IAPiEmployerRes>{
+    return this.http.patch<IAPiEmployerRes>(`employer/wallet/add/${employerId}`,{amount});
+
+  }
+
+  getWalletHistory(employerId:string,page:number,limit:number):Observable<IApiRes<IWalletHistoryAndCount | null>>{
+    return this.http.get<IApiRes<IWalletHistoryAndCount|null>>(`employer/wallet-history/${employerId}?page=${page}&limit=${limit}`)
   }
 }

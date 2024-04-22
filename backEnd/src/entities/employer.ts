@@ -1,4 +1,4 @@
-import { IEmployerAddress, IUserSubscription } from "./common"
+import { IEmployerAddress, IUserSubscription, IWalletHistory } from "./common"
 
 
 export interface IEmployer{
@@ -11,4 +11,6 @@ export interface IEmployer{
     mobile?: number
     isBlocked: boolean
     subscription:IUserSubscription
+    wallet:number
+    walletHistory:IWalletHistory[]
 } 

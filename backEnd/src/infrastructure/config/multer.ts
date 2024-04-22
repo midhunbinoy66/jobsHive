@@ -9,7 +9,7 @@ const storage: multer.StorageEngine = multer.diskStorage({
         cb(null,path.join(__dirname,'../../../images'))
     },
     filename:(req,file,cb)=>{
-        const name = Date.now().toString()+'-'+file.originalname.split('').join('-');
+        const name = Date.now().toString()+'-'+file.originalname.split(' ').join('-');
         cb(null,name);
     }
 });

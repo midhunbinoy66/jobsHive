@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { mobileValidators, nameValidators, requiredValidator } from 'src/app/shared/validators';
 import { saveUserOnStore } from 'src/app/states/user/user.action';
 import { selectUserDetails } from 'src/app/states/user/user.selector';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-edit-user-profile',
@@ -27,7 +28,8 @@ export class EditUserProfileComponent implements OnInit {
   zip=''
   dpurl = ''
   userDetails$ = this.store.pipe(select(selectUserDetails));
-
+  selectedFile!: File
+  
 
   constructor(
     private readonly store:Store,
@@ -92,6 +94,31 @@ export class EditUserProfileComponent implements OnInit {
         }
       })
     }
+  }
+
+  imageReady (blob:Blob):void{
+    const formData = new FormData();
+    formData.append('image',blob,this.user?.name+'.jpg');
+    this.userService.updateUserProfilePhoto(this.userId,formData).subscribe({
+      next:(res)=>{
+        if(res.data !== null){
+          this.dpurl = environment.baseUrl+`/images/${res.data.profilePic}`
+          this.store.dispatch(saveUserOnStore({userDetails:res.data}))
+        }
+      },
+      error:()=>{
+        this.dpurl = ''
+      }
+    })
+  }
+
+  deleteProfilePic(): void{
+    this.userService.deleteUserProfile(this.userId).subscribe({
+      next:(res)=>{
+        this.dpurl =''
+        if(res.data !== null) this.store.dispatch(saveUserOnStore({userDetails:res.data}));
+      }
+    })
   }
 
 }

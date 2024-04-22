@@ -4,6 +4,7 @@ import { employerAddressSchema } from "./subschema/addressSchema";
 import { mobileSchema } from "./base/mobileSchema";
 import { IEmployer } from "../../entities/employer";
 import { userSubscriptionSchema } from "./subschema/subscriptionSchema";
+import { walletSchema } from "./base/walletSchema";
 
 
 const employerSchema:Schema = new Schema<IEmployer & Document>({
@@ -28,5 +29,6 @@ const employerSchema:Schema = new Schema<IEmployer & Document>({
 
 employerSchema.add(emailSchema);
 employerSchema.add(mobileSchema);
+employerSchema.add(walletSchema);
 
 export const employerModel:Model<IEmployer & Document> = mongoose.model<IEmployer & Document>('Employers',employerSchema)

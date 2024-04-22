@@ -1,7 +1,7 @@
 <app-user-nav></app-user-nav>
 <div class="bg-cover bg-center " style="background-image: url('../../../../assets/cool-background.png')">
     <section >
-        <div class="container flex flex-col sm:flex-row space-x-2 ">
+        <div class="flex flex-col sm:flex-row space-x-2 ">
             <app-user-sidebar class="my-1"></app-user-sidebar>        
             <div  class="ring-gray-200 ring-2 w-full p-4 rounded-lg my-1">
 
@@ -25,14 +25,35 @@
                       </div>
                     </div>
                   </div>
-                  <div>
-                    <h1>current Subscription</h1>
-                    <p>{{userPlan?.name}}</p>
-                    <p>{{userPlan?.features}}</p>
-                    <p>start Date : {{user?.subscription?.startDate | date}}</p>
-                    <p>End Date : {{user?.subscription?.endDate | date}}</p>
-                  </div>
+                  <div *ngIf="userPlan !== undefined" class="bg-gray-100 py-8 px-6 rounded-lg shadow-md">
+                    <h1 class="text-2xl font-bold mb-4">Current Subscription</h1>
+                    
+                    <div class="mb-4">
+                        <p class="text-lg"><span class="font-semibold">Plan Name:</span> {{ userPlan.name }}</p>
+                    </div>
+                
+                    <div class="mb-4">
+                        <p class="font-semibold mb-2">Features:</p>
+                        <ul class="list-disc pl-5">
+                            <li *ngFor="let feature of userPlan.features" class="text-gray-600">{{ feature }}</li>
+                        </ul>
+                    </div>
+                
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-semibold">Start Date:</p>
+                            <p>{{ user?.subscription?.startDate | date }}</p>
+                        </div>
+                        
+                        <div>
+                            <p class="font-semibold">End Date:</p>
+                            <p>{{ user?.subscription?.endDate | date }}</p>
+                        </div>
+                    </div>
+                </div>
              </div>
         </div>
     </section>
 </div>
+
+<app-user-footer></app-user-footer>

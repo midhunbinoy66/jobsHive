@@ -36,7 +36,6 @@ export const mobileValidators = [
 
 export const commonValidators =[
     Validators.required,
-    Validators.pattern(nameRegex),
     Validators.minLength(commonMinLength),
     Validators.maxLength(commonMaxLength),
 ]

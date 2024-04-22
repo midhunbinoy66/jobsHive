@@ -4,7 +4,7 @@ import { OTP_TIMER } from "../../infrastructure/constants/constants";
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { IEmployerRepo } from "../interfaces/repos/employerRepo";
 import { ITempEmployerRepo } from "../interfaces/repos/tempEmployerRepo";
-import { IApiRes } from "../interfaces/types/commont";
+import { IApiRes, IWalletHistoryAndCount } from "../interfaces/types/commont";
 import { IApiEmployerAuthRes, IApiEmployerRes, IEmployerAndCount, IEmployerAuth, IEmployerUpdate} from "../interfaces/types/employer";
 import { ITempEmployerReq, ITempEmployerRes } from "../interfaces/types/tempEmployer";
 import { IEncryptor } from "../interfaces/utils/encryptor";
@@ -203,6 +203,69 @@ export class EmployeruseCase{
                 data:userData
             }
 
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
+                data:null
+            }
+        }
+    }
+
+
+    async addToWallet(userId:string,amount:number):Promise<IApiEmployerRes>{
+        try {
+            if(typeof amount !== 'number'){
+                return {
+                    status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                    message:"Internal Sever Error",
+                    data:null
+                }
+            }else{
+                const user = await this._employerRepository.updateWallet(userId,amount,'Add to Wallet');
+                if (user !== null){
+                    return{
+                        status:STATUS_CODES.OK,
+                        message:'Success',
+                        data:user
+                    }
+                }else{
+                    return{
+                        status:STATUS_CODES.BAD_REQUEST,
+                        message:'Bad Request',
+                        data:null
+                    }
+                } 
+
+            }
+            
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
+                data:null
+            }
+        }
+    }
+
+
+    async getWalletHistory(userId:string,page:number,limit:number):Promise<IApiRes<IWalletHistoryAndCount| null>>{
+        try {
+                const userWallet = await this._employerRepository.getWalletHistory(userId,page,limit)
+                if(userWallet){
+                    return {
+                        status:STATUS_CODES.OK,
+                        message:'Success',
+                        data:userWallet
+                    }
+                }
+                else{
+                    return {
+                        status:STATUS_CODES.BAD_REQUEST,
+                        message:'Error',
+                        data:null
+                    }
+                }
         } catch (error) {
             return {
                 status:STATUS_CODES.INTERNAL_SERVER_ERROR,

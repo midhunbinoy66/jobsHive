@@ -1,6 +1,6 @@
-<div>
+<div >
     <aside [ngClass]="{'hidden': !showSidebar, 'md:block': showSidebar}" class="text-black w-full md:w-64 flex-none border border-black rounded-r-lg shadow-2xl min-h-screen  bg-transparent ">
-        <div class="p-4">
+        <div class="p-4 ">
             <h1 class="text-xl font-bold mb-4 text-center">Menu</h1>
             <nav>
                 <ul>
@@ -19,6 +19,9 @@
       
                     <li>
                         <a [routerLink]="'/employer/subscription'" class="block py-2 px-4 hover:bg-gray-600  hover:text-white">Subscription</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="'/employer/wallet'" class="block py-2 px-4 hover:bg-gray-600  hover:text-white">Wallet</a>
                     </li>
       
                     <li>

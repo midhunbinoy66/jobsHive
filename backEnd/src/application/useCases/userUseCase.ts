@@ -1,4 +1,6 @@
 
+import path from "path";
+import fs from 'fs'
 import { IUserSubscription } from "../../entities/common";
 import { IUser } from "../../entities/user";
 import { OTP_TIMER } from "../../infrastructure/constants/constants";
@@ -432,4 +434,81 @@ export class UserUseCase{
             }
         }
     }
+
+    async updateUserProfilePic(userId:string , fileName:string|undefined):Promise<IApiUserRes>{
+
+        try {
+            if(!fileName)return {
+                status:STATUS_CODES.BAD_REQUEST,
+                message:'Error',
+                data:null
+            }
+
+            const user = await this._userRespository.findById(userId);
+            if(user && user.profilePic){
+                const filePath = path.join(__dirname,`../../images/${user.profilePic}`)
+                fs.unlinkSync(filePath);
+            }
+            const  updateUser  = await this._userRespository.updateUserProfilePic(userId,fileName);
+            if(updateUser){
+                return {
+                    status:STATUS_CODES.OK,
+                    message:'Success',
+                    data:updateUser
+                }
+            } else{
+                return {
+                    status:STATUS_CODES.BAD_REQUEST,
+                    message:"Invalid user",
+                    data:null
+                }
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
+                data:null
+            }
+        }
+    }
+
+    async removeUserProfileDp (userId: string): Promise<IApiUserRes> {
+        try {
+            const user = await this._userRespository.findById(userId)
+            if (!user){
+                return {
+                    status:STATUS_CODES.BAD_REQUEST,
+                    message:'Error',
+                    data:null
+                }
+            }
+            // Deleting user dp if it already exist
+            if (user.profilePic) {
+                const filePath = path.join(__dirname, `../../images/${user.profilePic}`)
+                fs.unlinkSync(filePath);
+            }
+            const updatedUser = await this._userRespository.removeUserProfileDp(userId)
+            if (updatedUser) {
+                return {
+                    status:STATUS_CODES.OK,
+                    message:'Success',
+                    data:updatedUser
+                }
+            }else{
+                return {
+                    status:STATUS_CODES.BAD_REQUEST,
+                    message:'Invalid User',
+                    data:null
+                }
+            }
+            
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal Error',
+                data:null
+            }
+        }
+    }
+
 }

@@ -1,4 +1,4 @@
-import { IApiRes, IEmployerAddress, ISubscription } from "./common"
+import { IApiRes, IEmployerAddress, ISubscription, IWalletHistory } from "./common"
 
 export interface IEmployerRes{
     _id:string
@@ -10,6 +10,9 @@ export interface IEmployerRes{
     mobile?:number
     address?:IEmployerAddress
     subscription?:ISubscription
+    wallet?: number
+    walletHistory?:IWalletHistory[]| []
+
 }
 
 

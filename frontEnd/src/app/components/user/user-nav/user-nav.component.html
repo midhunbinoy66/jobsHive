@@ -1,7 +1,7 @@
 <div class="flex flex-wrap w-screen  ">
     <section class="relative mx-auto">
       <!-- navbar -->
-      <nav class="flex justify-between  bg-gradient-to-br from-gray-100 to-gray-400 text-gray-800 w-screen">
+      <nav class="flex justify-between  bg-gradient-to-br from-gray-800 to-gray-900 text-white w-screen">
         <div class="px-5 xl:px-12 py-6 flex w-full items-start justify-start">
           <a class="" routerLink="/user/home">
             <img class="h-9" src="../../../../assets/logo.jpg" alt="jobHive Logo" />
@@ -27,7 +27,7 @@
   
             <div *ngIf="userDetails$ | async as user; else notLoggedIn" class="flex items-center" routerLink="/user/profile">
               <div *ngIf="user.profilePic">
-                <!-- <img [src]="imageFolderPath + user.profilePic" [alt]="user.name + ' Profile Picture'" class="rounded-full h-8 w-8 border-2 border-amber-300 hover:border-amber-500"> -->
+                <img [src]="imageFolderPath + user.profilePic" [alt]="user.name + ' Profile Picture'" class="rounded-full h-8 w-8 border-2 border-amber-300 hover:border-amber-500" alt="profilepic">
               </div>
               <div *ngIf="!user.profilePic" class="rounded-full h-8 w-8 border-2 border-amber-300 hover:border-amber-500 bg-black text-amber-300 hover:text-amber-500 text-center align-middle">
                 <span class="flex items-center justify-center h-full">

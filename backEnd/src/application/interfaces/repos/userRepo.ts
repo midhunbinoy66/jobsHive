@@ -25,5 +25,6 @@ export interface IuserRepo{
     updateWallet(userId:string,amount:number,message:string):Promise<IUserRes | null>
     getWalletHistory(userId:string,page:number,limit:number):Promise<IWalletHistoryAndCount | null>
     updateUserSubscription(userId:string,planData:IUserSubscription):Promise<IUserRes | null>
-
+    updateUserProfilePic(userId: string, fileName: string): Promise<IUserRes | null>
+    removeUserProfileDp(userId: string): Promise<IUserRes | null>
 }

@@ -1,8 +1,19 @@
 <app-user-nav></app-user-nav>
+<div class="bg-cover bg-center" style="background-image: url('../../../../assets/cool-background.png')"> 
 
-<app-wallet-history
-    [walletHistory]="walletHistory"
-    [transCount]="count"
-    (pageChange)="onPageChange($event)"
-    (itemsPerPageChange)="onItemsPerPageChange($event)"
-></app-wallet-history>
+    <section>
+        <div class="flex flex-col sm:flex-row space-x-2 ">
+            <app-user-sidebar class="my-1"></app-user-sidebar>
+            <div class="flex-1">
+                <app-wallet-history
+                [walletHistory]="walletHistory"
+                [transCount]="count"
+                (pageChange)="onPageChange($event)"
+                (itemsPerPageChange)="onItemsPerPageChange($event)"
+            ></app-wallet-history>
+            </div>
+
+        </div>
+    </section>
+</div>
+<app-user-footer></app-user-footer>
