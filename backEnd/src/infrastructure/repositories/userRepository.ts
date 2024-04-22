@@ -5,8 +5,10 @@ import { IUserAuth, IUserRes, IUserSocialAuth, IUserUpdate } from "../../applica
 import { IUserSubscription } from "../../entities/common";
 import { IJob } from "../../entities/job";
 import { IResume } from "../../entities/resume";
+import { ITransaction } from "../../entities/tranaction";
 import { IUser } from "../../entities/user";
 import resumeModel from "../db/resumeModel";
+import transactionModel from "../db/trascationModel";
 import userModel from "../db/userModel";
 
 
@@ -180,14 +182,23 @@ export class UserRespository implements IuserRepo {
       }
 
       async updateUserSubscription(userId: string, planData: IUserSubscription): Promise<IUserRes | null> {
-        console.log(planData);    
-        return await userModel.findByIdAndUpdate(
+        console.log(planData);
+        const user = await userModel.findByIdAndUpdate(
                 {_id:userId},
                 {
                     subscription:planData
                 },
                 {new:true}
-            )
+            ).populate('subscription.planId');
+
+            const tranactionData:ITransaction = {
+                userId:userId,
+                amount:user!.subscription!.planId.price,
+                date:new Date(Date.now())
+            }
+            await transactionModel.create(tranactionData);
+
+            return user
       } 
 
 

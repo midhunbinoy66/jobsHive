@@ -1,5 +1,6 @@
 import { AdminUseCase } from "../../application/useCases/adminUseCase";
 import { EmployeruseCase } from "../../application/useCases/employerUseCase";
+import { TransactionUseCase } from "../../application/useCases/trasactionUseCase";
 import { UserUseCase } from "../../application/useCases/userUseCase";
 import { IAdmin } from "../../entities/admin";
 import { Request, Response } from "express";
@@ -8,7 +9,8 @@ export class AdminController{
     constructor(
         private readonly _adminUseCase:AdminUseCase,
         private readonly _userUseCase:UserUseCase,
-        private readonly _employerUseCase:EmployeruseCase
+        private readonly _employerUseCase:EmployeruseCase,
+        private readonly _transactionUseCase:TransactionUseCase
     )
     {}
 
@@ -43,5 +45,10 @@ export class AdminController{
     async blockEmployers(req:Request,res:Response){
         const apiRes = await this._employerUseCase.blockUser(req.params.userId as string);
         res.status(apiRes.status).json(apiRes)
+    }
+
+    async getRevenueData(req:Request,res:Response){
+        const apiRes = await this._transactionUseCase.getRevenueAdmin();
+        res.status(apiRes.status).json(apiRes);
     }
 }

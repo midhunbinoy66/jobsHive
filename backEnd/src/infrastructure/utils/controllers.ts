@@ -9,6 +9,7 @@ import { ApplicationUseCase } from "../../application/useCases/applicationUseCas
 import { EmployeruseCase } from "../../application/useCases/employerUseCase"
 import { JobUseCase } from "../../application/useCases/jobUseCase"
 import { PlanUseCase } from "../../application/useCases/planUseCase"
+import { TransactionUseCase } from "../../application/useCases/trasactionUseCase"
 import { UserUseCase } from "../../application/useCases/userUseCase"
 import { AdminRepository } from "../repositories/adminRepository"
 import { ApplicationRepository } from "../repositories/applicationRepository"
@@ -17,6 +18,7 @@ import { JobRepository } from "../repositories/jobRepository"
 import { PlanRepository } from "../repositories/planRepository"
 import { TempEmployerRepository } from "../repositories/tempEmployerRepository"
 import { TempUserRepository } from "../repositories/tempUserRepository"
+import { TransactionRepository } from "../repositories/tranasactionRepository"
 import { UserRespository } from "../repositories/userRepository"
 import { Encryptor } from "./bcryptPassword"
 import { TokenGenerator } from "./jwtToken"
@@ -39,6 +41,7 @@ const employerRepository  = new EmployerRepository();
 const jobRepository = new JobRepository();
 const applicationRepository = new ApplicationRepository();
 const planRepository  = new PlanRepository();
+const transactionRepository = new TransactionRepository();
 
 //UseCases
 const userUseCase = new UserUseCase(userRepository,tempUserRepository,encryptor,tokenGenerator,mailSender,jobRepository,employerRepository);
@@ -47,9 +50,10 @@ const employerUseCase = new EmployeruseCase(employerRepository,tempEmployerRepos
 const jobUseCase = new JobUseCase(jobRepository);
 const applicationUseCase = new ApplicationUseCase(applicationRepository);
 const planUseCase = new PlanUseCase(planRepository);
+const transactionUseCase = new TransactionUseCase(transactionRepository);
 //UserControllers
 export const uController = new UserController(userUseCase,otpGenerator,encryptor);
-export const aController = new AdminController(adminUseCase,userUseCase,employerUseCase)
+export const aController = new AdminController(adminUseCase,userUseCase,employerUseCase,transactionUseCase)
 export const eContorller = new Employercontoller(employerUseCase,otpGenerator,encryptor);
 export const jController = new JobController(jobUseCase);
 export const appController = new ApplicationController(applicationUseCase);

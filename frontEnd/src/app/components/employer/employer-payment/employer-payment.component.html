@@ -1,6 +1,21 @@
 <app-employer-nav></app-employer-nav>
-<div class="bg-cover bg-center " style="background-image: url('../../../../assets/cool-background.png')">
-<p>{{plan.name}}</p>
-<p>{{plan.description}}</p>
-<button class="bg-blue-500 text-white" (click)="payforSusbcription(plan!.price)">Pay</button>
+<div  class="flex  flex-wrap  space-x-3 bg-cover bg-center " style="background-image: url('../../../../assets/cool-background.png')">
+  <app-employer-sidebar></app-employer-sidebar>
+  <div class="bg-transparent shadow-lg border-black rounded-lg px-8 py-6 flex-1 ">
+    <div class="ring-gray-200 ring-2 w-full p-4 rounded-lg my-1 hover:ring-gray-300 transition duration-300 ease-in-out">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">{{ plan.name }}</h2>
+            <span class="text-gray-500">{{ plan.duration }} Months</span>
+        </div>
+        <p class="text-gray-600">{{ plan.description }}</p>
+        <div class="mt-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-700">${{ plan.price }}</div>
+            <button 
+                class="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                (click)="payforSusbcription(plan!.price)">
+                Pay Now
+            </button>
+        </div>
+    </div>
+</div>
 </div>

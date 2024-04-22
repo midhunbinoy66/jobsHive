@@ -17,6 +17,7 @@ import { AdminEmployerMangementComponent } from './admin-employer-mangement/admi
 import { AdminJobManagementComponent } from './admin-job-management/admin-job-management.component';
 import { EmailValidationComponent } from '../common/validation/email-validation/email-validation.component';
 import { PasswordValidationComponent } from '../common/validation/password-validation/password-validation.component';
+import { LineGraphComponent } from '../common/line-graph/line-graph.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { PasswordValidationComponent } from '../common/validation/password-valid
     FormsModule,
     CommonValidationComponent,
     EmailValidationComponent,
-    PasswordValidationComponent
+    PasswordValidationComponent,
+    LineGraphComponent
   ]
 })
 export class AdminModule { }

@@ -3,7 +3,9 @@ import { IWalletHistoryAndCount } from "../../application/interfaces/types/commo
 import { IEmployerAuth, IEmployerRes, IEmployerUpdate } from "../../application/interfaces/types/employer";
 import { IUserSubscription } from "../../entities/common";
 import { IEmployer } from "../../entities/employer";
+import { ITransaction } from "../../entities/tranaction";
 import { employerModel } from "../db/employerModel";
+import transactionModel from "../db/trascationModel";
 
 
 
@@ -80,13 +82,22 @@ export class EmployerRepository implements IEmployerRepo{
 
       async updateUserSubscription(userId: string, planData: IUserSubscription): Promise<IEmployerRes | null> {
         console.log(planData);    
-        return await employerModel.findByIdAndUpdate(
+        const employer = await employerModel.findByIdAndUpdate(
                 {_id:userId},
                 {
                     subscription:planData
                 },
                 {new:true}
-            )
+            ).populate('subscription.planId');
+
+            const tranactionData:ITransaction = {
+                userId:userId,
+                amount:employer!.subscription!.planId.price,
+                date:new Date(Date.now())
+            }
+            await transactionModel.create(tranactionData);
+
+            return employer
       } 
 
 
