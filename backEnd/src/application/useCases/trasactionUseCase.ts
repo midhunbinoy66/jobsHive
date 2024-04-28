@@ -15,7 +15,7 @@ export class TransactionUseCase {
                     startDate = new Date(
                         new Date().getFullYear(),
                         new Date().getMonth(),
-                        new Date().getDate()
+                        1
                 );
                 endDate = new Date();
                 }

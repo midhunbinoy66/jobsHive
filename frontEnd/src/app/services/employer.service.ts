@@ -4,6 +4,7 @@ import { IApiRes, ISubscription, IWalletHistoryAndCount } from '../models/common
 import { Observable } from 'rxjs';
 import { IUsersAndCount } from '../models/users';
 import { IAPiEmployerRes, IApiEmployersRes, IEmployerUpdate, IEmployersAndCount } from '../models/employer';
+import { IApiChatRes } from '../models/chat';
 
 @Injectable({
   providedIn: 'root'
@@ -44,4 +45,22 @@ export class EmployerService {
   getWalletHistory(employerId:string,page:number,limit:number):Observable<IApiRes<IWalletHistoryAndCount | null>>{
     return this.http.get<IApiRes<IWalletHistoryAndCount|null>>(`employer/wallet-history/${employerId}?page=${page}&limit=${limit}`)
   }
+
+  getEmployerData(employerId:string):Observable<IAPiEmployerRes>{
+    return this.http.get<IAPiEmployerRes>(`user/employer/${employerId}`);
+  }
+
+  getEmployersChattedWith(userId:string):Observable<IApiEmployersRes>{
+    return this.http.get<IApiEmployersRes>(`user/chat/employers/${userId}`)
+  }
+
+  getChatHistory(employerId:string,userId:string):Observable<IApiChatRes>{
+    return this.http.get<IApiChatRes>(`employer/chat/history?employerId=${employerId}&userId=${userId}`);
+  }
+
+  markLastMessageAsRead (userId: string | undefined, employerId: string | undefined, adminId: string | undefined, msgId: string): Observable<IApiRes<null>> {
+    return this.http.patch<IApiRes<null>>(`theater/chat/mark/read?userId=${userId ?? ''}&employerId=${employerId ?? ''}&adminId=${adminId ?? ''}&msgId=${msgId}`, {})
+  }
+
+
 }

@@ -19,6 +19,7 @@ export class AdminHomeComponent implements OnInit{
   ngOnInit(): void {
     this.adminService.getRevenueData().subscribe({
       next:(res)=>{
+        console.log(res);
         if(res.data === null) return 
         this.data ={
           labels:res.data.labels,

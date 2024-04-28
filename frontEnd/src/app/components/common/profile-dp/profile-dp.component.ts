@@ -26,6 +26,7 @@ imageWidth = signal(0);
 
 @Input() currDp:string ='';
 
+
 imageHeight = signal(0);
 
 @Input() set height(val:number){

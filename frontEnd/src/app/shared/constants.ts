@@ -1,3 +1,5 @@
+import { environment } from 'src/environments/environment.development'
+
 export const OTP_TIMER = 60 * 3 // 3 min in seconds
 export const OTP_RESEND_MAX_TIME = 1000 * 60 * 10 // 10 min in milliseconds
 export const TICKET_EXPIRE_TIME = 60 * 10 // 10 min seconds
@@ -29,3 +31,4 @@ export const mobileRegex = '^[1-9][0-9]{9}$'
 export const MinAge = 10
 export const MinDate = new Date(1960, 0, 1)
 export const nonAuthRotues = ['login', 'register']
+export const imagesFolderPath = environment.baseUrl + '/images/'

@@ -1,5 +1,5 @@
   
-export function getDateKeyWithInterval(start: Date, end: Date, date: Date, interval: number = 5): string {
+export function getDateKeyWithInterval(start: Date, end: Date, date: Date, interval: number = 1): string {
     // Ensure start date is the beginning of an interval
     const adjustedStartDate = new Date(start.getFullYear(), start.getMonth(), start.getDate() - start.getDay() % interval);
   

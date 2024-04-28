@@ -4,6 +4,7 @@ import { IApiUserRes, IApiUsersRes, IUserRes, IUserUpdate, IUsersAndCount } from
 import { Observable } from 'rxjs';
 import { IApiResumeRes, IResumeUpdate } from '../models/resume';
 import { IApiRes, ISubscription, IWalletHistoryAndCount } from '../models/common';
+import { IApiChatRes, IUsersListForChats } from '../models/chat';
 
 @Injectable({
   providedIn: 'root'
@@ -77,4 +78,11 @@ export class UserService {
     return this.http.patch<IApiUserRes>(`user/remove/profileimage/${userId}`, {})
   }
 
+  getChatHistory(employerId:string,userId:string):Observable<IApiChatRes>{
+    return this.http.get<IApiChatRes>(`user/chat/history?employerId=${employerId}&userId=${userId}`);
+  }
+
+  getUsersChattedWith (employerId: string): Observable<IApiRes<IUsersListForChats[] | null>> {
+    return this.http.get<IApiRes<IUsersListForChats[] | null>>(`employer/chat/users/${employerId}`)
+  }
 }

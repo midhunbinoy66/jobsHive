@@ -1,5 +1,5 @@
 import express from 'express'
-import { appController, eContorller, jController } from '../utils/controllers';
+import { appController, chatController, eContorller, jController } from '../utils/controllers';
 
 const employerRouter = express.Router();
 
@@ -10,6 +10,9 @@ employerRouter.post('/login',(req,res)=>eContorller.employerLogin(req,res));
 employerRouter.put('/update/:userId',(req,res)=>eContorller.updateProfile(req,res));
 employerRouter.patch('/wallet/add/:employerId',(req,res)=>eContorller.addToWallet(req,res));
 employerRouter.get('/wallet-history/:employerId',(req,res)=>eContorller.getWalletHistory(req,res));
+
+employerRouter.get('/chat/users/:employerId',(req,res)=>chatController.getUsersChattedWith(req,res));
+employerRouter.get('/chat/history',(req,res)=>chatController.getChatHistory(req,res));
 
 employerRouter.get('/job/:jobId',(req,res)=>jController.getJobDetails(req,res))
 employerRouter.post('/create-job',(req,res)=>jController.addJob(req,res));

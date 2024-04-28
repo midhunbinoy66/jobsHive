@@ -10,6 +10,7 @@ import { RazorpayService } from 'src/app/services/razorpay.service';
 import { UserService } from 'src/app/services/user.service';
 import { saveUserOnStore } from 'src/app/states/user/user.action';
 import { selectUserDetails } from 'src/app/states/user/user.selector';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-payment',
@@ -98,7 +99,21 @@ export class UserPaymentComponent implements OnInit ,OnDestroy{
     return endDate
   }
 
+  payWithWallet(planPrice:number):void{
+    if(this.user?.wallet !== undefined){
+      if(this.user.wallet >=planPrice){
+        this.userService.updateUserWallet(this.userId,-planPrice).subscribe({
+          next:(res)=>{
+            this.user =res.data;
+            this.store.dispatch(saveUserOnStore({userDetails:this.user}));
+            this.confirmSubscription();
+            void Swal.fire('Success','Payment Success Using Wallet','success');
+          }
+        })
+      }
+    }
 
+  }
 
   ngOnDestroy(): void {
     this.paymentResultSubscription.unsubscribe();

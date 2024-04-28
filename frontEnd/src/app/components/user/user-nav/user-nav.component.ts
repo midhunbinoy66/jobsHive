@@ -14,7 +14,7 @@ export class UserNavComponent implements OnInit {
   isLoggedIn:boolean = false;
   showSidebar = false;
   userDetails$ = this.store.pipe(select(selectUserDetails));
-  imageFolderPath = environment.baseUrl+'/images/'
+  imageFolderPath = environment.baseUrl+'images/'
   constructor(
     private readonly router:Router,
     private readonly store:Store

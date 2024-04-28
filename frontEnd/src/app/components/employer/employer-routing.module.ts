@@ -15,6 +15,7 @@ import { EmployerProfileEditComponent } from './employer-profile-edit/employer-p
 import { EmployerSubscriptionComponent } from './employer-subscription/employer-subscription.component';
 import { EmployerPaymentComponent } from './employer-payment/employer-payment.component';
 import { EmployerWalletComponent } from './employer-wallet/employer-wallet.component';
+import { EmployerMessageComponent } from './employer-message/employer-message.component';
 
 const routes: Routes = [
   {
@@ -95,6 +96,11 @@ const routes: Routes = [
     title:'JobHive | Wallet',
     component:EmployerWalletComponent,
     canActivate:[authGuard]
+  },
+  {
+    path:'messages',
+    title:'JobHive | Message',
+    component:EmployerMessageComponent,
   },
   {
     path: '',

@@ -5,7 +5,7 @@ import {environment} from 'src/environments/environment.development'
 import { UserRoutingModule } from './user-routing.module';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { UserNavComponent } from './user-nav/user-nav.component';
 import { StoreModule } from '@ngrx/store';
@@ -37,6 +37,7 @@ import { UserWalletComponent } from './user-wallet/user-wallet.component';
 import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.component';
 import { UserFooterComponent } from './user-footer/user-footer.component';
 import { ProfileDpComponent } from '../common/profile-dp/profile-dp.component';
+import { UserMessagesComponent } from './user-messages/user-messages.component';
 
 @NgModule({
   declarations: [
@@ -56,11 +57,12 @@ import { ProfileDpComponent } from '../common/profile-dp/profile-dp.component';
     UserPaymentComponent,
     UserWalletComponent,
     UserFooterComponent,
+    UserMessagesComponent,
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
-    
+    FormsModule,
     ReactiveFormsModule,
     StoreModule.forFeature('user',userReducer),
     SocialLoginModule,

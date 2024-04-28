@@ -55,7 +55,8 @@ export class EditUserProfileComponent implements OnInit {
         this.userId = this.user._id;
         this.profileForm.get('name')?.setValue(this.user.name);
         this.profileForm.get('mobile')?.setValue(this.user.mobile);
-        if(this.user.profilePic !== undefined) this.dpurl = 'http://localhost:3000'+`'/images/${this.user.profilePic}`
+        if(this.user.profilePic !== undefined) this.dpurl = 'http://localhost:3000'+`/images/${this.user.profilePic}`
+        console.log(this.dpurl);
         console.log(this.user);
         if(this.user.address !== null){
           this.city = String(this.user.address?.city)

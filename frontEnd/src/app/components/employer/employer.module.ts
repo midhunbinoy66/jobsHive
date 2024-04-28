@@ -5,7 +5,7 @@ import { EmployerRoutingModule } from './employer-routing.module';
 import { EmployerLoginComponent } from './employer-login/employer-login.component';
 import { EmployerHomeComponent } from './employer-home/employer-home.component';
 import { EmployerRegisterComponent } from './employer-register/employer-register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailValidationComponent } from '../common/validation/email-validation/email-validation.component';
 import { PasswordValidationComponent } from '../common/validation/password-validation/password-validation.component';
 import { OtpValidationComponent } from '../common/validation/otp-validation/otp-validation.component';
@@ -34,6 +34,7 @@ import { EmployerPaymentComponent } from './employer-payment/employer-payment.co
 import { EmployerWalletComponent } from './employer-wallet/employer-wallet.component';
 import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.component';
 import { EmployerFooterComponent } from './employer-footer/employer-footer.component';
+import { EmployerMessageComponent } from './employer-message/employer-message.component';
 
 @NgModule({
   declarations: [
@@ -53,11 +54,13 @@ import { EmployerFooterComponent } from './employer-footer/employer-footer.compo
     EmployerPaymentComponent,
     EmployerWalletComponent,
     EmployerFooterComponent,
+    EmployerMessageComponent,
   ],
   imports: [
     CommonModule,
     EmployerRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     EmailValidationComponent,
     PasswordValidationComponent,
     OtpValidationComponent,

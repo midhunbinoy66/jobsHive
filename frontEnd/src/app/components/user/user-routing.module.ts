@@ -14,6 +14,7 @@ import { UserFollowingComponent } from './user-following/user-following.componen
 import { UserPaymentComponent } from './user-payment/user-payment.component';
 import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.component';
 import { UserWalletComponent } from './user-wallet/user-wallet.component';
+import { UserMessagesComponent } from './user-messages/user-messages.component';
 
 const routes: Routes = [
 
@@ -83,6 +84,11 @@ const routes: Routes = [
     title:'JobHive | Wallet',
     component:UserWalletComponent,
     canActivate:[authGuard]
+  },
+  {
+    path:'messages',
+    title:'JobHive | Messages',
+    component:UserMessagesComponent
   },
   {
     path: '',
