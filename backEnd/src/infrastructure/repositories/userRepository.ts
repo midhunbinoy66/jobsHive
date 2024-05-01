@@ -215,6 +215,7 @@ export class UserRespository implements IuserRepo {
       }
 
       async removeUserProfileDp(userId: string): Promise<IUserRes | null> {
+        console.log('hitt...')
           return await userModel.findByIdAndUpdate(
             {_id:userId},
             {

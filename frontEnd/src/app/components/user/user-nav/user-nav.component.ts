@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import { IUserRes } from 'src/app/models/users';
 import { deleteUserFromStore } from 'src/app/states/user/user.action';
 import { selectUserDetails } from 'src/app/states/user/user.selector';
 import { environment } from 'src/environments/environment.development';
@@ -11,6 +12,7 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./user-nav.component.css']
 })
 export class UserNavComponent implements OnInit {
+  trialUser!:IUserRes
   isLoggedIn:boolean = false;
   showSidebar = false;
   userDetails$ = this.store.pipe(select(selectUserDetails));
@@ -22,7 +24,13 @@ export class UserNavComponent implements OnInit {
 
 
   ngOnInit(): void {
-  
+    console.log(this.imageFolderPath);
+    this.userDetails$.subscribe((res)=>{
+      if(res !== null)
+      this.trialUser = res
+    })
+
+    console.log(this.imageFolderPath+this.trialUser.profilePic);
   }
 
   toggleSideBar():void{

@@ -38,6 +38,7 @@ import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.
 import { UserFooterComponent } from './user-footer/user-footer.component';
 import { ProfileDpComponent } from '../common/profile-dp/profile-dp.component';
 import { UserMessagesComponent } from './user-messages/user-messages.component';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { UserMessagesComponent } from './user-messages/user-messages.component';
     StateValidationComponent,
     ZipValidationComponent,
     WalletHistoryComponent,
-    ProfileDpComponent
+    ProfileDpComponent,
+    MatButtonModule
   ],
   providers: [
     {

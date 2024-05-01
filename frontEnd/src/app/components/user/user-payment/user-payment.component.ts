@@ -110,6 +110,8 @@ export class UserPaymentComponent implements OnInit ,OnDestroy{
             void Swal.fire('Success','Payment Success Using Wallet','success');
           }
         })
+      }else{
+        void Swal.fire('Oops','Insufficient Balance','error')
       }
     }
 

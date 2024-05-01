@@ -485,6 +485,7 @@ export class UserUseCase{
             // Deleting user dp if it already exist
             if (user.profilePic) {
                 const filePath = path.join(__dirname, `../../images/${user.profilePic}`)
+                console.log(filePath);
                 fs.unlinkSync(filePath);
             }
             const updatedUser = await this._userRespository.removeUserProfileDp(userId)
