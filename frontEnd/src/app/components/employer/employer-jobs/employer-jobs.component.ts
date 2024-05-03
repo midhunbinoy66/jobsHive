@@ -15,7 +15,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./employer-jobs.component.css']
 })
 export class EmployerJobsComponent implements OnInit{
-
+  currentPage= 1
+  totalItems =0
+  pageSize =3
+  Max = 0
   employerDetails = this.store.pipe(select(selectEmployerDetails))
   employer:IEmployerRes| null = null;
   employerJobs:IJobRes[]|null = null;
@@ -33,21 +36,17 @@ export class EmployerJobsComponent implements OnInit{
       this.employer = res;
     })
     if(this.employer){
-      // this.jobService.findEmployerJobs(this.employer._id).subscribe({
-      //   next:(res)=>{
-      //     this.employerJobs = res.data
-      //     console.log(this.employerJobs);
-      //   }
-      // })
       this.initialize();
     }
   }
 
   initialize(){
-    this.jobService.findEmployerJobs(this.employer!._id).subscribe({
+    this.jobService.findEmployerJobs(this.employer!._id,this.currentPage,this.pageSize).subscribe({
       next:(res)=>{
-        this.employerJobs = res.data
-        console.log(this.employerJobs);
+        console.log(res.data?.jobs);
+        this.employerJobs = res.data!.jobs
+        this.totalItems = res.data!.jobCount
+        this.Max =Math.ceil(this.totalItems/this.pageSize);
       }
     })
   }
@@ -82,6 +81,11 @@ export class EmployerJobsComponent implements OnInit{
     this.router.navigate([`/employer/job/${jobId}`]);
   }
 
+
+  onPageChange(page:number){
+    this.currentPage  =page;
+    this.initialize();
+  }
 
 
 }

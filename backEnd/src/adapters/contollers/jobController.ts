@@ -31,7 +31,9 @@ export class JobController{
 
     async getUserSavedJobs(req:Request,res:Response){
         const jobIds = req.body.jobIds;
-        const apiRes = await this._jobUseCase.findUserSavedJobs(jobIds);
+        const pageNumber = parseInt(req.query.pageNumber as string)
+        const pageSize = parseInt(req.query.pageSize as string)
+        const apiRes = await this._jobUseCase.findUserSavedJobs(jobIds,pageNumber,pageSize);
         res.status(apiRes.status).json(apiRes);
     }
 
@@ -43,11 +45,12 @@ export class JobController{
 
     async getAllEmployerJob(req:Request,res:Response){
         const employerId = req.params.employerId;
-        const apiRes = await this._jobUseCase.findEmployerJobs(employerId);
+        const page = parseInt(req.query.pageNumber as string)
+        const pageSize = parseInt(req.query.pageSize as string); 
+        const apiRes = await this._jobUseCase.findEmployerJobs(employerId,page,pageSize);
         res.status(apiRes.status).json(apiRes);
     }
-
-
+    
     async updateEmployerJob(req:Request,res:Response){
         const jobId = req.params.jobId;
         const jobData = req.body;

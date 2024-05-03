@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { validateByTrimming } from 'src/app/helpers/validations';
+import { lengthValidator, validateByTrimming } from 'src/app/helpers/validations';
 import { IApiJobRes, IApiJobsRes, IJobRes } from 'src/app/models/jobs';
 import { JobService } from 'src/app/services/job.service';
+import { MIN_SALARY_AMOUNT } from 'src/app/shared/constants';
 import { commonValidators, salaryValidators } from 'src/app/shared/validators';
 import Swal from 'sweetalert2';
 
@@ -45,15 +46,14 @@ export class EmployerJobEditComponent implements OnInit{
     this.jobForm = this.formBuilder.group({
       title:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
-      salary:['',Validators.required],
+      salary:['',[Validators.required,Validators.min(MIN_SALARY_AMOUNT)]],
       city:['',[validateByTrimming(commonValidators)]],
       district:['',[validateByTrimming(commonValidators)]],
       state:['',[validateByTrimming(commonValidators)]],
       country:['',[validateByTrimming(commonValidators)]],
-      // landmark:['',[validateByTrimming(commonValidators)]],
       zip:['',Validators.required],
-      requierments:this.formBuilder.array([this.formBuilder.control('')]),
-      responsibilities:this.formBuilder.array([this.formBuilder.control('')]),
+      requierments:this.formBuilder.array([],[Validators.required,lengthValidator(2)]),
+      responsibilities:this.formBuilder.array([],[Validators.required,lengthValidator(2)]),
       typeOfJob:['',Validators.required]
     })
 
@@ -77,13 +77,13 @@ export class EmployerJobEditComponent implements OnInit{
 
     if(this.jobData?.requierments && this.jobData.requierments.length>0){
       this.jobData.requierments.forEach((requirement)=>{
-        this.requiermentForms.push(this.formBuilder.control(requirement));
+        this.requiermentForms.push(this.formBuilder.control(requirement,Validators.required));
       })
     }
 
     if(this.jobData?.responsibilities && this.jobData.responsibilities.length>0){
       this.jobData.responsibilities.forEach((responsibility)=>{
-        this.responsibilitiesFrom.push(this.formBuilder.control(responsibility));
+        this.responsibilitiesFrom.push(this.formBuilder.control(responsibility,Validators.required));
       })
     }
   }
@@ -95,7 +95,7 @@ export class EmployerJobEditComponent implements OnInit{
   }
 
   addRequierment(){
-    this.requiermentForms.push(this.formBuilder.control(''))
+    this.requiermentForms.push(this.formBuilder.control('',Validators.required))
   }
 
   removeRequierment(index:number){
@@ -109,7 +109,7 @@ export class EmployerJobEditComponent implements OnInit{
   }
 
   addResponsiblilites(){
-    this.responsibilitiesFrom.push(this.formBuilder.control(''));
+    this.responsibilitiesFrom.push(this.formBuilder.control('',Validators.required));
   }
 
   removeResponsibilities(index:number){
@@ -117,6 +117,7 @@ export class EmployerJobEditComponent implements OnInit{
   }
 
   onSubmit(){
+    console.log(this.jobForm);
     this.isSubmitted = true;
     if(!this.jobForm.invalid){
       const formData = this.jobForm.getRawValue();

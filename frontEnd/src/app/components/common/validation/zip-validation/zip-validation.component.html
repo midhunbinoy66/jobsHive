@@ -1,3 +1,4 @@
 <div *ngIf="isSubmitted && zipControl && zipControl.errors">
-    <div *ngIf="zipControl.errors['required']" style="color: red;">Zip is required</div>
+    <div *ngIf="zipControl.errors['required']" style="color: red;">Zip code is required</div>
+    <div *ngIf="zipControl.errors['pattern']" style="color: red;">Zip code does not match pattern</div>
 </div>

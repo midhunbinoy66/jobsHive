@@ -10,6 +10,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-plans.component.css']
 })
 export class AdminPlansComponent  implements OnInit{
+  pageNumber=1;
+  pageSize = 3
+  totalItems =0
+  maxPage = 0;
 
   plans:IPlan[] | null =[]
 
@@ -20,11 +24,24 @@ export class AdminPlansComponent  implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.planService.findAllPlans().subscribe({
+    this.getPlans();
+  }
+
+  getPlans(){
+    this.planService.findAllPlans(this.pageNumber,this.pageSize).subscribe({
       next:(res)=>{
-        this.plans =res.data
+        if(res.data?.plans){
+          this.plans =res.data.plans
+          this.totalItems = res.data.planCount
+          this.maxPage =Math.ceil(this.totalItems/this.pageSize);
+        }
       }
     })
+  }
+
+  onPageChange(page:number){
+    this.pageNumber =page;
+    this.getPlans();
   }
 
   onDelete(planId:string){

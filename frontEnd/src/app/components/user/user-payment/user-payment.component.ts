@@ -59,7 +59,6 @@ export class UserPaymentComponent implements OnInit ,OnDestroy{
     console.log(planData);
     this.userService.usrePlanSubscription(this.userId,planData).subscribe({
       next:(res)=>{
-          console.log(res.data);
           this.store.dispatch(saveUserOnStore({userDetails:res.data}));
       }
     })

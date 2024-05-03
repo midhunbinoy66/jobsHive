@@ -26,5 +26,10 @@
         </div>
     </div>
  
-    
+    <!-- pagination -->
+    <div>
+        <button [disabled]="pageNumber===1" (click)="onPageChange(pageNumber-1)" >Prev</button>
+        <span>{{pageNumber}} of {{maxPage}}</span>
+        <button [disabled]="pageNumber===maxPage" (click)="onPageChange(pageNumber+1)" >Next</button>
+    </div>
 </div>

@@ -19,7 +19,8 @@
                     <div class="mb-3">
                         <label for="salary" class="form-label">Job Salary</label>
                         <input type="number" name="salary" placeholder="Salary" class="form-control" formControlName="salary">
-                        
+                        <p *ngIf="jobForm.get('salary')?.errors?.['required'] && isSubmitted" class="text-red-600">Salary is required</p>
+                        <p *ngIf="jobForm.get('salary')?.errors?.['min'] && isSubmitted" class="text-red-600">Salary Should be minimum 10000</p>
                     </div>
                     <h3 class="text-lg font-semibold mb-3">Company Address</h3>
                     <div class="row g-3">
@@ -62,6 +63,8 @@
                                 <button type="button" (click)="removeRequierment(i)" class="btn ">Remove</button>
                             </div>
                             <button type="button" (click)="addRequierment()" class="btn  bg-blue rounded-lg">Add Requirement</button>
+                            <p *ngIf="jobForm.get('requierments')?.errors?.['required'] && isSubmitted" class="text-red-600">Requirement has to be filled</p>
+                            <p *ngIf="jobForm.get('requierments')?.errors?.['minLength'] && isSubmitted" class="text-red-600">Atleast Three Requirement has to be filled</p>  
                         </div>
                     </div>
                     <div class="mb-3">

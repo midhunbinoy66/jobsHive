@@ -6,6 +6,17 @@ export interface IApiJobsRes{
     data:IJobRes[]|null
   }
 
+export interface IJobsAndCount{
+  jobs:IJobRes[],
+  jobCount:number
+}
+
+export interface IApiJobsAndCountRes{
+  status:string
+  message:string
+  data:IJobsAndCount | null
+}
+
 
 export interface IApiJobRes{
     status:string

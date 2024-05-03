@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { validateByTrimming } from 'src/app/helpers/validations';
 import { IPlan } from 'src/app/models/plans';
 import { PlanService } from 'src/app/services/plan.service';
+import { MIN_PLAN_AMOUNT, MIN_SALARY_AMOUNT } from 'src/app/shared/constants';
 import { commonValidators } from 'src/app/shared/validators';
 import Swal from 'sweetalert2';
 
@@ -45,9 +46,9 @@ export class AdminEditPlanComponent implements OnInit{
     this.form = this.fb.group({
       name:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
-      price:['',Validators.required],
+      price:['',[Validators.required,Validators.min(MIN_PLAN_AMOUNT)]],
       duration:['',Validators.required],
-      features:this.fb.array([this.fb.control('')])
+      features:this.fb.array([],Validators.required)
     })
 
     if(this.plan){
@@ -62,7 +63,7 @@ export class AdminEditPlanComponent implements OnInit{
 
       if(this.plan.features && this.plan.features.length>0){
           this.plan.features.forEach(feature=>{
-            this.featuresForm.push(this.fb.control(feature));
+            this.featuresForm.push(this.fb.control(feature,Validators.required));
           })
       }
     }
@@ -75,7 +76,7 @@ export class AdminEditPlanComponent implements OnInit{
  
 
   addFeature(){
-    this.featuresForm.push(this.fb.control(''));
+    this.featuresForm.push(this.fb.control('',Validators.required));
   }
 
   removeFeature(index:number){

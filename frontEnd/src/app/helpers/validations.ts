@@ -30,3 +30,17 @@ export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): V
     repeatPassword?.setErrors(null)
     return null
   }
+
+
+
+ 
+
+  export function lengthValidator(minLength:number):ValidatorFn{
+    return (control:AbstractControl)=>{
+      const value = control.value;
+      if(value && value.length < minLength) {
+        return {'minLength':{requiredLength:minLength,actualLength:value.length}}
+      }
+      return null
+    }
+  }

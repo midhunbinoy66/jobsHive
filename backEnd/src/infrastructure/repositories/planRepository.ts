@@ -1,5 +1,5 @@
 import { IPlanRepo } from "../../application/interfaces/repos/userPlanRespo";
-import { IPlanReq } from "../../application/interfaces/types/plan";
+import { IPlanAndCount, IPlanReq } from "../../application/interfaces/types/plan";
 import { IPlan } from "../../entities/plan";
 import userPlanModel from "../db/userPlanModel";
 
@@ -9,8 +9,20 @@ export class PlanRepository implements IPlanRepo{
         return await userPlanModel.findById(planId);
     }
 
-    async findAllPlans(): Promise<IPlan[] | null> {
-        return await userPlanModel.find({isActive:true});
+    async findAllPlans(page:number,pageSize:number): Promise<IPlanAndCount | null> {
+        console.log(page,pageSize);
+        const skip = (page - 1) * pageSize;
+        const plans = await userPlanModel.find({isActive:true})
+        .skip(skip)
+        .limit(pageSize)
+        .exec();
+
+        const planCount = await userPlanModel.countDocuments({isActive:true});
+
+        return {
+            plans:plans,
+            planCount:planCount
+        }
     }
 
    async createPlan(planData: IPlanReq): Promise<IPlan | null> {

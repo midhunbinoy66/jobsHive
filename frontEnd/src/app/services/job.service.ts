@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiJobRes, IApiJobsRes, IJobReq, IJobRes, IJobssAndCount } from '../models/jobs';
+import { IApiJobRes, IApiJobsAndCountRes, IApiJobsRes, IJobReq, IJobRes, IJobssAndCount } from '../models/jobs';
 import { IApiApplicationRes, IApiApplicationsRes } from '../models/application';
 import { IApiUserRes, IUserUpdate } from '../models/users';
 import { Observable } from 'rxjs';
@@ -28,9 +28,9 @@ export class JobService {
     return this.http.get<IApiJobsRes>('user/jobs',{params:criteria});
   }
 
-  findSavedJobs(jobIds:string[]){
+  findSavedJobs(jobIds:string[],pageNumber:number,pageSize:number){
     const payload = { jobIds: jobIds };
-    return this.http.post<IApiJobsRes>('user/saved-jobs',payload)
+    return this.http.post<IApiJobsAndCountRes>('user/saved-jobs',payload,{params:{pageNumber:pageNumber,pageSize:pageSize}})
   }
 
   applyForJob(jobData:any){
@@ -45,8 +45,9 @@ export class JobService {
     return this.http.post<IApiUserRes>(`user/remove/saved-jobs/${userId}`,{jobId});
   }
 
-  findEmployerJobs(employerId:string){
-    return this.http.get<IApiJobsRes>(`employer/jobs/${employerId}`)
+  findEmployerJobs(employerId:string,pageNumber:number,pageSize:number){
+    console.log(pageNumber,pageSize);
+    return this.http.get<IApiJobsAndCountRes>(`employer/jobs/${employerId}`,{params:{pageNumber:pageNumber.toString(),pageSize:pageSize.toString()}})
   }
 
   deleteEmployerJob(jobId:string){

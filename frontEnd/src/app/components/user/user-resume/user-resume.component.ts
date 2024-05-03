@@ -38,8 +38,12 @@ export class UserResumeComponent implements OnInit{
     this.userDetails$.subscribe((res)=>{
       this.user = res;
     })
-
     this.initializeForm();
+    this.getResume()
+  }
+
+
+  getResume(){
     this.useService.getUserResumeDetails(this.user!._id).subscribe({
       next:(res)=>{
         this.userResume = res.data;
@@ -47,31 +51,9 @@ export class UserResumeComponent implements OnInit{
           this.isResume = true;
           this.initializeForm();
         }
-
       }
     })
-
-    // this.form = this.formBuilder.group({
-    //   name:['',[validateByTrimming(nameValidators)]],
-    //   email:['',[validateByTrimming(emailValidators)]],
-    //   mobile:['',[validateByTrimming(mobileValidators)]],
-    //   languages:this.formBuilder.array([this.formBuilder.control('')]),
-    //   skills:this.formBuilder.array([this.formBuilder.control('')]),
-    //   companyName:['',[validateByTrimming(commonValidators)]],
-    //   jobTitle:['',[validateByTrimming(commonValidators)]],
-    //   companyLocation:['',[validateByTrimming(commonValidators)]],
-    //   companyStartDate:['',Validators.required],
-    //   companyEndDate:['',Validators.required],
-    //   institution:['',[validateByTrimming(commonValidators)]],
-    //   degree:['',[validateByTrimming(commonValidators)]],
-    //   fieldOfStudy:['',[validateByTrimming(commonValidators)]],
-    //   startDate:['',Validators.required],
-    //   endDate:['',Validators.required]
-
-    // })
-
   }
-
 
   addLanguage() {
     this.languageForms.push(this.formBuilder.control(''));
@@ -108,8 +90,8 @@ export class UserResumeComponent implements OnInit{
       name:['',[validateByTrimming(nameValidators)]],
       email:['',[validateByTrimming(emailValidators)]],
       mobile:['',[validateByTrimming(mobileValidators)]],
-      languages:this.formBuilder.array([this.formBuilder.control('')]),
-      skills:this.formBuilder.array([this.formBuilder.control('')]),
+      languages:this.formBuilder.array([],Validators.required),
+      skills:this.formBuilder.array([],Validators.required),
       companyName:['',[validateByTrimming(commonValidators)]],
       jobTitle:['',[validateByTrimming(commonValidators)]],
       companyLocation:['',[validateByTrimming(commonValidators)]],
@@ -125,7 +107,7 @@ export class UserResumeComponent implements OnInit{
 
    
     if (this.userResume) {
-
+      console.log(this.userResume);
       this.form.patchValue({
         name: this.userResume.name || '', 
         email: this.userResume.email || '', 
@@ -135,13 +117,13 @@ export class UserResumeComponent implements OnInit{
       // Patch values for arrays (e.g., languages and skills)
       if (this.userResume.languages && this.userResume.languages.length > 0) {
         this.userResume.languages.forEach((language: string) => {
-          this.languageForms.push(this.formBuilder.control(language));
+          this.languageForms.push(this.formBuilder.control(language,Validators.required));
         });
       }
   
       if (this.userResume.skills && this.userResume.skills.length > 0) {
         this.userResume.skills.forEach((skill: string) => {
-          this.skillForms.push(this.formBuilder.control(skill));
+          this.skillForms.push(this.formBuilder.control(skill,Validators.required));
         });
       }
   
@@ -151,9 +133,7 @@ export class UserResumeComponent implements OnInit{
           jobTitle: this.userResume.workExperience.jobTitle || '',
           companyLocation: this.userResume.workExperience.location || '',
           companyStartDate:this.userResume.workExperience.workStartDate|| '',
-          companyEndDate:this.userResume.workExperience.workEndDate|| '',
-
-
+          companyEndDate:this.userResume.workExperience.workEndDate|| ''
         });
       }
   
@@ -182,7 +162,7 @@ export class UserResumeComponent implements OnInit{
       const workData:IUserWorkExp = {
         companyName:formData.companyName,
         jobTitle:formData.jobTitle,
-        location:formData.workStartDate,
+        location:formData.companyLocation,
         workStartDate:formData.companyStartDate,
         workEndDate:formData.companyEndDate
       }
@@ -208,7 +188,7 @@ export class UserResumeComponent implements OnInit{
         next:(res)=>{
           this.isResume =true;
           void Swal.fire('Success','Resume has been saved','success')
-          this.router.navigate(['/user/resume'])
+          this.getResume();
         }
       })
     }

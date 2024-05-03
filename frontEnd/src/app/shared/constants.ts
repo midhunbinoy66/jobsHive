@@ -13,10 +13,14 @@ export const screenNameMaxLength = 10
 export const passwordMinLength = 8
 export const userNameMinLength = 3
 export const userNameMaxLength = 20
+export const MIN_SALARY_AMOUNT =10000
+export const MAX_SALARY_AMOUNT =50000
 export const MAX_WALLET_ADD = 50000
 export const MIN_WALLET_ADD = 100
+export const MIN_PLAN_AMOUNT = 200
 export const commonMinLength = 3
 export const commonMaxLength = 50
+
 
 export const emailRegex = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
 export const OTPRegex = '^[1-9][0-9]{3}$'

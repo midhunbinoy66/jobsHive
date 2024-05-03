@@ -13,4 +13,8 @@ export class SalaryValidationComponent {
 
   @Input() salaryContorl:AbstractControl | null = null;
   @Input() isSubmitted:boolean  =false;
+
+  constructor(){
+    console.log(this.salaryContorl);
+  }
 }

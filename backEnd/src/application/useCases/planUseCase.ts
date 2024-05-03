@@ -1,6 +1,6 @@
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { IPlanRepo } from "../interfaces/repos/userPlanRespo";
-import { IApiPlanRes, IApiPlansRes, IPlanReq } from "../interfaces/types/plan";
+import { IApiPlanAndCountRes, IApiPlanRes, IPlanReq } from "../interfaces/types/plan";
 
 
 export class PlanUseCase{
@@ -17,8 +17,8 @@ export class PlanUseCase{
         }
     }
 
-    async findAllPlans():Promise<IApiPlansRes>{
-    const plansData = await this._planRepository.findAllPlans();
+    async findAllPlans(page:number,pageSize:number):Promise<IApiPlanAndCountRes>{
+    const plansData = await this._planRepository.findAllPlans(page,pageSize);
     return {
         status:STATUS_CODES.OK,
         message:'Success',

@@ -190,7 +190,6 @@ export class UserRespository implements IuserRepo {
                 },
                 {new:true}
             ).populate('subscription.planId');
-
             const tranactionData:ITransaction = {
                 userId:userId,
                 amount:user!.subscription!.planId.price,

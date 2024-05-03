@@ -12,7 +12,8 @@ import { selectEmployerDetails } from 'src/app/states/employer/employrer.selecto
   styleUrls: ['./employer-subscription.component.css']
 })
 export class EmployerSubscriptionComponent implements OnInit{
-
+  pageNumber=1;
+  pageSize =10;
   employerDetails$  = this.store.pipe(select(selectEmployerDetails));
   emploeyr:IEmployerRes | null = null;
   plans:IPlan[] | null=[];
@@ -31,10 +32,12 @@ export class EmployerSubscriptionComponent implements OnInit{
         this.emploeyr = res;
       })
   
-      this.planService.findAllPlans().subscribe({
+      this.planService.findAllPlans(this.pageNumber,this.pageSize).subscribe({
         next:(res)=>{
-          this.plans = res.data!.filter(plan=>plan.type === 'employer');
-            this.employerPlan = this.plans.find(plan=>plan._id === this.emploeyr?.subscription?.planId)    
+          if(res.data?.plans){
+            this.plans = res.data!.plans.filter(plan=>plan.type === 'employer');
+            this.employerPlan = this.plans.find(plan=>plan._id === this.emploeyr?.subscription?.planId) 
+          }
         }
       })
     }

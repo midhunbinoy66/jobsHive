@@ -1,6 +1,6 @@
 
 import { IJobRepo } from "../../application/interfaces/repos/jobRepo";
-import {  IJobReq } from "../../application/interfaces/types/job";
+import { IJobAndCount, IJobReq } from "../../application/interfaces/types/job";
 import { IJob } from "../../entities/job";
 import jobModel from "../db/jobModel";
 
@@ -29,8 +29,19 @@ export class JobRepository implements IJobRepo{
         return jobModel.find(query);
     }
 
-    async findSavedJobs(jobIds: string[]): Promise<IJob[] | null> {
-        return await jobModel.find({_id:{$in:jobIds}});
+    async findSavedJobs(jobIds: string[],pageNumber:number,pageSize:number): Promise<IJobAndCount | null> {
+        const skip = (pageNumber-1)*pageSize
+        const savedJobs = await jobModel.find({_id:{$in:jobIds}})
+        .skip(skip)
+        .limit(pageSize)
+        .exec()
+
+        const savedJobsCount = await jobModel.countDocuments({_id:{$in:jobIds}});
+
+        return {
+            jobs:savedJobs,
+            jobCount:savedJobsCount
+        }
     }
 
     async findAppliedJobs(jobIds: string[]): Promise<IJob[] | null> {
@@ -47,10 +58,20 @@ export class JobRepository implements IJobRepo{
         )
     }
 
-    async findEmployerJObs(employerId: string): Promise<IJob[] | null> {
-        return await jobModel.find(
+    async findEmployerJObs(employerId: string,page:number,pageSize:number): Promise<{ jobs: IJob[]; jobCount: number } | null> {
+        const skip = (page - 1) * pageSize;
+        const jobs = await jobModel.find(
             {isActive:true,employer:employerId}
-        )
+        ).skip(skip)
+        .limit(pageSize)
+        .exec()
+
+        const jobCount = await jobModel.countDocuments({isActive:true,employer:employerId});
+
+        return {
+            jobs,
+            jobCount
+        }
     }
 
     async updateJob(jobId: string, jobData: IJobReq): Promise<IJob | null> {

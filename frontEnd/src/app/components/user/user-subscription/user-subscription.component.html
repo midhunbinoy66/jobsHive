@@ -12,7 +12,7 @@
                           <div class="font-bold text-xl mb-2">{{ plan.name }}</div>
                           <p class="text-black text-base">{{ plan.description }}</p>
                           <p class="text-black text-base mt-2">Duration: {{ plan.duration }}</p>
-                          <p class="text-black text-base">Price: ${{ plan.price }}</p>
+                          <p class="text-black text-base">Price: {{ plan.price }}</p>
                           <ul class="mt-4">
                             <li class="flex items-center" *ngFor="let feature of plan.features">
                               <span class="text-black">{{ feature }}</span>

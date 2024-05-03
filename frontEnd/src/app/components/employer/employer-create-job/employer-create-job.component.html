@@ -50,10 +50,6 @@
                             <app-country-validation [countryControl]="jobForm.get('country')"
                             [isSubmitted]="isSubmitted"></app-country-validation>
                         </div>
-                        <div class="w-full md:w-1/3 px-3">
-                            <label for="landmark" class="block text-gray-700 text-sm font-bold mb-2">Landmark</label>
-                            <input type="text" name="landmark" placeholder="Landmark" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" formControlName="landmark">
-                        </div>
                     </div>
                     <div class="mb-4">
                         <label for="zip" class="block text-gray-700 text-sm font-bold mb-2">Zip</label>
@@ -65,9 +61,10 @@
                 <!-- Requirements -->
                 <div class="mb-6">
                     <div formArrayName="requierments">
-                        <div *ngFor="let requirement of requiermentForms.controls; let i = index" class="flex items-center">
+                        <div *ngFor="let requirement of requiermentForms.controls; let i = index" class="flex items-center mb-4">
                             <input type="text" [formControlName]="i" placeholder="Requirement" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2">
                             <button type="button" (click)="removeRequierment(i)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Remove</button>
+                            <p *ngIf="requirement.errors?.['required'] && isSubmitted" class="text-red-600">Minmum Requirment</p>
                         </div>
                         <button type="button" (click)="addRequierment()" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Requirement</button>
                     </div>
@@ -78,6 +75,7 @@
                         <div *ngFor="let responsibility of responsibilitiesFrom.controls; let i = index" class="flex items-center mb-4">
                             <input type="text" placeholder="Responsibility" [formControlName]="i" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2">
                             <button type="button" (click)="removeResponsibilities(i)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Remove</button>
+                            <p *ngIf="responsibility.errors?.['required'] && isSubmitted" class="text-red-600">Minmum Requirment</p>
                         </div>
                         <button type="button" (click)="addResponsiblilites()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Responsibility</button>
                     </div>

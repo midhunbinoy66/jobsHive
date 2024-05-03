@@ -27,7 +27,7 @@ export class AdminCreatePlanComponent implements OnInit {
     this.form = this.fb.group({
       name:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
-      price:['',Validators.required],
+      price:['',[Validators.required,Validators.min(100),Validators.max(1000)]],
       features:this.fb.array([this.fb.control('')]),
       duration:['',Validators.required],
       type:['',Validators.required]

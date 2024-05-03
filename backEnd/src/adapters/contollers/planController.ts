@@ -7,7 +7,9 @@ export class PlanController {
     ){}
 
     async findAllPlans(req:Request,res:Response){
-        const apiRes = await this._planUseCases.findAllPlans();
+        const page = parseInt(req.query.pageNumber as string)
+        const pageSize = parseInt(req.query.pageSize as string); 
+        const apiRes = await this._planUseCases.findAllPlans(page,pageSize);
         res.status(apiRes.status).json(apiRes);
     }
 

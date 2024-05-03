@@ -6,12 +6,19 @@
           <!-- Sample saved job item -->
           <div class="mb-4">
             <h4 class="text-lg font-bold text-gray-900">{{job.title}}</h4>
-            <p class="text-sm text-gray-500">{{job.location}}</p>
+            <p class="text-sm text-gray-500">{{job.location.city}},{{job.location.state}}</p>
             <p class="text-sm text-gray-500">{{job.description}}</p>
           </div>
             <button class="p-2 text-gray-800 ring-2 ring-gray-700 bg-white text-sm rounded-lg hover:bg-slate-900" (click)="onRemove(job._id)"> Remove </button>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- pagination -->
+  <div>
+    <button (click)="onPageChage(pageNumber-1)" [disabled]="pageNumber===1">Prev</button>
+    <span>{{pageNumber}} of {{max}}</span>
+    <button (click)="onPageChage(pageNumber+1)" [disabled]="pageNumber === max">Next</button>
   </div>
   

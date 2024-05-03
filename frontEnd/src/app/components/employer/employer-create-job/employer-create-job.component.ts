@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { validateByTrimming } from 'src/app/helpers/validations';
@@ -7,6 +7,7 @@ import { IJobAddress } from 'src/app/models/common';
 import { IEmployerRes } from 'src/app/models/employer';
 import { IJobReq } from 'src/app/models/jobs';
 import { JobService } from 'src/app/services/job.service';
+import { MIN_SALARY_AMOUNT, ZipRegex } from 'src/app/shared/constants';
 import { commonValidators, salaryValidators } from 'src/app/shared/validators';
 import { selectEmployerDetails } from 'src/app/states/employer/employrer.selector';
 import Swal from 'sweetalert2';
@@ -39,15 +40,14 @@ export class EmployerCreateJobComponent implements OnInit {
     this.jobForm = this.formBuilder.group({
       title:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
-      salary:['',[validateByTrimming(salaryValidators)]],
+      salary:['',[Validators.required,Validators.min(MIN_SALARY_AMOUNT)]],
       city:['',[validateByTrimming(commonValidators)]],
       district:['',[validateByTrimming(commonValidators)]],
       state:['',[validateByTrimming(commonValidators)]],
       country:['',[validateByTrimming(commonValidators)]],
-      landmark:['',[validateByTrimming(commonValidators)]],
-      zip:['',[validateByTrimming(commonValidators)]],
-      requierments:this.formBuilder.array([this.formBuilder.control('')]),
-      responsibilities:this.formBuilder.array([this.formBuilder.control('')]),
+      zip:['',[Validators.required,Validators.pattern(ZipRegex)]],
+      requierments:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)]),
+      responsibilities:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)]),
       typeOfJob:['',[validateByTrimming(commonValidators)]]
 
     })

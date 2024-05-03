@@ -79,9 +79,9 @@ export class JobUseCase{
         }
     }
 
-    async findUserSavedJobs(jobIds:string[]){
+    async findUserSavedJobs(jobIds:string[],pageNumber:number,pageSize:number){
         try {
-            const jobs = await this._jobRepository.findSavedJobs(jobIds);
+            const jobs = await this._jobRepository.findSavedJobs(jobIds,pageNumber,pageSize);
 
                 return {
                     status:STATUS_CODES.OK,
@@ -142,9 +142,10 @@ export class JobUseCase{
         }
     }
 
-    async findEmployerJobs(employerId:string){
+    async findEmployerJobs(employerId:string,page:number,pageSize:number){
         try {
-            const jobsData = await this._jobRepository.findEmployerJObs(employerId);
+    
+            const jobsData = await this._jobRepository.findEmployerJObs(employerId,page,pageSize);
                 return {
                     status:STATUS_CODES.OK,
                     message:'Success',

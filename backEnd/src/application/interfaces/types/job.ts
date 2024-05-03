@@ -11,6 +11,8 @@ export interface IApiJobsRes{
   data:IJob[]|null
 }
 
+
+export interface IJobRes extends IJob{}
 export interface IApiJobRes{
     status:number
     message:string
@@ -21,6 +23,10 @@ export interface IApiJobRes{
 //   $or: ({ title: { $regex: RegExp } } | { location: { $regex: RegExp } })[];
 //   };
 
+export interface  IJobAndCount{
+  jobs:IJobRes[] | null,
+  jobCount:number
+}
 
 export interface MongoDBQuery {
   $or: Array<{

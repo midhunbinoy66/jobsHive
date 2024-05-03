@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IApiPlanRes, IApiPlansRes, IPlan, IPlanReq, IPlanUpdate } from '../models/plans';
+import { IApiPlanAndCountRes, IApiPlanRes, IApiPlansRes, IPlan, IPlanReq, IPlanUpdate } from '../models/plans';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class PlanService {
     private http: HttpClient
   ) { }
 
-  findAllPlans(){
-    return this.http.get<IApiPlansRes>('user/plans')
+  findAllPlans(pageNumber:number,pageSize:number){
+    return this.http.get<IApiPlanAndCountRes>('user/plans',{params:{pageNumber:pageNumber,pageSize:pageSize}})
   }
 
   findUserPlan(planId:string ){

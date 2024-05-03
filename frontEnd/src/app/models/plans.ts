@@ -16,6 +16,17 @@ export interface IApiPlansRes{
 }
 
 
+export interface IPlanAndCount{
+    plans:IPlan[] | null
+    planCount:number
+}
+
+export interface IApiPlanAndCountRes{
+    status:number
+    message:string
+    data:IPlanAndCount | null
+}
+
 export interface  IPlan{
     _id:string
     name:string
