@@ -43,11 +43,12 @@
                     <input type="text" [formControlName]="i" placeholder="Language"
                       class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2" required="true">
                     <button type="button" (click)="removeLanguage(i)" class="text-sm text-indigo-600 hover:text-indigo-900  bg-slate-400 p-1 rounded-lg ml-1">Remove</button>
+                    <p *ngIf="language?.errors?.['required'] && isSubmitted" class="text-red-600">Language field is required</p>
                   </div>
                 </div>
+                <p *ngIf="form.get('languages')?.errors?.['required'] && isSubmitted" class="text-red-500">Language Required</p>
               </div>
-              <button typ
-              e="button" (click)="addLanguage()" class="text-sm text-indigo-600 hover:text-indigo-900 bg-slate-400 p-1 rounded-lg mt-1">Add Language</button>
+              <button type="button" (click)="addLanguage()" class="text-sm text-indigo-600 hover:text-indigo-900 bg-slate-400 p-1 rounded-lg mt-1">Add Language</button>
             </div>
             <!-- Skill Section -->
             <div>
@@ -57,13 +58,12 @@
                     <input type="text" [formControlName]="i" placeholder="skill"
                       class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2" required="true">
                     <button type="button" (click)="removeSkill(i)" class="text-sm text-indigo-600 hover:text-indigo-900  bg-slate-400 p-1 rounded-lg ml-1">Remove</button>
+                  <p *ngIf="skill.errors?.['required'] && isSubmitted" class="text-red-500">Skill Field is required </p>
                   </div>
                 </div>
+                <p *ngIf="form.get('skills')?.errors?.['required'] && isSubmitted" class="text-red-600">Skills Cannot be empty</p>
               </div>
-              <button typ
-              e="button" (click)="addSkillForm()" class="text-sm text-indigo-600 hover:text-indigo-900 bg-slate-400 p-1 rounded-lg mt-1">Add Skill</button>
-  
-  
+              <button type="button" (click)="addSkillForm()" class="text-sm text-indigo-600 hover:text-indigo-900 bg-slate-400 p-1 rounded-lg mt-1">Add Skill</button>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Work Experience</label>

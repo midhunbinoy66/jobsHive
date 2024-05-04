@@ -14,7 +14,7 @@ export class JobRepository implements IJobRepo{
         return await jobModel.findById({_id:id});
     }
 
-   async findJobs(title:string,location:string): Promise<IJob[] | null> {
+   async findJobs(title:string,location:string,pageNumber:number,pageSize:number): Promise<IJobAndCount | null> {
     const query = {
         title: new RegExp(title, 'i'), // 'i' flag for case-insensitive matching
         isActive:true,
@@ -25,8 +25,19 @@ export class JobRepository implements IJobRepo{
             { 'location.city': new RegExp(location, 'i') },
             { 'location.zip': parseInt(location) || 0 } 
         ]
-    };
-        return jobModel.find(query);
+    }
+        const skip = (pageNumber-1)*pageSize
+        const jobs = await jobModel.find(query)
+        .skip(skip)
+        .limit(pageSize)
+        .exec()
+
+        const jobsCount = await jobModel.countDocuments(query);
+
+        return {
+            jobs,
+            jobCount:jobsCount
+        }
     }
 
     async findSavedJobs(jobIds: string[],pageNumber:number,pageSize:number): Promise<IJobAndCount | null> {
@@ -34,6 +45,7 @@ export class JobRepository implements IJobRepo{
         const savedJobs = await jobModel.find({_id:{$in:jobIds}})
         .skip(skip)
         .limit(pageSize)
+        .populate('employer')
         .exec()
 
         const savedJobsCount = await jobModel.countDocuments({_id:{$in:jobIds}});

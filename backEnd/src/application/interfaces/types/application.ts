@@ -17,4 +17,15 @@ export interface  IApiApplicationsRes {
 }
 
 
+export interface IApplcationAndCountRes{
+    applications:IApplicationRes[] | null,
+    applicationsCount:number
+}
+
+export interface IApiApplicationAndCountRes{
+    status:number,
+    message:string,
+    data:IApplcationAndCountRes
+}
+
 export interface IApplicationReq extends Omit<IApplication,'_id'|'status'|'appliedTime'>{}

@@ -30,12 +30,14 @@ export class EmployerSubscriptionComponent implements OnInit{
 
       this.employerDetails$.subscribe((res)=>{
         this.emploeyr = res;
+        console.log(this.emploeyr);
       })
   
       this.planService.findAllPlans(this.pageNumber,this.pageSize).subscribe({
         next:(res)=>{
           if(res.data?.plans){
             this.plans = res.data!.plans.filter(plan=>plan.type === 'employer');
+            console.log(this.plans);
             this.employerPlan = this.plans.find(plan=>plan._id === this.emploeyr?.subscription?.planId) 
           }
         }

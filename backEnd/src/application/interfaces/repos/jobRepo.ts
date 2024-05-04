@@ -5,7 +5,7 @@ import { IJobAndCount, IJobReq } from "../types/job";
 export interface IJobRepo{
     saveJobDetails(job:IJobReq):Promise<IJob| null>;
     findJobById(id:string):Promise<IJob | null>
-    findJobs(title:string,location:string):Promise<IJob[]|null>
+    findJobs(title:string,location:string,pageNumber:number,pageSize:number):Promise<IJobAndCount|null>
     findSavedJobs(jobIds:string[],pageNumber:number,pageSize:number):Promise<IJobAndCount|null>
     findAppliedJobs(jobIds:string[]):Promise<IJob[]|null>
     updateJob(jobId:string,jobData:IJobReq):Promise<IJob | null>

@@ -60,7 +60,8 @@
                         <div formArrayName="requierments">
                             <div *ngFor="let requirement of requiermentForms.controls; let i = index" class="d-flex align-items-center mb-2">
                                 <input type="text" [formControlName]="i" placeholder="Requirement" class="form-control me-2">
-                                <button type="button" (click)="removeRequierment(i)" class="btn ">Remove</button>
+                                <button type="button" (click)="removeRequierment(i)" class="btn" *ngIf="i>1">Remove</button>
+                                <p *ngIf="requirement?.errors?.['required'] && isSubmitted" class="text-red-600">Field cannot be empty</p>
                             </div>
                             <button type="button" (click)="addRequierment()" class="btn  bg-blue rounded-lg">Add Requirement</button>
                             <p *ngIf="jobForm.get('requierments')?.errors?.['required'] && isSubmitted" class="text-red-600">Requirement has to be filled</p>
@@ -72,7 +73,8 @@
                         <div formArrayName="responsibilities">
                             <div *ngFor="let responsibility of responsibilitiesFrom.controls; let i = index" class="d-flex align-items-center mb-2">
                                 <input type="text" placeholder="Responsibility" [formControlName]="i" class="form-control me-2">
-                                <button type="button" (click)="removeResponsibilities(i)" class="btn btn-danger">Remove</button>
+                                <button type="button" (click)="removeResponsibilities(i)" class="btn btn-danger " *ngIf="i>1">Remove</button>
+                                <p *ngIf="responsibility?.errors?.['required'] && isSubmitted" class="text-red-600">Field cannot be empty</p>
                             </div>
                             <button type="button" (click)="addResponsiblilites()" class="btn btn-primary">Add Responsibility</button>
                         </div>

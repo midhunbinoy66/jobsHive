@@ -1,6 +1,6 @@
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { JobRepository } from "../../infrastructure/repositories/jobRepository";
-import {  IApiJobRes, IApiJobsRes, IJobReq } from "../interfaces/types/job";
+import {  IApiJobRes, IJobReq } from "../interfaces/types/job";
 
 
 
@@ -34,10 +34,10 @@ export class JobUseCase{
         }
     }
 
-    async findJobs(title:string,location:string):Promise<IApiJobsRes>{
+    async findJobs(title:string,location:string,pageNumber:number,pageSize:number){
         try {
        
-            const jobs = await this._jobRepository.findJobs(title,location) 
+            const jobs = await this._jobRepository.findJobs(title,location,pageNumber,pageSize) 
                 return{
                     status:STATUS_CODES.OK,
                     message:'Success',

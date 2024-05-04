@@ -28,9 +28,9 @@ export class AdminCreatePlanComponent implements OnInit {
       name:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
       price:['',[Validators.required,Validators.min(100),Validators.max(1000)]],
-      features:this.fb.array([this.fb.control('')]),
+      features:this.fb.array([this.fb.control('',Validators.required)],Validators.required),
       duration:['',Validators.required],
-      type:['',Validators.required]
+      type:['user',Validators.required]
     })
   }
 
@@ -39,7 +39,7 @@ export class AdminCreatePlanComponent implements OnInit {
   }
 
   addFeature(){
-    this.featuresForm.push(this.fb.control(''))
+    this.featuresForm.push(this.fb.control('',Validators.required))
   }
 
   removeFeature(index:number){

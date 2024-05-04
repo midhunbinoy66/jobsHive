@@ -33,9 +33,9 @@ export class ApplicationUseCase{
     }
 
 
-    async findUserApplications(userId:string){
+    async findUserApplications(userId:string,pageNumber:number,pageSize:number){
         try {
-            const applications =await  this._applicationRepo.findAllApplication(userId);
+            const applications =await  this._applicationRepo.findAllApplication(userId,pageNumber,pageSize);
             return {
                 status:STATUS_CODES.OK,
                 message:'Success',

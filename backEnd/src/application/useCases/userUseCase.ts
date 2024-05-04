@@ -363,7 +363,12 @@ export class UserUseCase{
                     data:null
                 }
             }else{
-                const user = await this._userRespository.updateWallet(userId,amount,'Add to Wallet');
+                let user
+                if(amount>0){
+                    user = await this._userRespository.updateWallet(userId,amount,'Added to Wallet');
+                }else{
+                    user =await this._userRespository.updateWallet(userId,amount,'Debited from Wallet');
+                }
                 if (user !== null){
                     return{
                         status:STATUS_CODES.OK,

@@ -10,6 +10,7 @@ import { PlanService } from 'src/app/services/plan.service';
 import { RazorpayService } from 'src/app/services/razorpay.service';
 import { saveEmployerOnStore } from 'src/app/states/employer/employer.action';
 import { selectEmployerDetails } from 'src/app/states/employer/employrer.selector';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employer-payment',
@@ -105,6 +106,18 @@ export class EmployerPaymentComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.paymentResultSubscription.unsubscribe();
+  }
+
+  payUsingWallet(){
+    if(this.employer?.wallet){
+      if(this.plan.price<this.employer?.wallet){
+        this.confirmSubscription()
+        void Swal.fire('Success','Payment completed','success');
+        this.router.navigateByUrl('/employer/subscription')
+      }else{
+        void Swal.fire('Oops','Insufficient Balance','error');
+      }
+    }
   }
 }
 

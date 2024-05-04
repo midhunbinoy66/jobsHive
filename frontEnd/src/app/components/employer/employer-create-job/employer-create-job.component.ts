@@ -46,8 +46,8 @@ export class EmployerCreateJobComponent implements OnInit {
       state:['',[validateByTrimming(commonValidators)]],
       country:['',[validateByTrimming(commonValidators)]],
       zip:['',[Validators.required,Validators.pattern(ZipRegex)]],
-      requierments:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)]),
-      responsibilities:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)]),
+      requierments:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)],Validators.required),
+      responsibilities:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)],Validators.required),
       typeOfJob:['',[validateByTrimming(commonValidators)]]
 
     })
@@ -62,7 +62,7 @@ export class EmployerCreateJobComponent implements OnInit {
   }
 
   addRequierment(){
-    this.requiermentForms.push(this.formBuilder.control(''))
+    this.requiermentForms.push(this.formBuilder.control('',Validators.required))
   }
 
 
@@ -71,7 +71,7 @@ export class EmployerCreateJobComponent implements OnInit {
   }
 
   addResponsiblilites(){
-    this.responsibilitiesFrom.push(this.formBuilder.control(''));
+    this.responsibilitiesFrom.push(this.formBuilder.control('',Validators.required));
   }
 
   removeResponsibilities(index:number){

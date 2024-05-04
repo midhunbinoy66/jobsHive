@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { IApiJobsRes, IJobRes } from 'src/app/models/jobs';
+import { IApiJobsAndCountRes, IApiJobsRes, IJobRes } from 'src/app/models/jobs';
 import { IUserRes } from 'src/app/models/users';
 import { JobService } from 'src/app/services/job.service';
 import { UserService } from 'src/app/services/user.service';
@@ -20,6 +20,10 @@ import { IJobAddress } from 'src/app/models/common';
   styleUrls: ['./user-home.component.css']
 })
 export class UserHomeComponent implements OnInit {
+  pageNumber =1;
+  pageSize =4
+  max =0
+  totalJobs = 0;
   searchForm!:FormGroup;
   searchResults!:IJobRes[]|null;
   selectedJob!:IJobRes| undefined;
@@ -51,10 +55,14 @@ export class UserHomeComponent implements OnInit {
   onSubmit(){
     this.isSearched=true;
     let criteria = this.searchForm.getRawValue();
-    this.jobService.findJobs(criteria).subscribe({
-      next:(res:IApiJobsRes)=>{ 
-          this.searchResults = res.data;
+    this.jobService.findJobs(criteria,this.pageNumber,this.pageSize).subscribe({
+      next:(res:IApiJobsAndCountRes)=>{ 
+        if(res.data){
+          this.searchResults = res.data.jobs;
           this.selectedJob = this.searchResults![0]
+          this.totalJobs = res.data.jobCount
+          this.max = Math.ceil(this.totalJobs/this.pageSize);
+        }
       }
     })
   }
@@ -141,5 +149,11 @@ export class UserHomeComponent implements OnInit {
       return this.user!.following.includes(employerId);
     }else return false
 
+  }
+
+
+  onPageChage(pageNumber:number){
+    this.pageNumber = pageNumber;
+    this.onSubmit()
   }
 }

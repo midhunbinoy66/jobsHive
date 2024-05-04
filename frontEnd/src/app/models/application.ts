@@ -22,3 +22,15 @@ export interface IApiApplicationsRes{
     message:string
     data:IApplicationRes[] |null
 }
+
+
+export interface IApplcationAndCountRes{
+    applications:IApplicationRes[] | null,
+    applicationsCount:number
+}
+
+export interface IApiApplicationAndCountRes{
+    status:number,
+    message:string,
+    data:IApplcationAndCountRes
+}

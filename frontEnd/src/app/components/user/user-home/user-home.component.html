@@ -79,14 +79,9 @@
 </button>
             </div>
           </div>
-
+          <p class="text-gray-500 mb-2">Company:{{selectedJob.employer}}</p>
           <p class="text-gray-500 mb-2">Location : {{selectedJob.location.city}},{{selectedJob.location.state}}</p>
-          <p class="text-gray-500 mb-2">Salary : {{selectedJob.salary}}</p>
-
-
-
-  
-
+          <p class="text-gray-500 mb-2">Salary : {{selectedJob.salary}}</p>  
           <p>{{selectedJob.description}}</p>
           <!-- <div class="space-x-2 mt-2 flex flex-col sm:flex-row">
             <button class="bg-blue-500 text-white rounded-md hover:bg-blue-600 px-3 py-2" (click)="onApply(selectedJob._id, selectedJob.title, selectedJob.location)">Apply</button>
@@ -108,6 +103,10 @@
       </div>
     </div>
   </section>
-  
+  <div>
+    <button (click)="onPageChage(pageNumber-1)" [disabled]="pageNumber===1">Prev</button>
+    <span>{{pageNumber}} of {{max}}</span>
+    <button (click)="onPageChage(pageNumber+1)" [disabled]="pageNumber === max">Next</button>
+  </div>
   
 </div>

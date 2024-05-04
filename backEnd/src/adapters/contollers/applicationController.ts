@@ -16,8 +16,10 @@ export class ApplicationController{
     }
 
     async findUserApplications(req:Request,res:Response){
+        const pageNumber = parseInt(req.query.pageNumber as string);
+        const pageSize = parseInt(req.query.pageSize as string);
         const userId = req.params.userId
-        const apiRes  = await this.__applicationUseCase.findUserApplications(userId);
+        const apiRes  = await this.__applicationUseCase.findUserApplications(userId,pageNumber,pageSize);
         res.status(apiRes.status).json(apiRes);
 
     }

@@ -13,6 +13,10 @@ import { selectUserDetails } from 'src/app/states/user/user.selector';
 })
 export class UserAppliedJobsComponent implements OnInit {
 
+  pageNumber =1
+  pageSize = 3
+  max = 0;
+  totalApplications = 0;
   userDetails$ = this.store.pipe(select(selectUserDetails));
   user:IUserRes| null = null;
   userApplication:IApplicationRes[]|null =null;
@@ -26,13 +30,22 @@ export class UserAppliedJobsComponent implements OnInit {
     this.userDetails$.subscribe((res)=>{
       this.user =res
     });
+    this.getAppliedJobs();
+  }
 
-    this.jobService.findAppliedJobs(this.user!._id).subscribe({
+  getAppliedJobs(){
+    this.jobService.findAppliedJobs(this.user!._id,this.pageNumber,this.pageSize).subscribe({
       next:(res)=>{
-        this.userApplication =res.data
+        this.userApplication =res.data.applications
+        this.totalApplications = res.data.applicationsCount
+        this.max = Math.ceil(this.totalApplications/this.pageSize)
+
       }
     })
+  }
 
-
+  onPageChange(pageNumber:number):void{
+    this.pageNumber = pageNumber;
+    this.getAppliedJobs()
   }
 }

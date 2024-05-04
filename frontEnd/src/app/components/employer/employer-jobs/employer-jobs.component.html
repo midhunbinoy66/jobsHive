@@ -56,16 +56,18 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+        <div>
+            <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+            <span>Page {{ currentPage }} of {{ Max }}</span>
+            <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === Max">Next</button>
         </div>
     </div>
 
 </div>
 
-<div>
-    <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
-    <span>Page {{ currentPage }} of {{ Max }}</span>
-    <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === Max">Next</button>
-</div>
+
 <app-employer-footer></app-employer-footer>
 
 

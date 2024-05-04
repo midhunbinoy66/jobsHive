@@ -6,6 +6,7 @@ import { IEmployer } from "../../entities/employer";
 import { ITransaction } from "../../entities/tranaction";
 import { employerModel } from "../db/employerModel";
 import transactionModel from "../db/trascationModel";
+import userPlanModel from "../db/userPlanModel";
 
 
 
@@ -88,11 +89,13 @@ export class EmployerRepository implements IEmployerRepo{
                     subscription:planData
                 },
                 {new:true}
-            ).populate('subscription.planId');
+            )
+
+        const plan = await userPlanModel.findById({_id:planData.planId});
 
             const tranactionData:ITransaction = {
                 userId:userId,
-                amount:employer!.subscription!.planId.price,
+                amount:plan!.price,
                 date:new Date(Date.now())
             }
             await transactionModel.create(tranactionData);

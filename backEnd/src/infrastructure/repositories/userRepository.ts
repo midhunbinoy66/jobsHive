@@ -4,12 +4,14 @@ import { IResumeReq } from "../../application/interfaces/types/resume";
 import { IUserAuth, IUserRes, IUserSocialAuth, IUserUpdate } from "../../application/interfaces/types/user";
 import { IUserSubscription } from "../../entities/common";
 import { IJob } from "../../entities/job";
+import { IPlan } from "../../entities/plan";
 import { IResume } from "../../entities/resume";
 import { ITransaction } from "../../entities/tranaction";
 import { IUser } from "../../entities/user";
 import resumeModel from "../db/resumeModel";
 import transactionModel from "../db/trascationModel";
 import userModel from "../db/userModel";
+import userPlanModel from "../db/userPlanModel";
 
 
 export class UserRespository implements IuserRepo {
@@ -189,10 +191,12 @@ export class UserRespository implements IuserRepo {
                     subscription:planData
                 },
                 {new:true}
-            ).populate('subscription.planId');
+            )
+
+            const plan:IPlan|null = await userPlanModel.findById({_id:planData.planId});
             const tranactionData:ITransaction = {
                 userId:userId,
-                amount:user!.subscription!.planId.price,
+                amount:plan!.price,
                 date:new Date(Date.now())
             }
             await transactionModel.create(tranactionData);

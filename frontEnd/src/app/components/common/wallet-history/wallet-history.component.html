@@ -18,7 +18,8 @@
                 <tr *ngFor="let transaction of walletHistory; index as i">
                     <td class="px-3 font-medium dark:text-gray-400">{{ ((currPage -1) * itemsPerPage) + (i + 1) }}</td>
                     <td class="px-3 py-2">
-                        <p>{{ transaction.amount }}</p>
+                        <p *ngIf="transaction.amount<0" class="text-red-600">{{ transaction.amount }}</p>
+                        <p *ngIf="transaction.amount>0" class="text-white">{{ transaction.amount }}</p>
                     </td>
                     <td class="px-3 py-2">
                         <span>{{ transaction.message }}</span>

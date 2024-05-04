@@ -48,14 +48,15 @@ export class AdminPlansComponent  implements OnInit{
     this.planService.deletePlan(planId).subscribe({
       next:(res)=>{
 
-        const planIdx = this.plans!.findIndex(plan => plan._id === planId)
-        if (planIdx !== -1) {
-          this.plans = [
-            ...this.plans!.slice(0, planIdx),
-            { ...this.plans![planIdx], isActive: !this.plans![planIdx].isActive },
-            ...this.plans!.slice(planIdx + 1)
-          ]
-        }
+        // const planIdx = this.plans!.findIndex(plan => plan._id === planId)
+        // if (planIdx !== -1) {
+        //   this.plans = [
+        //     ...this.plans!.slice(0, planIdx),
+        //     { ...this.plans![planIdx], isActive: !this.plans![planIdx].isActive },
+        //     ...this.plans!.slice(planIdx + 1)
+        //   ]
+        // }
+        this.getPlans()
         void Swal.fire('Success','Plan deleted successfully','success');
       }
     })

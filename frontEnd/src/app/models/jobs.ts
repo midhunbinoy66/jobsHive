@@ -1,4 +1,5 @@
 import { IJobAddress } from "./common"
+import { IEmployerRes } from "./employer"
 
 export interface IApiJobsRes{
     status:string
@@ -27,7 +28,7 @@ export interface IApiJobRes{
 
 export interface IJobRes{
     _id:string
-    employer:string
+    employer:string 
     title:string
     description:string
     salary:number

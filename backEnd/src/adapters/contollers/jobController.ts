@@ -16,9 +16,9 @@ export class JobController{
     async getJobs(req:Request,res:Response){
         const  title = req.query.title as string;
         const location = req.query.location as string;
-
-
-        const apiRes = await this._jobUseCase.findJobs(title,location);
+        const pageNumber = parseInt(req.query.pageNumber as string) ;
+        const pageSize  =  parseInt(req.query.pageSize as string) ;
+        const apiRes = await this._jobUseCase.findJobs(title,location,pageNumber,pageSize);
         res.status(apiRes.status).json(apiRes);
     }
 
