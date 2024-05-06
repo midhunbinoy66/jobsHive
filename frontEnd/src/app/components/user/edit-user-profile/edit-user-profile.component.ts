@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { validateByTrimming } from 'src/app/helpers/validations';
 import { IUserAddress } from 'src/app/models/common';
 import { IUserRes, IUserUpdate } from 'src/app/models/users';
 import { UserService } from 'src/app/services/user.service';
+import { ZipRegex } from 'src/app/shared/constants';
 import { mobileValidators, nameValidators, requiredValidator } from 'src/app/shared/validators';
 import { saveUserOnStore } from 'src/app/states/user/user.action';
 import { selectUserDetails } from 'src/app/states/user/user.selector';
@@ -46,7 +47,7 @@ export class EditUserProfileComponent implements OnInit {
       district:['',validateByTrimming(requiredValidator)],
       state:['',[validateByTrimming(requiredValidator)]],
       country:['',[validateByTrimming(requiredValidator)]],
-      zip:['',[validateByTrimming(requiredValidator)]]
+      zip:['',[Validators.required,Validators.pattern(ZipRegex)]]
     })
 
     this.userDetails$.subscribe(user=>{

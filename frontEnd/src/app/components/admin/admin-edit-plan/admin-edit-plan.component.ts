@@ -47,7 +47,8 @@ export class AdminEditPlanComponent implements OnInit{
       name:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
       price:['',[Validators.required,Validators.min(MIN_PLAN_AMOUNT)]],
-      duration:['',Validators.required],
+      duration:['',[Validators.required,Validators.min(2)]],
+      type:['',Validators.required],
       // features:this.fb.array([],Validators.required)
       features:this.fb.group({
         jobApplications:['',[Validators.required,Validators.min(10)]],
@@ -63,6 +64,7 @@ export class AdminEditPlanComponent implements OnInit{
           description:this.plan.description || '',
           price:this.plan.price || '',
           duration:this.plan.duration || '',
+          type:this.plan.type,
           features:this.plan.features
         }
       )

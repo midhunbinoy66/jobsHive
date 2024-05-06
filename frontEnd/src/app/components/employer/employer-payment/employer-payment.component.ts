@@ -111,9 +111,15 @@ export class EmployerPaymentComponent implements OnInit {
   payUsingWallet(){
     if(this.employer?.wallet){
       if(this.plan.price<this.employer?.wallet){
-        this.confirmSubscription()
-        void Swal.fire('Success','Payment completed','success');
-        this.router.navigateByUrl('/employer/subscription')
+        this.employerService.updateEmployerWallet(this.employerId,-this.plan.price).subscribe({
+          next:(res)=>{
+            this.employer = res.data
+            this.store.dispatch(saveEmployerOnStore({employerDetails:this.employer}));
+            this.confirmSubscription()
+            void Swal.fire('Success','Payment completed','success');
+            this.router.navigateByUrl('/employer/subscription')
+          }
+        })
       }else{
         void Swal.fire('Oops','Insufficient Balance','error');
       }

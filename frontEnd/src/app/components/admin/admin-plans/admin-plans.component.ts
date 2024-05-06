@@ -11,12 +11,14 @@ import Swal from 'sweetalert2';
 })
 export class AdminPlansComponent  implements OnInit{
   pageNumber=1;
-  pageSize = 3
+  pageSize = 4
   totalItems =0
   maxPage = 0;
+  planType:string='Type'
+  filtered = false;
 
   plans:IPlan[] | null =[]
-
+  filterdPlans:IPlan[] | null =[]
   constructor(
     private readonly planService:PlanService,
     private readonly router:Router,
@@ -42,6 +44,7 @@ export class AdminPlansComponent  implements OnInit{
   onPageChange(page:number){
     this.pageNumber =page;
     this.getPlans();
+    this.filtered =false;
   }
 
   onDelete(planId:string){
@@ -64,5 +67,15 @@ export class AdminPlansComponent  implements OnInit{
 
   onEdit(planId:string){
     this.router.navigate([`/admin/plan-edit/${planId}`])
+  }
+
+  onPlanChange(){
+    this.filtered = true
+    if(this.plans !== null){
+      this.filterdPlans = this.plans!.filter(plan=>plan.type===this.planType);
+      console.log(this.filterdPlans);
+    }
+
+
   }
 }

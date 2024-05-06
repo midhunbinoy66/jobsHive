@@ -35,7 +35,7 @@ export class AdminCreatePlanComponent implements OnInit {
         unlimitedSearch:[true,Validators.required],
         chatFacility:[true,Validators.required]
       }),
-      duration:['',Validators.required],
+      duration:['',[Validators.required,Validators.min(2)]],
       type:['user',Validators.required]
     })
   }

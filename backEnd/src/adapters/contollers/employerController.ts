@@ -145,4 +145,10 @@ export class Employercontoller{
         return res.status(apiRes.status).json(apiRes);
     }
 
+    async getEmployerData(req:Request,res:Response){
+        const {employerId} = req.params;
+        const apiRes = await this._employerUseCase.getEmployerData(employerId);
+        return res.status(apiRes.status).json(apiRes);
+    }
+
 }

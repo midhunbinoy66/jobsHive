@@ -5,7 +5,7 @@ import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import { IEmployerRepo } from "../interfaces/repos/employerRepo";
 import { ITempEmployerRepo } from "../interfaces/repos/tempEmployerRepo";
 import { IApiRes, IWalletHistoryAndCount } from "../interfaces/types/commont";
-import { IApiEmployerAuthRes, IApiEmployerRes, IEmployerAndCount, IEmployerAuth, IEmployerUpdate} from "../interfaces/types/employer";
+import { IApiEmployerAuthRes, IApiEmployerRes, IEmployerAndCount, IEmployerAuth, IEmployerRes, IEmployerUpdate} from "../interfaces/types/employer";
 import { ITempEmployerReq, ITempEmployerRes } from "../interfaces/types/tempEmployer";
 import { IEncryptor } from "../interfaces/utils/encryptor";
 import { ImailSender } from "../interfaces/utils/mailSender";
@@ -222,7 +222,8 @@ export class EmployeruseCase{
                     data:null
                 }
             }else{
-                const user = await this._employerRepository.updateWallet(userId,amount,'Add to Wallet');
+                const message = amount<0 ? 'Debited From Wallet':'Added To Wallet'
+                const user = await this._employerRepository.updateWallet(userId,amount,message);
                 if (user !== null){
                     return{
                         status:STATUS_CODES.OK,
@@ -275,4 +276,29 @@ export class EmployeruseCase{
         }
     }
 
+
+    async getEmployerData(employerId:string):Promise<IApiRes<IEmployerRes | null>>{
+        try {
+            const employer = await this._employerRepository.findById(employerId);
+            if(employer){
+                return{
+                    status:STATUS_CODES.OK,
+                    message:'Success',
+                    data:employer
+                }
+            }else{
+                return{
+                    status:STATUS_CODES.BAD_REQUEST,
+                    message:'No Employer Found',
+                    data:null
+                }
+            }
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:"Internal Sever Error",
+                data:null
+            }
+        }
+    }
 }

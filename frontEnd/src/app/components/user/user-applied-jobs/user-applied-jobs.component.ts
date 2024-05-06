@@ -37,9 +37,9 @@ export class UserAppliedJobsComponent implements OnInit {
     this.jobService.findAppliedJobs(this.user!._id,this.pageNumber,this.pageSize).subscribe({
       next:(res)=>{
         this.userApplication =res.data.applications
+        console.log(this.userApplication);
         this.totalApplications = res.data.applicationsCount
         this.max = Math.ceil(this.totalApplications/this.pageSize)
-
       }
     })
   }

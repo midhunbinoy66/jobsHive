@@ -13,6 +13,7 @@ import { selectUserDetails } from 'src/app/states/user/user.selector';
 import Swal from 'sweetalert2';
 import { ApplyModalComponent } from '../../common/apply-modal/apply-modal.component';
 import { IJobAddress } from 'src/app/models/common';
+import { EmployerService } from 'src/app/services/employer.service';
 
 @Component({
   selector: 'app-user-home',
@@ -27,17 +28,23 @@ export class UserHomeComponent implements OnInit {
   searchForm!:FormGroup;
   searchResults!:IJobRes[]|null;
   selectedJob!:IJobRes| undefined;
+  employerName!:string;
   userId='';
   user:IUserRes|null=null;
   userDetail$ = this.store.pipe(select(selectUserDetails));
   isSearched=false;
+  sort!:string
+  salarySort:string ='Sort Salary'
+  jobTypeSort:string='Job Type'
+  filteredResults!:IJobRes[]|null
   constructor(
     private jobService:JobService,
     private formBuilder:FormBuilder,
     private userService:UserService,
     private store:Store,
     private router:Router,
-    private dialog:MatDialog
+    private dialog:MatDialog,
+    private readonly employerService:EmployerService
   ){}
 
   ngOnInit(): void {
@@ -59,7 +66,16 @@ export class UserHomeComponent implements OnInit {
       next:(res:IApiJobsAndCountRes)=>{ 
         if(res.data){
           this.searchResults = res.data.jobs;
+          this.filteredResults = [...this.searchResults]
           this.selectedJob = this.searchResults![0]
+          if(this.selectedJob){
+            this.employerService.getEmployerData(this.selectedJob!.employer).subscribe({
+              next:(res)=>{
+                this.employerName = res.data.name
+              }
+            })
+          }
+
           this.totalJobs = res.data.jobCount
           this.max = Math.ceil(this.totalJobs/this.pageSize);
         }
@@ -70,6 +86,14 @@ export class UserHomeComponent implements OnInit {
 
   onSelection(jobId:string){
     this.selectedJob = this.searchResults?.find(j=>j._id==jobId);
+    if(this.selectedJob){
+      this.employerService.getEmployerData(this.selectedJob!.employer).subscribe({
+        next:(res)=>{
+          this.employerName = res.data.name
+        }
+      })
+    }
+
   }
 
   saveJob(jobId:string){
@@ -105,7 +129,7 @@ export class UserHomeComponent implements OnInit {
           userId: this.user?._id,
           jobId:jobId,
           jobTitle:jobTitle,
-          jobLocation:jobLocation,
+          jobLocation:jobLocation.city+","+jobLocation.state,
           coverLetter:result
         }
         console.log(jobData);
@@ -155,5 +179,49 @@ export class UserHomeComponent implements OnInit {
   onPageChage(pageNumber:number){
     this.pageNumber = pageNumber;
     this.onSubmit()
+  }
+
+  onDateSort(){
+    console.log(this.sort);
+    if(this.sort === 'thisWeek'){
+      let today = new Date()
+      let lastWeek = new Date(today.getTime()- 7*24*60*60*1000);
+      this.searchResults = this.searchResults!.filter(job=>{
+        let jobDate = new Date(job.dateCreated);
+        return jobDate >= lastWeek
+      })
+      this.selectedJob = this.searchResults[0];
+    }
+  }
+
+  onSalarySort(){
+    console.log(this.salarySort);
+    if(this.salarySort==='highToLow'){
+      this.filteredResults = this.searchResults!.sort((a,b)=>b.salary-a.salary);
+      this.selectedJob = this.filteredResults[0];
+    }else if(this.salarySort === 'lowToHigh'){
+      this.filteredResults = this.searchResults!.sort((a,b)=>a.salary-b.salary);
+      this.selectedJob = this.filteredResults[0]
+    }else{
+      this.filteredResults = this.searchResults
+    }
+  }
+
+  onJobTypeSort(){
+    console.log(this.jobTypeSort);
+    if(this.searchResults !== null){
+      const filteredResults = [...this.searchResults];
+      if(this.jobTypeSort==='fullTime'){
+        this.filteredResults = this.searchResults!.filter(job=>job.type==='fullTime');
+        this.selectedJob = this.searchResults[0];
+      }else if(this.jobTypeSort === 'partTime'){
+        console.log(this.searchResults);
+        this.filteredResults = this.searchResults!.filter(job=>job.type==='partTime');
+        this.selectedJob = this.searchResults[0]
+      }else{
+        this.filteredResults = [...this.searchResults]
+      }
+    }
+
   }
 }

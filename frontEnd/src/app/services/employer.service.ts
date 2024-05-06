@@ -59,7 +59,7 @@ export class EmployerService {
   }
 
   markLastMessageAsRead (userId: string | undefined, employerId: string | undefined, adminId: string | undefined, msgId: string): Observable<IApiRes<null>> {
-    return this.http.patch<IApiRes<null>>(`theater/chat/mark/read?userId=${userId ?? ''}&employerId=${employerId ?? ''}&adminId=${adminId ?? ''}&msgId=${msgId}`, {})
+    return this.http.patch<IApiRes<null>>(`employer/chat/mark/read?userId=${userId ?? ''}&employerId=${employerId ?? ''}&adminId=${adminId ?? ''}&msgId=${msgId}`, {})
   }
 
 

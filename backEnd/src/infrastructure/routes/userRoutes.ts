@@ -1,5 +1,5 @@
 import express from 'express';
-import { appController, chatController, jController, pController, uController } from '../utils/controllers';
+import { appController, chatController, eContorller, jController, pController, uController } from '../utils/controllers';
 import { userAuth } from '../middleware/userAuth';
 import { upload } from '../config/multer';
 
@@ -36,5 +36,5 @@ userRouter.patch('/unfollow/:userId',(req,res)=>uController.unfollowEmployer(req
 userRouter.get('/wallet-history/:userId',(req,res)=>uController.getWalletHistory(req,res));
 userRouter.patch('/wallet/add/:userId',(req,res)=>uController.addToWallet(req,res));
 userRouter.patch('/subscription/:userId',(req,res)=>uController.userPlanSubscribe(req,res))
-
+userRouter.get('/employer/:employerId',(req,res)=>eContorller.getEmployerData(req,res))
 export default userRouter

@@ -38,6 +38,7 @@ export interface IJobRes{
     requierments:string[]
     responsibilities:string[]
     verification:string
+    dateCreated:Date
 }
 
 
@@ -46,4 +47,4 @@ export interface IJobssAndCount{
   jobs:IJobRes[]
   jobCount:number
 }
-export interface IJobReq extends Omit<IJobRes ,'_id'|'isActive'|'tags'|'verification'>{}
+export interface IJobReq extends Omit<IJobRes ,'_id'|'isActive'|'tags'|'verification'|'dateCreated'>{}

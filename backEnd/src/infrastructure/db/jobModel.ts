@@ -41,6 +41,10 @@ const jobSchema:Schema  = new Schema<IJob &Document>({
     verification:{
         type:String,
         default:'pending'
+    },
+    dateCreated:{
+        type:Date,
+        default:Date.now()
     }
 })
 
