@@ -10,7 +10,6 @@ export class PlanRepository implements IPlanRepo{
     }
 
     async findAllPlans(page:number,pageSize:number): Promise<IPlanAndCount | null> {
-        console.log(page,pageSize);
         const skip = (page - 1) * pageSize;
         const plans = await userPlanModel.find({isActive:true})
         .skip(skip)

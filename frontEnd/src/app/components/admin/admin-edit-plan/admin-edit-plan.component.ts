@@ -48,7 +48,12 @@ export class AdminEditPlanComponent implements OnInit{
       description:['',[validateByTrimming(commonValidators)]],
       price:['',[Validators.required,Validators.min(MIN_PLAN_AMOUNT)]],
       duration:['',Validators.required],
-      features:this.fb.array([],Validators.required)
+      // features:this.fb.array([],Validators.required)
+      features:this.fb.group({
+        jobApplications:['',[Validators.required,Validators.min(10)]],
+        unlimitedSearch:['',Validators.required],
+        chatFacility:['',Validators.required]
+      })
     })
 
     if(this.plan){
@@ -57,31 +62,36 @@ export class AdminEditPlanComponent implements OnInit{
           name:this.plan.name || '',
           description:this.plan.description || '',
           price:this.plan.price || '',
-          duration:this.plan.duration || ''
+          duration:this.plan.duration || '',
+          features:this.plan.features
         }
       )
 
-      if(this.plan.features && this.plan.features.length>0){
-          this.plan.features.forEach(feature=>{
-            this.featuresForm.push(this.fb.control(feature,Validators.required));
-          })
-      }
+      // if(this.plan.features && this.plan.features.length>0){
+      //     this.plan.features.forEach(feature=>{
+      //       this.featuresForm.push(this.fb.control(feature,Validators.required));
+      //     })
+      // }
+
+      
     }
+
+    
     
   }
   
-  get featuresForm(){
-    return this.form.get('features') as FormArray
-  }
+  // get featuresForm(){
+  //   return this.form.get('features') as FormArray
+  // }
  
 
-  addFeature(){
-    this.featuresForm.push(this.fb.control('',Validators.required));
-  }
+  // addFeature(){
+  //   this.featuresForm.push(this.fb.control('',Validators.required));
+  // }
 
-  removeFeature(index:number){
-    this.featuresForm.removeAt(index);
-  }
+  // removeFeature(index:number){
+  //   this.featuresForm.removeAt(index);
+  // }
 
   onSubmit(){
     this.isSubmittd =true;

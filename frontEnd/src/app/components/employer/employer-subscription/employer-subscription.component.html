@@ -12,12 +12,29 @@
                           <div class="font-bold text-xl mb-2">{{ plan.name }}</div>
                           <p class="text-black text-base">{{ plan.description }}</p>
                           <p class="text-black text-base mt-2">Duration: {{ plan.duration }}</p>
-                          <p class="text-black text-base">Price: ${{ plan.price }}</p>
-                          <ul class="mt-4">
+                          <p class="text-black text-base">Price: INR {{ plan.price }}</p>
+                          <!-- <ul class="mt-4">
                             <li class="flex items-center" *ngFor="let feature of plan.features">
                               <span class="text-black">{{ feature }}</span>
                             </li>
-                          </ul>
+                          </ul> -->
+                          <div class="p-1 mt-2 mb-2 shadow-lg bg-gray-300 rounded-md">
+                            <p class="font-semibold">Features:</p>
+                            <ul>
+                                <li>Job Postings: {{ plan.features.jobApplications }}</li>
+                                <li>Chat Facility:
+              
+                                    <i  *ngIf="plan?.features?.chatFacility" class="fa-solid fa-check"></i>
+                                    <i  *ngIf="!plan?.features?.chatFacility" class="fa-regular fa-circle-xmark"></i>
+                                </li>
+                                <li>Unlimited Search:
+                                    <i  *ngIf="plan?.features?.unlimitedSearch" class="fa-solid fa-check"></i>
+                                    <i  *ngIf="!plan?.features?.unlimitedSearch" class="fa-regular fa-circle-xmark"></i>
+                                </li>
+                                <!-- Add more features as needed -->
+                            </ul>
+                        </div>
+                          
                           <div class="my-1 flex justify-end">
                             <button class="p-1 bg-slate-500 ring-2 rounded-lg" (click)="goToDetails(plan._id)" >Add subscription</button>
                           </div>
@@ -25,16 +42,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div *ngIf="employerPlan !== undefined">
-                    <h1>current Subscription</h1>
-                    <p>{{employerPlan.name}}</p>
-                    <p>{{employerPlan.features}}</p>
-                    <p>start Date : {{emploeyr?.subscription?.startDate | date}}</p>
-                    <p>End Date : {{emploeyr?.subscription?.endDate | date}}</p>
-                  </div> -->
-
-
-
 
                   <div *ngIf="employerPlan !== undefined" class="bg-gray-100 py-8 px-6 rounded-lg shadow-md">
                     <h1 class="text-2xl font-bold mb-4">Current Subscription</h1>
@@ -44,10 +51,19 @@
                     </div>
                 
                     <div class="mb-4">
-                        <p class="font-semibold mb-2">Features:</p>
-                        <ul class="list-disc pl-5">
-                            <li *ngFor="let feature of employerPlan.features" class="text-gray-600">{{ feature }}</li>
-                        </ul>
+                      <ul>
+                        <li>Job Postings: {{ employerPlan.features.jobApplications }}</li>
+                        <li>Chat Facility:
+      
+                            <i  *ngIf="employerPlan?.features?.chatFacility" class="fa-solid fa-check"></i>
+                            <i  *ngIf="!employerPlan?.features?.chatFacility" class="fa-regular fa-circle-xmark"></i>
+                        </li>
+                        <li>Unlimited Search:
+                            <i  *ngIf="employerPlan?.features?.unlimitedSearch" class="fa-solid fa-check"></i>
+                            <i  *ngIf="!employerPlan?.features?.unlimitedSearch" class="fa-regular fa-circle-xmark"></i>
+                        </li>
+                        <!-- Add more features as needed -->
+                    </ul>
                     </div>
                 
                     <div class="grid grid-cols-2 gap-4">

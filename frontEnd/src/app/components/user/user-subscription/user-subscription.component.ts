@@ -35,6 +35,7 @@ export class UserSubscriptionComponent implements OnInit {
   ngOnInit(): void {
     this.userDetails$.subscribe((res)=>{
       this.user = res;
+      console.log(this.user)
       this.userPlanId = res?.subscription?.planId;
       
     })

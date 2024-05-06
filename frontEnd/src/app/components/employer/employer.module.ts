@@ -35,6 +35,7 @@ import { EmployerWalletComponent } from './employer-wallet/employer-wallet.compo
 import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.component';
 import { EmployerFooterComponent } from './employer-footer/employer-footer.component';
 import { EmployerMessageComponent } from './employer-message/employer-message.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { EmployerMessageComponent } from './employer-message/employer-message.co
     ZipValidationComponent,
     CommonValidationComponent,
     SalaryValidationComponent,
-    WalletHistoryComponent
+    WalletHistoryComponent,
+    MatIconModule
     
   ]
 })

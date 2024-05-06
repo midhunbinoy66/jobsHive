@@ -128,8 +128,6 @@ export class JobRepository implements IJobRepo{
     }
 
    async findJobscount(): Promise<number> {
-        return await jobModel.find(
-            {verification:'pending'}
-        ).countDocuments();
+        return await jobModel.countDocuments({verification:'pending',isActive:true})
     }
 }

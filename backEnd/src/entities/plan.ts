@@ -6,7 +6,13 @@ export interface IPlan{
     price:number
     name:string
     description:string
-    features:string[]
+    features:IPlanFeatures
     isActive:boolean
     type:string
+}
+
+export interface IPlanFeatures{
+    jobApplications:number
+    unlimitedSearch:boolean
+    chatFacility:boolean
 }

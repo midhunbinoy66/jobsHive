@@ -44,6 +44,6 @@ export interface IJobRes{
 
 export interface IJobssAndCount{
   jobs:IJobRes[]
-  jobsCount:number
+  jobCount:number
 }
 export interface IJobReq extends Omit<IJobRes ,'_id'|'isActive'|'tags'|'verification'>{}

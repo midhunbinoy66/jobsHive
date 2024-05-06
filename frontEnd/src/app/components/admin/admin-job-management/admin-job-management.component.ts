@@ -11,10 +11,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-job-management.component.css']
 })
 export class AdminJobManagementComponent implements OnInit{
-
+  pageNumber = 1;
   totalItems: number = 0;
-  currentPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 3;
+  max =0;
 
   
   jobsForVerification :IJobRes[] | null =[]
@@ -24,28 +24,25 @@ export class AdminJobManagementComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    // this.jobService.findJobsForVerification().subscribe({
-    //   next:(res)=>{
-    //     this.jobsForVerification = res.data
-    //     console.log(this.jobsForVerification);
-    //   }
-    // })
     this.loadJobsForVerification();
   }
 
-  loadJobsForVerification(page: number = 1): void {
-    this.jobService.findJobsForVerification(page, this.itemsPerPage).subscribe({
+  loadJobsForVerification(): void {
+    this.jobService.findJobsForVerification(this.pageNumber, this.itemsPerPage).subscribe({
       next: (res) => {
       this.jobsForVerification = res.data!.jobs;
-        this.totalItems = res.data!.jobsCount;  // Total number of items from the API
+      console.log(res.data);
+        this.totalItems = res.data!.jobCount;  // Total number of items from the API
+        console.log(this.totalItems);
         console.log(this.jobsForVerification);
+        this.max = Math.ceil(this.totalItems/this.itemsPerPage);
       }
     });
   }
 
-  pageChanged(event: any): void {
-    this.currentPage = event.page;
-    this.loadJobsForVerification(this.currentPage);
+  pageChanged(page: number): void {
+    this.pageNumber =page
+    this.loadJobsForVerification();
   }
 
   updateJobstatus(jobId:string){
@@ -60,7 +57,7 @@ export class AdminJobManagementComponent implements OnInit{
         this.jobService.verifyJob(jobId).subscribe({
           next:(res)=>{
             void Swal.fire('Success','Job Status updated','success');
-            this.loadJobsForVerification(this.currentPage); 
+            this.loadJobsForVerification(); 
           }
         })
       }

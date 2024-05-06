@@ -58,8 +58,8 @@ export class JobService {
     return this.http.post<IApiJobRes>(`employer/update-job/${jobId}`,jobData);
   }
 
-  findJobsForVerification(page: number = 1, limit: number = 10):Observable<IApiRes<IJobssAndCount |null >>{
-    return this.http.get<IApiRes<IJobssAndCount |null >>(`admin/jobs?page=${page}&limit=${limit}`);
+  findJobsForVerification(pageNumber:number, pageSize: number ):Observable<IApiRes<IJobssAndCount |null >>{
+    return this.http.get<IApiRes<IJobssAndCount |null >>(`admin/jobs`,{params:{pageNumber,pageSize}});
   }
 
   verifyJob(jobId:string):Observable<IApiJobRes>{

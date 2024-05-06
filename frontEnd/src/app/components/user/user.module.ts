@@ -39,6 +39,7 @@ import { UserFooterComponent } from './user-footer/user-footer.component';
 import { ProfileDpComponent } from '../common/profile-dp/profile-dp.component';
 import { UserMessagesComponent } from './user-messages/user-messages.component';
 import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import {MatButtonModule} from '@angular/material/button';
     ZipValidationComponent,
     WalletHistoryComponent,
     ProfileDpComponent,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     {

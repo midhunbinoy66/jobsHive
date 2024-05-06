@@ -32,7 +32,7 @@
             <div *ngIf="form.get('price')?.errors?.['required'] && isSubmittd" style="color: red;">Field is required</div>
             <p *ngIf="form.get('price')?.errors?.['min'] && isSubmittd" class="text-red-600">Price cant be less than 100</p>
         </div>
-
+<!-- 
         <div formArrayName="features">
             <div *ngFor="let feature of featuresForm.controls; let i = index" class="mb-4">
                 <div class="flex items-center space-x-3">
@@ -47,11 +47,37 @@
                 </div>
             </div>
             <p *ngIf="form.get('features')?.errors?.['required'] && isSubmittd" class="text-red-600 block">Atleast One Feature is required</p>
-        </div>
+        </div> -->        
 
-        <button type="button" (click)="addFeature()"
+        <!-- <button type="button" (click)="addFeature()"
                 class="mb-4 inline-block px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Add Feature
-        </button>
+        </button> -->
+
+        <div formGroupName="features">
+            <div class="mb-4">
+                <label for="jobApplications" class="block text-gray-700 font-bold mb-2">Job Applications</label>
+                <input type="number" placeholder="Job Applications" formControlName="jobApplications"
+                    class="p-2 ring-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-500">
+                    <p *ngIf="form.get('features')?.get('jobApplications')?.errors?.['required'] && isSubmittd" class="text-red-500">Field is required</p>
+                    <p *ngIf="form.get('features')?.get('jobApplications')?.errors?.['min'] && isSubmittd" class="text-red-500">Minimum value is 10</p>   
+            </div>
+        
+            <div class="mb-4">
+                <label for="unlimitedSearch" class="block text-gray-700 font-bold mb-2">Unlimited Search</label>
+                <input type="checkbox" formControlName="unlimitedSearch" class="mr-2">
+                <span class="text-gray-600">Enable Unlimited Search</span>
+            </div>
+        
+            <div class="mb-4">
+                <label for="employerChat" class="block text-gray-700 font-bold mb-2">Employer Chat</label>
+                <input type="checkbox" formControlName="chatFacility" class="mr-2">
+                <span class="text-gray-600">Enable Chat</span>
+            </div>
+        
+            <!-- Add more feature fields as needed -->
+        
+            <p *ngIf="form.get('features')?.errors?.['required'] && isSubmittd" class="text-red-600">At least one feature is required</p>
+        </div>
 
         <button type="submit"
                 class="w-full block rounded-full bg-amber-400 hover:bg-amber-600 hover:shadow-lg font-semibold text-gray-800 px-6 py-2">Save

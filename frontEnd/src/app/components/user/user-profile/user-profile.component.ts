@@ -37,7 +37,7 @@ export class UserProfileComponent implements OnInit,OnDestroy{
         this.userService.updateUserWallet(this.userId,this.moneyToAddToWallet).subscribe({
           next:(res)=>{
             this.store.dispatch(saveUserOnStore({userDetails:res.data}));
-            this.user = res.data;
+           this.getUserDetails();
           }
         })
       }else{
@@ -48,6 +48,10 @@ export class UserProfileComponent implements OnInit,OnDestroy{
   }
 
   ngOnInit(): void {
+    this.getUserDetails();
+  }
+
+  getUserDetails(){
     this.userDetails$.subscribe((user)=>{
       if(user!== null){
         this.user = user;

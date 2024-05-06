@@ -41,14 +41,14 @@ export class EmployerCreateJobComponent implements OnInit {
       title:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
       salary:['',[Validators.required,Validators.min(MIN_SALARY_AMOUNT)]],
-      city:['',[validateByTrimming(commonValidators)]],
-      district:['',[validateByTrimming(commonValidators)]],
-      state:['',[validateByTrimming(commonValidators)]],
-      country:['',[validateByTrimming(commonValidators)]],
-      zip:['',[Validators.required,Validators.pattern(ZipRegex)]],
+      // city:['',[validateByTrimming(commonValidators)]],
+      // district:['',[validateByTrimming(commonValidators)]],
+      // state:['',[validateByTrimming(commonValidators)]],
+      // country:['',[validateByTrimming(commonValidators)]],
+      // zip:['',[Validators.required,Validators.pattern(ZipRegex)]],
       requierments:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)],Validators.required),
       responsibilities:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)],Validators.required),
-      typeOfJob:['',[validateByTrimming(commonValidators)]]
+      typeOfJob:['fullTime',[validateByTrimming(commonValidators)]]
 
     })
   }
@@ -79,38 +79,35 @@ export class EmployerCreateJobComponent implements OnInit {
   }
 
   onSubmit(){
-    this.isSubmitted =true;
-    if(!this.jobForm.invalid){
-      console.log('submitted');
-      const formData= this.jobForm.getRawValue();
+    if(this.employer?.address === undefined){
+      void Swal.fire('Oops','Update address','error');
+      this.router.navigateByUrl('/employer/profile/edit');
+    }else{
+      this.isSubmitted =true;
+      if(!this.jobForm.invalid){
+        console.log('submitted');
+        const formData= this.jobForm.getRawValue();
       
-      const jobAddress:IJobAddress  = {
-        city:formData.city,
-        district:formData.district,
-        state:formData.state,
-        country:formData.country,
-        zip:formData.zip
-      }
-  
-      const jobData:IJobReq ={
-        title:formData.title,
-        description:formData.description,
-        location:jobAddress,
-        requierments:formData.requierments,
-        responsibilities:formData.responsibilities,
-        salary:formData.salary,
-        type:formData.typeOfJob,
-        employer:this.employer!._id
-      }
-   
-      console.log(jobData)
-  
-      this.jobService.createJob(jobData).subscribe({
-        next:(res)=>{
-          void Swal.fire('Success','Job Has been created','success');
-          this.router.navigate(['/employer/jobs'])
+        const jobData:IJobReq ={
+          title:formData.title,
+          description:formData.description,
+          location:this.employer?.address as IJobAddress,
+          requierments:formData.requierments,
+          responsibilities:formData.responsibilities,
+          salary:formData.salary,
+          type:formData.typeOfJob,
+          employer:this.employer!._id
         }
-      })
+     
+        console.log(jobData)
+    
+        this.jobService.createJob(jobData).subscribe({
+          next:(res)=>{
+            void Swal.fire('Success','Job Has been created','success');
+            this.router.navigate(['/employer/jobs'])
+          }
+        })
+      }
     }
 
   }

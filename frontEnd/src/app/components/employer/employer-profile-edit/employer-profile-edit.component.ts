@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { validateByTrimming } from 'src/app/helpers/validations';
@@ -7,6 +7,7 @@ import { IEmployerAddress } from 'src/app/models/common';
 import { IEmployerRes, IEmployerUpdate } from 'src/app/models/employer';
 import { IUserUpdate } from 'src/app/models/users';
 import { EmployerService } from 'src/app/services/employer.service';
+import { ZipRegex } from 'src/app/shared/constants';
 import { mobileValidators, nameValidators, requiredValidator } from 'src/app/shared/validators';
 import { saveEmployerOnStore } from 'src/app/states/employer/employer.action';
 import { selectEmployerDetails } from 'src/app/states/employer/employrer.selector';
@@ -45,7 +46,7 @@ export class EmployerProfileEditComponent implements OnInit {
       district:['',validateByTrimming(requiredValidator)],
       state:['',[validateByTrimming(requiredValidator)]],
       country:['',[validateByTrimming(requiredValidator)]],
-      zip:['',[validateByTrimming(requiredValidator)]]
+      zip:['',[Validators.required,Validators.pattern(ZipRegex)]]
     })
 
     this.employeDetails$.subscribe(user=>{

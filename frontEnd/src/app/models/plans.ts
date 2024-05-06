@@ -16,6 +16,12 @@ export interface IApiPlansRes{
 }
 
 
+export interface IPlanFeatures{
+    jobApplications:number 
+    unlimitedSearch:boolean
+    chatFacility:boolean
+}
+
 export interface IPlanAndCount{
     plans:IPlan[] | null
     planCount:number
@@ -32,7 +38,7 @@ export interface  IPlan{
     name:string
     description:string
     price:number
-    features:string[]
+    features:IPlanFeatures
     duration:number
     isActive:boolean
     type:string 

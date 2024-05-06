@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { features } from 'process';
 import { validateByTrimming } from 'src/app/helpers/validations';
 import { PlanService } from 'src/app/services/plan.service';
 import { commonValidators, nameValidators } from 'src/app/shared/validators';
@@ -28,23 +29,28 @@ export class AdminCreatePlanComponent implements OnInit {
       name:['',[validateByTrimming(commonValidators)]],
       description:['',[validateByTrimming(commonValidators)]],
       price:['',[Validators.required,Validators.min(100),Validators.max(1000)]],
-      features:this.fb.array([this.fb.control('',Validators.required)],Validators.required),
+      // features:this.fb.array([this.fb.control('',Validators.required)],Validators.required),
+      features:this.fb.group({
+        jobApplications:[20,[Validators.required,Validators.min(10)]],
+        unlimitedSearch:[true,Validators.required],
+        chatFacility:[true,Validators.required]
+      }),
       duration:['',Validators.required],
       type:['user',Validators.required]
     })
   }
 
-  get featuresForm(){
-    return this.form.get('features') as FormArray
-  }
+  // get featuresForm(){
+  //   return this.form.get('features') as FormArray
+  // }
 
-  addFeature(){
-    this.featuresForm.push(this.fb.control('',Validators.required))
-  }
+  // addFeature(){
+  //   this.featuresForm.push(this.fb.control('',Validators.required))
+  // }
 
-  removeFeature(index:number){
-    this.featuresForm.removeAt(index);
-  }
+  // removeFeature(index:number){
+  //   this.featuresForm.removeAt(index);
+  // }
 
   onSubmit(){
     this.isSubmittd =true;
