@@ -10,4 +10,5 @@ export interface IApplication{
     appliedTime:Date
     status:string
     coverLetter:string
+    resume:string
 }

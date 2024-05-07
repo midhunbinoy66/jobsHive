@@ -85,4 +85,9 @@ export class UserService {
   getUsersChattedWith (employerId: string): Observable<IApiRes<IUsersListForChats[] | null>> {
     return this.http.get<IApiRes<IUsersListForChats[] | null>>(`employer/chat/users/${employerId}`)
   }
+
+  uploadUserResume(userId:string,file:FormData):Observable<IApiUserRes>{
+    console.log(file,'userservice');
+    return this.http.patch<IApiUserRes>(`user/upload/resume/${userId}`, file)
+  }
 }

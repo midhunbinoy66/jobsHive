@@ -7,6 +7,7 @@ import { ApplicationService } from 'src/app/services/application.service';
 import { UserService } from 'src/app/services/user.service';
 import { UpdateJobStatusModalComponent } from '../../common/update-job-status-modal/update-job-status-modal.component';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-employer-job-applicants',
@@ -75,6 +76,16 @@ export class EmployerJobApplicantsComponent implements OnInit{
           })
         }
     })
-
   }
+
+  downloadResume(resume:string) {
+    const resumeUrl = environment.baseUrl+`resumes/${resume}`
+    const anchor = document.createElement('a');
+    anchor.href = resumeUrl;
+    anchor.download = 'resume.pdf';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  }
+  
 }

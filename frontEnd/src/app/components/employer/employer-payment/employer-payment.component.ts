@@ -50,11 +50,11 @@ export class EmployerPaymentComponent implements OnInit {
 
   confirmSubscription():void{
 
-    const currentDate = new Date();
+    const currentDate =this.employer?.subscription?.endDate?this.employer.subscription.endDate:new Date();
     const endDate = this.calculateEndDate(currentDate,this.plan!.duration);
     const planData:ISubscription = {
         planId:this.planId,
-        startDate:currentDate,
+        startDate:new Date(),
         endDate:endDate
     }
     console.log(planData);
@@ -62,7 +62,6 @@ export class EmployerPaymentComponent implements OnInit {
       next:(res)=>{
           console.log(res.data);
           this.store.dispatch(saveEmployerOnStore({employerDetails:res.data}));
-          this.router.navigate(['/employer/subscription'])
       }
     })
   }
@@ -117,7 +116,6 @@ export class EmployerPaymentComponent implements OnInit {
             this.store.dispatch(saveEmployerOnStore({employerDetails:this.employer}));
             this.confirmSubscription()
             void Swal.fire('Success','Payment completed','success');
-            this.router.navigateByUrl('/employer/subscription')
           }
         })
       }else{

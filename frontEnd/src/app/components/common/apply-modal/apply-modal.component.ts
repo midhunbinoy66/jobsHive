@@ -7,12 +7,19 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class ApplyModalComponent {
   coverLetter: string='';
+  selectedFile: File | null = null;
+
+ 
 
   constructor(public dialogRef: MatDialogRef<ApplyModalComponent>) {}
 
   apply() {
-    
-    this.dialogRef.close(this.coverLetter);
-    
+    this.dialogRef.close({ coverLetter: this.coverLetter, file: this.selectedFile });
   }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    console.log('Selected file:', this.selectedFile);
+  }
+  
 }

@@ -54,6 +54,7 @@ export class EmployerJobEditComponent implements OnInit{
       zip:['',Validators.required],
       requierments:this.formBuilder.array([],[Validators.required,lengthValidator(2)]),
       responsibilities:this.formBuilder.array([],[Validators.required,lengthValidator(2)]),
+      skills:this.formBuilder.array([],[Validators.required,lengthValidator(2)]),
       typeOfJob:['',Validators.required]
     })
 
@@ -86,6 +87,14 @@ export class EmployerJobEditComponent implements OnInit{
         this.responsibilitiesFrom.push(this.formBuilder.control(responsibility,Validators.required));
       })
     }
+
+
+
+    if(this.jobData?.skills && this.jobData.skills.length>0){
+      this.jobData.skills.forEach((skill)=>{
+        this.skillsForm.push(this.formBuilder.control(skill,Validators.required));
+      })
+    }
   }
 
 
@@ -116,11 +125,25 @@ export class EmployerJobEditComponent implements OnInit{
     this.responsibilitiesFrom.removeAt(index);
   }
 
+
+  get skillsForm(){
+    return this.jobForm.get('skills') as FormArray
+  }
+
+  addSkills(){
+    this.skillsForm.push(this.formBuilder.control('',Validators.required));
+  }
+
+  removeSkill(index:number){
+    this.skillsForm.removeAt(index);
+  }
+
   onSubmit(){
     console.log(this.jobForm);
     this.isSubmitted = true;
     if(!this.jobForm.invalid){
       const formData = this.jobForm.getRawValue();
+      console.log(formData);
       this.jobService.updateJob(this.jobData!._id,formData).subscribe({
         next:(res)=>{
           void Swal.fire('Success','Job Edited Successfully','success');

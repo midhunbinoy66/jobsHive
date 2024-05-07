@@ -14,5 +14,6 @@ export interface IJob{
     requierments:string[]
     responsibilities:string[]
     verification:string,
-    dateCreated:Date
+    dateCreated:Date,
+    skills:string[]
 }

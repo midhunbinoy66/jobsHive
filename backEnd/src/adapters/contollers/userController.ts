@@ -228,4 +228,12 @@ export class UserController{
         res.status(apiRes.status).json(apiRes)
     }
 
+    async uploadUserResume(req:Request,res:Response){
+        const userId = req.params.userId;
+        const fileName = req.file?.filename
+        const apiRes = await this._userUseCAse.uploadUserResumeFile(userId,fileName);
+        res.status(apiRes.status).json(apiRes)
+
+    }
+
 }

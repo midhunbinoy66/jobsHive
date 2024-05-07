@@ -16,6 +16,7 @@ export const createServer =  ()=>{
             app.use(express.json());
             app.use(express.urlencoded());
             app.use('/images',express.static(path.join(__dirname,'../../../images')))
+            app.use('/resumes',express.static(path.join(__dirname,'../../../resumes')))
             app.use(cookieParser());
             app.use(cors({
                 credentials:true,

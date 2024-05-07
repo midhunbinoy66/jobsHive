@@ -9,6 +9,7 @@ export interface IApplicationRes{
     appliedTime:Date
     status:string
     coverLetter:string
+    resume:string
 }
 
 export interface IApiApplicationRes{

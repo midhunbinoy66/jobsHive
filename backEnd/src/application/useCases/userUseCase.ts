@@ -517,4 +517,43 @@ export class UserUseCase{
         }
     }
 
+
+    async uploadUserResumeFile(userId:string,fileName:string|undefined):Promise<IApiUserRes>{
+        try {
+            if(!fileName)return {
+                status:STATUS_CODES.BAD_REQUEST,
+                message:'Error',
+                data:null
+            }
+            // const user = await this._userRespository.findById(userId)
+            // if(user && user.resume ){
+            //     const filePath = path.join(__dirname,`../../resumes/${user.resume}`)
+            //     fs.unlinkSync(filePath);
+            // }
+
+            const updatedUser =await this._userRespository.updateResumePath(userId,fileName);
+            if (updatedUser) {
+                return {
+                    status:STATUS_CODES.OK,
+                    message:'Success',
+                    data:updatedUser
+                }
+            }else{
+                return {
+                    status:STATUS_CODES.BAD_REQUEST,
+                    message:'Invalid User',
+                    data:null
+                }
+            }
+
+            
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal Error',
+                data:null
+            }
+        }
+    }
+
 }

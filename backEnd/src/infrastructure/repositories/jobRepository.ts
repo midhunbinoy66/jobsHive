@@ -97,7 +97,8 @@ export class JobRepository implements IJobRepo{
                     type:jobData.type,
                     requierments:jobData.requierments,
                     responsibilities:jobData.responsibilities,
-                    location:jobData.location
+                    location:jobData.location,
+                    skills:jobData.skills
                 }
             },
             {new:true}

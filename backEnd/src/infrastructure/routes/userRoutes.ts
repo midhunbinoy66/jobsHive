@@ -2,6 +2,7 @@ import express from 'express';
 import { appController, chatController, eContorller, jController, pController, uController } from '../utils/controllers';
 import { userAuth } from '../middleware/userAuth';
 import { upload } from '../config/multer';
+import {uploadResume} from '../config/multerResume' 
 
 
 const userRouter = express.Router();
@@ -15,6 +16,7 @@ userRouter.post('/login',(req,res)=>uController.userLogin(req,res));
 userRouter.post('/auth/google',(req,res)=>uController.userSocialSignUp(req,res));
 userRouter.patch('/update/profileimage/:userId',upload.single('image'),(req,res)=>uController.updateUserProfilePhoto(req,res))
 userRouter.patch('/remove/profileimage/:userId', (req,res) => uController.removeUserProfileDp(req,res))
+userRouter.patch('/upload/resume/:userId',uploadResume.single('file'),(req,res)=>uController.uploadUserResume(req,res))
 
 userRouter.get('/chat/employers/:userId',(req,res)=>chatController.getEmployersChattedWith(req,res));
 userRouter.get('/chat/history',(req,res)=>chatController.getChatHistory(req,res));

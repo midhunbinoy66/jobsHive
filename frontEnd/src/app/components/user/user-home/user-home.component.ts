@@ -130,14 +130,25 @@ export class UserHomeComponent implements OnInit {
           jobId:jobId,
           jobTitle:jobTitle,
           jobLocation:jobLocation.city+","+jobLocation.state,
-          coverLetter:result
+          coverLetter:result.coverLetter,
+          resume:''
         }
-        console.log(jobData);
-        this.jobService.applyForJob(jobData).subscribe({
-          next:(res)=>{
-            console.log(res);
-            void Swal.fire('Success','You application has been sent','success');
-          }
+        const formData = new FormData();
+        formData.append('file',result.file,this.user?.name+'.pdf');
+        if(this.user?._id)
+        this.userService.uploadUserResume(this.user?._id,formData).subscribe((res)=>{
+          console.log('uploading resume')
+          console.log(res);
+          if(res.data.resume)
+          jobData.resume = res.data.resume
+          console.log(jobData);
+          console.log(res.data.resume);
+          this.jobService.applyForJob(jobData).subscribe({
+            next:(res)=>{
+              console.log(res);
+              void Swal.fire('Success','You application has been sent','success');
+            }
+          })
         })
       }else {
         console.log('Application canceled');

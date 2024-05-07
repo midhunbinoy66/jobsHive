@@ -39,6 +39,7 @@ export interface IJobRes{
     responsibilities:string[]
     verification:string
     dateCreated:Date
+    skills:string[]
 }
 
 

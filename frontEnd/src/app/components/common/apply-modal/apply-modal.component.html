@@ -3,8 +3,13 @@
   <mat-form-field>
  <textarea matInput [(ngModel)]="coverLetter" placeholder="Enter your cover letter"></textarea>
   </mat-form-field>
+  <div>
+    <input type="file" name="" id="" (change)="onFileSelected($event)" accept=".pdf" class="form-control">
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="undefined">Cancel</button>
-  <button mat-button [mat-dialog-close]="coverLetter" (click)="apply()">Apply</button>
+  <button mat-button [mat-dialog-close]="coverLetter" (click)="apply()" [disabled]="!selectedFile">Apply</button>
 </div>
+
+

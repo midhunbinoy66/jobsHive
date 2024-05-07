@@ -30,6 +30,9 @@ const applicationSchema :Schema = new Schema<IApplication & Document>({
     },
     coverLetter:{
         type:String
+    },
+    resume:{
+        type:String
     }
 })
 

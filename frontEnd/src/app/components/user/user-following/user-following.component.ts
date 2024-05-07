@@ -50,8 +50,9 @@ export class UserFollowingComponent implements OnInit {
     this.userService.unfollowEmployer(this.user!._id,employerId).subscribe({
       next:(res)=>{
         this.store.dispatch(saveUserOnStore({userDetails:res.data}))
+        this.employers = this.employers.filter(e=>e._id !== employerId);
         void Swal.fire('Success','UnFollowed','success');
-        this.initialize()
+        // this.initialize()
       }
     })
   }

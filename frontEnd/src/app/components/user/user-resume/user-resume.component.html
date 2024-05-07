@@ -44,6 +44,7 @@
                       class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2" required="true">
                     <button type="button" (click)="removeLanguage(i)" class="text-sm text-indigo-600 hover:text-indigo-900  bg-slate-400 p-1 rounded-lg ml-1">Remove</button>
                     <p *ngIf="language?.errors?.['required'] && isSubmitted" class="text-red-600">Language field is required</p>
+                    <!-- <p *ngIf="language?.errors?.['minLength'] && isSubmitted" class="text-red-600">Minimum Character lenght is three</p> -->
                   </div>
                 </div>
                 <p *ngIf="form.get('languages')?.errors?.['required'] && isSubmitted" class="text-red-500">Language Required</p>

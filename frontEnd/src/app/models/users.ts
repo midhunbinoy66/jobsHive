@@ -13,7 +13,8 @@ export interface IUserRes {
     savedJobs?:string[]
     subscription?:ISubscription
     following?:string[]
-    walletHistory?:IWalletHistory[]| []
+    walletHistory?:IWalletHistory[]| [],
+    resume?:string
   }
   
 

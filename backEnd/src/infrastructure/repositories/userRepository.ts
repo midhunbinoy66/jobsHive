@@ -229,4 +229,18 @@ export class UserRespository implements IuserRepo {
             {new:true}
           )
       }
+
+      async updateResumePath(userId: string, fileName: string): Promise<IUserRes | null> {
+          console.log('resume hit');
+
+          return await userModel.findByIdAndUpdate(
+            {_id:userId},
+            {
+                $set:{
+                    resume:fileName
+                }
+            },
+            {new:true}
+          )
+      }
 }

@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 import { saveUserOnStore } from 'src/app/states/user/user.action';
 import { selectUserDetails, selectUserState } from 'src/app/states/user/user.selector';
 import { AddToWalletComponent } from '../../common/add-to-wallet/add-to-wallet.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-profile',
@@ -21,6 +22,7 @@ export class UserProfileComponent implements OnInit,OnDestroy{
   userId:string =''
   userDetails$ = this.store.pipe(select(selectUserDetails));
   moneyToAddToWallet = 0
+  wallet =0;
   private readonly paymentResultSubscription:Subscription
 
   constructor(
@@ -36,8 +38,12 @@ export class UserProfileComponent implements OnInit,OnDestroy{
       if(response !== null ){
         this.userService.updateUserWallet(this.userId,this.moneyToAddToWallet).subscribe({
           next:(res)=>{
+            void Swal.fire('Success','Added to Wallet','success');
+            if(res.data.wallet){
+              this.wallet = res.data.wallet
+            }
             this.store.dispatch(saveUserOnStore({userDetails:res.data}));
-           this.getUserDetails();
+          //  this.getUserDetails();
           }
         })
       }else{
@@ -55,6 +61,9 @@ export class UserProfileComponent implements OnInit,OnDestroy{
     this.userDetails$.subscribe((user)=>{
       if(user!== null){
         this.user = user;
+        if(this.user.wallet){
+          this.wallet = this.user.wallet
+        }
         this.userId = user._id
       }
     })

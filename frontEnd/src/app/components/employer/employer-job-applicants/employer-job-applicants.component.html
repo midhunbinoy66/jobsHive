@@ -11,6 +11,8 @@
                 <div class="flex space-x-4 mt-4">
                     <button type="button" class="p-2 bg-teal-500 rounded-lg text-white font-semibold hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50" (click)="viewResume(application.userId)">View Resume</button>
                     <button type="button" class="p-2 bg-red-500 rounded-lg text-white font-semibold hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50" (click)="updateJobStatus(application.userId, application._id)">Update Status</button>
+                    <button *ngIf="application.resume" type="button" class="p-2 bg-blue-500 rounded-lg text-white font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" (click)="downloadResume(application.resume)">Download Resume</button>
+
                 </div>
             </div>
         </div>

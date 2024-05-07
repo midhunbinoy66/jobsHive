@@ -33,6 +33,9 @@ const jobSchema:Schema  = new Schema<IJob &Document>({
         type:[String],
 
     },
+    skills:{
+        type:[String]
+    },
     employer:{
         type:Schema.Types.ObjectId,
         ref:'Employers'

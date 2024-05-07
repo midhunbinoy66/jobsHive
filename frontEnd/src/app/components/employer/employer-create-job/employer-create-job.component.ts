@@ -48,6 +48,7 @@ export class EmployerCreateJobComponent implements OnInit {
       // zip:['',[Validators.required,Validators.pattern(ZipRegex)]],
       requierments:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)],Validators.required),
       responsibilities:this.formBuilder.array([this.formBuilder.control('',Validators.required),this.formBuilder.control('',Validators.required)],Validators.required),
+      skills:this.formBuilder.array([this.formBuilder.control('',Validators.required)]),
       typeOfJob:['fullTime',[validateByTrimming(commonValidators)]]
 
     })
@@ -78,6 +79,19 @@ export class EmployerCreateJobComponent implements OnInit {
     this.responsibilitiesFrom.removeAt(index);
   }
 
+
+  get skillsForm(){
+    return this.jobForm.get('skills') as FormArray
+  }
+
+  addSkills(){
+    this.skillsForm.push(this.formBuilder.control('',Validators.required));
+  }
+
+  removeSkill(index:number){
+    this.skillsForm.removeAt(index);
+  }
+
   onSubmit(){
     if(this.employer?.address === undefined){
       void Swal.fire('Oops','Update address','error');
@@ -96,6 +110,7 @@ export class EmployerCreateJobComponent implements OnInit {
           responsibilities:formData.responsibilities,
           salary:formData.salary,
           type:formData.typeOfJob,
+          skills:formData.skills,
           employer:this.employer!._id
         }
      

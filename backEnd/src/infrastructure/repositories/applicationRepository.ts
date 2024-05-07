@@ -34,7 +34,8 @@ export class ApplicationRepository implements IApplicantRepo{
                 $set:{
                     jobTitle:applicationData.jobTitle,
                     jobLocation:applicationData.jobLocation,
-                    coverLetter:applicationData.coverLetter
+                    coverLetter:applicationData.coverLetter,
+                    resume:applicationData.resume
                 }
             },
             {upsert:true,new:true}
