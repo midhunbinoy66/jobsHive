@@ -58,10 +58,12 @@
             </div>
 
         </div>
-        <div>
-            <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
-            <span>Page {{ currentPage }} of {{ Max }}</span>
-            <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === Max">Next</button>
+        <div class="mt-1">
+            <div class="flex justify-center">
+                <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Prev </button>
+                <span>Page {{ currentPage }} of {{ Max }}</span>
+                <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === Max">Next</button>
+            </div>
         </div>
     </div>
 

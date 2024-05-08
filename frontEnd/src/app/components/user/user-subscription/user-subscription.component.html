@@ -49,14 +49,30 @@
                     <div class="mb-4">
                         <p class="text-lg"><span class="font-semibold">Plan Name:</span> {{ userPlan.name }}</p>
                     </div>
-                
+<!--                 
                     <div class="mb-4">
                         <p class="font-semibold mb-2">Features:</p>
                         <ul class="list-disc pl-5">
-                            <!-- <li *ngFor="let feature of userPlan.features" class="text-gray-600">{{ feature }}</li> -->
+                             <li *ngFor="let feature of userPlan.features" class="text-gray-600">{{ feature }}</li> 
                         </ul>
-                    </div>
+                    </div> -->
                 
+                    <div class="mb-4">
+                      <ul>
+                        <li>Job Postings: {{ userPlan.features.jobApplications }}</li>
+                        <li>Chat Facility:
+      
+                            <i  *ngIf="userPlan?.features?.chatFacility" class="fa-solid fa-check"></i>
+                            <i  *ngIf="!userPlan?.features?.chatFacility" class="fa-regular fa-circle-xmark"></i>
+                        </li>
+                        <li>Unlimited Search:
+                            <i  *ngIf="userPlan?.features?.unlimitedSearch" class="fa-solid fa-check"></i>
+                            <i  *ngIf="!userPlan?.features?.unlimitedSearch" class="fa-regular fa-circle-xmark"></i>
+                        </li>
+                        <!-- Add more features as needed -->
+                    </ul>
+                    </div>
+
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <p class="font-semibold">Start Date:</p>

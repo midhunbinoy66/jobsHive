@@ -57,9 +57,12 @@
     </div>
  
     <!-- pagination -->
-    <div>
-        <button [disabled]="pageNumber===1" (click)="onPageChange(pageNumber-1)" >Prev</button>
-        <span>{{pageNumber}} of {{maxPage}}</span>
-        <button [disabled]="pageNumber===maxPage" (click)="onPageChange(pageNumber+1)" >Next</button>
+    <div class="mt-1">
+        <div class="flex justify-center">
+            <button [disabled]="pageNumber===1" (click)="onPageChange(pageNumber-1)" >Prev</button>
+            <span>{{pageNumber}} of {{maxPage}}</span>
+            <button [disabled]="pageNumber===maxPage" (click)="onPageChange(pageNumber+1)" >Next</button>
+        </div>
+        
     </div>
 </div>

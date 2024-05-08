@@ -16,9 +16,11 @@
   </div>
 
   <!-- pagination -->
-  <div>
-    <button (click)="onPageChage(pageNumber-1)" [disabled]="pageNumber===1">Prev</button>
-    <span>{{pageNumber}} of {{max}}</span>
-    <button (click)="onPageChage(pageNumber+1)" [disabled]="pageNumber === max">Next</button>
+  <div class="mt-1">
+    <div class="flex justify-center">
+      <button (click)="onPageChage(pageNumber-1)" [disabled]="pageNumber===1">Prev </button>
+      <span>{{pageNumber}} of {{max}}</span>
+      <button (click)="onPageChage(pageNumber+1)" [disabled]="pageNumber === max"> Next</button>
+    </div>
   </div>
   

@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { ApplyModalComponent } from '../../common/apply-modal/apply-modal.component';
 import { IJobAddress } from 'src/app/models/common';
 import { EmployerService } from 'src/app/services/employer.service';
+import { IResumeRes } from 'src/app/models/resume';
 
 @Component({
   selector: 'app-user-home',
@@ -37,6 +38,7 @@ export class UserHomeComponent implements OnInit {
   salarySort:string ='Sort Salary'
   jobTypeSort:string='Job Type'
   filteredResults!:IJobRes[]|null
+  userResume:IResumeRes | null = null
   constructor(
     private jobService:JobService,
     private formBuilder:FormBuilder,
@@ -56,6 +58,32 @@ export class UserHomeComponent implements OnInit {
     
     this.userDetail$.subscribe((user)=>{
       this.user  =user;
+      if(this.user?._id){
+        this.userService.getUserResumeDetails(this.user?._id).subscribe({
+          next:(res)=>{
+            this.userResume = res.data;
+            if(this.userResume?.skills){
+              this.jobService.findJobsBySkill(this.userResume.skills,this.pageNumber,this.pageSize).subscribe({
+                next:(res)=>{
+                  if(res.data){
+                    this.searchResults = res.data.jobs
+                    console.log(this.searchResults);
+                    this.totalJobs = res.data.jobCount;
+                    this.max = Math.ceil(this.totalJobs/this.pageSize)
+                    if(this.searchResults && this.searchResults.length >0){
+                      this.filteredResults = [...this.searchResults]
+                      this.selectedJob = this.filteredResults[0]
+                      this.isSearched =true
+                    }
+                   
+                  }
+                }
+              })
+            }
+          }
+        })
+
+      }
     })
   }
 
@@ -122,38 +150,54 @@ export class UserHomeComponent implements OnInit {
   }
 
   onApply(jobId:string,jobTitle:string,jobLocation:IJobAddress){
-    const dialogRef = this.dialog.open(ApplyModalComponent);
-    dialogRef.afterClosed().subscribe(result=>{
-      if(result !== undefined){
-        const jobData ={
-          userId: this.user?._id,
-          jobId:jobId,
-          jobTitle:jobTitle,
-          jobLocation:jobLocation.city+","+jobLocation.state,
-          coverLetter:result.coverLetter,
-          resume:''
+    if(this.user === null){
+      void Swal.fire({
+        title: 'You are not logged in',
+        text: 'Do you want to redirect to login page',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Login',
+        cancelButtonText: 'Cancel'
+      }).then(result => {
+        if (result.isConfirmed) {
+          void this.router.navigate(['/user/login'])
         }
-        const formData = new FormData();
-        formData.append('file',result.file,this.user?.name+'.pdf');
-        if(this.user?._id)
-        this.userService.uploadUserResume(this.user?._id,formData).subscribe((res)=>{
-          console.log('uploading resume')
-          console.log(res);
-          if(res.data.resume)
-          jobData.resume = res.data.resume
-          console.log(jobData);
-          console.log(res.data.resume);
-          this.jobService.applyForJob(jobData).subscribe({
-            next:(res)=>{
-              console.log(res);
-              void Swal.fire('Success','You application has been sent','success');
-            }
+      })
+    }else{
+      const dialogRef = this.dialog.open(ApplyModalComponent);
+      dialogRef.afterClosed().subscribe(result=>{
+        if(result !== undefined){
+          const jobData ={
+            userId: this.user?._id,
+            jobId:jobId,
+            jobTitle:jobTitle,
+            jobLocation:jobLocation.city+","+jobLocation.state,
+            coverLetter:result.coverLetter,
+            resume:''
+          }
+          const formData = new FormData();
+          formData.append('file',result.file,this.user?.name+'.pdf');
+          if(this.user?._id)
+          this.userService.uploadUserResume(this.user?._id,formData).subscribe((res)=>{
+            console.log('uploading resume')
+            console.log(res);
+            if(res.data.resume)
+            jobData.resume = res.data.resume
+            console.log(jobData);
+            console.log(res.data.resume);
+            this.jobService.applyForJob(jobData).subscribe({
+              next:(res)=>{
+                console.log(res);
+                void Swal.fire('Success','You application has been sent','success');
+              }
+            })
           })
-        })
-      }else {
-        console.log('Application canceled');
-      }
-    })
+        }else {
+          console.log('Application canceled');
+        }
+      })
+    }
+
   }
 
 

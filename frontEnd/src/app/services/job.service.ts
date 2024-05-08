@@ -33,6 +33,11 @@ export class JobService {
     return this.http.post<IApiJobsAndCountRes>('user/saved-jobs',payload,{params:{pageNumber:pageNumber,pageSize:pageSize}})
   }
 
+  findJobsBySkill(skills:string[],pageNumber:number,pageSize:number){
+    const payload = {skills:skills}
+    return this.http.post<IApiJobsAndCountRes>('user/jobs/skills',payload)
+  }
+
   applyForJob(jobData:any){
     return this.http.post<IApiApplicationRes>('user/job/apply',jobData);
   }

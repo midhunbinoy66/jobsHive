@@ -8,6 +8,7 @@ export class JobRepository implements IJobRepo{
 
     async saveJobDetails(job: IJobReq): Promise<IJob | null> {
         return await new jobModel(job).save();
+  
     }
 
    async findJobById(id: string): Promise<IJob | null> {
@@ -55,6 +56,23 @@ export class JobRepository implements IJobRepo{
             jobCount:savedJobsCount
         }
     }
+
+
+    async findJobsBySkill(skills:string[],pageNumber:number,pageSize:number):Promise<IJobAndCount | null>{
+        const skip = (pageNumber-1)*pageSize
+        const jobs = await jobModel.find({
+            skills:{$in:skills}
+        }).skip(skip).limit(pageSize).exec()
+
+        const JobsCount = await jobModel.countDocuments({
+            skills:{$in:skills}
+        })
+        return {
+            jobs:jobs,
+            jobCount:JobsCount
+        }
+    }
+
 
     async findAppliedJobs(jobIds: string[]): Promise<IJob[] | null> {
         return await jobModel.find({_id:{$in:jobIds}})

@@ -22,6 +22,7 @@ userRouter.get('/chat/employers/:userId',(req,res)=>chatController.getEmployersC
 userRouter.get('/chat/history',(req,res)=>chatController.getChatHistory(req,res));
 
 userRouter.get('/jobs',(req,res)=>jController.getJobs(req,res))
+userRouter.post('/jobs/skills',(req,res)=>jController.getJobsBySkill(req,res))
 userRouter.put('/update/:userId',userAuth,(req,res)=>uController.updateProfile(req,res));
 userRouter.put('/saveJob/:userId',(req,res)=>uController.updateUserSavedJobs(req,res));
 userRouter.post('/saved-jobs',(req,res)=>jController.getUserSavedJobs(req,res));

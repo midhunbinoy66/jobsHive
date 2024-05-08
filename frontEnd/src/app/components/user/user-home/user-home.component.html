@@ -132,7 +132,7 @@
           <ul>
             <li *ngFor="let req of selectedJob.responsibilities" class="text-gray-400">{{req}}</li>
           </ul>
-          <p>JobType:{{selectedJob.type}}</p>
+          <p class="text-gray-400">JobType:{{selectedJob.type}}</p>
         </div>
 
 
@@ -140,9 +140,11 @@
     </div>
   </section>
   <div *ngIf="isSearched">
-    <button (click)="onPageChage(pageNumber-1)" [disabled]="pageNumber===1">Prev</button>
-    <span>{{pageNumber}} of {{max}}</span>
-    <button (click)="onPageChage(pageNumber+1)" [disabled]="pageNumber === max">Next</button>
+    <div class="flex justify-center">
+      <button (click)="onPageChage(pageNumber-1)" [disabled]="pageNumber===1">Prev</button>
+      <span>{{pageNumber}} of {{max}}</span>
+      <button (click)="onPageChage(pageNumber+1)" [disabled]="pageNumber === max">Next</button>
+    </div>
   </div>
 
 </div>

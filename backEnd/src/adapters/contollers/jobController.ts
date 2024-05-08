@@ -22,6 +22,14 @@ export class JobController{
         res.status(apiRes.status).json(apiRes);
     }
 
+    async getJobsBySkill(req:Request,res:Response){
+        const skills = req.body.skills
+        const pageNumber = parseInt(req.query.pageNumber as string) ;
+        const pageSize  =  parseInt(req.query.pageSize as string) 
+        const apiRes = await this._jobUseCase.findJobsBySkill(skills,pageNumber,pageSize);
+        res.status(apiRes.status).json(apiRes)
+    }
+
     async addJob(req:Request,res:Response){
         const job = req.body
         console.log(job)

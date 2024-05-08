@@ -52,6 +52,26 @@ export class JobUseCase{
             }
         }
     }
+
+
+    async findJobsBySkill(skills:string[],pageNumber:number,pageSize:number){
+        try {
+
+            const jobs = await this._jobRepository.findJobsBySkill(skills,pageNumber,pageSize)
+            return{
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:jobs
+            }
+            
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal server error',
+                data:null
+            }
+        }
+    }
     
 
     async findJob(id:string){

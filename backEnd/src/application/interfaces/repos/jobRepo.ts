@@ -15,4 +15,5 @@ export interface IJobRepo{
     findJobsForVerification(page:number,limit:number):Promise<IJob[] | null>
     verifyJob(jobId:string):Promise<IJob | null>
     findJobscount():Promise<number>
+    findJobsBySkill(skills:[string],pageNumber:number,pageSize:number):Promise<IJobAndCount | null>
 }

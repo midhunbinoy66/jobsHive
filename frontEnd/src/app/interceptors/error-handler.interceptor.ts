@@ -22,8 +22,14 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err:HttpErrorResponse)=>{
         const role = request.url.slice(environment.baseUrl.length).split('/')[0];
-        void Swal.fire(err.statusText,err.error.message,'error');
-        return throwError(()=>err);
+        const route = request.url.slice(environment.baseUrl.length).split('/')[1];
+        if(route === 'resume'){
+          console.log('no resume found');
+          return throwError(()=>err);
+        }else{
+          void Swal.fire(err.statusText,err.error.message,'error');
+          return throwError(()=>err);
+        }
       })
     )
   }
