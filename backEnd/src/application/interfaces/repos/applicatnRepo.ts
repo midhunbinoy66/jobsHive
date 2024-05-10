@@ -8,4 +8,5 @@ export interface IApplicantRepo{
     findApplicaitonById(applicationId:string):Promise<IApplication|null>
     findApplicationByJobId(jobId:string):Promise<IApplication[]|null>
     updateApplicationStatus(applicationId:string,status:string):Promise<IApplication | null>
+    findApplicationByEmployerId(employerId: string): Promise<IApplication[] | null> 
 } 

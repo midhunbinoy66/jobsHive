@@ -7,6 +7,7 @@ import { ITempEmployerReq } from "../../application/interfaces/types/tempEmploye
 import { STATUS_CODES } from "../../infrastructure/constants/httpStatusCodes";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { IEmployer } from "../../entities/employer";
+import { ApplicationUseCase } from "../../application/useCases/applicationUseCase";
 
 
 
@@ -14,7 +15,8 @@ export class Employercontoller{
     constructor(
         private readonly _employerUseCase: EmployeruseCase,
         private readonly otpGenerator : OTPGenerator,
-        private readonly encrypt:Encryptor
+        private readonly encrypt:Encryptor,
+        private readonly _applicationUseCase:ApplicationUseCase
     ){}
 
     async employerRegister(req:Request,res:Response){
@@ -149,6 +151,15 @@ export class Employercontoller{
         const {employerId} = req.params;
         const apiRes = await this._employerUseCase.getEmployerData(employerId);
         return res.status(apiRes.status).json(apiRes);
+    }
+
+    async getApplicationData(req:Request,res:Response){
+        const {employerId}  = req.params;
+        const apiRes = await this._applicationUseCase.getApplicationData(employerId);
+        if(apiRes)
+        return res.status(apiRes.status).json(apiRes);
+        
+        
     }
 
 }

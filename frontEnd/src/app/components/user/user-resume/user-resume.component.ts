@@ -25,6 +25,7 @@ export class UserResumeComponent implements OnInit{
   isResume = false;
   userResumeData:IResumeUpdate |null = null;
   isSubmitted=false
+  isEditingResume = false;
 
   constructor(
     private readonly formBuilder:FormBuilder,
@@ -108,11 +109,13 @@ export class UserResumeComponent implements OnInit{
    
     if (this.userResume) {
       console.log(this.userResume);
+      this.isEditingResume =true
       this.form.patchValue({
         name: this.userResume.name || '', 
         email: this.userResume.email || '', 
         mobile: this.userResume.mobile || '' 
       });
+
   
       // Patch values for arrays (e.g., languages and skills)
       if (this.userResume.languages && this.userResume.languages.length > 0) {

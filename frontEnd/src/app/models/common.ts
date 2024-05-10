@@ -1,4 +1,4 @@
-import { IRevenueData } from "./chart";
+import { IApplicationData, IRevenueData } from "./chart";
 import { IChatRes, IUsersListForChats } from "./chat";
 import { IEmployerRes } from "./employer";
 import { IJobssAndCount } from "./jobs";
@@ -39,7 +39,7 @@ export interface IEmployerAddress extends IUserAddress{
 
 export interface IJobAddress extends IUserAddress{}
 
-export type AllResTypes = IUserRes | IEmployerRes | IEmployerRes[]|IUserRes[] | IUsersAndCount | IJobssAndCount | IWalletHistoryAndCount|IRevenueData | IChatRes|null| IUsersListForChats[]
+export type AllResTypes = IUserRes | IEmployerRes | IEmployerRes[]|IUserRes[] | IUsersAndCount | IJobssAndCount | IWalletHistoryAndCount|IRevenueData | IChatRes|null| IUsersListForChats[] | IApplicationData
 
 export interface IApiRes<T extends AllResTypes> {
     status: number

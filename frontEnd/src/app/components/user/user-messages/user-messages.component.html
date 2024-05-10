@@ -5,14 +5,29 @@
     <!-- User List (3-width) with padding -->
     <div class="w-3/12 bg-gray-200 p-3 overflow-y-auto">
         <!-- Search Bar -->
-        <div class="mb-4">
-            <input type="text" placeholder="Search users..."
-                class="w-full px-2 py-1 border rounded focus:outline-none focus:border-blue-500">
+        <!-- <div class="mb-4">
             <div *ngFor="let follow of followings">
                 <p>{{follow.email}}</p>
                 <p>{{follow.name}}</p>
                 <a (click)="onSelectEmployer(follow)">Select</a>
             </div>
+        </div> -->
+        <div *ngFor="let user of followings; index as i">
+            <a (click)="onSelectEmployer(user)">
+                <div class="flex items-center space-x-4 mb-4 relative">
+                    <!-- <span class="absolute top-1/2 right-2 transform -translate-y-1/2 h-4 min-w-4 bg-amber-500 rounded-full flex items-center justify-center text-white text-xs p-2">{{ user }}</span> -->
+                    <!-- <img *ngIf="user.profilePic" [src]="imageFolderPath + user.profilePic" alt="User 1" class="w-8 h-8 rounded-full"> -->
+                    <div  class="rounded-full h-8 w-8 border-2 border-amber-300 hover:border-amber-500 bg-black text-amber-300 hover:text-amber-500 text-center align-middle">
+                        <span class="flex items-center justify-center h-full">
+                          {{ user.name | slice:0:1 | uppercase }}
+                        </span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-gray-800">{{ user.name }}</span>
+                        <!-- <span class="text-gray-600">Online</span> -->
+                    </div>
+                </div>
+            </a>
         </div>
 
         <!-- User List with Unread Message Badge -->

@@ -13,8 +13,8 @@
             <a (click)="onSelectUser(user, i)">
                 <div class="flex items-center space-x-4 mb-4 relative">
                     <span class="absolute top-1/2 right-2 transform -translate-y-1/2 h-4 min-w-4 bg-amber-500 rounded-full flex items-center justify-center text-white text-xs p-2">{{ user.unreadCount }}</span>
-                    <img *ngIf="user.profilePic" [src]="imageFolderPath + user.profilePic" alt="User 1" class="w-8 h-8 rounded-full">
-                    <div *ngIf="!user.profilePic" class="rounded-full h-8 w-8 border-2 border-amber-300 hover:border-amber-500 bg-black text-amber-300 hover:text-amber-500 text-center align-middle">
+                    <!-- <img *ngIf="user.profilePic" [src]="imageFolderPath + user.profilePic" alt="User 1" class="w-8 h-8 rounded-full"> -->
+                    <div  class="rounded-full h-8 w-8 border-2 border-amber-300 hover:border-amber-500 bg-black text-amber-300 hover:text-amber-500 text-center align-middle">
                         <span class="flex items-center justify-center h-full">
                           {{ user.name | slice:0:1 | uppercase }}
                         </span>
@@ -43,8 +43,8 @@
             <div class="flex sm:items-center justify-between py-1 border-b-2 border-gray-200">
                 <div class="relative flex items-center space-x-4">
 
-                    <img *ngIf="currUser.profilePic"  [src]="imageFolderPath + currUser.profilePic" [alt]="currUser.name + 'Profile'" class="w-8 sm:w-16 h-8 sm:h-16 rounded-full">
-                    <div *ngIf="!currUser.profilePic" class="w-8 sm:w-16 h-8 sm:h-16 rounded-full border-2 border-amber-300 hover:border-amber-500 bg-black text-amber-300 hover:text-amber-500 text-center align-middle">
+                    <!-- <img *ngIf="currUser.profilePic"  [src]="imageFolderPath + currUser.profilePic" [alt]="currUser.name + 'Profile'" class="w-8 sm:w-16 h-8 sm:h-16 rounded-full"> -->
+                    <div  class="w-8 sm:w-16 h-8 sm:h-16 rounded-full border-2 border-amber-300 hover:border-amber-500 bg-black text-amber-300 hover:text-amber-500 text-center align-middle">
                         <span class="flex items-center justify-center h-full text-2xl">
                           {{ currUser.name | slice:0:1 | uppercase }}
                         </span>

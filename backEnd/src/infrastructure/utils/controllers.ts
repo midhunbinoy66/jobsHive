@@ -59,7 +59,7 @@ export const chatUseCase = new ChatUseCase(chatRepository);
 //UserControllers
 export const uController = new UserController(userUseCase,otpGenerator,encryptor);
 export const aController = new AdminController(adminUseCase,userUseCase,employerUseCase,transactionUseCase)
-export const eContorller = new Employercontoller(employerUseCase,otpGenerator,encryptor);
+export const eContorller = new Employercontoller(employerUseCase,otpGenerator,encryptor,applicationUseCase);
 export const jController = new JobController(jobUseCase);
 export const appController = new ApplicationController(applicationUseCase);
 export const pController = new PlanController(planUseCase) ;

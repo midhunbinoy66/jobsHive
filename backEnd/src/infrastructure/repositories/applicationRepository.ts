@@ -3,6 +3,7 @@ import { IApplicantRepo } from "../../application/interfaces/repos/applicatnRepo
 import { IApplcationAndCountRes, IApplicationReq } from "../../application/interfaces/types/application";
 import { IApplication } from "../../entities/application";
 import applicationModel from "../db/applicaitonModel";
+import jobModel from "../db/jobModel";
 
 export class ApplicationRepository implements IApplicantRepo{
     async findAllApplication(userId: string,pageNumber:number,pageSize:number): Promise<IApplcationAndCountRes | null> {
@@ -54,4 +55,10 @@ export class ApplicationRepository implements IApplicantRepo{
                 }
             )
     }
+
+    async findApplicationByEmployerId(employerId: string): Promise<IApplication[] | null> {
+        const jobs = await jobModel.find({employer:employerId});
+        const jobIds = jobs.map(j=>j._id);
+        return await applicationModel.find({jobId:{$in:jobIds}})
+}
 }

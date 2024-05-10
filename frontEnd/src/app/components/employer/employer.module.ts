@@ -36,6 +36,7 @@ import { WalletHistoryComponent } from '../common/wallet-history/wallet-history.
 import { EmployerFooterComponent } from './employer-footer/employer-footer.component';
 import { EmployerMessageComponent } from './employer-message/employer-message.component';
 import { MatIconModule } from '@angular/material/icon';
+import { LineGraphComponent } from '../common/line-graph/line-graph.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { MatIconModule } from '@angular/material/icon';
     CommonValidationComponent,
     SalaryValidationComponent,
     WalletHistoryComponent,
-    MatIconModule
+    MatIconModule,
+    LineGraphComponent
     
   ]
 })

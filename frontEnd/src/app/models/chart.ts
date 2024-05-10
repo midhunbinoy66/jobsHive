@@ -16,3 +16,8 @@ export interface IChartDataset {
     data: number[]
   }
   
+
+  export interface IApplicationData {
+    labels: string[]
+    data: number[]
+  }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IUsersAndCount } from '../models/users';
 import { IAPiEmployerRes, IApiEmployersRes, IEmployerUpdate, IEmployersAndCount } from '../models/employer';
 import { IApiChatRes } from '../models/chat';
+import { IApplicationData } from '../models/chart';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,11 @@ export class EmployerService {
 
   markLastMessageAsRead (userId: string | undefined, employerId: string | undefined, adminId: string | undefined, msgId: string): Observable<IApiRes<null>> {
     return this.http.patch<IApiRes<null>>(`employer/chat/mark/read?userId=${userId ?? ''}&employerId=${employerId ?? ''}&adminId=${adminId ?? ''}&msgId=${msgId}`, {})
+  }
+
+
+  getApplicationData(employerId:string):Observable<IApiRes<IApplicationData>>{
+    return this.http.get<IApiRes<IApplicationData>>(`employer/dashboard/applications/${employerId}`)
   }
 
 

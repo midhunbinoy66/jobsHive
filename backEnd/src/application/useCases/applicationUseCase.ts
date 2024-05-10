@@ -84,4 +84,39 @@ export class ApplicationUseCase{
             }
         }
     }
+
+
+
+    async getApplicationData(employerId:string){
+        try {
+            console.log(employerId);
+            const applications = await this._applicationRepo.findApplicationByEmployerId(employerId)
+            const applicationRecord:Record<string,number>={};
+            applications?.forEach(app=>{
+                if(!applicationRecord[app.jobId.toString()]){
+                    applicationRecord[app.jobId.toString()] =0;
+                }
+                applicationRecord[app.jobId.toString()] =applicationRecord[app.jobId.toString()] +1;
+
+
+            })
+            const labels = Object.keys(applicationRecord)
+            const data = Object.values(applicationRecord)
+            console.log(labels,data);
+            return {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:{labels,data}
+            } 
+
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal Server Error',
+                data:null
+            }
+        }
+    }
+
+
 }

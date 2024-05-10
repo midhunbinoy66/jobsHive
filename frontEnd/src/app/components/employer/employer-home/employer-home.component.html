@@ -1,8 +1,26 @@
 <app-employer-nav></app-employer-nav>
-<div class="flex flex-wrap">
+<!-- <div class="flex flex-wrap">
     <app-employer-sidebar class=" w-full md:w-64"></app-employer-sidebar>
-    <div class="flex-1" style="background-image: url('../../../../assets/vector.jpg');background-position: center; background-repeat: no-repeat; background-size: contain;">
-        
+    <div class="container mx-auto mt-8 px-4">
+        <div>
+        <app-line-graph [data]="data"></app-line-graph>
+        </div>
     </div>
 </div>
-<app-employer-footer></app-employer-footer>
+<app-employer-footer></app-employer-footer> -->
+
+<!-- Admin Home Section -->
+<div class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <div class="flex">
+        <app-employer-sidebar class=" w-full md:w-64"></app-employer-sidebar>
+    
+        <!-- Main Content -->
+        <div class=" mt-8 px-4 flex-1">
+            <div>
+            <app-line-graph [data]="data"></app-line-graph>
+            </div>
+        </div>
+    </div>
+
+</div>
