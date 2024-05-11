@@ -10,6 +10,7 @@ import { AdminPlansComponent } from './admin-plans/admin-plans.component';
 import { AdminEditPlanComponent } from './admin-edit-plan/admin-edit-plan.component';
 import { AdminEmployerMangementComponent } from './admin-employer-mangement/admin-employer-mangement.component';
 import { AdminJobManagementComponent } from './admin-job-management/admin-job-management.component';
+import { AdminReportComponent } from './admin-report/admin-report.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,12 @@ const routes: Routes = [
     path:'employers',
     title:'JobHive | Employers',
     component:AdminEmployerMangementComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path:'reports',
+    title:'JobHive | Reports',
+    component:AdminReportComponent,
     canActivate:[authGuard]
   },
   {

@@ -5,8 +5,55 @@
 
     <!-- Main Content -->
     <div class="container mx-auto mt-8 px-4">
-        <div>
-        <app-line-graph [data]="data"></app-line-graph>
+        <div class="flex justify-center my-4">
+          <!-- additional information , no of users,employers, total job posting. total application -->
+          <div class="grid grid-cols-3 gap-3 h-44 bg-gray-200 w-1/2" *ngIf="dashboardData"> 
+            <div class="bg-purple-500 shadow-lg flex flex-col justify-center p-2 hover:animate-pulse">
+                <i class="fa-regular fa-user text-3xl text-center"></i>
+                <p class="text-white font-extrabold text-center  text-2xl ">{{dashboardData.numberOfUsers}}</p>
+                <p class="text-white text-center">Users</p>
+            </div>
+            <div class="bg-teal-500 shadow-lg flex flex-col justify-center p-2 hover:animate-pulse">
+                <i class="fa-regular fa-building text-3xl text-center"></i>
+                <p class="text-white font-extrabold text-center  text-2xl ">{{dashboardData.numberOfEmployers}}</p>
+                <p class="text-white text-center">Employers</p>
+            </div>
+
+            <div class="bg-blue-500 shadow-lg flex flex-col justify-center p-2 hover:animate-pulse">
+                <i class="fa-regular fa-paper-plane text-3xl text-center"></i>
+                <p class="text-white font-extrabold text-center  text-2xl ">{{dashboardData.numberOfApplications}}</p>
+                <p class="text-white text-center">Applications</p>
+            </div>
         </div>
     </div>
+  
+
+        <app-line-graph [data]="data" class="mt-2"></app-line-graph>
+
+        <div class="container mx-auto mt-4">
+            <h1 class="text-2xl font-bold text-center mb-3">Recent Transactions</h1>
+            <table class="table ">
+                <thead>
+                  <tr>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Transaction id</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let transaction of dashboardData.recentTransactions">
+                    <th scope="row">{{transaction.userId?.name}}</th>
+                    <td>{{transaction.amount}}</td>
+                    <td>{{transaction._id }}</td>
+                    <td>{{transaction.date | date}}</td>
+                  </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
 </div>
+

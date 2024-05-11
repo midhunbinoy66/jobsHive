@@ -2,7 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getRandomColor } from 'src/app/helpers/getRandomColor';
 import { ILineGraphData } from 'src/app/models/chart';
+import { ITransactionPopulated } from 'src/app/models/transactions';
 import { AdminService } from 'src/app/services/admin.service';
+
+interface IdashboardData{
+  numberOfApplications:number
+  numberOfEmployers:number
+  numberOfUsers:number
+  recentTransactions:ITransactionPopulated[]
+}
 
 @Component({
   selector: 'app-admin-home',
@@ -11,6 +19,7 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class AdminHomeComponent implements OnInit{
   data!: ILineGraphData
+  dashboardData!:IdashboardData 
   constructor(
     private readonly router:Router,
     private readonly adminService:AdminService
@@ -35,6 +44,14 @@ export class AdminHomeComponent implements OnInit{
         }
       }
     })
+
+    this.adminService.getDashboardData().subscribe({
+      next:(res)=>{
+        this.dashboardData =res.data;
+        console.log(this.dashboardData);
+      }
+    })
+    
   }
 
   onLogout(){
@@ -42,4 +59,5 @@ export class AdminHomeComponent implements OnInit{
     localStorage.removeItem('adminRefreshToken')
     void this.router.navigate(['/admin/login'])
   }
+
 }

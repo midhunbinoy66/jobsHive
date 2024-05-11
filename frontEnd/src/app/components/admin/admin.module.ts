@@ -18,6 +18,7 @@ import { AdminJobManagementComponent } from './admin-job-management/admin-job-ma
 import { EmailValidationComponent } from '../common/validation/email-validation/email-validation.component';
 import { PasswordValidationComponent } from '../common/validation/password-validation/password-validation.component';
 import { LineGraphComponent } from '../common/line-graph/line-graph.component';
+import { AdminReportComponent } from './admin-report/admin-report.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { LineGraphComponent } from '../common/line-graph/line-graph.component';
     AdminEditPlanComponent,
     AdminNavComponent,
     AdminEmployerMangementComponent,
-    AdminJobManagementComponent
+    AdminJobManagementComponent,
+    AdminReportComponent
   ],
   imports: [
     CommonModule,

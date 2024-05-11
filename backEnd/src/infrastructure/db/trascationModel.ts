@@ -20,6 +20,11 @@ const transactionSchema:Schema = new Schema<ITransaction & Document>({
     date:{
         type:Date,
         default:Date.now()
+    },
+    planId:{
+        type:mongoose.Types.ObjectId,
+        ref:'UserPlans'
+
     }
 
 })

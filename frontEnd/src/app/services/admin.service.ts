@@ -18,4 +18,13 @@ export class AdminService {
   }
 
 
+  generateReport(startDate:Date,endDate:Date):Observable<any>{
+    const payload = {startDate,endDate}
+    return this.http.post<any>('admin/download/report',payload)
+  }
+
+  getDashboardData():Observable<any>{
+    return this.http.get('admin/dashboard/data')
+  }
+
 }

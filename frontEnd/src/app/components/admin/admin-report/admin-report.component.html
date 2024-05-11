@@ -1,0 +1,24 @@
+<app-admin-nav></app-admin-nav>
+<main>
+    <section>
+        <div>
+            <h1>Trasaction report Generation</h1>
+            <form (submit)="onTransactionSubmit()" [formGroup]="transactionForm">
+                <div>
+                    <label for="startDate">
+                        start Date
+                    </label>
+                    <input type="date" formControlName="startDate">
+                </div>
+                <div>
+                    <label for="endDate">
+                        end Date
+                    </label>
+                    <input type="date"  formControlName="endDate">
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+</main>

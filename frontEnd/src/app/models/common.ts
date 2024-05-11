@@ -39,8 +39,8 @@ export interface IEmployerAddress extends IUserAddress{
 
 export interface IJobAddress extends IUserAddress{}
 
-export type AllResTypes = IUserRes | IEmployerRes | IEmployerRes[]|IUserRes[] | IUsersAndCount | IJobssAndCount | IWalletHistoryAndCount|IRevenueData | IChatRes|null| IUsersListForChats[] | IApplicationData
-
+export type AllResTypes = IUserRes | IEmployerRes | IEmployerRes[]|IUserRes[] | IUsersAndCount | IJobssAndCount | IWalletHistoryAndCount|IRevenueData | IChatRes|null| IUsersListForChats[] | IApplicationData | Blob
+ 
 export interface IApiRes<T extends AllResTypes> {
     status: number
     message: string

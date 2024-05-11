@@ -51,4 +51,20 @@ export class AdminController{
         const apiRes = await this._transactionUseCase.getRevenueAdmin();
         res.status(apiRes.status).json(apiRes);
     }
+
+    async getTransactionPdf(req:Request,res:Response){
+        const {startDate} = req.body
+        const {endDate} = req.body;
+        const apiRes = await this._transactionUseCase.getTrasactionReport(startDate,endDate)
+        if(apiRes)
+        res.status(apiRes.status).json(apiRes);
+    }
+
+
+    async getDashboardData(req:Request,res:Response){
+        const apiRes = await this._transactionUseCase.getDashboardData();
+        if(apiRes)
+        res.status(apiRes.status).json(apiRes);
+        
+    }
 }

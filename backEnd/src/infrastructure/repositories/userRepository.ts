@@ -197,6 +197,7 @@ export class UserRespository implements IuserRepo {
             const tranactionData:ITransaction = {
                 userId:userId,
                 amount:plan!.price,
+                planId:plan!._id,
                 date:new Date(Date.now())
             }
             await transactionModel.create(tranactionData);
