@@ -23,7 +23,12 @@ const employerSchema:Schema = new Schema<IEmployer & Document>({
         default:false
     },
     address:employerAddressSchema,
-    subscription:userSubscriptionSchema
+    subscription:userSubscriptionSchema,
+    subscriptionChangeQueue:[{
+        type:Schema.Types.ObjectId,
+        ref:'UserPlans'
+    }
+    ]
 
 })
 

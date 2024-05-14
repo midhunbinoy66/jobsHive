@@ -48,7 +48,7 @@ export class UserPaymentComponent implements OnInit ,OnDestroy{
 
 
   confirmSubscription():void{
-    const currentDate =this.user?.subscription?.endDate?this.user.subscription.endDate:new Date();
+    const currentDate =new Date();
     const endDate = this.calculateEndDate(currentDate,this.plan!.duration);
     const planData:ISubscription = {
         planId:this.planId,
@@ -91,7 +91,6 @@ export class UserPaymentComponent implements OnInit ,OnDestroy{
   }
   
   calculateEndDate(startDate:Date,duration:number):Date{
-    console.log(duration);
     const endDate = new Date(startDate);
     endDate.setMonth(endDate.getMonth()+duration);
     return endDate

@@ -1,6 +1,6 @@
 
 import path from "path";
-import fs from 'fs'
+// import fs from 'fs'
 import { IUserSubscription } from "../../entities/common";
 import { IUser } from "../../entities/user";
 import { OTP_TIMER } from "../../infrastructure/constants/constants";
@@ -452,7 +452,7 @@ export class UserUseCase{
             const user = await this._userRespository.findById(userId);
             if(user && user.profilePic){
                 const filePath = path.join(__dirname,`../../images/${user.profilePic}`)
-                fs.unlinkSync(filePath);
+                console.log(filePath)
             }
             const  updateUser  = await this._userRespository.updateUserProfilePic(userId,fileName);
             if(updateUser){
@@ -490,8 +490,7 @@ export class UserUseCase{
             // Deleting user dp if it already exist
             if (user.profilePic) {
                 const filePath = path.join(__dirname, `../../images/${user.profilePic}`)
-                console.log(filePath);
-                fs.unlinkSync(filePath);
+                console.log(filePath)
             }
             const updatedUser = await this._userRespository.removeUserProfileDp(userId)
             if (updatedUser) {

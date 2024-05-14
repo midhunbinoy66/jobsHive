@@ -12,5 +12,6 @@ export interface IEmployer{
     isBlocked: boolean
     subscription:IUserSubscription
     wallet:number
-    walletHistory:IWalletHistory[]
+    walletHistory:IWalletHistory[],
+    subscriptionChangeQueue:string[]
 } 

@@ -50,7 +50,7 @@ export class EmployerPaymentComponent implements OnInit {
 
   confirmSubscription():void{
 
-    const currentDate =this.employer?.subscription?.endDate?this.employer.subscription.endDate:new Date();
+    const currentDate =new Date();
     const endDate = this.calculateEndDate(currentDate,this.plan!.duration);
     const planData:ISubscription = {
         planId:this.planId,

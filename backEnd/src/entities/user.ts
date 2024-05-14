@@ -15,5 +15,7 @@ export interface IUser {
     wallet:number
     walletHistory:IWalletHistory[]
     subscription?:IUserSubscription,
-    resume?:string
+    resume?:string,
+    subscriptionChangeQueue:string[]
+
 }

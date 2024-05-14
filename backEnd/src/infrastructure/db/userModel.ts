@@ -38,7 +38,11 @@ export const userSchema  =  new Schema<IUser & Document>({
         type:Schema.Types.ObjectId,
         ref:'Employer'
     }],
-    subscription:userSubscriptionSchema
+    subscription:userSubscriptionSchema,
+    subscriptionChangeQueue:[{
+        type:Schema.Types.ObjectId,
+        ref:'UserPlans'
+    }]
 
 })
 

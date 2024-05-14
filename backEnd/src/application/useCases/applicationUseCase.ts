@@ -89,7 +89,6 @@ export class ApplicationUseCase{
 
     async getApplicationData(employerId:string){
         try {
-            console.log(employerId);
             const applications = await this._applicationRepo.findApplicationByEmployerId(employerId)
             const applicationRecord:Record<string,number>={};
             applications?.forEach(app=>{
@@ -102,7 +101,6 @@ export class ApplicationUseCase{
             })
             const labels = Object.keys(applicationRecord)
             const data = Object.values(applicationRecord)
-            console.log(labels,data);
             return {
                 status:STATUS_CODES.OK,
                 message:'Success',

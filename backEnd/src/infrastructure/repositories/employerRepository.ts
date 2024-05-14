@@ -7,6 +7,7 @@ import { ITransaction } from "../../entities/tranaction";
 import { employerModel } from "../db/employerModel";
 import transactionModel from "../db/trascationModel";
 import userPlanModel from "../db/userPlanModel";
+import { processSubscriptionQueueEmployer } from "../helperFucntions/subscriptionQueueProcess";
 
 
 
@@ -82,20 +83,35 @@ export class EmployerRepository implements IEmployerRepo{
       }
 
       async updateUserSubscription(userId: string, planData: IUserSubscription): Promise<IEmployerRes | null> {
-        console.log(planData);    
-        const employer = await employerModel.findByIdAndUpdate(
+        
+        const employerData = await employerModel.findById({_id:userId});
+        let employer;
+
+        if(!employerData?.subscription){
+           employer = await employerModel.findByIdAndUpdate(
                 {_id:userId},
                 {
                     subscription:planData
                 },
                 {new:true}
             )
+        }else{
+            employer = await employerModel.findByIdAndUpdate(
+                {_id:userId},
+                {
+                    $push:{subscriptionChangeQueue:planData.planId}
+                },
+                {new:true}
+            )
+        }
 
+        processSubscriptionQueueEmployer();
         const plan = await userPlanModel.findById({_id:planData.planId});
 
             const tranactionData:ITransaction = {
-                userId:userId,
+                employerId:userId,
                 amount:plan!.price,
+                planId:planData.planId,
                 date:new Date(Date.now())
             }
             await transactionModel.create(tranactionData);

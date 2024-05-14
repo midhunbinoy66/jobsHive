@@ -30,7 +30,7 @@
 
         <app-line-graph [data]="data" class="mt-2"></app-line-graph>
 
-        <div class="container mx-auto mt-4">
+        <div class="container mx-auto mt-4" *ngIf="dashboardData.recentTransactions">
             <h1 class="text-2xl font-bold text-center mb-3">Recent Transactions</h1>
             <table class="table ">
                 <thead>
@@ -43,13 +43,12 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let transaction of dashboardData.recentTransactions">
-                    <th scope="row">{{transaction.userId?.name}}</th>
+                    <th scope="row">{{transaction.userId?.name || transaction.employerId?.name}}</th>
                     <td>{{transaction.amount}}</td>
                     <td>{{transaction._id }}</td>
                     <td>{{transaction.date | date}}</td>
                   </tr>
                 </tbody>
-
             </table>
         </div>
 

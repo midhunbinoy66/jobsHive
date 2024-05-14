@@ -88,8 +88,8 @@ export class UserResumeComponent implements OnInit{
   initializeForm(): void {
     // Initialize form controls and populate with user resume data
     this.form = this.formBuilder.group({
-      name:['',[validateByTrimming(nameValidators)]],
-      email:['',[validateByTrimming(emailValidators)]],
+      name:[{ value: this.user?.name, disabled: true },[validateByTrimming(nameValidators)]],
+      email:[{value:this.user?.email,disabled:true},[validateByTrimming(emailValidators)]],
       mobile:['',[validateByTrimming(mobileValidators)]],
       languages:this.formBuilder.array([],Validators.required),
       skills:this.formBuilder.array([],Validators.required),

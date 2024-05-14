@@ -12,6 +12,7 @@ import resumeModel from "../db/resumeModel";
 import transactionModel from "../db/trascationModel";
 import userModel from "../db/userModel";
 import userPlanModel from "../db/userPlanModel";
+import { processSubscriptionQueue } from "../helperFucntions/subscriptionQueueProcess";
 
 
 export class UserRespository implements IuserRepo {
@@ -185,26 +186,40 @@ export class UserRespository implements IuserRepo {
 
       async updateUserSubscription(userId: string, planData: IUserSubscription): Promise<IUserRes | null> {
         console.log(planData);
-        const user = await userModel.findByIdAndUpdate(
+
+        const userData = await userModel.findById({_id:userId});    
+        let user;
+
+        if(!userData?.subscription){
+            user = await userModel.findByIdAndUpdate(
                 {_id:userId},
                 {
                     subscription:planData
                 },
                 {new:true}
             )
-
+        }else{
+            user = await userModel.findByIdAndUpdate(
+                {_id:userId},
+                {
+                    $push:{subscriptionChangeQueue:planData.planId}
+                },
+                {new:true}
+            )
+        }
+            processSubscriptionQueue();
             const plan:IPlan|null = await userPlanModel.findById({_id:planData.planId});
             const tranactionData:ITransaction = {
                 userId:userId,
                 amount:plan!.price,
-                planId:plan!._id,
+                planId:planData.planId,
                 date:new Date(Date.now())
             }
             await transactionModel.create(tranactionData);
 
             return user
-      } 
-
+      }
+      
 
      async updateUserProfilePic(userId: string, fileName: string): Promise<IUserRes | null> {
           return await userModel.findByIdAndUpdate(
@@ -223,7 +238,7 @@ export class UserRespository implements IuserRepo {
           return await userModel.findByIdAndUpdate(
             {_id:userId},
             {
-                $unset:{
+                $set:{
                     profilePic:''
                 }
             },

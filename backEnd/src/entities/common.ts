@@ -41,3 +41,8 @@ export interface IWalletHistory {
     message:string
     date:Date
 }
+
+
+export interface ISubscriptionChangeRequest{
+    planId:string
+}
