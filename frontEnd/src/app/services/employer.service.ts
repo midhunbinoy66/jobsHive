@@ -69,4 +69,8 @@ export class EmployerService {
   }
 
 
+  getDashboardData(employerId:string):Observable<any>{
+    return this.http.get(`employer/dashboard/data/${employerId}`)
+  }
+
 }

@@ -45,7 +45,7 @@
                   <tr *ngFor="let transaction of dashboardData.recentTransactions">
                     <th scope="row">{{transaction.userId?.name || transaction.employerId?.name}}</th>
                     <td>{{transaction.amount}}</td>
-                    <td>{{transaction._id }}</td>
+                    <td>{{transaction._id  | slice:0:8}}</td>
                     <td>{{transaction.date | date}}</td>
                   </tr>
                 </tbody>

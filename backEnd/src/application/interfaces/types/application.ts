@@ -29,3 +29,5 @@ export interface IApiApplicationAndCountRes{
 }
 
 export interface IApplicationReq extends Omit<IApplication,'_id'|'status'|'appliedTime'>{}
+
+

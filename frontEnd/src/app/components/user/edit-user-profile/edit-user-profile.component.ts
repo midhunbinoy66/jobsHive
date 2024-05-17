@@ -41,7 +41,7 @@ export class EditUserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileForm = this.formBuilder.group({
-      name:['',validateByTrimming(nameValidators)],
+      name:[{value:'',disabled:true},validateByTrimming(nameValidators)],
       mobile:['',validateByTrimming(mobileValidators)],
       city:['',validateByTrimming(requiredValidator)],
       district:['',validateByTrimming(requiredValidator)],

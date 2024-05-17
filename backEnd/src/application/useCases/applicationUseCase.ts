@@ -117,4 +117,23 @@ export class ApplicationUseCase{
     }
 
 
+    async getDashboardData(employerId:string){
+        try {
+                const data = await this._applicationRepo.getDashBoardData(employerId)
+
+                return {
+                    status:STATUS_CODES.OK,
+                    message:'Success',
+                    data:data
+                } 
+
+        } catch (error) {
+            return {
+                status:STATUS_CODES.INTERNAL_SERVER_ERROR,
+                message:'Internal Server Error',
+                data:null
+            }
+        }
+    }
+
 }

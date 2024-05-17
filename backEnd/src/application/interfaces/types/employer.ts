@@ -1,5 +1,6 @@
 
 
+import { IApplication } from "../../../entities/application"
 import { IEmployer } from "../../../entities/employer"
 
 
@@ -29,3 +30,9 @@ export interface  IEmployerAndCount{
 }
 
 export interface IEmployerUpdate extends Omit<IEmployerRes,'_id'|'password'|'email'|'isBlocked'>{}
+
+export interface IEmployerDashboardData{
+    totalJobs:number,
+    totalApplicants:number,
+    recentApplications:IApplication[]
+}

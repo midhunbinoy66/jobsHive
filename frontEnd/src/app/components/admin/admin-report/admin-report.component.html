@@ -1,5 +1,5 @@
 <app-admin-nav></app-admin-nav>
-<main>
+<!-- <main>
     <section>
         <div>
             <h1>Trasaction report Generation</h1>
@@ -21,4 +21,26 @@
             </form>
         </div>
     </section>
-</main>
+</main> -->
+
+<div class="container">
+    <app-line-graph [data]="data" class="mt-2"></app-line-graph>
+    <main class="bg-gray-100 min-h-screen flex justify-center items-center">
+
+        <section class="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
+            <h1 class="text-xl font-bold mb-4">Transaction Report Generation</h1>
+            <form (submit)="onTransactionSubmit()" [formGroup]="transactionForm" class="space-y-4">
+                <div class="flex flex-col">
+                    <label for="startDate" class="text-sm font-medium text-gray-700">Start Date</label>
+                    <input type="date" formControlName="startDate" id="startDate" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                </div>
+                <div class="flex flex-col">
+                    <label for="endDate" class="text-sm font-medium text-gray-700">End Date</label>
+                    <input type="date" formControlName="endDate" id="endDate" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Submit</button>
+            </form>
+        </section>
+    
+    </main>
+</div>

@@ -158,8 +158,13 @@ export class Employercontoller{
         const apiRes = await this._applicationUseCase.getApplicationData(employerId);
         if(apiRes)
         return res.status(apiRes.status).json(apiRes);
-        
-        
+    }
+
+    async getDashboardData(req:Request,res:Response){
+        const {employerId} = req.params;
+        const apiRes = await this._applicationUseCase.getDashboardData(employerId)
+        if(apiRes)
+        return res.status(apiRes.status).json(apiRes);
     }
 
 }

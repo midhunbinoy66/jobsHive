@@ -61,4 +61,19 @@ export class ApplicationRepository implements IApplicantRepo{
         const jobIds = jobs.map(j=>j._id);
         return await applicationModel.find({jobId:{$in:jobIds}})
 }
+
+    async getDashBoardData(employerId:string){
+        const Jobs = await jobModel.find({employer:employerId});
+        const jobIds = Jobs.map(j=>j._id); 
+        const applicants = await applicationModel.find({jobId:{$in:jobIds}})
+        const recentApplications = applicants.slice(0,3);
+
+       const data = {
+        totalJobs :Jobs.length,
+        totalApplicants:applicants.length,
+        recentApplications:recentApplications
+       }
+
+       return data
+    }
 }

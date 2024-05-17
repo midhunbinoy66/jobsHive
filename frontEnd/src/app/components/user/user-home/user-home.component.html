@@ -119,9 +119,9 @@
           <p class="text-gray-500 mb-2">Salary : {{selectedJob.salary}}</p>
           <p>{{selectedJob.description}}</p>
           <div class="space-x-2 mt-2 flex flex-col sm:flex-row">
-            <button class="w-full sm:w-auto bg-blue-500 text-white rounded-md hover:bg-blue-600 px-3 py-2"
+            <button class="w-24 sm:w-auto bg-blue-500 text-white rounded-md hover:bg-blue-600 px-3 py-2"
               (click)="onApply(selectedJob._id, selectedJob.title, selectedJob.location)">Apply</button>
-            <button class="w-full sm:w-auto bg-gray-500 text-white rounded-md hover:bg-gray-900 px-3 py-2"
+            <button class="w-24 sm:w-auto  bg-gray-500 text-white rounded-md hover:bg-gray-900 px-3 py-2"
               (click)="saveJob(selectedJob._id)">Save</button>
           </div>
           <h2 class="text-lg font-bold my-2">Responsibilities:</h2>

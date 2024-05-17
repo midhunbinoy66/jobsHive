@@ -20,15 +20,14 @@ export async function generateTransactionReportPDF(transactions:ITransactionRepo
             return {
                 amount:trt.amount,
                 date:formattedDate,
-                planName:trt.planId?.type,
+                planName:trt.planId?.type || 'user',
                 subscriber:trt.userId?.name||trt.employerId?.name
             }
         })
 
         const totalAmount = data.reduce((acc,curr)=>acc+curr.amount,0);
         const numberOfSubscriptions = data.length;
-        const avrgAmount = totalAmount/numberOfSubscriptions;
-        console.log(avrgAmount);
+        const avrgAmount =Math.round(totalAmount/numberOfSubscriptions); 
  
         const subscriptionRecord:Record<string,number>={}
         
@@ -36,7 +35,7 @@ export async function generateTransactionReportPDF(transactions:ITransactionRepo
             if(!subscriptionRecord[trt.date]){
                 subscriptionRecord[trt.date] =0;
             }
-            subscriptionRecord[trt.date] = trt.amount;
+            subscriptionRecord[trt.date] += trt.amount;
         })
 
         const subscriptionByDateLabel = Object.keys(subscriptionRecord);
@@ -70,6 +69,25 @@ export async function generateTransactionReportPDF(transactions:ITransactionRepo
             background-color: #f2f2f2;
             font-weight: bold;
         }
+
+        p {
+            margin: 10px 0;
+        }
+        .report-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin-top:120px
+        }
+        .report-section h1 {
+            margin: 0;
+        }
+        .report-section p {
+            margin: 0;
+        }
     </style>
             <h1>Transaction Report</h1>
             <table>
@@ -102,12 +120,23 @@ export async function generateTransactionReportPDF(transactions:ITransactionRepo
                 </tbody>
             </table>
             <h1>Subscriptions-Graphs</h1>
-            <canvas id="myChart" width="400" height="400"></canvas> <!-- Chart canvas -->
-            <canvas id="secondChart" width="400" height="400"></canvas> <!-- Chart canvas -->
+       
+            <canvas id="secondChart" width="350" height="350"></canvas> <!-- Chart canvas -->
+
+            <div class="report-section">
+            <h1>Summary</h1>
+            <div>
+                <p>Total Amount: ${totalAmount}</p>
+                <p>Number of Subscriptions: ${numberOfSubscriptions}</p>
+                <p>Average Amount: ${avrgAmount}</p>
+            </div>
+        </div>
 
         `;
         content += `<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>`;
 
+
+        // <canvas id="myChart" width="400" height="400"></canvas> <!-- Chart canvas -->
         const trasactionRecords:Record<string,number>={};
         data.forEach(trt=>{
             if(trt.planName)
@@ -128,7 +157,7 @@ export async function generateTransactionReportPDF(transactions:ITransactionRepo
         <script>
             var ctx = document.getElementById('myChart').getContext('2d');
             var chart = new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: ${labelsString},
                     datasets: [{

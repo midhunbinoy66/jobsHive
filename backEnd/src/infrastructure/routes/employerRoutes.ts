@@ -11,6 +11,7 @@ employerRouter.put('/update/:userId',(req,res)=>eContorller.updateProfile(req,re
 employerRouter.patch('/wallet/add/:employerId',(req,res)=>eContorller.addToWallet(req,res));
 employerRouter.get('/wallet-history/:employerId',(req,res)=>eContorller.getWalletHistory(req,res));
 employerRouter.get('/dashboard/applications/:employerId',(req,res)=>eContorller.getApplicationData(req,res))
+employerRouter.get('/dashboard/data/:employerId',(req,res)=>eContorller.getDashboardData(req,res));
 
 employerRouter.get('/chat/users/:employerId',(req,res)=>chatController.getUsersChattedWith(req,res));
 employerRouter.get('/chat/history',(req,res)=>chatController.getChatHistory(req,res));

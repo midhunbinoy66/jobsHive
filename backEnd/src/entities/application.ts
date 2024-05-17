@@ -12,3 +12,4 @@ export interface IApplication{
     coverLetter:string
     resume:string
 }
+
