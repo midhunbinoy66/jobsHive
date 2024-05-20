@@ -1,0 +1,30 @@
+.audio-recorder {
+    display: flex;
+    align-items: center;
+  }
+  
+  .record-button, .send-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .record-button:hover, .send-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .send-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  audio {
+    margin-left: 10px;
+    width: 150px;
+  }
+  

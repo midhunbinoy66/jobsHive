@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IApiUserRes, IApiUsersRes, IUserRes, IUserUpdate, IUsersAndCount } from '../models/users';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IApiResumeRes, IResumeUpdate } from '../models/resume';
 import { IApiRes, ISubscription, IWalletHistoryAndCount } from '../models/common';
 import { IApiChatRes, IUsersListForChats } from '../models/chat';
@@ -89,5 +89,22 @@ export class UserService {
   uploadUserResume(userId:string,file:FormData):Observable<IApiUserRes>{
     console.log(file,'userservice');
     return this.http.patch<IApiUserRes>(`user/upload/resume/${userId}`, file)
+  }
+
+  uploadChatAudio(audioBlob:Blob):Observable<string>{
+    const formData = new FormData();
+    formData.append('audio',audioBlob,'audioMessage.webm');
+    return this.http.post<{data:string}>('user/upload-audio',formData).pipe(
+      map(res=>res.data)
+    )
+  }
+
+
+  uploadChatImage(image:File):Observable<string>{
+    const formData = new FormData();
+    formData.append('image',image,image.name);
+    return this.http.post<{data:string}>('user/upload-image',formData).pipe(
+      map(res=>res.data)
+    )
   }
 }

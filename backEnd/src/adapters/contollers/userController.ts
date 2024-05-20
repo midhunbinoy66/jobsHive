@@ -236,4 +236,47 @@ export class UserController{
 
     }
 
+    async uploadUserAudio(req:Request,res:Response){
+        const fileName = req.file?.filename;
+        if(fileName){
+            const apiRes = {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:fileName
+            }
+            res.status(apiRes.status).json(apiRes)
+        }else{
+            const apiRes = {
+                status:STATUS_CODES.BAD_REQUEST,
+                message:'Error',
+                data:fileName
+            }
+            res.status(apiRes.status).json(apiRes)
+        }
+
+    
+    }
+
+
+    async uploadUserImage(req:Request,res:Response){
+        const fileName = req.file?.filename;
+        if(fileName){
+            const apiRes = {
+                status:STATUS_CODES.OK,
+                message:'Success',
+                data:fileName
+            }
+            res.status(apiRes.status).json(apiRes)
+        }else{
+            const apiRes = {
+                status:STATUS_CODES.BAD_REQUEST,
+                message:'Error',
+                data:fileName
+            }
+            res.status(apiRes.status).json(apiRes)
+        }
+
+    
+    }
+
 }

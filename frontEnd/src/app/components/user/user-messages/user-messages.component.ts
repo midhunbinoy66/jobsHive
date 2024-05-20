@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Route } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { IApiChatRes, IChatMessage, IChatReqs } from 'src/app/models/chat';
@@ -27,13 +28,23 @@ export class UserMessagesComponent implements OnInit ,OnDestroy{
   imageFolderPath=imagesFolderPath
   followings:IEmployerRes[]=[];
   user!:IUserRes
+  isRecording=false;
+  @ViewChild('audioPlayback') audioPlayback!:ElementRef<HTMLAudioElement>
+  mediaRecorder!:MediaRecorder
+  audioChunks:Blob[]=[]
+  audioBlob:Blob | null = null;
+  selectedImage: File | null =null;
+  previewImageUrl: SafeUrl | null = null;
 
   constructor(
     private readonly socketService:WebSocketService,
     private readonly employerService:EmployerService,
     private readonly userService:UserService,
     private readonly route:ActivatedRoute,
-    private readonly store:Store
+    private readonly store:Store,
+    private sanitizer: DomSanitizer
+    
+    
 
   ){
     this.userDetails$.subscribe((user)=>{
@@ -125,5 +136,74 @@ export class UserMessagesComponent implements OnInit ,OnDestroy{
     }
   }
 
+
+
+  async toggleRecording(){
+    if(this.isRecording){
+      this.mediaRecorder.stop()
+    }else{
+      const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+      this.mediaRecorder = new MediaRecorder(stream);
+      this.mediaRecorder.ondataavailable = (event)=>{
+        this.audioChunks.push(event.data);
+      }
+
+      this.mediaRecorder.onstop=()=>{
+        this.audioBlob = new Blob(this.audioChunks,{type:'audio/webm'});
+        this.audioPlayback.nativeElement.src = URL.createObjectURL(this.audioBlob);
+        this.audioChunks =[];
+      }
+      this.mediaRecorder.start();
+    }
+    this.isRecording = !this.isRecording;
+  }
+
+
+
+  sendAudioMessage(){
+    if(!this.audioBlob) return 
+    this.userService.uploadChatAudio(this.audioBlob).subscribe(audioUrl=>{
+      this.message =audioUrl;
+      this.sendMessage();
+      this.audioBlob =null;
+    })
+
+
+  }
+
+  isAudioMessage(message: string): boolean {
+    return message.endsWith('.webm');
+  }
+
+  getAudioUrl(message: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(`http://localhost:3000/audios/${message}`);
+  }
+
+
+  fileSelected(event:any){
+    const file = event.target.files[0];
+    if(file){
+      this.selectedImage = file;
+      this.previewImageUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+    }
+  } 
+
+  sendImage(){
+    if(!this.selectedImage) return 
+    this.userService.uploadChatImage(this.selectedImage).subscribe(data=>{
+      this.message =data;
+      this.sendMessage();
+      this.selectedImage = null;
+      this.previewImageUrl = null;
+    })
+  }
+
+  isImageMessage(message: string): boolean {
+    return /\.(jpeg|jpg|png|gif)$/.test(message);
+  }
+
+  getMediaUrl(message: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(`http://localhost:3000/images/${message}`);
+  }
 
 }
